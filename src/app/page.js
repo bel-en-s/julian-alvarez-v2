@@ -31,6 +31,8 @@ export default function Index() {
   const heroSectionRef = useRef(null);
   const alvarezCanvasRef = useRef(null);
   const alvarezContainerRef = useRef(null);
+  const aboutRef = useRef(null);
+  const logoScaleRef = useRef(null);
 
   const handlePreloaderComplete = () => {
     setLoaderAnimating(false);
@@ -62,6 +64,19 @@ export default function Index() {
         scrub: true,
       },
     });
+
+    if (logoScaleRef.current && aboutRef.current) {
+      gsap.to(logoScaleRef.current, {
+        scale: 4,
+        ease: "none",
+        scrollTrigger: {
+          trigger: aboutRef.current,
+          start: "top top",
+          end: "+=100vh",
+          scrub: true,
+        },
+      });
+    }
   });
 
   useEffect(() => {
@@ -175,26 +190,27 @@ export default function Index() {
 
       <Mascara3D />
 
-      <section className="about">
-        <div className="container">
-          <div className="about-copy">
-           <div className="about-icon">
-              <BrandIcon />
-            </div>
-            <Copy>
-              <h3>
-               "Sigan soñando.<br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
-              </h3>
-            </Copy>
-            <div className="about-icon">
-              Aca poner un componente de video
-            </div>
+      <section className="about" ref={aboutRef}>
+        <div className="about-sticky-logo">
+          <div className="about-logo-scaler" ref={logoScaleRef}>
+            <BrandIcon showSoundButton />
           </div>
         </div>
-        <div className="section-footer light">
-          <Copy type="flicker">
-            <p>/ Core State /</p>
-          </Copy>
+        <div className="about-scroll-content">
+          <div className="container">
+            <div className="about-copy">
+              <Copy>
+                <h3>
+                 "Sigan soñando.<br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
+                </h3>
+              </Copy>
+            </div>
+          </div>
+          <div className="section-footer light">
+            <Copy type="flicker">
+              <p>/ Core State /</p>
+            </Copy>
+          </div>
         </div>
       </section>
 {/* 
@@ -238,7 +254,7 @@ export default function Index() {
 
       <TextBlock />
 
-      <PeelReveal />
+      {/* <PeelReveal /> */}
 
       <CTA />
     </>
