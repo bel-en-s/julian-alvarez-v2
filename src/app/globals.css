@@ -129,7 +129,7 @@ h3,
 h4,
 h5 {
   text-transform: uppercase;
-  font-family: var(--font-koulen), sans-serif;
+  font-family: var(--font-big-shoulders), sans-serif;
   font-weight: 400;
   line-height: 0.8;
 }

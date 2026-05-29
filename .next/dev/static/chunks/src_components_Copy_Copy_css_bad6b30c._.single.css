@@ -1,6 +1,7 @@
 /* [project]/src/components/Copy/Copy.css [app-client] (css) */
 .line {
   will-change: transform;
+  padding-top: .3em;
   position: relative;
   transform: translateY(100%);
 }

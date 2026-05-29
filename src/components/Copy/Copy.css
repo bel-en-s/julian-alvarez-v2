@@ -2,4 +2,5 @@
   position: relative;
   transform: translateY(100%);
   will-change: transform;
+  padding-top: 0.3em;
 }

@@ -1,10 +1,9 @@
 /* [project]/src/app/home.css [app-client] (css) */
 .hero {
-  background: linear-gradient(#0000 60%, #51398d 100%);
+  background: linear-gradient(#0000 10%, #51398d 90%);
   width: 100%;
-  height: 100svh;
+  height: 110svh;
   position: relative;
-  overflow: hidden;
 }
 
 .hero:after {
@@ -19,45 +18,51 @@
 }
 
 .hero .hero-header {
-  text-align: center;
+  width: 100%;
+  padding: 0 var(--page-pad);
   will-change: transform;
   z-index: 2;
   pointer-events: none;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   line-height: 1;
   display: flex;
   position: absolute;
-  top: 10svh;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 40svh;
+  left: 0;
+}
+
+.hero .hero-header [data-copy-wrapper] {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15%;
+  width: 100%;
+  display: flex;
 }
 
 .hero .hero-header .hero-name {
   text-transform: uppercase;
   color: #0000;
-  -webkit-text-stroke: 2px var(--violet);
-  text-stroke: 2px var(--violet);
-  margin: 0;
-  font-family: Humane, sans-serif;
-  font-weight: 800;
+  -webkit-text-stroke: 2px var(--ja-amethyst-900);
+  text-stroke: 2px var(--ja-amethyst-900);
   line-height: .85;
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  flex: 1;
+  margin: 0;
+  font-size: clamp(4rem, 15vw, 13rem);
+  font-weight: 800;
 }
 
 .hero .hero-header .hero-name--julian {
-  font-size: 20vw;
+  text-align: right;
 }
 
 .hero .hero-header .hero-name--alvarez {
+  text-align: left;
   pointer-events: auto;
-  font-size: 40vw;
   position: relative;
-}
-
-.hero .hero-header .hero-name.violeta {
-  color: var(--violet);
-  -webkit-text-stroke: 0;
-  text-stroke: 0;
 }
 
 .hero-alvarez-canvas {
@@ -211,7 +216,7 @@
 
 @media (max-width: 1000px) {
   .hero .hero-header {
-    width: calc(100% - 3rem);
+    padding: 0 1.5rem;
   }
 
   .about .about-copy {
@@ -225,8 +230,8 @@
 }
 
 @media (min-width: 2000px) {
-  .hero .hero-header {
-    width: 40%;
+  .hero .hero-header [data-copy-wrapper] {
+    max-width: 60%;
   }
 }
 
@@ -467,6 +472,7 @@
   will-change: transform;
   position: relative;
   transform: translateY(100%);
+  overflow: visible !important;
 }
 
 /* [project]/src/components/TextBlock/TextBlock.css [app-client] (css) */

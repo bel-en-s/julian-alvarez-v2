@@ -72,13 +72,15 @@ const CTA = () => {
           </div>
         </div>
         <div className="cta-col">
-          <div className="cta-header">
+         
+          <div className="cta-main-img">
+            <img src="/bio/2.jpeg" alt="" />
+            
+          </div>
+           <div className="cta-header">
             <Copy>
               <h5>“Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid.” </h5>
             </Copy>
-          </div>
-          <div className="cta-main-img">
-            <img src="/bio/2.jpeg" alt="" />
           </div>
         </div>
         <div className="cta-col">
@@ -88,6 +90,7 @@ const CTA = () => {
         </div>
       </div>
       <div className="container">
+        
         <div className="cta-main-copy">
           <div className="btn">
             <Copy type="flicker">

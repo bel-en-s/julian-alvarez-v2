@@ -1,9 +1,6 @@
 "use client";
 import "./home.css";
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-
-import { products } from "./wardrobe/products";
 import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
 import DotMatrix from "@/components/DotMatrix/DotMatrix";
 import BrandIcon from "@/components/BrandIcon/BrandIcon";
@@ -13,9 +10,10 @@ import PeelReveal from "@/components/PeelReveal/PeelReveal";
 import CTA from "@/components/CTA/CTA";
 import NextMatch from "@/components/NextMatch/NextMatch";
 import Mascara3D from "@/components/Mascara3D/Mascara3D";
+import HeroAtmos from "@/components/HeroAtmos/HeroAtmos";
+import MiHistoria from "@/components/MiHistoria/MiHistoria";
 
 import Copy from "@/components/Copy/Copy";
-import Product from "@/components/Product/Product";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -25,23 +23,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Index() {
   const [loaderAnimating, setLoaderAnimating] = useState(isInitialLoad);
-  const [featuredProducts, setFeaturedProducts] = useState([]);
   const heroImgRef = useRef(null);
   const heroHeaderRef = useRef(null);
   const heroSectionRef = useRef(null);
   const alvarezCanvasRef = useRef(null);
   const alvarezContainerRef = useRef(null);
-  const aboutRef = useRef(null);
-  const logoScaleRef = useRef(null);
+  const scrollTrackRef = useRef(null);
 
   const handlePreloaderComplete = () => {
     setLoaderAnimating(false);
   };
-
-  useEffect(() => {
-    const shuffled = [...products].sort(() => 0.5 - Math.random());
-    setFeaturedProducts(shuffled.slice(0, 4));
-  }, []);
 
   useGSAP(() => {
     if (!heroImgRef.current || !heroHeaderRef.current) return;
@@ -65,18 +56,83 @@ export default function Index() {
       },
     });
 
-    if (logoScaleRef.current && aboutRef.current) {
-      gsap.to(logoScaleRef.current, {
-        scale: 4,
-        ease: "none",
-        scrollTrigger: {
-          trigger: aboutRef.current,
-          start: "top top",
-          end: "+=100vh",
-          scrub: true,
+    const track = scrollTrackRef.current;
+    if (!track) return;
+
+    const ABOUT_VH = 3;
+    const CARDS_VH = 5;
+    const TOTAL_VH = ABOUT_VH + CARDS_VH;
+    const revealEnd = ABOUT_VH / TOTAL_VH;
+
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 1000px)", () => {
+      ScrollTrigger.refresh();
+
+      const st = ScrollTrigger.create({
+        trigger: track,
+        start: "top top",
+        end: `+=${window.innerHeight * TOTAL_VH}px`,
+        pin: true,
+        pinSpacing: true,
+        scrub: true,
+        invalidateOnRefresh: true,
+        refreshPriority: 10,
+        onUpdate: (self) => {
+          const p = self.progress;
+
+          if (p < revealEnd) {
+            const rp = p / revealEnd;
+            gsap.set(".scroll-track .about", { x: -rp * 100 + "vw" });
+            document.documentElement.classList.remove("is-h-scroll");
+          } else {
+            const ap = (p - revealEnd) / (1 - revealEnd);
+            gsap.set(".scroll-track .about", { x: "-100vw" });
+            document.documentElement.classList.add("is-h-scroll");
+
+            const header = document.querySelector(".mh-header");
+            const cards = document.querySelectorAll(".mh-card");
+            if (header) {
+              const maxTranslate = Math.max(0, header.offsetWidth - window.innerWidth);
+              gsap.set(header, { x: -ap * maxTranslate });
+            }
+
+            cards.forEach((card, i) => {
+              const delay = i * 0.08;
+              const mult = i < 4 ? 1.5 : 2;
+              const raw = (ap - delay) * mult;
+              const cp = Math.max(0, Math.min(raw, 1));
+
+              const fadeIn = Math.min(cp / 0.08, 1);
+              const fadeOut = Math.min((1 - cp) / 0.08, 1);
+              const opacity = Math.max(0, Math.min(fadeIn, fadeOut));
+
+              if (opacity > 0.001) {
+                const easeCp = cp < 0.5 ? 2 * cp * cp : 1 - Math.pow(-2 * cp + 2, 2) / 2;
+                const cx = gsap.utils.interpolate(25, -450, easeCp);
+                const cy = i % 2 === 0
+                  ? gsap.utils.interpolate(10, -5, easeCp)
+                  : gsap.utils.interpolate(50, 10, easeCp);
+                const cr = gsap.utils.interpolate(15, -30, easeCp);
+                const scale = 0.85 + 0.15 * Math.min(cp / 0.15, 1);
+
+                gsap.set(card, {
+                  xPercent: cx,
+                  yPercent: cy,
+                  rotation: cr,
+                  opacity,
+                  scale,
+                });
+              } else {
+                gsap.set(card, { opacity: 0 });
+              }
+            });
+          }
         },
       });
-    }
+
+      return () => st.kill();
+    });
+
   });
 
   useEffect(() => {
@@ -148,6 +204,7 @@ export default function Index() {
       <Preloader onAnimationComplete={handlePreloaderComplete} />
 
       <section className="hero" ref={heroSectionRef}>
+        <HeroAtmos />
         <DotMatrix
           color1="#51398D"
           color2="#7c5cbf"
@@ -160,13 +217,13 @@ export default function Index() {
           <div className="hero-header" ref={heroHeaderRef}>
             <Copy animateOnScroll={false} delay={isInitialLoad ? 5.5 : 0.65}>
               <span className="hero-name hero-name--julian">Julián</span>
-              <span className="hero-name hero-name--alvarez violeta" ref={alvarezContainerRef}>Alvarez</span>
+              <span className="hero-name hero-name--alvarez" ref={alvarezContainerRef}>Alvarez</span>
             </Copy>
           </div>
           <canvas className="hero-alvarez-canvas" ref={alvarezCanvasRef} aria-hidden="true" />
         </div>
         <div className="hero-img" ref={heroImgRef}>
-          <img src="/home/hero.webp" alt="" />
+          <img src="/home/test.png" alt="" />
         </div>
         <div className="section-footer">
           <Copy
@@ -190,13 +247,8 @@ export default function Index() {
 
       <Mascara3D />
 
-      <section className="about" ref={aboutRef}>
-        <div className="about-sticky-logo">
-          <div className="about-logo-scaler" ref={logoScaleRef}>
-            <BrandIcon showSoundButton />
-          </div>
-        </div>
-        <div className="about-scroll-content">
+      <div className="scroll-track" ref={scrollTrackRef}>
+        <section className="about">
           <div className="container">
             <div className="about-copy">
               <Copy>
@@ -204,6 +256,9 @@ export default function Index() {
                  "Sigan soñando.<br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
                 </h3>
               </Copy>
+              <div className="about-icon">
+                <BrandIcon />
+              </div>
             </div>
           </div>
           <div className="section-footer light">
@@ -211,52 +266,18 @@ export default function Index() {
               <p>/ Core State /</p>
             </Copy>
           </div>
-        </div>
-      </section>
-{/* 
-      <section className="featured-products">
-        <div className="container">
-          <div className="featured-products-header">
-            <Copy type="flicker">
-              <p>Featured Units</p>
-            </Copy>
-            <Copy>
-              <h3>
-                Selected <br /> Garments
-              </h3>
-            </Copy>
-          </div>
-          <div className="featured-products-separator">
-            <div className="featured-products-divider"></div>
-            <div className="featured-products-labels">
-              <Copy type="flicker">
-                <p>Primary Set</p>
-              </Copy>
-              <Copy type="flicker">
-                <Link href="/wardrobe">View Archive</Link>
-              </Copy>
-            </div>
-          </div>
-          <div className="featured-products-list">
-            {featuredProducts.map((product) => (
-              <Product
-                key={product.name}
-                product={product}
-                productIndex={products.indexOf(product) + 1}
-                showAddToCart={true}
-              />
-            ))}
-          </div>
-        </div>
-      </section> */}
-
+        </section>
+        <MiHistoria />
+      </div>
+            <CTA />
       <MarqueeBanner />
 
       <TextBlock />
 
-      {/* <PeelReveal /> */}
 
-      <CTA />
+
+    
+     
     </>
   );
 }

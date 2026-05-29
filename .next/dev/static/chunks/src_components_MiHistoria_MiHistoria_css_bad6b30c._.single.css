@@ -1,0 +1,148 @@
+/* [project]/src/components/MiHistoria/MiHistoria.css [app-client] (css) */
+.mi-historia {
+  z-index: 0;
+  background: linear-gradient(180deg, var(--ja-amethyst-900), #1a1a2e);
+  width: 100%;
+  height: 100svh;
+  position: absolute;
+  inset: 0;
+}
+
+.mi-historia .mh-desktop {
+  background: none;
+  width: 100%;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+}
+
+.mi-historia .mh-header {
+  will-change: transform;
+  justify-content: flex-start;
+  align-items: center;
+  width: 290vw;
+  height: 100svh;
+  display: flex;
+  position: relative;
+}
+
+.mi-historia .mh-header h1 {
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  text-transform: uppercase;
+  color: var(--fg-1);
+  margin-top: 2.5%;
+  margin-left: 80vw;
+  font-size: 20vw;
+  line-height: 1;
+}
+
+.mi-historia .mh-card {
+  z-index: 2;
+  will-change: transform;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  background: #0000004d;
+  border-radius: .7rem;
+  width: 280px;
+  padding: .5rem;
+  position: absolute;
+  top: 12%;
+  left: 100%;
+}
+
+.mi-historia .mh-card .mh-card-img {
+  border-radius: .4rem;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.mi-historia .mh-card .mh-card-img img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.mi-historia .mh-card .mh-card-content {
+  width: 100%;
+  height: 275px;
+  color: var(--fg-1);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  display: flex;
+}
+
+.mi-historia .mh-card .mh-card-title h6 {
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  text-transform: uppercase;
+  color: var(--fg-1);
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.mi-historia .mh-card .mh-card-desc p {
+  color: #f4f4f499;
+  font-family: Neue Montreal, system-ui, sans-serif;
+  font-size: .875rem;
+  line-height: 1.4;
+}
+
+.mi-historia .mh-mobile {
+  display: none;
+}
+
+@media (max-width: 999px) {
+  .mi-historia {
+    height: auto;
+    min-height: auto;
+    position: static;
+  }
+
+  .mi-historia .mh-desktop {
+    display: none;
+  }
+
+  .mi-historia .mh-mobile {
+    background: linear-gradient(180deg, var(--ja-amethyst-900), #1a1a2e);
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    padding: 6rem 2rem;
+    display: flex;
+  }
+
+  .mi-historia .mh-mobile-header {
+    width: 100%;
+    margin-bottom: .5rem;
+  }
+
+  .mi-historia .mh-mobile-header h1 {
+    font-family: var(--font-big-shoulders), "Humane", sans-serif;
+    text-transform: uppercase;
+    color: var(--fg-1);
+    font-size: 4rem;
+    line-height: 1;
+  }
+
+  .mi-historia .mh-card {
+    width: 100%;
+    max-width: 680px;
+    height: auto;
+    margin: 0 auto;
+    position: static;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .mi-historia .mh-card .mh-card-img {
+    margin-bottom: 1rem;
+  }
+
+  .mi-historia .mh-card .mh-card-content {
+    gap: 3rem;
+    height: auto;
+  }
+}
+
+/*# sourceMappingURL=src_components_MiHistoria_MiHistoria_css_bad6b30c._.single.css.map*/

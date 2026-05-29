@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 .cta .container {
@@ -21,7 +21,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 7rem;
 }
 
 .cta .container .cta-col:nth-child(2) .cta-header {
@@ -31,7 +31,7 @@
 
 .cta .container .cta-col:nth-child(2) .cta-main-img {
   aspect-ratio: 4/5;
-  width: 100%;
+  width: 80%;
   height: 100%;
   overflow: hidden;
   margin-top: -4rem;

@@ -1,0 +1,241 @@
+/* [project]/src/components/HeroAtmos/HeroAtmos.css [app-client] (css) */
+.hero-atmos {
+  z-index: 1;
+  pointer-events: none;
+  contain: paint layout;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-atmos .ha-fog {
+  filter: blur(60px);
+  mix-blend-mode: screen;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  contain: paint layout style;
+  border-radius: 50%;
+  position: absolute;
+  transform: translateZ(0);
+}
+
+.hero-atmos .ha-fog.f1 {
+  background: radial-gradient(circle, #8a75b859 0%, #8a75b800 60%);
+  width: 70vmax;
+  height: 70vmax;
+  animation: 28s ease-in-out infinite alternate ha-fog-a;
+  top: -10%;
+  right: -10%;
+}
+
+.hero-atmos .ha-fog.f2 {
+  background: radial-gradient(circle, #6b549f40 0%, #6b549f00 60%);
+  width: 80vmax;
+  height: 80vmax;
+  animation: 36s ease-in-out infinite alternate ha-fog-b;
+  bottom: -25%;
+  left: -15%;
+}
+
+.hero-atmos .ha-fog.f3 {
+  background: radial-gradient(circle, #edf1e833 0%, #edf1e800 65%);
+  width: 50vmax;
+  height: 50vmax;
+  animation: 22s ease-in-out infinite alternate ha-fog-c;
+  top: 30%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+@keyframes ha-fog-a {
+  from {
+    transform: translate3d(0, 0, 0)scale(1);
+  }
+
+  to {
+    transform: translate3d(-6vw, 4vh, 0)scale(1.08);
+  }
+}
+
+@keyframes ha-fog-b {
+  from {
+    transform: translate3d(0, 0, 0)scale(1.02);
+  }
+
+  to {
+    transform: translate3d(8vw, -3vh, 0)scale(1.12);
+  }
+}
+
+@keyframes ha-fog-c {
+  from {
+    transform: translate3d(-50%, -50%, 0)scale(1);
+  }
+
+  to {
+    transform: translate3d(-46%, -54%, 0)scale(1.18);
+  }
+}
+
+.hero-atmos .ha-vignette {
+  pointer-events: none;
+  contain: paint;
+  background: radial-gradient(#0000 40%, #00000059 78%, #000000b3 100%);
+  position: absolute;
+  inset: 0;
+}
+
+.hero-atmos .ha-halo {
+  z-index: 1;
+  filter: blur(40px);
+  opacity: .7;
+  pointer-events: none;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  contain: paint;
+  background: radial-gradient(circle at 50% 35%, #f4f4f44d 0%, #d8c8f526 25%, #0000 60%);
+  width: 50%;
+  height: 60%;
+  animation: 6s ease-in-out infinite alternate ha-halo-pulse;
+  position: absolute;
+  top: 18%;
+  left: 25%;
+}
+
+@keyframes ha-halo-pulse {
+  from {
+    opacity: .5;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: .85;
+    transform: scale(1.08);
+  }
+}
+
+.hero-atmos .ha-backtext {
+  z-index: 1;
+  pointer-events: none;
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  text-transform: uppercase;
+  color: #0000;
+  -webkit-text-stroke: 1.5px #f4f4f440;
+  text-stroke: 1.5px #f4f4f440;
+  text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
+  letter-spacing: -.03em;
+  will-change: transform;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(8rem, 18vw, 40rem);
+  font-size: clamp(3rem, 14vw, 16rem);
+  font-weight: 900;
+  line-height: .85;
+  display: flex;
+  position: absolute;
+  inset: 0;
+}
+
+.hero-atmos .ha-backtext span {
+  text-align: center;
+  flex: 1;
+}
+
+.hero-atmos .ha-webs {
+  z-index: 1001;
+  pointer-events: none;
+  contain: paint layout;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-atmos .ha-corner {
+  opacity: .3;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 6px #a88ce633);
+  contain: paint layout;
+  width: 45vmin;
+  max-width: 700px;
+  height: 45vmin;
+  max-height: 700px;
+  position: absolute;
+}
+
+.hero-atmos .ha-corner svg {
+  contain: paint;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-atmos .ha-corner svg .web-ray {
+  fill: none;
+  stroke: #d8c8f533;
+  stroke-width: .7px;
+  stroke-linecap: round;
+}
+
+.hero-atmos .ha-corner svg .web-arc {
+  fill: none;
+  stroke: #d8c8f540;
+  stroke-width: .7px;
+  stroke-linecap: round;
+}
+
+.hero-atmos .ha-corner svg .web-dew {
+  fill: #f4f4f499;
+  stroke: none;
+  filter: drop-shadow(0 0 6px #a88ce699);
+}
+
+.hero-atmos .ha-corner.tl {
+  transform: translate3d(calc(var(--mx, 0) * 4px), calc(var(--my, 0) * 4px), 0);
+  top: 0;
+  left: 0;
+}
+
+.hero-atmos .ha-corner.tr {
+  transform: translate3d(calc(var(--mx, 0) * -4px), calc(var(--my, 0) * 4px), 0) scaleX(-1);
+  top: 0;
+  right: 0;
+}
+
+.hero-atmos .ha-corner.bl {
+  transform: translate3d(calc(var(--mx, 0) * 4px), calc(var(--my, 0) * -4px), 0) scaleY(-1);
+  bottom: 0;
+  left: 0;
+}
+
+.hero-atmos .ha-corner.br {
+  transform: translate3d(calc(var(--mx, 0) * -4px), calc(var(--my, 0) * -4px), 0) scale(-1, -1);
+  bottom: 0;
+  right: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-atmos .ha-fog, .hero-atmos .ha-halo {
+    animation: none !important;
+  }
+
+  .hero-atmos .ha-corner {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .hero-atmos .ha-corner.tr {
+    transform: scaleX(-1) !important;
+  }
+
+  .hero-atmos .ha-corner.bl {
+    transform: scaleY(-1) !important;
+  }
+
+  .hero-atmos .ha-corner.br {
+    transform: scale(-1) !important;
+  }
+}
+
+/*# sourceMappingURL=src_components_HeroAtmos_HeroAtmos_css_bad6b30c._.single.css.map*/
