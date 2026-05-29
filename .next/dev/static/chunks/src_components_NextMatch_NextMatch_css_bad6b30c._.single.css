@@ -1,0 +1,347 @@
+/* [project]/src/components/NextMatch/NextMatch.css [app-client] (css) */
+@keyframes nm-hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@property --ring-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes nm-ring-rotate {
+  to {
+    --ring-angle: 360deg;
+  }
+}
+
+.next-match {
+  left: var(--page-pad);
+  z-index: 7;
+  border: 1px solid var(--border-soft);
+  z-index: 100000;
+  isolation: isolate;
+  opacity: 0;
+  width: min(300px, 88vw);
+  animation: nm-hero-fade 1s var(--easing) .2s forwards;
+  pointer-events: auto;
+  transition: transform .35s var(--easing), border-color .35s, box-shadow .35s;
+  font-family: var(--font-support);
+  background: linear-gradient(#1f1535 0%, #1a0f2d 100%);
+  border-radius: 12px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px 16px;
+  display: flex;
+  position: fixed;
+  bottom: clamp(20px, 4vh, 40px);
+  overflow: hidden;
+  box-shadow: inset 0 1px #f4f4f40a, 0 18px 50px #0d08208c, 0 2px 8px #00000059;
+}
+
+.next-match:hover {
+  border-color: var(--border-strong);
+  box-shadow: inset 0 1px #f4f4f40a, 0 24px 60px #0d0820b3, 0 0 0 1px #8a75b859, 0 0 40px #8a75b840;
+}
+
+.next-match:after {
+  content: "";
+  border-radius: inherit;
+  background: conic-gradient(from var(--ring-angle, 0deg), transparent 0%, #a88ce6e6 8%, #d8c8f58c 14%, transparent 28%, transparent 100%);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  opacity: .35;
+  transition: opacity .35s var(--easing);
+  z-index: 3;
+  padding: 1.5px;
+  animation: 8s linear infinite nm-ring-rotate;
+  position: absolute;
+  inset: -1px;
+  -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  -webkit-mask-position: 0 0, 0 0;
+  -webkit-mask-size: auto, auto;
+  -webkit-mask-repeat: repeat, repeat;
+  -webkit-mask-clip: content-box, border-box;
+  -webkit-mask-origin: content-box, border-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  -webkit-mask-source-type: auto, auto;
+  mask-mode: match-source, match-source;
+}
+
+.next-match:hover:after {
+  opacity: 1;
+}
+
+.next-match .watermark {
+  opacity: .06;
+  pointer-events: none;
+  z-index: 0;
+  background: url("/next-match/logo-mark-amethyst.png") center / contain no-repeat;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  bottom: -30px;
+  right: -28px;
+  transform: rotate(-49.6deg);
+}
+
+.next-match .web {
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity .25s var(--easing);
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
+.next-match:hover .web {
+  opacity: .55;
+}
+
+.next-match > .head, .next-match > .countdown, .next-match > .nm-extra {
+  z-index: 2;
+  position: relative;
+}
+
+.next-match .nm-extra {
+  overflow: hidden;
+}
+
+.next-match .head {
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  display: flex;
+}
+
+.next-match .eyebrow {
+  font-family: var(--font-support);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--ja-amethyst-300);
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  display: flex;
+}
+
+.next-match .eyebrow:before {
+  content: "";
+  background: currentColor;
+  width: 22px;
+  height: 1.5px;
+}
+
+.next-match .toggle {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  transition: background .2s var(--easing), border-color .2s, transform .12s var(--easing);
+  background: #51398d1f;
+  border: 1px solid #8a75b859;
+  border-radius: 6px;
+  place-items: center;
+  padding: 0;
+  display: grid;
+}
+
+.next-match .toggle:hover {
+  background: var(--ja-amethyst);
+  border-color: #0000;
+}
+
+.next-match .toggle:active {
+  transform: scale(.94);
+}
+
+.next-match .toggle .bar {
+  width: 10px;
+  height: 1.5px;
+  color: var(--fg-1);
+  background: currentColor;
+  display: block;
+  position: relative;
+}
+
+.next-match .toggle .bar:after {
+  content: "";
+  transform-origin: center;
+  width: 1.5px;
+  height: 10px;
+  transition: transform .25s var(--easing);
+  background: currentColor;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)scaleY(0);
+}
+
+.next-match.is-min .toggle .bar:after {
+  transform: translate(-50%, -50%)scaleY(1);
+}
+
+.next-match .countdown {
+  font-variant-numeric: tabular-nums;
+  align-items: flex-end;
+  gap: 6px;
+  display: flex;
+}
+
+.next-match .countdown .unit {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 36px;
+  display: flex;
+}
+
+.next-match .countdown .n {
+  font-family: var(--font-display);
+  letter-spacing: -.018em;
+  color: var(--fg-1);
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.next-match .countdown .u {
+  font-family: var(--font-support);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  font-size: 9px;
+}
+
+.next-match .countdown .sep {
+  font-family: var(--font-display);
+  color: var(--ja-amethyst-300);
+  opacity: .8;
+  padding-bottom: 12px;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.next-match .teams {
+  font-family: var(--font-display);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--fg-1);
+  border-top: 1px solid var(--border-soft);
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  padding-top: 12px;
+  font-size: 13px;
+  font-weight: 900;
+  display: flex;
+}
+
+.next-match .teams .vs {
+  font-family: var(--font-support);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--ja-amethyst-300);
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.next-match .meta {
+  font-family: var(--font-support);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 10px;
+  display: inline-flex;
+}
+
+.next-match .meta .dot {
+  color: #8a75b899;
+}
+
+.next-match.is-min {
+  border-radius: 999px;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  width: auto;
+  padding: 10px 12px 10px 18px;
+}
+
+.next-match.is-min .countdown {
+  align-items: center;
+  gap: 4px;
+}
+
+.next-match.is-min .countdown .n {
+  font-size: 18px;
+}
+
+.next-match.is-min .countdown .u {
+  display: none;
+}
+
+.next-match.is-min .countdown .unit {
+  min-width: 0;
+}
+
+.next-match.is-min .countdown .sep {
+  padding-bottom: 0;
+  font-size: 16px;
+}
+
+.next-match.is-min .head {
+  flex-direction: row;
+  gap: 12px;
+}
+
+.next-match.is-min .head .eyebrow {
+  display: none;
+}
+
+.next-match.is-min .head {
+  order: 2;
+}
+
+.next-match.is-min .countdown {
+  order: 1;
+}
+
+.next-match.is-min .nm-extra, .next-match.is-min .watermark, .next-match.is-min .web {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .next-match {
+    width: calc(100vw - var(--page-pad) * 2);
+  }
+
+  .next-match .countdown .n {
+    font-size: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .next-match {
+    opacity: 1;
+    animation: none;
+  }
+
+  .next-match:after {
+    animation: none;
+  }
+}
+
+/*# sourceMappingURL=src_components_NextMatch_NextMatch_css_bad6b30c._.single.css.map*/

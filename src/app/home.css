@@ -1,0 +1,236 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, transparent 0%, #51398D 100%);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(to top, #C0B9D0, transparent);
+  pointer-events: none;
+}
+
+
+
+.hero .hero-header {
+  position: absolute;
+  top: 10svh;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero .hero-header .hero-name {
+  line-height: 0.85;
+  text-transform: uppercase;
+  margin: 0;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--violet);
+  text-stroke: 2px var(--violet);
+  font-family: "Humane", sans-serif;
+  font-weight: 800;
+}
+
+.hero .hero-header .hero-name--julian {
+  font-size: 20vw;
+}
+
+.hero .hero-header .hero-name--alvarez {
+  font-size: 40vw;
+  pointer-events: auto;
+  position: relative;
+}
+
+.hero .hero-header .hero-name.violeta {
+  color: var(--violet);
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+}
+
+.hero-alvarez-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.hero .hero-img {
+  position: absolute;
+  top: 35svh;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 75%;
+  will-change: opacity;
+  z-index: 1000;
+}
+
+.hero .hero-img img {
+  object-fit: contain;
+}
+
+.about {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #C0B9D0;
+  color: var(--base-700);
+  padding: 8rem 0;
+}
+
+.about .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about .section-footer {
+  justify-content: center;
+}
+
+.about .about-copy {
+  width: 70%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.about .about-copy p {
+  color: var(--base-500);
+}
+
+.about .about-copy .about-icon {
+  width: 25rem;
+  height: 25rem;
+}
+
+.about .about-copy .about-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-products {
+  padding: 6rem 0;
+}
+
+.featured-products .featured-products-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  text-align: center;
+}
+
+.featured-products .featured-products-header p {
+  color: var(--base-500);
+}
+
+.featured-products .featured-products-separator {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.featured-products .featured-products-divider {
+  position: relative;
+  width: calc(100% - 5rem);
+  margin: 0 auto;
+  height: 1px;
+  background-color: rgba(175, 179, 171, 0.35);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.featured-products .featured-products-divider::before,
+.featured-products .featured-products-divider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 1.5rem;
+  background-color: rgba(175, 179, 171, 0.35);
+}
+
+.featured-products .featured-products-divider::before {
+  left: 0;
+}
+
+.featured-products .featured-products-divider::after {
+  right: 0;
+}
+
+.featured-products .featured-products-labels {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.featured-products .featured-products-labels p,
+.featured-products .featured-products-labels a {
+  color: var(--base-700);
+}
+
+.featured-products .featured-products-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .featured-products .featured-products-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-products .featured-products-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-products .featured-products-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero .hero-header {
+    width: calc(100% - 3rem);
+  }
+
+  .about .about-copy {
+    width: 90%;
+  }
+
+  .about .about-copy .about-icon {
+    height: 10rem;
+    width: auto;
+  }
+}
+
+@media (min-width: 2000px) {
+  .hero .hero-header {
+    width: 40%;
+  }
+}

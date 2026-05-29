@@ -1,0 +1,291 @@
+/* [project]/src/components/Menu/Menu.css [app-client] (css) */
+.menu {
+  z-index: 100001;
+  mix-blend-mode: difference;
+  padding: 0 1rem;
+  position: fixed;
+  top: 1rem;
+  left: 0;
+  right: 0;
+}
+
+.menu .menu-header {
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.menu .menu-logo {
+  object-fit: contain;
+  width: auto;
+  height: 5.5rem;
+}
+
+.menu .menu-toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  width: 5.5em;
+  height: 5.5rem;
+  padding: 0;
+  display: flex;
+}
+
+.menu .menu-hamburger-icon {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+.menu .menu-hamburger-icon .menu-item {
+  background: #fff;
+  border-radius: 1px;
+  width: 3em;
+  height: 1.5px;
+  margin: 0 0 3px;
+  transition: all .2s;
+  display: block;
+}
+
+.menu .menu-hamburger-icon.open .menu-item {
+  mix-blend-mode: normal;
+  background: #51398d;
+}
+
+.menu .menu-hamburger-icon.open .menu-item:first-child {
+  transform: rotate(45deg)translate(3px, 3px);
+}
+
+.menu .menu-hamburger-icon.open .menu-item:nth-child(2) {
+  opacity: 0;
+}
+
+.menu .menu-hamburger-icon.open .menu-item:nth-child(3) {
+  transform: rotate(-45deg)translate(3px, -3px);
+}
+
+.ja-menu-arana {
+  z-index: 99;
+  pointer-events: none;
+  isolation: isolate;
+  position: fixed;
+  inset: 0;
+}
+
+.ja-menu-arana__layer {
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity .25s;
+  position: fixed;
+  inset: 0;
+}
+
+.ja-menu-arana__layer.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ja-menu-arana__scrim {
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  background: radial-gradient(circle at calc(100% - 56px) 52px, #0d0820c7 0%, #0d082073 22%, #0d082026 40%, #0000 55%);
+  transition: opacity .35s;
+  position: fixed;
+  inset: 0;
+}
+
+.ja-menu-arana__layer.is-open .ja-menu-arana__scrim {
+  opacity: 1;
+}
+
+.ja-menu-arana__frame {
+  --s: 1;
+  transform-origin: 100% 0;
+  width: 800px;
+  height: 560px;
+  transform: translate(calc(-56px * (1 - var(--s))), calc(52px * (1 - var(--s)))) scale(var(--s));
+  pointer-events: none;
+  will-change: transform;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.ja-menu-arana__frame .ja-menu-arana__web {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.ja-menu-arana__web path, .ja-menu-arana__web line, .ja-menu-arana__web circle {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.ja-menu-arana__web .strand {
+  stroke: var(--web-stroke);
+  stroke-width: var(--web-w-thick);
+  filter: drop-shadow(0 0 6px var(--web-glow));
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360px;
+}
+
+.ja-menu-arana__web .auxiliary {
+  stroke: var(--web-stroke-soft);
+  stroke-width: var(--web-w-thin);
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360px;
+}
+
+.ja-menu-arana__web .nine {
+  stroke: var(--web-stroke);
+  stroke-width: .95px;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900px;
+  filter: drop-shadow(0 0 6px var(--web-glow));
+}
+
+.ja-menu-arana__web .anchor {
+  fill: var(--web-stroke);
+  stroke: none;
+  opacity: 0;
+  filter: drop-shadow(0 0 4px var(--web-glow));
+}
+
+.ja-menu-arana__web .dangle {
+  stroke: var(--web-stroke-soft);
+  stroke-width: .55px;
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80px;
+  filter: drop-shadow(0 0 3px var(--web-glow-soft));
+}
+
+.ja-menu-arana__web .dangle-tip {
+  fill: #f4f1ea8c;
+  stroke: none;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px var(--web-glow-soft));
+}
+
+@keyframes ja-menu-arana-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ja-menu-arana-drop {
+  from {
+    opacity: 0;
+    transform: scale(.4);
+  }
+
+  to {
+    opacity: .85;
+    transform: scale(1);
+  }
+}
+
+@keyframes ja-menu-arana-anchor {
+  from {
+    opacity: 0;
+    transform: scale(.3);
+  }
+
+  to {
+    opacity: .9;
+    transform: scale(1);
+  }
+}
+
+@keyframes ja-menu-arana-sway {
+  0%, 100% {
+    transform: rotate(0);
+  }
+
+  50% {
+    transform: rotate(.6deg);
+  }
+}
+
+.ja-menu-arana__item {
+  z-index: 3;
+  font-family: var(--font-display);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+  -webkit-backdrop-filter: blur(8px);
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+  isolation: isolate;
+  opacity: 0;
+  background-color: #1d1231;
+  border: 1px solid #8a75b880;
+  border-radius: 999px;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+  transition: transform .4s cubic-bezier(.2, .7, .15, 1), opacity .3s;
+  display: inline-flex;
+  position: fixed;
+  overflow: hidden;
+  transform: translate(-50%, -50%)scale(.6);
+  box-shadow: 0 8px 24px #00000059;
+}
+
+.ja-menu-arana__item:hover {
+  border-color: #e8dcfff2;
+}
+
+.ja-menu-arana__item:active {
+  transform: translate(-50%, -50%)scale(.98);
+}
+
+.ja-menu-arana__item.ja-glow-button:hover {
+  border-color: #e8dcfff2;
+}
+
+.ja-menu-arana__item.ja-glow-button:active {
+  transform: translate(-50%, -50%)scale(.98);
+}
+
+.ja-menu-arana__dot {
+  background: var(--ja-amethyst-300);
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  transition: background .3s, box-shadow .3s;
+}
+
+.ja-menu-arana__item:hover .ja-menu-arana__dot {
+  background: #f4ecff;
+  box-shadow: 0 0 8px #d8c8f5e6, 0 0 16px #d8c8f580;
+}
+
+.ja-menu-arana__item.i1 {
+  top: 158px;
+  left: 612px;
+}
+
+.ja-menu-arana__item.i2 {
+  top: 248px;
+  left: 520px;
+}
+
+.ja-menu-arana__item.i4 {
+  top: 198px;
+  left: 688px;
+}
+
+/*# sourceMappingURL=src_components_Menu_Menu_css_bad6b30c._.single.css.map*/

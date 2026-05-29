@@ -1,0 +1,19 @@
+[00:00:00.435] Server  LOG      ✓ Ready in 312ms
+[00:00:06.045] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:06.164] Browser WARN    GSAP target  not found. https://gsap.com
+[00:00:06.164] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[00:00:06.164] Browser WARN    GSAP target  not found. https://gsap.com
+[00:00:06.164] Browser WARN    GSAP target  not found. https://gsap.com
+[00:00:10.258] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:10.406] Browser WARN    GSAP target  not found. https://gsap.com
+[00:00:10.406] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[00:00:10.406] Browser WARN    GSAP target  not found. https://gsap.com
+[00:00:10.406] Browser WARN    GSAP target  not found. https://gsap.com
+[00:02:59.729] Server  LOG      ✓ Compiled in 40ms
+[00:03:22.909] Server  LOG      ✓ Compiled in 18ms
+[00:03:25.721] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:25.870] Browser WARN    GSAP target  not found. https://gsap.com
+[00:03:25.870] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[00:03:25.870] Browser WARN    GSAP target  not found. https://gsap.com
+[00:03:25.870] Browser WARN    GSAP target  not found. https://gsap.com
+[00:05:20.217] Server  LOG      ✓ Compiled in 28ms

@@ -1,0 +1,233 @@
+/* [project]/src/app/home.css [app-client] (css) */
+.hero {
+  background: linear-gradient(#0000 0%, #51398d 100%);
+  width: 100%;
+  height: 100svh;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero:after {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(to top, #c0b9d0, #0000);
+  width: 100%;
+  height: 25%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.hero .hero-header {
+  text-align: center;
+  will-change: transform;
+  z-index: 2;
+  pointer-events: none;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  display: flex;
+  position: absolute;
+  top: 10svh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero .hero-header .hero-name {
+  text-transform: uppercase;
+  color: #0000;
+  -webkit-text-stroke: 2px var(--violet);
+  text-stroke: 2px var(--violet);
+  margin: 0;
+  font-family: Humane, sans-serif;
+  font-weight: 800;
+  line-height: .85;
+}
+
+.hero .hero-header .hero-name--julian {
+  font-size: 20vw;
+}
+
+.hero .hero-header .hero-name--alvarez {
+  pointer-events: auto;
+  font-size: 40vw;
+  position: relative;
+}
+
+.hero .hero-header .hero-name.violeta {
+  color: var(--violet);
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+}
+
+.hero-alvarez-canvas {
+  pointer-events: none;
+  z-index: 3;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.hero .hero-img {
+  will-change: opacity;
+  z-index: 1000;
+  height: 75%;
+  position: absolute;
+  top: 35svh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero .hero-img img {
+  object-fit: contain;
+}
+
+.about {
+  width: 100%;
+  height: 100%;
+  color: var(--base-700);
+  background-color: #c0b9d0;
+  padding: 8rem 0;
+  position: relative;
+}
+
+.about .container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.about .section-footer {
+  justify-content: center;
+}
+
+.about .about-copy {
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  width: 70%;
+  display: flex;
+}
+
+.about .about-copy p {
+  color: var(--base-500);
+}
+
+.about .about-copy .about-icon {
+  width: 25rem;
+  height: 25rem;
+}
+
+.about .about-copy .about-icon img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.featured-products {
+  padding: 6rem 0;
+}
+
+.featured-products .featured-products-header {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  display: flex;
+}
+
+.featured-products .featured-products-header p {
+  color: var(--base-500);
+}
+
+.featured-products .featured-products-separator {
+  flex-direction: column;
+  gap: 2rem;
+  display: flex;
+}
+
+.featured-products .featured-products-divider {
+  background-color: #afb3ab59;
+  width: calc(100% - 5rem);
+  height: 1px;
+  margin: 3rem auto 1.5rem;
+  position: relative;
+}
+
+.featured-products .featured-products-divider:before, .featured-products .featured-products-divider:after {
+  content: "";
+  background-color: #afb3ab59;
+  width: 1px;
+  height: 1.5rem;
+  position: absolute;
+  top: 0;
+}
+
+.featured-products .featured-products-divider:before {
+  left: 0;
+}
+
+.featured-products .featured-products-divider:after {
+  right: 0;
+}
+
+.featured-products .featured-products-labels {
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+}
+
+.featured-products .featured-products-labels p, .featured-products .featured-products-labels a {
+  color: var(--base-700);
+}
+
+.featured-products .featured-products-list {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+  display: grid;
+}
+
+@media (max-width: 1024px) {
+  .featured-products .featured-products-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-products .featured-products-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-products .featured-products-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero .hero-header {
+    width: calc(100% - 3rem);
+  }
+
+  .about .about-copy {
+    width: 90%;
+  }
+
+  .about .about-copy .about-icon {
+    width: auto;
+    height: 10rem;
+  }
+}
+
+@media (min-width: 2000px) {
+  .hero .hero-header {
+    width: 40%;
+  }
+}
+
+/*# sourceMappingURL=src_app_home_css_bad6b30c._.single.css.map*/
