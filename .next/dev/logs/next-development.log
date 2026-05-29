@@ -207,3 +207,11 @@ It can also happen if the client has a browser extension installed which messes 
 [00:27:24.664] Server  LOG      ✓ Compiled in 17ms
 [00:27:29.238] Server  LOG      ✓ Compiled in 6ms
 [00:27:32.520] Server  LOG      ✓ Compiled in 3ms
+[00:27:44.198] Server  LOG      ✓ Compiled in 55ms
+[00:27:49.182] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:49.353] Browser WARN    GSAP target  not found. https://gsap.com
+[00:27:49.353] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[00:27:49.353] Browser WARN    GSAP target  not found. https://gsap.com
+[00:27:49.353] Browser WARN    GSAP target  not found. https://gsap.com
+[00:28:05.319] Server  LOG      ✓ Compiled in 7ms
+[00:28:10.658] Server  LOG      ✓ Compiled in 4ms
