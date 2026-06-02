@@ -88,7 +88,7 @@ const Preloader = () => {
           duration: 1,
         })
           .add(animateProgress(), "<")
-          .set(".preloader-progress", { backgroundColor: "#fff" })
+          .set(".preloader-progress-bar", { backgroundColor: "#fff" })
           .to(
             logoSplit.chars,
             {
@@ -103,7 +103,16 @@ const Preloader = () => {
             ".preloader-progress",
             {
               opacity: 0,
-              duration: 0.5,
+              duration: 0.3,
+              ease: "power3.out",
+            },
+            "-=0.5"
+          )
+          .to(
+            ".preloader-video",
+            {
+              opacity: 0,
+              duration: 0.3,
               ease: "power3.out",
             },
             "-=0.5"
@@ -115,8 +124,18 @@ const Preloader = () => {
               duration: 1.25,
               ease: "power3.out",
             },
-            "<"
-          );
+            "-=0.5"
+          )
+          .to(
+            ".preloader-bg",
+            {
+              opacity: 0,
+              duration: 0.3,
+              ease: "power3.out",
+            },
+            "-=0.2"
+          )
+          .to({}, { duration: 1 });
       });
     },
     { scope: wrapperRef, dependencies: [showPreloader] }
@@ -126,11 +145,13 @@ const Preloader = () => {
 
   return (
     <div className="preloader-wrapper" ref={wrapperRef}>
+      <div className="preloader-bg"></div>
+      <video className="preloader-video" src="/loader/loader.mp4" autoPlay muted loop playsInline />
       <div className="preloader-progress">
         <div className="preloader-progress-bar"></div>
-        <div className="preloader-logo">
-          {/* <h1>Nrmlss</h1> */}
-        </div>
+      </div>
+      <div className="preloader-logo">
+        {/* <h1>Nrmlss</h1> */}
       </div>
       <div className="preloader-mask"></div>
     </div>

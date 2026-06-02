@@ -150,10 +150,10 @@ const Menu = () => {
 
   return (
     <nav className="menu" ref={menuRef}>
-      <div className="menu-header" onClick={toggleMenu}>
+      <div className={`menu-header${isOpen ? " is-open" : ""}`} onClick={toggleMenu}>
         <img className="menu-logo" src="./logo.png" alt="Julian Alvarez" />
-        <button className="menu-toggle" aria-label="Toggle menu">
-          <div className="menu-hamburger-icon" ref={hamburgerRef}>
+        <button className="menu-toggle" aria-label="Toggle menu" onClick={(e) => { e.stopPropagation(); toggleMenu(); }}>
+          <div className={`menu-hamburger-icon${isAnimating || isOpen ? " open" : ""}`} ref={hamburgerRef}>
             <span className="menu-item"></span>
             <span className="menu-item"></span>
             <span className="menu-item"></span>
