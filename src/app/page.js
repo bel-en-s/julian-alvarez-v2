@@ -96,6 +96,22 @@ export default function Index() {
               gsap.set(header, { x: -ap * maxTranslate });
             }
 
+            const video = document.querySelector(".mh-video video");
+            if (video) {
+              const videoPeak = 0.25;
+              const videoEnd = 0.65;
+              let vol = 0;
+              if (ap < videoPeak) {
+                vol = ap / videoPeak;
+              } else if (ap < videoEnd) {
+                vol = 1 - (ap - videoPeak) / (videoEnd - videoPeak);
+              }
+              vol = Math.max(0, Math.min(vol, 1));
+              const targetVol = vol * 0.4;
+              video.volume = video.volume * 0.92 + targetVol * 0.08;
+              video.muted = vol < 0.01;
+            }
+
             cards.forEach((card, i) => {
               const delay = i * 0.08;
               const mult = i < 4 ? 1.5 : 2;

@@ -5,7 +5,6 @@
   right: 0;
   padding: 0 1rem;
   z-index: 100001;
-  mix-blend-mode: difference;
 }
 
 .menu .menu-header {
@@ -13,6 +12,7 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  mix-blend-mode: difference;
 }
 
 .menu .menu-logo {
@@ -29,8 +29,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 100002;
   width: 5.5em;
-   height: 5.5rem
+  height: 5.5rem;
 }
 
 .menu .menu-hamburger-icon {
@@ -51,8 +53,7 @@
 }
 
 .menu .menu-hamburger-icon.open .menu-item {
-  background: #51398D;
-  mix-blend-mode: normal;
+  background: #fff;
 }
 
 .menu .menu-hamburger-icon.open .menu-item:nth-child(1) {

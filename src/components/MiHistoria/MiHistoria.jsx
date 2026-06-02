@@ -1,5 +1,6 @@
 "use client";
 import "./MiHistoria.css";
+import { useRef, useState, useCallback } from "react";
 
 const cards = [
   { name: "Toque Fino", desc: "La pelota nunca se queja. Solo vuelve.", img: "/team-cards/futbol.webp" },
@@ -13,11 +14,31 @@ const cards = [
 ];
 
 export default function MiHistoria() {
+  const videoRef = useRef(null);
+  const [muted, setMuted] = useState(true);
+
+  const toggleSound = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.muted) {
+      video.muted = false;
+      video.play();
+      setMuted(false);
+    } else {
+      video.muted = true;
+      setMuted(true);
+    }
+  }, []);
+
   return (
     <section className="mi-historia">
       {/* desktop */}
       <div className="mh-desktop">
         <div className="mh-header">
+          <div className="mh-video" onClick={toggleSound}>
+            <video ref={videoRef} src="/home/julian-chiquito.mp4" autoPlay loop muted playsInline />
+            {!muted && <span className="mh-video-indicator">🔊</span>}
+          </div>
           <h1>Mi historia</h1>
         </div>
         {cards.map((card, i) => (
@@ -35,6 +56,9 @@ export default function MiHistoria() {
 
       {/* mobile */}
       <div className="mh-mobile">
+        <div className="mh-mobile-video">
+          <video src="/home/julian-chiquito.mp4" autoPlay loop muted playsInline />
+        </div>
         <div className="mh-mobile-header">
           <h1>Mi historia</h1>
         </div>

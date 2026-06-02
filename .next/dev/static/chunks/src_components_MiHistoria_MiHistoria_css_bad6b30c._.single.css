@@ -18,20 +18,50 @@
 
 .mi-historia .mh-header {
   will-change: transform;
-  justify-content: flex-start;
   align-items: center;
-  width: 290vw;
+  width: 320vw;
   height: 100svh;
   display: flex;
   position: relative;
+}
+
+.mi-historia .mh-video {
+  cursor: pointer;
+  border-radius: .75rem;
+  flex-shrink: 0;
+  align-self: center;
+  width: 70vw;
+  height: 70svh;
+  margin-left: 80vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.mi-historia .mh-video video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mi-historia .mh-video-indicator {
+  pointer-events: none;
+  background: #00000080;
+  border-radius: 2rem;
+  padding: .5rem .75rem;
+  font-size: 1.5rem;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
 }
 
 .mi-historia .mh-header h1 {
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   text-transform: uppercase;
   color: var(--fg-1);
-  margin-top: 2.5%;
-  margin-left: 80vw;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 150vw;
   font-size: 20vw;
   line-height: 1;
 }
@@ -110,6 +140,19 @@
     width: 100%;
     padding: 6rem 2rem;
     display: flex;
+  }
+
+  .mi-historia .mh-mobile-video {
+    border-radius: .5rem;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+  }
+
+  .mi-historia .mh-mobile-video video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 
   .mi-historia .mh-mobile-header {

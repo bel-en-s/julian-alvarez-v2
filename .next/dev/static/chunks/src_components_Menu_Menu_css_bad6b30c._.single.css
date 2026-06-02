@@ -1,7 +1,6 @@
 /* [project]/src/components/Menu/Menu.css [app-client] (css) */
 .menu {
   z-index: 100001;
-  mix-blend-mode: difference;
   padding: 0 1rem;
   position: fixed;
   top: 1rem;
@@ -11,6 +10,7 @@
 
 .menu .menu-header {
   cursor: pointer;
+  mix-blend-mode: difference;
   justify-content: space-between;
   align-items: center;
   display: flex;
@@ -24,6 +24,7 @@
 
 .menu .menu-toggle {
   cursor: pointer;
+  z-index: 100002;
   background: none;
   border: none;
   justify-content: center;
@@ -32,6 +33,7 @@
   height: 5.5rem;
   padding: 0;
   display: flex;
+  position: relative;
 }
 
 .menu .menu-hamburger-icon {
@@ -52,8 +54,7 @@
 }
 
 .menu .menu-hamburger-icon.open .menu-item {
-  mix-blend-mode: normal;
-  background: #51398d;
+  background: #fff;
 }
 
 .menu .menu-hamburger-icon.open .menu-item:first-child {

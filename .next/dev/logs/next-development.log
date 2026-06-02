@@ -226,3 +226,89 @@ It can also happen if the client has a browser extension installed which messes 
 [00:59:19.102] Server  LOG      ✓ Compiled in 13ms
 [00:59:30.728] Server  LOG      ✓ Compiled in 5ms
 [00:59:40.219] Server  LOG      ✓ Compiled in 5ms
+[01:01:04.910] Server  LOG      ✓ Compiled in 28ms
+[01:01:22.143] Server  LOG      ✓ Compiled in 10ms
+[01:01:34.974] Server  LOG      ✓ Compiled in 10ms
+[01:01:46.709] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:01:46.915] Browser WARN    GSAP target  not found. https://gsap.com
+[01:01:46.915] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[01:01:46.915] Browser WARN    GSAP target  not found. https://gsap.com
+[01:01:46.915] Browser WARN    GSAP target  not found. https://gsap.com
+[01:03:47.750] Server  LOG      ✓ Compiled in 31ms
+[01:03:55.880] Server  LOG      ✓ Compiled in 4ms
+[01:04:38.916] Server  LOG      ✓ Compiled in 11ms
+[01:04:47.854] Server  LOG      ✓ Compiled in 4ms
+[01:06:06.811] Server  LOG      ✓ Compiled in 14ms
+[01:06:12.997] Server  LOG      ✓ Compiled in 5ms
+[01:06:35.112] Server  LOG      ✓ Compiled in 14ms
+[01:06:38.206] Server  LOG      ✓ Compiled in 2ms
+[01:07:09.569] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:07:09.774] Browser WARN    GSAP target  not found. https://gsap.com
+[01:07:09.774] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[01:07:09.775] Browser WARN    GSAP target  not found. https://gsap.com
+[01:07:09.775] Browser WARN    GSAP target  not found. https://gsap.com
+[01:07:49.412] Server  LOG      ✓ Compiled in 10ms
+[01:07:52.398] Server  LOG      ✓ Compiled in 2ms
+[01:09:04.174] Server  LOG      ✓ Compiled in 18ms
+[01:09:07.247] Server  LOG      ✓ Compiled in 2ms
+[01:09:20.396] Server  LOG      ✓ Compiled in 27ms
+[01:09:54.150] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:09:54.355] Browser WARN    GSAP target  not found. https://gsap.com
+[01:09:54.355] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[01:09:54.355] Browser WARN    GSAP target  not found. https://gsap.com
+[01:09:54.355] Browser WARN    GSAP target  not found. https://gsap.com
+[01:29:33.745] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:29:34.081] Browser WARN    GSAP target  not found. https://gsap.com
+[01:29:34.081] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[01:29:34.081] Browser WARN    GSAP target  not found. https://gsap.com
+[01:29:34.081] Browser WARN    GSAP target  not found. https://gsap.com
+[01:35:16.373] Browser WARN    GSAP target  not found. https://gsap.com
+[01:35:16.373] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[01:35:16.373] Browser WARN    GSAP target  not found. https://gsap.com
+[01:35:16.373] Browser WARN    GSAP target  not found. https://gsap.com
+[25:15:19.559] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[25:15:19.903] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.js">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         style={{--lineColor:"#E88A24",--lineWidth:"1px",--rulerNumbers:"#000000",--rulerBaseLine:"#000000", ...}}
+                        >
+                  ...
+
+[25:15:19.903] Browser WARN    GSAP target  not found. https://gsap.com
+[25:15:19.903] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[25:15:19.903] Browser WARN    GSAP target  not found. https://gsap.com
+[25:15:19.903] Browser WARN    GSAP target  not found. https://gsap.com
+[25:16:07.784] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[25:16:08.093] Browser WARN    GSAP target  not found. https://gsap.com
+[25:16:08.093] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[25:16:08.093] Browser WARN    GSAP target  not found. https://gsap.com
+[25:16:08.093] Browser WARN    GSAP target  not found. https://gsap.com
