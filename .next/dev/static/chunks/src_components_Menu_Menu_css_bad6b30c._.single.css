@@ -1,9 +1,9 @@
 /* [project]/src/components/Menu/Menu.css [app-client] (css) */
 .menu {
   z-index: 100001;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   position: fixed;
-  top: 1rem;
+  top: 1.5rem;
   left: 0;
   right: 0;
 }
@@ -11,54 +11,76 @@
 .menu .menu-header {
   cursor: pointer;
   mix-blend-mode: difference;
+  z-index: 100004;
+  pointer-events: none;
   justify-content: space-between;
   align-items: center;
   display: flex;
+  position: relative;
+}
+
+.menu .menu-header.is-open {
+  mix-blend-mode: unset;
 }
 
 .menu .menu-logo {
   object-fit: contain;
+  pointer-events: auto;
   width: auto;
   height: 5.5rem;
 }
 
 .menu .menu-toggle {
   cursor: pointer;
-  z-index: 100002;
+  z-index: 100006;
+  isolation: isolate;
   background: none;
   border: none;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
-  width: 5.5em;
+  width: 5.5rem;
   height: 5.5rem;
+  margin-right: -1rem;
   padding: 0;
   display: flex;
   position: relative;
+  pointer-events: auto !important;
 }
 
 .menu .menu-hamburger-icon {
   cursor: pointer;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   position: relative;
 }
 
 .menu .menu-hamburger-icon .menu-item {
+  transform-origin: center;
   background: #fff;
   border-radius: 1px;
-  width: 3em;
-  height: 1.5px;
-  margin: 0 0 3px;
-  transition: all .2s;
-  display: block;
+  width: 100%;
+  height: 2px;
+  transition: all .25s;
+  position: absolute;
+  left: 0;
 }
 
-.menu .menu-hamburger-icon.open .menu-item {
-  background: #fff;
+.menu .menu-hamburger-icon .menu-item:first-child {
+  top: 3px;
+}
+
+.menu .menu-hamburger-icon .menu-item:nth-child(2) {
+  top: 11px;
+}
+
+.menu .menu-hamburger-icon .menu-item:nth-child(3) {
+  top: 19px;
 }
 
 .menu .menu-hamburger-icon.open .menu-item:first-child {
-  transform: rotate(45deg)translate(3px, 3px);
+  top: 11px;
+  transform: rotate(45deg);
 }
 
 .menu .menu-hamburger-icon.open .menu-item:nth-child(2) {
@@ -66,11 +88,12 @@
 }
 
 .menu .menu-hamburger-icon.open .menu-item:nth-child(3) {
-  transform: rotate(-45deg)translate(3px, -3px);
+  top: 11px;
+  transform: rotate(-45deg);
 }
 
 .ja-menu-arana {
-  z-index: 99;
+  z-index: 100002;
   pointer-events: none;
   isolation: isolate;
   position: fixed;
@@ -92,9 +115,9 @@
 }
 
 .ja-menu-arana__scrim {
-  -webkit-backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
-  background: radial-gradient(circle at calc(100% - 56px) 52px, #0d0820c7 0%, #0d082073 22%, #0d082026 40%, #0000 55%);
+  background: radial-gradient(circle at calc(100% - 120px) 120px, #0d0820d9 0%, #0d082080 20%, #0d08202e 38%, #0000 52%);
   transition: opacity .35s;
   position: fixed;
   inset: 0;
@@ -106,10 +129,10 @@
 
 .ja-menu-arana__frame {
   --s: 1;
-  transform-origin: 100% 0;
+  transform-origin: calc(100% - 120px) 120px;
   width: 800px;
   height: 560px;
-  transform: translate(calc(-56px * (1 - var(--s))), calc(52px * (1 - var(--s)))) scale(var(--s));
+  transform: translate(calc(-130px * (1 - var(--s))), calc(108px * (1 - var(--s)))) scale(var(--s));
   pointer-events: none;
   will-change: transform;
   position: fixed;
@@ -151,6 +174,13 @@
   stroke-dasharray: 900;
   stroke-dashoffset: 900px;
   filter: drop-shadow(0 0 6px var(--web-glow));
+}
+
+.ja-menu-arana__web .anchor.origin {
+  fill: #e8dcfff2;
+  stroke: none;
+  filter: drop-shadow(0 0 8px var(--web-glow)) drop-shadow(0 0 16px #a88ce64d);
+  opacity: 0;
 }
 
 .ja-menu-arana__web .anchor {
@@ -275,18 +305,18 @@
 }
 
 .ja-menu-arana__item.i1 {
-  top: 158px;
-  left: 612px;
+  top: 238px;
+  left: 580px;
 }
 
 .ja-menu-arana__item.i2 {
-  top: 248px;
-  left: 520px;
+  top: 328px;
+  left: 490px;
 }
 
 .ja-menu-arana__item.i4 {
-  top: 198px;
-  left: 688px;
+  top: 278px;
+  left: 656px;
 }
 
 /*# sourceMappingURL=src_components_Menu_Menu_css_bad6b30c._.single.css.map*/

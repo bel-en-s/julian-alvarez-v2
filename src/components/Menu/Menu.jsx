@@ -10,14 +10,13 @@ const Menu = () => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const menuRef = useRef(null);
-  const hamburgerRef = useRef(null);
+
   const layerRef = useRef(null);
   const frameRef = useRef(null);
   const scrimRef = useRef(null);
   const webRef = useRef(null);
 
   const toggleMenu = () => {
-    if (isAnimating) return;
     if (isOpen) closeMenu();
     else openMenu();
   };
@@ -35,11 +34,10 @@ const Menu = () => {
 
   const openMenu = () => {
     setIsAnimating(true);
-    if (hamburgerRef.current) hamburgerRef.current.classList.add("open");
+    setIsOpen(true);
 
     const tl = gsap.timeline({
       onComplete: () => {
-        setIsOpen(true);
         setIsAnimating(false);
       },
     });
@@ -53,8 +51,17 @@ const Menu = () => {
     tl.to(layer, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
     tl.to(scrim, { opacity: 1, duration: 0.35, ease: "power2.out" }, 0);
 
-    // Web paths draw
+      // Web paths draw
     if (web) {
+      const origin = web.querySelector(".origin");
+      if (origin) {
+        tl.fromTo(
+          origin,
+          { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" },
+          { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2.5)" },
+          0.05
+        );
+      }
       const strands = web.querySelectorAll(".strand");
       if (strands.length) {
         tl.to(strands, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut", stagger: 0.08 }, 0.08);
@@ -67,7 +74,7 @@ const Menu = () => {
       if (nine) {
         tl.to(nine, { strokeDashoffset: 0, duration: 1.0, ease: "power3.inOut" }, 0.55);
       }
-      const anchors = web.querySelectorAll(".anchor");
+      const anchors = web.querySelectorAll(".anchor:not(.origin)");
       if (anchors.length) {
         tl.fromTo(
           anchors,
@@ -109,13 +116,10 @@ const Menu = () => {
   };
 
   const closeMenu = () => {
-    setIsAnimating(true);
-
     const tl = gsap.timeline({
       onComplete: () => {
         setIsOpen(false);
         setIsAnimating(false);
-        if (hamburgerRef.current) hamburgerRef.current.classList.remove("open");
         if (layerRef.current) layerRef.current.classList.remove("is-open");
       },
     });
@@ -126,9 +130,7 @@ const Menu = () => {
   };
 
   const handleLinkClick = () => {
-    if (isOpen) {
-      setTimeout(() => closeMenu(), 500);
-    }
+    if (isOpen) closeMenu();
   };
 
   useEffect(() => {
@@ -153,7 +155,7 @@ const Menu = () => {
       <div className={`menu-header${isOpen ? " is-open" : ""}`} onClick={toggleMenu}>
         <img className="menu-logo" src="./logo.png" alt="Julian Alvarez" />
         <button className="menu-toggle" aria-label="Toggle menu" onClick={(e) => { e.stopPropagation(); toggleMenu(); }}>
-          <div className={`menu-hamburger-icon${isAnimating || isOpen ? " open" : ""}`} ref={hamburgerRef}>
+          <div className={`menu-hamburger-icon${isOpen ? " open" : ""}`}>
             <span className="menu-item"></span>
             <span className="menu-item"></span>
             <span className="menu-item"></span>
@@ -172,29 +174,30 @@ const Menu = () => {
               preserveAspectRatio="xMidYMid meet"
               aria-hidden="true"
             >
-              <path className="strand s1" d="M 744 52 Q 560 110 380 160" />
-              <path className="strand s2" d="M 744 52 Q 500 170 260 270" />
-              <path className="strand s3" d="M 744 52 Q 550 250 360 370" />
-              <path className="strand s4" d="M 744 52 Q 620 130 480 200" />
-              <path className="auxiliary a1" d="M 744 52 Q 640 80 480 100" />
-              <path className="auxiliary a2" d="M 744 52 Q 560 95 360 120" />
-              <path className="auxiliary a3" d="M 744 52 Q 660 160 540 280" />
-              <path className="auxiliary a4" d="M 744 52 Q 600 250 420 420" />
-              <path className="auxiliary a5" d="M 744 52 Q 540 340 340 380" />
+              <circle className="anchor origin" cx="680" cy="120" r="3.5" />
+              <path className="strand s1" d="M 680 120 Q 520 180 340 240" />
+              <path className="strand s2" d="M 680 120 Q 460 250 220 340" />
+              <path className="strand s3" d="M 680 120 Q 510 330 320 440" />
+              <path className="strand s4" d="M 680 120 Q 560 200 440 260" />
+              <path className="auxiliary a1" d="M 680 120 Q 580 140 440 160" />
+              <path className="auxiliary a2" d="M 680 120 Q 520 150 340 180" />
+              <path className="auxiliary a3" d="M 680 120 Q 600 230 500 340" />
+              <path className="auxiliary a4" d="M 680 120 Q 560 310 400 480" />
+              <path className="auxiliary a5" d="M 680 120 Q 500 400 320 440" />
               <path
                 className="nine"
-                d="M 380 160 C 430 150 460 180 480 200 C 510 230 460 270 260 270 C 230 270 320 210 380 160 Z"
+                d="M 340 240 C 400 230 430 260 440 280 C 460 310 420 350 220 340 C 190 340 280 290 340 240 Z"
               />
-              <circle className="anchor k1" cx="380" cy="160" r="2.4" />
-              <circle className="anchor k4" cx="480" cy="200" r="2.4" />
-              <circle className="anchor k2" cx="260" cy="270" r="2.4" />
+              <circle className="anchor k1" cx="340" cy="240" r="2.4" />
+              <circle className="anchor k4" cx="440" cy="280" r="2.4" />
+              <circle className="anchor k2" cx="220" cy="340" r="2.4" />
               <g className="dangles">
-                <path className="dangle g1" d="M 380 220 Q 382 260 376 290 Q 372 310 380 320" />
-                <circle className="dangle-tip t1" cx="380" cy="320" r="1.3" />
-                <path className="dangle g2" d="M 260 320 Q 250 360 246 390 Q 244 410 254 420" />
-                <circle className="dangle-tip t2" cx="254" cy="420" r="1.4" />
-                <path className="dangle g3" d="M 480 250 Q 488 280 482 300 Q 478 320 486 330" />
-                <circle className="dangle-tip t3" cx="486" cy="330" r="1.2" />
+                <path className="dangle g1" d="M 340 290 Q 342 330 336 360 Q 332 380 340 390" />
+                <circle className="dangle-tip t1" cx="340" cy="390" r="1.3" />
+                <path className="dangle g2" d="M 220 380 Q 210 420 206 450 Q 204 470 214 480" />
+                <circle className="dangle-tip t2" cx="214" cy="480" r="1.4" />
+                <path className="dangle g3" d="M 440 320 Q 448 350 442 370 Q 438 390 446 400" />
+                <circle className="dangle-tip t3" cx="446" cy="400" r="1.2" />
               </g>
             </svg>
 
