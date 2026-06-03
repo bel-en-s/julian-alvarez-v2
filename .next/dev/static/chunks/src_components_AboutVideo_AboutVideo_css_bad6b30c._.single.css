@@ -1,0 +1,50 @@
+/* [project]/src/components/AboutVideo/AboutVideo.css [app-client] (css) */
+.about-video-wrapper {
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-video-wrapper video {
+  cursor: pointer;
+  border-radius: 1rem;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-video-controls {
+  opacity: 0;
+  gap: .5rem;
+  transition: opacity .3s;
+  display: flex;
+  position: absolute;
+  bottom: .75rem;
+  right: .75rem;
+}
+
+.about-video-wrapper:hover .about-video-controls {
+  opacity: 1;
+}
+
+.about-video-controls button {
+  color: #fff;
+  cursor: pointer;
+  background: #0000008c;
+  border: none;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  transition: background .2s;
+  display: flex;
+}
+
+.about-video-controls button:hover {
+  background: #000c;
+}
+
+/*# sourceMappingURL=src_components_AboutVideo_AboutVideo_css_bad6b30c._.single.css.map*/

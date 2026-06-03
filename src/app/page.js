@@ -3,7 +3,6 @@ import "./home.css";
 import { useState, useEffect, useRef } from "react";
 import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
 import DotMatrix from "@/components/DotMatrix/DotMatrix";
-import BrandIcon from "@/components/BrandIcon/BrandIcon";
 import MarqueeBanner from "@/components/MarqueeBanner/MarqueeBanner";
 import TextBlock from "@/components/TextBlock/TextBlock";
 import PeelReveal from "@/components/PeelReveal/PeelReveal";
@@ -12,6 +11,7 @@ import NextMatch from "@/components/NextMatch/NextMatch";
 import Mascara3D from "@/components/Mascara3D/Mascara3D";
 import HeroAtmos from "@/components/HeroAtmos/HeroAtmos";
 import MiHistoria from "@/components/MiHistoria/MiHistoria";
+import AboutVideo from "@/components/AboutVideo/AboutVideo";
 
 import Copy from "@/components/Copy/Copy";
 
@@ -159,6 +159,10 @@ export default function Index() {
     let ww = 0, wh = 0;
     let anchors = [];
     let lastPt = null;
+    let raf = null;
+    const LIFETIME = 900;
+    const MAX_LINES = 400;
+    let lines = [];
 
     const repaint = () => {
       ww = window.innerWidth;
@@ -168,7 +172,8 @@ export default function Index() {
       canvas.style.width = ww + "px";
       canvas.style.height = wh + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, ww, wh);
+      lastPt = null;
+      lines = [];
       const rx = ww * 0.3, ry = wh * 0.35;
       anchors = [];
       for (let i = 0; i < 8; i++) {
@@ -180,30 +185,43 @@ export default function Index() {
 
     window.addEventListener("resize", repaint);
 
-    const strand = (x1, y1, x2, y2, alpha) => {
-      ctx.strokeStyle = "rgba(216, 200, 245, " + alpha + ")";
-      ctx.lineWidth = 0.6;
-      ctx.lineCap = "round";
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
+    const render = (now) => {
+      ctx.clearRect(0, 0, ww, wh);
+      const cutoff = now - LIFETIME;
+      let write = 0;
+      for (let i = 0; i < lines.length; i++) {
+        const ln = lines[i];
+        if (ln.t < cutoff) continue;
+        lines[write++] = ln;
+        const age = (now - ln.t) / LIFETIME;
+        const alpha = (1 - age) * ln.opacity;
+        ctx.strokeStyle = "rgba(216, 200, 245, " + alpha + ")";
+        ctx.lineWidth = 0.6;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(ln.x1, ln.y1);
+        ctx.lineTo(ln.x2, ln.y2);
+        ctx.stroke();
+      }
+      lines.length = write;
+      raf = requestAnimationFrame(render);
+    };
+
+    raf = requestAnimationFrame(render);
+
+    const pushLine = (x1, y1, x2, y2, opacity) => {
+      lines.push({ x1, y1, x2, y2, t: performance.now(), opacity });
+      if (lines.length > MAX_LINES) lines.splice(0, lines.length - MAX_LINES);
     };
 
     const onMove = (e) => {
-      ctx.save();
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.fillStyle = "rgba(0,0,0,0.04)";
-      ctx.fillRect(0, 0, ww, wh);
-      ctx.restore();
-
       const sorted = anchors.slice().sort((a, b) =>
         (a.x - e.clientX) * (a.x - e.clientX) + (a.y - e.clientY) * (a.y - e.clientY)
         - ((b.x - e.clientX) * (b.x - e.clientX) + (b.y - e.clientY) * (b.y - e.clientY))
       );
-      strand(sorted[0].x, sorted[0].y, e.clientX, e.clientY, 0.55);
-      strand(sorted[1].x, sorted[1].y, e.clientX, e.clientY, 0.32);
-      if (lastPt) strand(lastPt.x, lastPt.y, e.clientX, e.clientY, 0.7);
+      pushLine(sorted[0].x, sorted[0].y, e.clientX, e.clientY, 0.55);
+      pushLine(sorted[1].x, sorted[1].y, e.clientX, e.clientY, 0.32);
+      if (lastPt) pushLine(lastPt.x, lastPt.y, e.clientX, e.clientY, 0.7);
       lastPt = { x: e.clientX, y: e.clientY };
     };
 
@@ -212,6 +230,7 @@ export default function Index() {
     return () => {
       window.removeEventListener("resize", repaint);
       document.removeEventListener("pointermove", onMove);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 
@@ -266,14 +285,16 @@ export default function Index() {
       <div className="scroll-track" ref={scrollTrackRef}>
         <section className="about">
           <div className="container">
-            <div className="about-copy">
-              <Copy>
-                <h3>
-                 "Sigan soñando.<br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
-                </h3>
-              </Copy>
-              <div className="about-icon">
-                <BrandIcon />
+            <div className="about-layout">
+              <div className="about-col about-col-phrase">
+                <Copy>
+                  <h3>
+                   "Sigan soñando.<br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
+                  </h3>
+                </Copy>
+              </div>
+              <div className="about-col about-col-video">
+                <AboutVideo />
               </div>
             </div>
           </div>

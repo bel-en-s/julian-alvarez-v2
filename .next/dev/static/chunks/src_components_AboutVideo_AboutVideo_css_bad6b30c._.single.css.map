@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/components/AboutVideo/AboutVideo.css"],"sourcesContent":[".about-video-wrapper {\n  position: relative;\n  width: 100%;\n  max-width: 480px;\n  border-radius: 1rem;\n  overflow: hidden;\n}\n\n.about-video-wrapper video {\n  width: 100%;\n  height: auto;\n  display: block;\n  border-radius: 1rem;\n  cursor: pointer;\n}\n\n.about-video-controls {\n  position: absolute;\n  bottom: 0.75rem;\n  right: 0.75rem;\n  display: flex;\n  gap: 0.5rem;\n  opacity: 0;\n  transition: opacity 0.3s ease;\n}\n\n.about-video-wrapper:hover .about-video-controls {\n  opacity: 1;\n}\n\n.about-video-controls button {\n  width: 2.25rem;\n  height: 2.25rem;\n  border-radius: 50%;\n  border: none;\n  background: rgba(0, 0, 0, 0.55);\n  color: #fff;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: background 0.2s;\n}\n\n.about-video-controls button:hover {\n  background: rgba(0, 0, 0, 0.8);\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;AAQA;;;;;;;;AAQA;;;;;;;;;;AAUA;;;;AAIA;;;;;;;;;;;;;;AAcA"}}]
+}

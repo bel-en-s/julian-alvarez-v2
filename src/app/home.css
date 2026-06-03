@@ -119,17 +119,23 @@
   width: 100%;
 }
 
-.scroll-track .about .about-copy {
-  width: 80%;
-  max-width: 900px;
-  text-align: center;
+.scroll-track .about .about-layout {
   display: flex;
-  flex-direction: column;
+  width: 90%;
+  max-width: 1200px;
+  gap: 4rem;
   align-items: center;
-  gap: 2rem;
 }
 
-.scroll-track .about .about-copy h3 {
+.scroll-track .about .about-col {
+  flex: 1;
+}
+
+.scroll-track .about .about-col-phrase {
+  text-align: right;
+}
+
+.scroll-track .about .about-col-phrase h3 {
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   font-weight: 800;
   font-size: clamp(2.5rem, 6vw, 5rem);
@@ -138,19 +144,17 @@
   color: var(--base-700);
 }
 
-.scroll-track .about .about-copy p {
-  color: var(--base-500);
+.scroll-track .about .about-col-video {
+  display: flex;
+  justify-content: center;
 }
 
-.scroll-track .about .about-copy .about-icon {
-  width: 12rem;
-  height: 12rem;
-}
-
-.scroll-track .about .about-copy .about-icon img {
+.scroll-track .about .about-col-video video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 480px;
+  height: auto;
+  border-radius: 1rem;
+  display: block;
 }
 
 .scroll-track .about .section-footer {
@@ -272,13 +276,18 @@ html.is-h-scroll {
     flex: none;
   }
 
-  .scroll-track .about .about-copy {
+  .scroll-track .about .about-layout {
+    flex-direction: column;
     width: 90%;
+    gap: 2rem;
   }
 
-  .scroll-track .about .about-copy .about-icon {
-    width: 6rem;
-    height: 6rem;
+  .scroll-track .about .about-col-phrase {
+    text-align: center;
+  }
+
+  .scroll-track .about .about-col-video video {
+    max-width: 320px;
   }
 
   .scroll-track .about .section-footer {
