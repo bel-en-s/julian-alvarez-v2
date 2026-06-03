@@ -174,16 +174,16 @@ const Menu = () => {
               preserveAspectRatio="xMidYMid meet"
               aria-hidden="true"
             >
-              <circle className="anchor origin" cx="680" cy="120" r="3.5" />
-              <path className="strand s1" d="M 680 120 Q 520 180 340 240" />
-              <path className="strand s2" d="M 680 120 Q 460 250 220 340" />
-              <path className="strand s3" d="M 680 120 Q 510 330 320 440" />
-              <path className="strand s4" d="M 680 120 Q 560 200 440 260" />
-              <path className="auxiliary a1" d="M 680 120 Q 580 140 440 160" />
-              <path className="auxiliary a2" d="M 680 120 Q 520 150 340 180" />
-              <path className="auxiliary a3" d="M 680 120 Q 600 230 500 340" />
-              <path className="auxiliary a4" d="M 680 120 Q 560 310 400 480" />
-              <path className="auxiliary a5" d="M 680 120 Q 500 400 320 440" />
+              <circle className="anchor origin" cx="740" cy="110" r="3.5" />
+              <path className="strand s1" d="M 740 110 Q 520 170 340 240" />
+              <path className="strand s2" d="M 740 110 Q 460 240 220 340" />
+              <path className="strand s3" d="M 740 110 Q 510 320 320 440" />
+              <path className="strand s4" d="M 740 110 Q 560 190 440 260" />
+              <path className="auxiliary a1" d="M 740 110 Q 580 130 440 160" />
+              <path className="auxiliary a2" d="M 740 110 Q 520 140 340 180" />
+              <path className="auxiliary a3" d="M 740 110 Q 600 220 500 340" />
+              <path className="auxiliary a4" d="M 740 110 Q 560 300 400 480" />
+              <path className="auxiliary a5" d="M 740 110 Q 500 390 320 440" />
               <path
                 className="nine"
                 d="M 340 240 C 400 230 430 260 440 280 C 460 310 420 350 220 340 C 190 340 280 290 340 240 Z"

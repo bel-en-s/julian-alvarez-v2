@@ -818,11 +818,29 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].registerPlugin(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$ScrollTrigger$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ScrollTrigger"]);
+const config = {
+    stampInterval: 8,
+    sizeBase: 55,
+    sizeFromSpeed: 0.06,
+    expandMultiplier: 1.0,
+    expandTime: 0.2,
+    expandEase: "power2.out",
+    dissolveStart: 0.2,
+    dissolveTime: 1.5,
+    dissolveEase: "power2.inOut",
+    brushDensity: 10,
+    brushSpread: 4,
+    brushAspectMin: 0.5,
+    brushAspectMax: 1
+};
 const MarqueeBanner = ()=>{
     _s();
     const marqueeBannerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const marquee1Ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const marquee2Ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const smudgeContainerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const smudgeSVGRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const bannerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$gsap$2f$react$2f$src$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGSAP"])({
         "MarqueeBanner.useGSAP": ()=>{
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$ScrollTrigger$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ScrollTrigger"].create({
@@ -848,6 +866,152 @@ const MarqueeBanner = ()=>{
     }["MarqueeBanner.useGSAP"], {
         scope: marqueeBannerRef
     });
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "MarqueeBanner.useEffect": ()=>{
+            const banner = bannerRef.current;
+            const smudgeContainer = smudgeContainerRef.current;
+            const smudgeSVG = smudgeSVGRef.current;
+            if (!banner || !smudgeContainer || !smudgeSVG) return;
+            const pointer = {
+                x: 0,
+                y: 0,
+                lx: 0,
+                ly: 0
+            };
+            let hasStarted = false;
+            let stampAccum = 0;
+            let raf = null;
+            const onPointerMove = {
+                "MarqueeBanner.useEffect.onPointerMove": (x, y)=>{
+                    if (!hasStarted) {
+                        pointer.x = pointer.lx = x;
+                        pointer.y = pointer.ly = y;
+                        hasStarted = true;
+                        return;
+                    }
+                    pointer.x = x;
+                    pointer.y = y;
+                }
+            }["MarqueeBanner.useEffect.onPointerMove"];
+            const getRelativePos = {
+                "MarqueeBanner.useEffect.getRelativePos": (clientX, clientY)=>{
+                    const rect = banner.getBoundingClientRect();
+                    return {
+                        x: clientX - rect.left,
+                        y: clientY - rect.top
+                    };
+                }
+            }["MarqueeBanner.useEffect.getRelativePos"];
+            const handleMouseMove = {
+                "MarqueeBanner.useEffect.handleMouseMove": (e)=>{
+                    const pos = getRelativePos(e.clientX, e.clientY);
+                    onPointerMove(pos.x, pos.y);
+                }
+            }["MarqueeBanner.useEffect.handleMouseMove"];
+            banner.addEventListener("mousemove", handleMouseMove);
+            banner.addEventListener("touchstart", {
+                "MarqueeBanner.useEffect": (e)=>{
+                    e.preventDefault();
+                    const pos = getRelativePos(e.touches[0].clientX, e.touches[0].clientY);
+                    onPointerMove(pos.x, pos.y);
+                }
+            }["MarqueeBanner.useEffect"], {
+                passive: false
+            });
+            banner.addEventListener("touchmove", {
+                "MarqueeBanner.useEffect": (e)=>{
+                    e.preventDefault();
+                    const pos = getRelativePos(e.touches[0].clientX, e.touches[0].clientY);
+                    onPointerMove(pos.x, pos.y);
+                }
+            }["MarqueeBanner.useEffect"], {
+                passive: false
+            });
+            const matchSVGToViewport = {
+                "MarqueeBanner.useEffect.matchSVGToViewport": ()=>{
+                    const rect = banner.getBoundingClientRect();
+                    smudgeSVG.style.width = rect.width + "px";
+                    smudgeSVG.style.height = rect.height + "px";
+                }
+            }["MarqueeBanner.useEffect.matchSVGToViewport"];
+            matchSVGToViewport();
+            window.addEventListener("resize", matchSVGToViewport);
+            const stampSmudgeAt = {
+                "MarqueeBanner.useEffect.stampSmudgeAt": (x, y, radius)=>{
+                    const count = config.brushDensity;
+                    const spread = config.brushSpread;
+                    for(let b = 0; b < count; b++){
+                        const ox = (Math.random() - 0.5) * spread;
+                        const oy = (Math.random() - 0.5) * spread;
+                        const size = radius * (0.4 + Math.random() * 0.6);
+                        const ellipse = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
+                        const aspect = config.brushAspectMin + Math.random() * (config.brushAspectMax - config.brushAspectMin);
+                        const angle = Math.random() * Math.PI * 2;
+                        ellipse.setAttribute("cx", x + ox);
+                        ellipse.setAttribute("cy", y + oy);
+                        ellipse.setAttribute("rx", size);
+                        ellipse.setAttribute("ry", size * aspect);
+                        ellipse.setAttribute("fill", "#fff");
+                        ellipse.setAttribute("transform", `rotate(${angle * (180 / Math.PI)} ${x + ox} ${y + oy})`);
+                        smudgeContainer.prepend(ellipse);
+                        const animatedSize = {
+                            current: size
+                        };
+                        const timeline = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].timeline({
+                            onUpdate () {
+                                const s = Math.max(0, animatedSize.current);
+                                ellipse.setAttribute("rx", s);
+                                ellipse.setAttribute("ry", s * aspect);
+                            },
+                            onComplete () {
+                                timeline.kill();
+                                ellipse.remove();
+                            }
+                        });
+                        timeline.to(animatedSize, {
+                            current: size * config.expandMultiplier,
+                            duration: config.expandTime,
+                            ease: config.expandEase
+                        });
+                        timeline.to(animatedSize, {
+                            current: 0,
+                            duration: config.dissolveTime,
+                            ease: config.dissolveEase
+                        }, config.dissolveStart);
+                    }
+                }
+            }["MarqueeBanner.useEffect.stampSmudgeAt"];
+            const update = {
+                "MarqueeBanner.useEffect.update": ()=>{
+                    if (hasStarted) {
+                        const dx = pointer.x - pointer.lx;
+                        const dy = pointer.y - pointer.ly;
+                        const dist = Math.hypot(dx, dy);
+                        pointer.lx = pointer.x;
+                        pointer.ly = pointer.y;
+                        if (dist > 0) {
+                            stampAccum += dist;
+                            const interval = config.stampInterval;
+                            while(stampAccum >= interval){
+                                stampAccum -= interval;
+                                const t = 1 - stampAccum / dist;
+                                stampSmudgeAt(pointer.x - dx * t, pointer.y - dy * t, config.sizeBase + dist * config.sizeFromSpeed);
+                            }
+                        }
+                    }
+                    raf = requestAnimationFrame(update);
+                }
+            }["MarqueeBanner.useEffect.update"];
+            raf = requestAnimationFrame(update);
+            return ({
+                "MarqueeBanner.useEffect": ()=>{
+                    banner.removeEventListener("mousemove", handleMouseMove);
+                    window.removeEventListener("resize", matchSVGToViewport);
+                    if (raf) cancelAnimationFrame(raf);
+                }
+            })["MarqueeBanner.useEffect"];
+        }
+    }["MarqueeBanner.useEffect"], []);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         className: "marquee-banner",
         ref: marqueeBannerRef,
@@ -862,12 +1026,12 @@ const MarqueeBanner = ()=>{
                             children: "Transmission lost in neutral space"
                         }, void 0, false, {
                             fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                            lineNumber: 42,
+                            lineNumber: 225,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                        lineNumber: 41,
+                        lineNumber: 224,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -877,22 +1041,23 @@ const MarqueeBanner = ()=>{
                             children: "Synthetic forms archive the signal"
                         }, void 0, false, {
                             fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                            lineNumber: 45,
+                            lineNumber: 228,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                        lineNumber: 44,
+                        lineNumber: 227,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                lineNumber: 40,
+                lineNumber: 223,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "banner",
+                ref: bannerRef,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "banner-content",
@@ -903,12 +1068,12 @@ const MarqueeBanner = ()=>{
                                     children: "[ Las dos caras ]"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                                    lineNumber: 51,
+                                    lineNumber: 234,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                                lineNumber: 50,
+                                lineNumber: 233,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Copy$2f$Copy$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -916,33 +1081,91 @@ const MarqueeBanner = ()=>{
                                     children: "Dentro y fuera de las canchas"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                                    lineNumber: 54,
+                                    lineNumber: 237,
                                     columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                                lineNumber: 53,
+                                lineNumber: 236,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                        lineNumber: 49,
+                        lineNumber: 232,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "banner-img",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                            src: "/marquee-banner/mask-face.webp",
-                            alt: ""
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                            lineNumber: 58,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
+                        className: "banner-img banner-img--face"
                     }, void 0, false, {
                         fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                        lineNumber: 57,
+                        lineNumber: 240,
+                        columnNumber: 9
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "banner-img banner-img--reveal"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
+                        lineNumber: 241,
+                        columnNumber: 9
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        preserveAspectRatio: "none",
+                        className: "smudge-revealer",
+                        ref: smudgeSVGRef,
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("defs", {
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("filter", {
+                                    id: "smudge-goo",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feGaussianBlur", {
+                                            in: "SourceGraphic",
+                                            stdDeviation: "50"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
+                                            lineNumber: 250,
+                                            columnNumber: 15
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("feColorMatrix", {
+                                            type: "matrix",
+                                            values: "0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 4 -0.35"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
+                                            lineNumber: 251,
+                                            columnNumber: 15
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
+                                    lineNumber: 249,
+                                    columnNumber: 13
+                                }, ("TURBOPACK compile-time value", void 0))
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
+                                lineNumber: 248,
+                                columnNumber: 11
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("mask", {
+                                id: "smudge-mask",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("g", {
+                                    className: "smudge-blobs",
+                                    ref: smudgeContainerRef,
+                                    filter: "url(#smudge-goo)"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
+                                    lineNumber: 258,
+                                    columnNumber: 13
+                                }, ("TURBOPACK compile-time value", void 0))
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
+                                lineNumber: 257,
+                                columnNumber: 11
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
+                        lineNumber: 242,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -952,28 +1175,28 @@ const MarqueeBanner = ()=>{
                             alt: ""
                         }, void 0, false, {
                             fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                            lineNumber: 61,
+                            lineNumber: 262,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                        lineNumber: 60,
+                        lineNumber: 261,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                lineNumber: 48,
+                lineNumber: 231,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-        lineNumber: 39,
+        lineNumber: 222,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(MarqueeBanner, "BNyEp8sxbMdX2ejTAEFfoB+Y/5A=", false, function() {
+_s(MarqueeBanner, "8ZqmLLLRKEbLa8fJMPhxJ9xVj70=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$gsap$2f$react$2f$src$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGSAP"]
     ];

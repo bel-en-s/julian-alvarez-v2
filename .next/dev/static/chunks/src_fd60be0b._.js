@@ -405,8 +405,8 @@ const Menu = ()=>{
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
                                             className: "anchor origin",
-                                            cx: "680",
-                                            cy: "120",
+                                            cx: "740",
+                                            cy: "110",
                                             r: "3.5"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
@@ -415,7 +415,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "strand s1",
-                                            d: "M 680 120 Q 520 180 340 240"
+                                            d: "M 740 110 Q 520 170 340 240"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 178,
@@ -423,7 +423,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "strand s2",
-                                            d: "M 680 120 Q 460 250 220 340"
+                                            d: "M 740 110 Q 460 240 220 340"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 179,
@@ -431,7 +431,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "strand s3",
-                                            d: "M 680 120 Q 510 330 320 440"
+                                            d: "M 740 110 Q 510 320 320 440"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 180,
@@ -439,7 +439,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "strand s4",
-                                            d: "M 680 120 Q 560 200 440 260"
+                                            d: "M 740 110 Q 560 190 440 260"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 181,
@@ -447,7 +447,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "auxiliary a1",
-                                            d: "M 680 120 Q 580 140 440 160"
+                                            d: "M 740 110 Q 580 130 440 160"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 182,
@@ -455,7 +455,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "auxiliary a2",
-                                            d: "M 680 120 Q 520 150 340 180"
+                                            d: "M 740 110 Q 520 140 340 180"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 183,
@@ -463,7 +463,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "auxiliary a3",
-                                            d: "M 680 120 Q 600 230 500 340"
+                                            d: "M 740 110 Q 600 220 500 340"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 184,
@@ -471,7 +471,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "auxiliary a4",
-                                            d: "M 680 120 Q 560 310 400 480"
+                                            d: "M 740 110 Q 560 300 400 480"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 185,
@@ -479,7 +479,7 @@ const Menu = ()=>{
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                                             className: "auxiliary a5",
-                                            d: "M 680 120 Q 500 400 320 440"
+                                            d: "M 740 110 Q 500 390 320 440"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Menu/Menu.jsx",
                                             lineNumber: 186,
