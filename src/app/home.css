@@ -167,14 +167,14 @@
   font-weight: 800;
   font-size: clamp(2rem, 10vw, 16rem);
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  /* line-height: 1.25; */
   color: #fff;
 }
 
 .slide-description {
   position: absolute;
   top: 50%;
-  right: 3rem;
+  right: 15rem;
   transform: translate(0%, -50%);
   width: 15%;
   min-width: 250px;
@@ -190,7 +190,7 @@
   font-weight: 800;
   font-size: clamp(1.2rem, 2.5vw, 3.5rem);
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  /* line-height: 1.25; */
   color: #fff;
 }
 

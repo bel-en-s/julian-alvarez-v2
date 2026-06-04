@@ -164,7 +164,6 @@
   color: #fff;
   font-size: clamp(2rem, 10vw, 16rem);
   font-weight: 800;
-  line-height: 1.25;
 }
 
 .slide-description {
@@ -177,7 +176,7 @@
   display: flex;
   position: absolute;
   top: 50%;
-  right: 3rem;
+  right: 15rem;
   transform: translate(0%, -50%);
 }
 
@@ -187,7 +186,6 @@
   color: #fff;
   font-size: clamp(1.2rem, 2.5vw, 3.5rem);
   font-weight: 800;
-  line-height: 1.25;
 }
 
 .scroll-track .about .section-footer {
