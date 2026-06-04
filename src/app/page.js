@@ -284,18 +284,23 @@ export default function Index() {
 
       <div className="scroll-track" ref={scrollTrackRef}>
         <section className="about">
-          <div className="container">
-            <div className="about-layout">
-              <div className="about-col about-col-phrase">
-                <Copy>
-                  <h3>
-                   "Sigan soñando.<br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
-                  </h3>
-                </Copy>
-              </div>
-              <div className="about-col about-col-video">
-                <AboutVideo />
-              </div>
+          <div className="about-bg">
+            <AboutVideo />
+          </div>
+          <div className="slide-content">
+            <div className="slide-title">
+              <Copy>
+                <h1>
+                  "Sigan <br />soñando.
+                </h1>
+              </Copy>
+            </div>
+            <div className="slide-description">
+              <Copy>
+                <h1>
+                 <br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
+                </h1>
+              </Copy>
             </div>
           </div>
           <div className="section-footer light">

@@ -1,6 +1,7 @@
 "use client";
 import "./NextMatch.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import gsap from "gsap";
 
 function getTimeLeft(kickoff) {
   const diff = new Date(kickoff).getTime() - Date.now();

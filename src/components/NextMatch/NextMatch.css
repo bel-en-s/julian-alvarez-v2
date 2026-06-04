@@ -283,6 +283,16 @@
   align-items: center;
 }
 
+.next-match.is-min .nm-extra,
+.next-match.is-min .watermark,
+.next-match.is-min .web {
+  display: none;
+}
+
+.next-match.is-min .head .eyebrow {
+  display: none;
+}
+
 .next-match.is-min .countdown {
   align-items: center;
   gap: 4px;
@@ -306,26 +316,11 @@
 }
 
 .next-match.is-min .head {
-  flex-direction: row;
-  gap: 12px;
-}
-
-.next-match.is-min .head .eyebrow {
-  display: none;
-}
-
-.next-match.is-min .head {
   order: 2;
 }
 
 .next-match.is-min .countdown {
   order: 1;
-}
-
-.next-match.is-min .nm-extra,
-.next-match.is-min .watermark,
-.next-match.is-min .web {
-  display: none;
 }
 
 @media (max-width: 760px) {

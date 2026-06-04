@@ -1,15 +1,12 @@
 /* [project]/src/components/AboutVideo/AboutVideo.css [app-client] (css) */
 .about-video-wrapper {
-  border-radius: 1rem;
   width: 100%;
-  max-width: 480px;
   position: relative;
   overflow: hidden;
 }
 
 .about-video-wrapper video {
   cursor: pointer;
-  border-radius: 1rem;
   width: 100%;
   height: auto;
   display: block;

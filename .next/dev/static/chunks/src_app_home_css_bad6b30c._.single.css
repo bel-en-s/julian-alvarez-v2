@@ -50,7 +50,7 @@
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   z-index: 5;
   margin: -30vh 0 0;
-  font-size: clamp(4rem, 15vw, 13rem);
+  font-size: clamp(4rem, 16vw, 15rem);
   font-weight: 800;
   position: relative;
 }
@@ -106,11 +106,15 @@
 
 .scroll-track .about {
   z-index: 1;
+  background: #1e1634;
   width: 100%;
   height: 100svh;
-  color: var(--base-700);
-  background-color: #c0b9d0;
-  flex-direction: column;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.about-bg {
   justify-content: center;
   align-items: center;
   display: flex;
@@ -118,58 +122,77 @@
   inset: 0;
 }
 
-.scroll-track .about .container {
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+.about-bg .about-video-wrapper {
+  border-radius: 0;
+  width: 30%;
+  max-width: 900px;
+}
+
+.about-bg .about-video-wrapper video {
+  border-radius: 0;
   width: 100%;
-  display: flex;
-}
-
-.scroll-track .about .about-layout {
-  align-items: center;
-  gap: 4rem;
-  width: 90%;
-  max-width: 1200px;
-  display: flex;
-}
-
-.scroll-track .about .about-col {
-  flex: 1;
-}
-
-.scroll-track .about .about-col-phrase {
-  text-align: right;
-}
-
-.scroll-track .about .about-col-phrase h3 {
-  font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  text-transform: uppercase;
-  color: var(--base-700);
-  font-size: clamp(2.5rem, 6vw, 2rem);
-  font-weight: 800;
-  line-height: .9;
-}
-
-.scroll-track .about .about-col-video {
-  justify-content: center;
-  display: flex;
-}
-
-.scroll-track .about .about-col-video video {
-  border-radius: 1rem;
-  width: 100%;
-  max-width: 480px;
+  max-width: 100%;
   height: auto;
   display: block;
 }
 
-.scroll-track .about .section-footer {
-  justify-content: center;
-  padding-bottom: 2.125rem;
-  position: relative;
+.slide-content {
+  mix-blend-mode: difference;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
   left: 0;
-  transform: none;
+}
+
+.slide-title {
+  color: #fff;
+  width: max-content;
+  position: absolute;
+  top: 50%;
+  left: 5rem;
+  transform: translate(0%, -50%);
+}
+
+.slide-title h1 {
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  letter-spacing: -.02em;
+  color: #fff;
+  font-size: clamp(2rem, 10vw, 16rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.slide-description {
+  color: #fff;
+  z-index: 2;
+  flex-direction: column;
+  gap: 2rem;
+  width: 15%;
+  min-width: 250px;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  right: 3rem;
+  transform: translate(0%, -50%);
+}
+
+.slide-description h1 {
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  letter-spacing: -.02em;
+  color: #fff;
+  font-size: clamp(1.2rem, 2.5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.scroll-track .about .section-footer {
+  z-index: 3;
+  justify-content: center;
 }
 
 html.is-h-scroll {
@@ -302,34 +325,37 @@ html.is-h-scroll {
   }
 
   .scroll-track .about {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: auto;
-    padding: 8rem 0;
+    min-height: 100svh;
+    display: flex;
     position: relative;
   }
 
-  .scroll-track .about .container {
-    flex: none;
+  .about-bg .about-video-wrapper {
+    max-width: 500px;
   }
 
-  .scroll-track .about .about-layout {
-    flex-direction: column;
-    gap: 2rem;
-    width: 90%;
-  }
-
-  .scroll-track .about .about-col-phrase {
-    text-align: center;
-  }
-
-  .scroll-track .about .about-col-video video {
-    max-width: 320px;
-  }
-
-  .scroll-track .about .section-footer {
-    padding-bottom: 0;
-    position: absolute;
+  .slide-title {
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .slide-title h1 {
+    text-align: center;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .slide-description {
+    text-align: center;
+    width: 75%;
+    top: unset;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 

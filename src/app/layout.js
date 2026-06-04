@@ -34,8 +34,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "NRMLSS | Codegrid",
-  description: "MWT by Codegrid",
+  title: "Julián Alvarez",
+  description: "Julián Alvarez — Web Personal",
 };
 
 export default function RootLayout({ children }) {

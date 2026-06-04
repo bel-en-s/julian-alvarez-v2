@@ -29,14 +29,14 @@ const Footer = () => {
               </div>
               <div className="footer-col-links">
                 <a
-                  href="https://www.instagram.com/codegridweb/"
+                  href="https://www.instagram.com/julianalvarez/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Instagram
                 </a>
                 <a
-                  href="https://www.youtube.com/@codegrid"
+                  href="https://www.youtube.com/@julianalvarez"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -60,7 +60,7 @@ const Footer = () => {
               <h5>Nrmlss</h5>
               <p className="bodyCopy">&copy;2025 All modules reserved.</p>
               <p className="bodyCopy" id="copyright-text">
-                Built by Codegrid
+                Built by Julián Alvarez
               </p>
             </div>
           </div>
