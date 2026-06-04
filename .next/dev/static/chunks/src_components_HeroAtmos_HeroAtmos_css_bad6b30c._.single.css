@@ -153,7 +153,7 @@
 }
 
 .hero-atmos .ha-corner {
-  opacity: .3;
+  opacity: 1.9;
   mix-blend-mode: screen;
   filter: drop-shadow(0 0 6px #a88ce633);
   contain: paint layout;

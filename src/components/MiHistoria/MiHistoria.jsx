@@ -35,10 +35,6 @@ export default function MiHistoria() {
       {/* desktop */}
       <div className="mh-desktop">
         <div className="mh-header">
-          <div className="mh-video" onClick={toggleSound}>
-            <video ref={videoRef} src="/home/julian-chiquito.mp4" autoPlay loop muted playsInline />
-            {!muted && <span className="mh-video-indicator">🔊</span>}
-          </div>
           <h1>Mi historia</h1>
         </div>
         {cards.map((card, i) => (

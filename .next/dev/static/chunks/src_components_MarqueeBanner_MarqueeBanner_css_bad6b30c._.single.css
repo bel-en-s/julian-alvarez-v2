@@ -44,6 +44,7 @@
   max-width: 600px;
   height: 70%;
   max-height: 40rem;
+  margin-top: 20vh;
   position: relative;
   overflow: hidden;
 }
@@ -70,18 +71,17 @@
   mask: url("#smudge-mask");
 }
 
-.marquee-banner .banner .banner-content {
-  z-index: 2;
-  width: 100%;
-  color: var(--base-100);
+.marquee-banner > .banner-content {
+  z-index: 20;
   text-align: center;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding: 3rem 2rem 2rem;
+  gap: 1rem;
+  width: 100%;
   display: flex;
-  position: relative;
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .marquee-banner .banner .banner-content p {

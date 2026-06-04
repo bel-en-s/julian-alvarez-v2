@@ -16,6 +16,8 @@
   position: relative;
   z-index: 100004;
   pointer-events: none;
+  max-width: 2000px;
+  margin: 0 auto;
 }
 
 .menu .menu-header.is-open {

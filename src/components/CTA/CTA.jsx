@@ -94,7 +94,7 @@ const CTA = () => {
         <div className="cta-main-copy">
           <div className="btn">
             <Copy type="flicker">
-              <Link href="/wardrobe">Enter Wardrobe</Link>
+              <Link href="/wardrobe">VEr mas</Link>
             </Copy>
           </div>
         </div>

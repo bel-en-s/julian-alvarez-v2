@@ -113,6 +113,7 @@ const MarqueeBanner = () => {
       const rect = banner.getBoundingClientRect();
       smudgeSVG.style.width = rect.width + "px";
       smudgeSVG.style.height = rect.height + "px";
+      smudgeSVG.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
     };
 
     matchSVGToViewport();
@@ -220,23 +221,28 @@ const MarqueeBanner = () => {
 
   return (
     <section className="marquee-banner" ref={marqueeBannerRef}>
+       <div className="banner-content">
+    <Copy type="flicker">
+      <p>[ Las dos caras ]</p>
+    </Copy>
+
+    <Copy>
+      <h4>Dentro y fuera de las canchas</h4>
+    </Copy>
+  </div>
+
       <div className="marquees">
         <div className="marquee-header marquee-header-1" ref={marquee1Ref}>
-          <h1>Transmission lost in neutral space</h1>
+          <h1>Cada partido cuenta una historia. Acá están los míos.
+</h1>
         </div>
         <div className="marquee-header marquee-header-2" ref={marquee2Ref}>
-          <h1>Synthetic forms archive the signal</h1>
+          <h1> Mi vida lejos del campo
+</h1>
         </div>
       </div>
       <div className="banner" ref={bannerRef}>
-        <div className="banner-content">
-          <Copy type="flicker">
-            <p>[ Las dos caras ]</p>
-          </Copy>
-          <Copy>
-            <h4>Dentro y fuera de las canchas</h4>
-          </Copy>
-        </div>
+  
         <div className="banner-img banner-img--face"></div>
         <div className="banner-img banner-img--reveal"></div>
         <svg

@@ -12,6 +12,7 @@ import Mascara3D from "@/components/Mascara3D/Mascara3D";
 import HeroAtmos from "@/components/HeroAtmos/HeroAtmos";
 import MiHistoria from "@/components/MiHistoria/MiHistoria";
 import AboutVideo from "@/components/AboutVideo/AboutVideo";
+import Curtain from "@/components/Curtain/Curtain";
 
 import Copy from "@/components/Copy/Copy";
 
@@ -60,9 +61,11 @@ export default function Index() {
     if (!track) return;
 
     const ABOUT_VH = 3;
+    const CURTAIN_VH = 3;
     const CARDS_VH = 5;
-    const TOTAL_VH = ABOUT_VH + CARDS_VH;
-    const revealEnd = ABOUT_VH / TOTAL_VH;
+    const TOTAL_VH = ABOUT_VH + CURTAIN_VH + CARDS_VH;
+    const aboutEnd = ABOUT_VH / TOTAL_VH;
+    const curtainEnd = (ABOUT_VH + CURTAIN_VH) / TOTAL_VH;
 
     const mm = gsap.matchMedia();
     mm.add("(min-width: 1000px)", () => {
@@ -80,56 +83,66 @@ export default function Index() {
         onUpdate: (self) => {
           const p = self.progress;
 
-          if (p < revealEnd) {
-            const rp = p / revealEnd;
-            gsap.set(".scroll-track .about", { x: -rp * 100 + "vw" });
+          if (p < aboutEnd) {
+            // ---- ABOUT PHASE ----
             document.documentElement.classList.remove("is-h-scroll");
-          } else {
-            const ap = (p - revealEnd) / (1 - revealEnd);
+            gsap.set(".scroll-track .about", { x: "0vw" });
+            gsap.set(".scroll-track .curtain", { x: "100vw" });
+          } else if (p < curtainEnd) {
+            // ---- CURTAIN PHASE ----
+            const rp = (p - aboutEnd) / (curtainEnd - aboutEnd);
+            document.documentElement.classList.remove("is-h-scroll");
+
+            const eased = gsap.parseEase("power3.out")(rp);
+            gsap.set(".curtain-img", {
+              rotation: 30 * (1 - eased),
+              scale: 0.75 + 0.25 * eased,
+            });
+            gsap.set(".curtain-header:nth-child(1)", {
+              x: -innerWidth * 3 * rp,
+              y: innerHeight * 0.5 * rp,
+              scale: 1 + 9 * rp,
+            });
+            gsap.set(".curtain-header:nth-child(2)", {
+              x: innerWidth * 3 * rp,
+              y: innerHeight * 0.5 * rp,
+              scale: 1 + 9 * rp,
+            });
             gsap.set(".scroll-track .about", { x: "-100vw" });
+            gsap.set(".scroll-track .curtain", { x: "0vw" });
+          } else {
+            // ---- CARDS PHASE (horizontal scroll) ----
+            const cp = (p - aboutEnd) / (1 - aboutEnd);
             document.documentElement.classList.add("is-h-scroll");
+
+            gsap.set(".scroll-track .curtain", { x: "-100vw" });
+            gsap.set(".scroll-track .about", { x: "0vw" });
 
             const header = document.querySelector(".mh-header");
             const cards = document.querySelectorAll(".mh-card");
             if (header) {
               const maxTranslate = Math.max(0, header.offsetWidth - window.innerWidth);
-              gsap.set(header, { x: -ap * maxTranslate });
-            }
-
-            const video = document.querySelector(".mh-video video");
-            if (video) {
-              const videoPeak = 0.25;
-              const videoEnd = 0.65;
-              let vol = 0;
-              if (ap < videoPeak) {
-                vol = ap / videoPeak;
-              } else if (ap < videoEnd) {
-                vol = 1 - (ap - videoPeak) / (videoEnd - videoPeak);
-              }
-              vol = Math.max(0, Math.min(vol, 1));
-              const targetVol = vol * 0.4;
-              video.volume = video.volume * 0.92 + targetVol * 0.08;
-              video.muted = vol < 0.01;
+              gsap.set(header, { x: -cp * maxTranslate });
             }
 
             cards.forEach((card, i) => {
               const delay = i * 0.08;
               const mult = i < 4 ? 1.5 : 2;
-              const raw = (ap - delay) * mult;
-              const cp = Math.max(0, Math.min(raw, 1));
+              const raw = (cp - delay) * mult;
+              const ccp = Math.max(0, Math.min(raw, 1));
 
-              const fadeIn = Math.min(cp / 0.08, 1);
-              const fadeOut = Math.min((1 - cp) / 0.08, 1);
+              const fadeIn = Math.min(ccp / 0.08, 1);
+              const fadeOut = Math.min((1 - ccp) / 0.08, 1);
               const opacity = Math.max(0, Math.min(fadeIn, fadeOut));
 
               if (opacity > 0.001) {
-                const easeCp = cp < 0.5 ? 2 * cp * cp : 1 - Math.pow(-2 * cp + 2, 2) / 2;
+                const easeCp = ccp < 0.5 ? 2 * ccp * ccp : 1 - Math.pow(-2 * ccp + 2, 2) / 2;
                 const cx = gsap.utils.interpolate(25, -450, easeCp);
                 const cy = i % 2 === 0
                   ? gsap.utils.interpolate(10, -5, easeCp)
                   : gsap.utils.interpolate(50, 10, easeCp);
                 const cr = gsap.utils.interpolate(15, -30, easeCp);
-                const scale = 0.85 + 0.15 * Math.min(cp / 0.15, 1);
+                const scale = 0.85 + 0.15 * Math.min(ccp / 0.15, 1);
 
                 gsap.set(card, {
                   xPercent: cx,
@@ -258,6 +271,7 @@ export default function Index() {
               <span className="hero-name hero-name--alvarez" ref={alvarezContainerRef}>Alvarez</span>
             </Copy>
           </div>
+          <div className="hero-gradient"></div>
           <canvas className="hero-alvarez-canvas" ref={alvarezCanvasRef} aria-hidden="true" />
         </div>
         <div className="section-footer">
@@ -309,6 +323,7 @@ export default function Index() {
             </Copy>
           </div>
         </section>
+        <Curtain />
         <MiHistoria />
       </div>
             <CTA />

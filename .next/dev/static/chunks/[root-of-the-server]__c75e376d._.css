@@ -729,6 +729,8 @@ button.secondary {
   pointer-events: none;
   justify-content: space-between;
   align-items: center;
+  max-width: 2000px;
+  margin: 0 auto;
   display: flex;
   position: relative;
 }

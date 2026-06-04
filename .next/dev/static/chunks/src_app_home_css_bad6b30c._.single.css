@@ -6,12 +6,12 @@
   position: relative;
 }
 
-.hero:after {
-  content: "";
+.hero .hero-gradient {
   pointer-events: none;
-  background: linear-gradient(to top, #c0b9d0, #0000);
+  z-index: 4;
+  background: linear-gradient(to top, #1e1634, #0000);
   width: 100%;
-  height: 25%;
+  height: 40%;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -69,7 +69,7 @@
 }
 
 .hero .hero-header .hero-header-img {
-  z-index: 1000;
+  z-index: 6;
   justify-content: center;
   align-items: center;
   height: 55vh;
@@ -86,7 +86,7 @@
 
 .hero-alvarez-canvas {
   pointer-events: none;
-  z-index: 3;
+  z-index: 5;
   display: block;
   position: fixed;
   top: 0;
@@ -114,6 +114,10 @@
   overflow: hidden;
 }
 
+.scroll-track .curtain {
+  z-index: 3;
+}
+
 .about-bg {
   justify-content: center;
   align-items: center;
@@ -137,7 +141,6 @@
 }
 
 .slide-content {
-  mix-blend-mode: difference;
   -webkit-user-select: none;
   user-select: none;
   pointer-events: none;
@@ -329,6 +332,11 @@ html.is-h-scroll {
     height: auto;
     min-height: 100svh;
     display: flex;
+    position: relative;
+  }
+
+  .scroll-track .curtain {
+    height: 100svh;
     position: relative;
   }
 

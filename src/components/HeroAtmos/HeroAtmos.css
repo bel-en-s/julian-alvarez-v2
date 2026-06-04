@@ -135,7 +135,7 @@
   height: 45vmin;
   max-width: 700px;
   max-height: 700px;
-  opacity: 0.3;
+  opacity: 1.9;
   mix-blend-mode: screen;
   filter: drop-shadow(0 0 6px rgba(168, 140, 230, 0.2));
   contain: paint layout;
