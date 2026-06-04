@@ -258,9 +258,9 @@ const MarqueeBanner = () => {
             <g className="smudge-blobs" ref={smudgeContainerRef} filter="url(#smudge-goo)"></g>
           </mask>
         </svg>
-        <div className="banner-logo">
+        {/* <div className="banner-logo">
           <img src="public/logo.png" alt="" />
-        </div>
+        </div> */}
       </div>
     </section>
   );

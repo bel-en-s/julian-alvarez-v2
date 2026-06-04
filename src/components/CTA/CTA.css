@@ -25,13 +25,13 @@
 }
 
 .cta .container .cta-col:nth-child(2) .cta-header {
-  width: 50%;
+  /* width: 50%; */
   text-align: center;
 }
 
 .cta .container .cta-col:nth-child(2) .cta-main-img {
   aspect-ratio: 4/5;
-  width: 80%;
+  /* width: 80%; */
   height: 100%;
   overflow: hidden;
   margin-top: -4rem;

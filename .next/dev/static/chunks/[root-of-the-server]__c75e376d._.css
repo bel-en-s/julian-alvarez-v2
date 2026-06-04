@@ -157,13 +157,7 @@ h5 {
 }
 
 a, p, span {
-  text-transform: uppercase;
-  color: var(--base-700);
-  font-family: var(--font-dm-mono), monospace;
   font-size: clamp(.8rem, .75vw, .85rem);
-  font-weight: 500;
-  line-height: 1;
-  text-decoration: none;
 }
 
 a.md, p.md, span.md {

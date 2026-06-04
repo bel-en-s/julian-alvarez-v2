@@ -35,13 +35,11 @@
 }
 
 .hero .hero-header [data-copy-wrapper] {
-  display: flex;
-  flex-direction: row;
+  display: grid;
   width: 100%;
   justify-content: center;
   align-items: center;
-  gap: 15%;
-
+  grid-template-columns: 1fr 0 1fr;
 }
 
 .hero .hero-header .hero-name {
@@ -54,17 +52,41 @@
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   font-weight: 800;
   font-size: clamp(4rem, 15vw, 13rem);
-  flex: 1;
+}
+
+.hero .hero-header .hero-name {
+  position: relative;
+  z-index: 5;
+  margin-top: -30vh;
 }
 
 .hero .hero-header .hero-name--julian {
   text-align: right;
+  justify-self: end;
+  margin-right: 5vw;
 }
 
 .hero .hero-header .hero-name--alvarez {
   text-align: left;
+  justify-self: start;
+  margin-left: 2vw;
   pointer-events: auto;
-  position: relative;
+}
+
+.hero .hero-header .hero-header-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 55vh;
+  max-height: 55vh;
+  z-index: 1000;
+}
+
+.hero .hero-header .hero-header-img img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  max-height: 55vh;
 }
 
 .hero-alvarez-canvas {
@@ -77,17 +99,7 @@
 }
 
 .hero .hero-img {
-  position: absolute;
-  top: 25svh;
-  left: 34%;
-  /* transform: translateX(-50%); */
-  height: 75%;
-  will-change: opacity;
-  z-index: 1000;
-}
-
-.hero .hero-img img {
-  object-fit: contain;
+  display: none;
 }
 
 .scroll-track {
@@ -138,7 +150,7 @@
 .scroll-track .about .about-col-phrase h3 {
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   font-weight: 800;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 2rem);
   line-height: 0.9;
   text-transform: uppercase;
   color: var(--base-700);
@@ -259,6 +271,38 @@ html.is-h-scroll {
 @media (max-width: 1000px) {
   .hero .hero-header {
     padding: 0 1.5rem;
+  }
+
+  .hero .hero-header [data-copy-wrapper] {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .hero .hero-header .hero-name--julian {
+    text-align: center;
+    justify-self: center;
+    margin-right: 0;
+    margin-top: 0;
+  }
+
+  .hero .hero-header .hero-name--alvarez {
+    text-align: center;
+    justify-self: center;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .hero .hero-header .hero-header-img {
+    grid-row: 3;
+    height: auto;
+    max-height: 40vh;
+    margin-top: 0.75rem;
+  }
+
+  .hero .hero-header .hero-header-img img {
+    max-height: 40vh;
   }
 
   .scroll-track {

@@ -159,7 +159,7 @@ h5 {
   letter-spacing: clamp(0rem, -0.25vw, -0.05rem);
 }
 
-a,
+/* a,
 p,
 span {
   text-decoration: none;
@@ -168,7 +168,7 @@ span {
   font-family: var(--font-dm-mono), monospace;
   font-weight: 500;
   line-height: 1;
-}
+} */
 
 a,
 p,

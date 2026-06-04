@@ -128,8 +128,8 @@
 }
 
 .next-match .eyebrow {
-  font-family: var(--font-support);
-  font-size: 10px;
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-size: 18px;
   letter-spacing: .26em;
   text-transform: uppercase;
   color: var(--ja-amethyst-300);
@@ -150,7 +150,7 @@
   height: 24px;
   border-radius: 6px;
   border: 1px solid rgba(138, 117, 184, .35);
-  background: rgba(81, 57, 141, .12);
+  background: rgba(255, 255, 255, 0.12);
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -214,7 +214,7 @@
   font-size: 26px;
   line-height: 1;
   letter-spacing: -.018em;
-  color: var(--fg-1);
+  color: #fff;
 }
 
 .next-match .countdown .u {
@@ -222,7 +222,7 @@
   font-size: 9px;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--fg-3);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .next-match .countdown .sep {
@@ -242,10 +242,10 @@
   gap: 4px 8px;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--fg-1);
+  color: #fff;
   padding-top: 12px;
   border-top: 1px solid var(--border-soft);
 }
@@ -264,7 +264,7 @@
   font-size: 10px;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--fg-3);
+  color: rgba(255, 255, 255, 0.45);
   display: inline-flex;
   gap: 8px;
   flex-wrap: wrap;

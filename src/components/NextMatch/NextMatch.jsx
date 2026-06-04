@@ -19,7 +19,7 @@ const NextMatch = ({
   competition = "LaLiga",
   extra = "Metropolitano",
 }) => {
-  const [minimized, setMinimized] = useState(false);
+   const [minimized, setMinimized] = useState(false);
   const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(kickoff));
   const canvasRef = useRef(null);
   const cardRef = useRef(null);
@@ -158,17 +158,17 @@ const NextMatch = ({
       </div>
 
       <div className="nm-extra">
-        <div className="teams">
-          <span className="t home">{home}</span>
-          <span className="vs">vs</span>
-          <span className="t away">{away}</span>
+          <div className="teams">
+            <span className="t home">{home}</span>
+            <span className="vs">vs</span>
+            <span className="t away">{away}</span>
+          </div>
+          <div className="meta">
+            <span className="comp">{competition}</span>
+            <span className="dot">·</span>
+            <span className="extra">{extra}</span>
+          </div>
         </div>
-        <div className="meta">
-          <span className="comp">{competition}</span>
-          <span className="dot">·</span>
-          <span className="extra">{extra}</span>
-        </div>
-      </div>
     </article>
   );
 };

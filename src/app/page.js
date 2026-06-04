@@ -46,7 +46,7 @@ export default function Index() {
     });
 
     gsap.to(heroHeaderRef.current, {
-      y: 150,
+      y: 30,
       ease: "none",
       scrollTrigger: {
         trigger: heroSectionRef.current,
@@ -252,13 +252,13 @@ export default function Index() {
           <div className="hero-header" ref={heroHeaderRef}>
             <Copy animateOnScroll={false} delay={isInitialLoad ? 5.5 : 0.65}>
               <span className="hero-name hero-name--julian">Julián</span>
+              <span className="hero-header-img" ref={heroImgRef}>
+                <img src="/home/test.png" alt="" />
+              </span>
               <span className="hero-name hero-name--alvarez" ref={alvarezContainerRef}>Alvarez</span>
             </Copy>
           </div>
           <canvas className="hero-alvarez-canvas" ref={alvarezCanvasRef} aria-hidden="true" />
-        </div>
-        <div className="hero-img" ref={heroImgRef}>
-          <img src="/home/test.png" alt="" />
         </div>
         <div className="section-footer">
           <Copy

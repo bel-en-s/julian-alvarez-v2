@@ -1167,21 +1167,6 @@ const MarqueeBanner = ()=>{
                         fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
                         lineNumber: 242,
                         columnNumber: 9
-                    }, ("TURBOPACK compile-time value", void 0)),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "banner-logo",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                            src: "public/logo.png",
-                            alt: ""
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                            lineNumber: 262,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/MarqueeBanner/MarqueeBanner.jsx",
-                        lineNumber: 261,
-                        columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
@@ -2508,7 +2493,7 @@ const NextMatch = ({ kickoff = "2026-06-15T21:00:00+02:00", home = "Atlético de
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NextMatch/NextMatch.jsx",
                                 lineNumber: 162,
-                                columnNumber: 11
+                                columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "vs",
@@ -2516,7 +2501,7 @@ const NextMatch = ({ kickoff = "2026-06-15T21:00:00+02:00", home = "Atlético de
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NextMatch/NextMatch.jsx",
                                 lineNumber: 163,
-                                columnNumber: 11
+                                columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "t away",
@@ -2524,13 +2509,13 @@ const NextMatch = ({ kickoff = "2026-06-15T21:00:00+02:00", home = "Atlético de
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NextMatch/NextMatch.jsx",
                                 lineNumber: 164,
-                                columnNumber: 11
+                                columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/NextMatch/NextMatch.jsx",
                         lineNumber: 161,
-                        columnNumber: 9
+                        columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "meta",
@@ -2541,7 +2526,7 @@ const NextMatch = ({ kickoff = "2026-06-15T21:00:00+02:00", home = "Atlético de
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NextMatch/NextMatch.jsx",
                                 lineNumber: 167,
-                                columnNumber: 11
+                                columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "dot",
@@ -2549,7 +2534,7 @@ const NextMatch = ({ kickoff = "2026-06-15T21:00:00+02:00", home = "Atlético de
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NextMatch/NextMatch.jsx",
                                 lineNumber: 168,
-                                columnNumber: 11
+                                columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "extra",
@@ -2557,13 +2542,13 @@ const NextMatch = ({ kickoff = "2026-06-15T21:00:00+02:00", home = "Atlético de
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NextMatch/NextMatch.jsx",
                                 lineNumber: 169,
-                                columnNumber: 11
+                                columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/NextMatch/NextMatch.jsx",
                         lineNumber: 166,
-                        columnNumber: 9
+                        columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
@@ -3568,7 +3553,7 @@ function Index() {
                 delay: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Preloader$2f$Preloader$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isInitialLoad"] ? 5.75 : 1
             });
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].to(heroHeaderRef.current, {
-                y: 150,
+                y: 30,
                 ease: "none",
                 scrollTrigger: {
                     trigger: heroSectionRef.current,
@@ -3821,12 +3806,28 @@ function Index() {
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "hero-header-img",
+                                            ref: heroImgRef,
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                src: "/home/test.png",
+                                                alt: ""
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/page.js",
+                                                lineNumber: 256,
+                                                columnNumber: 17
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/page.js",
+                                            lineNumber: 255,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             className: "hero-name hero-name--alvarez",
                                             ref: alvarezContainerRef,
                                             children: "Alvarez"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.js",
-                                            lineNumber: 255,
+                                            lineNumber: 258,
                                             columnNumber: 15
                                         }, this)
                                     ]
@@ -3846,29 +3847,13 @@ function Index() {
                                 "aria-hidden": "true"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/page.js",
-                                lineNumber: 258,
+                                lineNumber: 261,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/page.js",
                         lineNumber: 251,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "hero-img",
-                        ref: heroImgRef,
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                            src: "/home/test.png",
-                            alt: ""
-                        }, void 0, false, {
-                            fileName: "[project]/src/app/page.js",
-                            lineNumber: 261,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/page.js",
-                        lineNumber: 260,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {

@@ -125,13 +125,13 @@
 }
 
 .next-match .eyebrow {
-  font-family: var(--font-support);
+  font-family: var(--font-big-shoulders), sans-serif;
   letter-spacing: .26em;
   text-transform: uppercase;
   color: var(--ja-amethyst-300);
   align-items: center;
   gap: 10px;
-  font-size: 10px;
+  font-size: 18px;
   display: flex;
 }
 
@@ -147,7 +147,7 @@
   width: 24px;
   height: 24px;
   transition: background .2s var(--easing), border-color .2s, transform .12s var(--easing);
-  background: #51398d1f;
+  background: #ffffff1f;
   border: 1px solid #8a75b859;
   border-radius: 6px;
   place-items: center;
@@ -208,7 +208,7 @@
 .next-match .countdown .n {
   font-family: var(--font-display);
   letter-spacing: -.018em;
-  color: var(--fg-1);
+  color: #fff;
   font-size: 26px;
   font-weight: 900;
   line-height: 1;
@@ -218,7 +218,7 @@
   font-family: var(--font-support);
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--fg-3);
+  color: #ffffff8c;
   font-size: 9px;
 }
 
@@ -236,13 +236,13 @@
   font-family: var(--font-display);
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--fg-1);
+  color: #fff;
   border-top: 1px solid var(--border-soft);
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px 8px;
   padding-top: 12px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 900;
   display: flex;
 }
@@ -260,7 +260,7 @@
   font-family: var(--font-support);
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--fg-3);
+  color: #ffffff73;
   flex-wrap: wrap;
   gap: 8px;
   font-size: 10px;
