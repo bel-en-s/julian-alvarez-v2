@@ -1,6 +1,7 @@
 /* [project]/src/components/Menu/Menu.css [app-client] (css) */
 .menu {
   z-index: 100001;
+  mix-blend-mode: difference;
   padding: 0 1.5rem;
   position: fixed;
   top: 1.5rem;
@@ -8,9 +9,12 @@
   right: 0;
 }
 
+.menu:has(.is-open) {
+  mix-blend-mode: unset;
+}
+
 .menu .menu-header {
   cursor: pointer;
-  mix-blend-mode: difference;
   z-index: 100004;
   pointer-events: none;
   justify-content: space-between;
@@ -19,10 +23,6 @@
   margin: 0 auto;
   display: flex;
   position: relative;
-}
-
-.menu .menu-header.is-open {
-  mix-blend-mode: unset;
 }
 
 .menu .menu-logo {
@@ -35,7 +35,6 @@
 .menu .menu-toggle {
   cursor: pointer;
   z-index: 100006;
-  isolation: isolate;
   background: none;
   border: none;
   flex-shrink: 0;
@@ -43,7 +42,6 @@
   align-items: center;
   width: 5.5rem;
   height: 5.5rem;
-  margin-right: -1rem;
   padding: 0;
   display: flex;
   position: relative;
@@ -52,36 +50,36 @@
 
 .menu .menu-hamburger-icon {
   cursor: pointer;
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
   position: relative;
 }
 
 .menu .menu-hamburger-icon .menu-item {
   transform-origin: center;
   background: #fff;
-  border-radius: 1px;
+  border-radius: 2px;
   width: 100%;
-  height: 2px;
+  height: 4px;
   transition: all .25s;
   position: absolute;
   left: 0;
 }
 
 .menu .menu-hamburger-icon .menu-item:first-child {
-  top: 3px;
+  top: 6px;
 }
 
 .menu .menu-hamburger-icon .menu-item:nth-child(2) {
-  top: 11px;
+  top: 22px;
 }
 
 .menu .menu-hamburger-icon .menu-item:nth-child(3) {
-  top: 19px;
+  top: 38px;
 }
 
 .menu .menu-hamburger-icon.open .menu-item:first-child {
-  top: 11px;
+  top: 22px;
   transform: rotate(45deg);
 }
 
@@ -90,7 +88,7 @@
 }
 
 .menu .menu-hamburger-icon.open .menu-item:nth-child(3) {
-  top: 11px;
+  top: 22px;
   transform: rotate(-45deg);
 }
 

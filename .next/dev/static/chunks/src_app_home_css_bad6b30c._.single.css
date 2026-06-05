@@ -198,6 +198,65 @@ html.is-h-scroll {
   overflow-x: visible;
 }
 
+.anexo-section {
+  background: linear-gradient(#1a1a2e 10%, #edf1e8 100%);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 600px;
+  display: flex;
+  position: relative;
+}
+
+.anexo-section .container {
+  gap: 2rem;
+  width: 100%;
+  padding: 3rem;
+  display: flex;
+}
+
+.anexo-section .anexo-col {
+  flex-direction: column;
+  flex: 1;
+  gap: 2rem;
+  display: flex;
+}
+
+.anexo-section .anexo-col:first-child {
+  justify-content: flex-start;
+}
+
+.anexo-section .anexo-col h3 {
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  text-transform: uppercase;
+  color: var(--base-100);
+  font-size: clamp(3rem, 8vw, 10rem);
+  line-height: 1;
+}
+
+.anexo-section .anexo-text p {
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  color: var(--base-100);
+  max-width: 600px;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.anexo-section .anexo-img {
+  border-radius: .75rem;
+  width: 80%;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.anexo-section .anexo-img img {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .featured-products {
   padding: 6rem 0;
 }
@@ -360,6 +419,21 @@ html.is-h-scroll {
     bottom: 5%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .anexo-section {
+    min-height: auto;
+    padding: 4rem 0;
+  }
+
+  .anexo-section .container {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 1.5rem;
+  }
+
+  .anexo-section .anexo-img {
+    max-width: 100%;
   }
 }
 

@@ -311,6 +311,22 @@ export default function Index() {
         <Curtain />
         <MiHistoria />
       </div>
+      <section className="anexo-section">
+        <div className="container">
+          <div className="anexo-col">
+            <div className="anexo-img">
+              <img src="/bio/Anexo%201.jpeg" alt="" />
+            </div>
+          </div>
+          <div className="anexo-col">
+            <div className="anexo-text">
+              <Copy>
+                <p>Antes de los estadios llenos, los títulos y las finales, hubo un sueño. Desde chico fui hincha de River. Esa camiseta no era solo un club, era una ilusión que me acompañó desde el primer día que toqué una pelota.</p>
+              </Copy>
+            </div>
+          </div>
+        </div>
+      </section>
       <CTA />
       <MarqueeBanner />
 
