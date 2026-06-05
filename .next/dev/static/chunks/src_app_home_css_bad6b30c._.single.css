@@ -104,13 +104,11 @@
   overflow: hidden;
 }
 
-.scroll-track .about {
-  z-index: 1;
+.about {
   background: #1e1634;
   width: 100%;
   height: 100svh;
-  position: absolute;
-  inset: 0;
+  position: relative;
   overflow: hidden;
 }
 
@@ -191,7 +189,7 @@
   font-weight: 800;
 }
 
-.scroll-track .about .section-footer {
+.about .section-footer {
   z-index: 3;
   justify-content: center;
 }
@@ -325,7 +323,7 @@ html.is-h-scroll {
     overflow: visible;
   }
 
-  .scroll-track .about {
+  .about {
     flex-direction: column;
     justify-content: center;
     align-items: center;

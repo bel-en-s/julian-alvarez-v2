@@ -6,7 +6,7 @@ export default function Curtain() {
   return (
     <section className="curtain">
       <div className="curtain-img">
-        <img src="/home/arana.png" alt="" />
+        <img src="/curtain/cuerpo.png" alt="" />
       </div>
       <div className="curtain-copy">
         <div className="curtain-header"><h1>Julián</h1></div>

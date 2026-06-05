@@ -60,12 +60,10 @@ export default function Index() {
     const track = scrollTrackRef.current;
     if (!track) return;
 
-    const ABOUT_VH = 3;
     const CURTAIN_VH = 3;
     const CARDS_VH = 5;
-    const TOTAL_VH = ABOUT_VH + CURTAIN_VH + CARDS_VH;
-    const aboutEnd = ABOUT_VH / TOTAL_VH;
-    const curtainEnd = (ABOUT_VH + CURTAIN_VH) / TOTAL_VH;
+    const TOTAL_VH = CURTAIN_VH + CARDS_VH;
+    const curtainEnd = CURTAIN_VH / TOTAL_VH;
 
     const mm = gsap.matchMedia();
     mm.add("(min-width: 1000px)", () => {
@@ -83,14 +81,9 @@ export default function Index() {
         onUpdate: (self) => {
           const p = self.progress;
 
-          if (p < aboutEnd) {
-            // ---- ABOUT PHASE ----
-            document.documentElement.classList.remove("is-h-scroll");
-            gsap.set(".scroll-track .about", { x: "0vw" });
-            gsap.set(".scroll-track .curtain", { x: "100vw" });
-          } else if (p < curtainEnd) {
+          if (p < curtainEnd) {
             // ---- CURTAIN PHASE ----
-            const rp = (p - aboutEnd) / (curtainEnd - aboutEnd);
+            const rp = p / curtainEnd;
             document.documentElement.classList.remove("is-h-scroll");
 
             const eased = gsap.parseEase("power3.out")(rp);
@@ -108,53 +101,44 @@ export default function Index() {
               y: innerHeight * 0.5 * rp,
               scale: 1 + 9 * rp,
             });
-            gsap.set(".scroll-track .about", { x: "-100vw" });
             gsap.set(".scroll-track .curtain", { x: "0vw" });
           } else {
             // ---- CARDS PHASE (horizontal scroll) ----
-            const cp = (p - aboutEnd) / (1 - aboutEnd);
+            const cp = (p - curtainEnd) / (1 - curtainEnd);
             document.documentElement.classList.add("is-h-scroll");
 
-            gsap.set(".scroll-track .curtain", { x: "-100vw" });
-            gsap.set(".scroll-track .about", { x: "0vw" });
+            gsap.set(".scroll-track .curtain", { x: -100 * cp + "vw" });
 
             const header = document.querySelector(".mh-header");
-            const cards = document.querySelectorAll(".mh-card");
             if (header) {
               const maxTranslate = Math.max(0, header.offsetWidth - window.innerWidth);
               gsap.set(header, { x: -cp * maxTranslate });
             }
 
-            cards.forEach((card, i) => {
-              const delay = i * 0.08;
-              const mult = i < 4 ? 1.5 : 2;
-              const raw = (cp - delay) * mult;
-              const ccp = Math.max(0, Math.min(raw, 1));
 
-              const fadeIn = Math.min(ccp / 0.08, 1);
-              const fadeOut = Math.min((1 - ccp) / 0.08, 1);
-              const opacity = Math.max(0, Math.min(fadeIn, fadeOut));
+          }
 
-              if (opacity > 0.001) {
-                const easeCp = ccp < 0.5 ? 2 * ccp * ccp : 1 - Math.pow(-2 * ccp + 2, 2) / 2;
-                const cx = gsap.utils.interpolate(25, -450, easeCp);
-                const cy = i % 2 === 0
-                  ? gsap.utils.interpolate(10, -5, easeCp)
-                  : gsap.utils.interpolate(50, 10, easeCp);
-                const cr = gsap.utils.interpolate(15, -30, easeCp);
-                const scale = 0.85 + 0.15 * Math.min(ccp / 0.15, 1);
+          // ---- BALL BOUNCE (runs across both phases) ----
+          const ballStart = 0.15;
+          const bp = p < ballStart ? 0 : Math.min((p - ballStart) / (1 - ballStart), 1);
 
-                gsap.set(card, {
-                  xPercent: cx,
-                  yPercent: cy,
-                  rotation: cr,
-                  opacity,
-                  scale,
-                });
-              } else {
-                gsap.set(card, { opacity: 0 });
-              }
-            });
+          if (bp > 0) {
+            const card = document.querySelector(".mh-card");
+            if (card) {
+              const shaped = Math.pow(bp, 0.5);
+              const cx = gsap.utils.interpolate(80, -700, bp);
+              const cy = -50 + 130 * Math.sin(Math.PI * shaped) + bp * -50;
+              const cr = gsap.utils.interpolate(15, -540, bp);
+              const s = 0.5 - 0.08 * Math.sin(Math.PI * shaped);
+
+              gsap.set(card, {
+                xPercent: cx,
+                yPercent: cy,
+                rotation: cr,
+                opacity: 1,
+                scale: s,
+              });
+            }
           }
         },
       });
@@ -294,39 +278,40 @@ export default function Index() {
 
       <NextMatch />
 
+      <section className="about">
+        <div className="about-bg">
+          <AboutVideo />
+        </div>
+        <div className="slide-content">
+          <div className="slide-title">
+            <Copy>
+              <h1>
+                "Sigan <br />soñando.
+              </h1>
+            </Copy>
+          </div>
+          <div className="slide-description">
+            <Copy>
+              <h1>
+               <br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
+              </h1>
+            </Copy>
+          </div>
+        </div>
+        <div className="section-footer light">
+          <Copy type="flicker">
+            <p>/ Core State /</p>
+          </Copy>
+        </div>
+      </section>
+
       <Mascara3D />
 
       <div className="scroll-track" ref={scrollTrackRef}>
-        <section className="about">
-          <div className="about-bg">
-            <AboutVideo />
-          </div>
-          <div className="slide-content">
-            <div className="slide-title">
-              <Copy>
-                <h1>
-                  "Sigan <br />soñando.
-                </h1>
-              </Copy>
-            </div>
-            <div className="slide-description">
-              <Copy>
-                <h1>
-                 <br />Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."
-                </h1>
-              </Copy>
-            </div>
-          </div>
-          <div className="section-footer light">
-            <Copy type="flicker">
-              <p>/ Core State /</p>
-            </Copy>
-          </div>
-        </section>
         <Curtain />
         <MiHistoria />
       </div>
-            <CTA />
+      <CTA />
       <MarqueeBanner />
 
       <TextBlock />

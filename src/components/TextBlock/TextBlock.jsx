@@ -9,7 +9,7 @@ const TextBlock = () => {
       <div className="container">
         <div className="text-block-col">
           <Copy>
-            <h3>El hombre, el araña,</h3>
+            <h3>El hombre araña,</h3>
             <br />
             <h3>el nueve</h3>
           </Copy>

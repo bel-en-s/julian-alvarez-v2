@@ -109,10 +109,8 @@
   overflow: hidden;
 }
 
-.scroll-track .about {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
+.about {
+  position: relative;
   width: 100%;
   height: 100svh;
   background: #1E1634;
@@ -198,7 +196,7 @@
   color: #fff;
 }
 
-.scroll-track .about .section-footer {
+.about .section-footer {
   z-index: 3;
   justify-content: center;
 }
@@ -336,7 +334,7 @@ html.is-h-scroll {
     overflow: visible;
   }
 
-  .scroll-track .about {
+  .about {
     position: relative;
     height: auto;
     min-height: 100svh;
