@@ -64,15 +64,15 @@ const CTA = () => {
           </div>
           <div className="cta-col-copy">
             <Copy>
-              <p className="bodyCopy sm">
+              {/* <p className="bodyCopy sm">
                 Built to exist outside context, these forms prioritize
                 neutrality, and distortion.
-              </p>
+              </p> */}
             </Copy>
           </div>
         </div>
         <div className="cta-col">
-         
+          <h2 className="cta-title">El Doble Salto (2018)</h2>
           <div className="cta-main-img">
             <img src="/bio/2.jpeg" alt="" />
             

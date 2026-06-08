@@ -25,11 +25,11 @@
   pointer-events: none;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   line-height: 1;
   display: flex;
   position: absolute;
-  top: 40svh;
+  bottom: 0;
   left: 0;
 }
 
@@ -49,7 +49,7 @@
   line-height: .85;
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   z-index: 5;
-  margin: -30vh 0 0;
+  margin: 0 0 10svh;
   font-size: clamp(4rem, 16vw, 15rem);
   font-weight: 800;
   position: relative;
@@ -71,17 +71,17 @@
 .hero .hero-header .hero-header-img {
   z-index: 6;
   justify-content: center;
-  align-items: center;
-  height: 55vh;
-  max-height: 55vh;
+  align-items: flex-end;
+  height: 100svh;
+  max-height: 100svh;
   display: flex;
 }
 
 .hero .hero-header .hero-header-img img {
   object-fit: contain;
   width: auto;
-  height: 100%;
-  max-height: 55vh;
+  height: auto;
+  max-height: 90svh;
 }
 
 .hero-alvarez-canvas {
@@ -250,6 +250,18 @@ html.is-h-scroll {
   overflow: hidden;
 }
 
+.anexo-section--inverted {
+  background: linear-gradient(#edf1e8 10%, #1a1a2e 100%);
+}
+
+.anexo-section--inverted .container, .anexo-section--inverted .anexo-col {
+  gap: 1rem;
+}
+
+.anexo-section--inverted .anexo-text p {
+  color: #1a1a2e;
+}
+
 .anexo-section .anexo-img img {
   object-fit: cover;
   width: 100%;
@@ -356,6 +368,7 @@ html.is-h-scroll {
     text-align: center;
     justify-self: center;
     margin-top: 0;
+    margin-bottom: 0;
     margin-right: 0;
   }
 
@@ -363,18 +376,18 @@ html.is-h-scroll {
     text-align: center;
     justify-self: center;
     margin-top: 0;
+    margin-bottom: 0;
     margin-left: 0;
   }
 
   .hero .hero-header .hero-header-img {
     grid-row: 3;
     height: auto;
-    max-height: 40vh;
-    margin-top: .75rem;
+    max-height: 50svh;
   }
 
   .hero .hero-header .hero-header-img img {
-    max-height: 40vh;
+    max-height: 50svh;
   }
 
   .scroll-track {

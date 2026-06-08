@@ -46,22 +46,11 @@ export default function Index() {
       delay: isInitialLoad ? 5.75 : 1,
     });
 
-    gsap.to(heroHeaderRef.current, {
-      y: 30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: heroSectionRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-
     const track = scrollTrackRef.current;
     if (!track) return;
 
-    const CURTAIN_VH = 3;
-    const CARDS_VH = 5;
+    const CURTAIN_VH = 2;
+    const CARDS_VH = 3;
     const TOTAL_VH = CURTAIN_VH + CARDS_VH;
     const curtainEnd = CURTAIN_VH / TOTAL_VH;
 
@@ -118,18 +107,25 @@ export default function Index() {
 
           }
 
-          // ---- BALL BOUNCE (runs across both phases) ----
+          // ---- BALL BOUNCE (starts when name scales off screen) ----
           const ballStart = 0.15;
           const bp = p < ballStart ? 0 : Math.min((p - ballStart) / (1 - ballStart), 1);
 
           if (bp > 0) {
-            const card = document.querySelector(".mh-card");
+            const card = document.querySelector(".mh-desktop .mh-card");
             if (card) {
               const shaped = Math.pow(bp, 0.5);
-              const cx = gsap.utils.interpolate(80, -700, bp);
-              const cy = -50 + 130 * Math.sin(Math.PI * shaped) + bp * -50;
-              const cr = gsap.utils.interpolate(15, -540, bp);
-              const s = 0.5 - 0.08 * Math.sin(Math.PI * shaped);
+              const cx = gsap.utils.interpolate(150, -900, bp);
+
+              const yKeyframes = [10, 400, 50, 420];
+              const yProgress = shaped * (yKeyframes.length - 1);
+              const yIndex = Math.min(Math.floor(yProgress), yKeyframes.length - 2);
+              const cy = gsap.utils.interpolate(yKeyframes[yIndex], yKeyframes[yIndex + 1], yProgress - yIndex);
+
+              const rKeyframes = [15, 480, 960, 1440];
+              const cr = gsap.utils.interpolate(rKeyframes[yIndex], rKeyframes[yIndex + 1], yProgress - yIndex);
+
+              const s = 0.7 - 0.12 * Math.sin(Math.PI * shaped);
 
               gsap.set(card, {
                 xPercent: cx,
@@ -321,8 +317,24 @@ export default function Index() {
           <div className="anexo-col">
             <div className="anexo-text">
               <Copy>
-                <p>Antes de los estadios llenos, los títulos y las finales, hubo un sueño. Desde chico fui hincha de River. Esa camiseta no era solo un club, era una ilusión que me acompañó desde el primer día que toqué una pelota.</p>
+                <p>"Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid."</p>
               </Copy>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="anexo-section anexo-section--inverted">
+        <div className="container">
+          <div className="anexo-col">
+            <div className="anexo-text">
+              <Copy>
+                <p>"De esos potreros de Calchín a los grandes escenarios, siempre supe que el fútbol era mi destino. Cada paso, cada sacrificio, me fue llevando a donde siempre quise estar".</p>
+              </Copy>
+            </div>
+          </div>
+          <div className="anexo-col">
+            <div className="anexo-img">
+              <img src="/bio/Anexo%202.jpeg" alt="" />
             </div>
           </div>
         </div>

@@ -6,6 +6,12 @@
   position: relative;
 }
 
+.cta .container .cta-col:nth-child(2) .cta-title {
+  text-align: center;
+  width: 100%;
+  font-size: 2.5rem;
+}
+
 .cta .container {
   gap: 2rem;
   display: flex;

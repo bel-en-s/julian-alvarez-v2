@@ -5,6 +5,12 @@
   padding: 4rem 0;
 }
 
+.cta .container .cta-col:nth-child(2) .cta-title {
+  text-align: center;
+  width: 100%;
+  font-size: 2.5rem;
+}
+
 .cta .container {
   display: flex;
   gap: 2rem;
