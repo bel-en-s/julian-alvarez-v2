@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 
+const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const BrandIcon = ({ width, height, style, showSoundButton, ...props }) => {
   const videoRef = useRef(null);
   const [muted, setMuted] = useState(true);
@@ -33,8 +35,8 @@ const BrandIcon = ({ width, height, style, showSoundButton, ...props }) => {
         style={{
           width: "100%",
           height: "100%",
-          maskImage: "url(/logo.png)",
-          WebkitMaskImage: "url(/logo.png)",
+          maskImage: `url(${bp}/logo.png)`,
+          WebkitMaskImage: `url(${bp}/logo.png)`,
           maskSize: "contain",
           WebkitMaskSize: "contain",
           maskRepeat: "no-repeat",
@@ -45,7 +47,7 @@ const BrandIcon = ({ width, height, style, showSoundButton, ...props }) => {
       >
         <video
           ref={videoRef}
-          src="/home/julian-chiquito.mp4"
+          src={`${bp}/home/julian-chiquito.mp4`}
           autoPlay
           muted
           loop

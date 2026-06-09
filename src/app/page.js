@@ -21,6 +21,8 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function Index() {
   const [loaderAnimating, setLoaderAnimating] = useState(isInitialLoad);
   const heroImgRef = useRef(null);
@@ -250,7 +252,7 @@ export default function Index() {
             <Copy animateOnScroll={false} delay={isInitialLoad ? 5.5 : 0.65}>
               <span className="hero-name hero-name--julian">Julián</span>
               <span className="hero-header-img" ref={heroImgRef}>
-                <img src="/home/test.png" alt="" />
+                <img src={`${bp}/home/test.png`} alt="" />
               </span>
               <span className="hero-name hero-name--alvarez" ref={alvarezContainerRef}>Alvarez</span>
             </Copy>

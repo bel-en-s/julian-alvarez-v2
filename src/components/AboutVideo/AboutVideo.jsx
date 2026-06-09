@@ -2,6 +2,8 @@
 import { useRef, useState, useCallback } from "react";
 import "./AboutVideo.css";
 
+const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function AboutVideo() {
   const videoRef = useRef(null);
   const [muted, setMuted] = useState(true);
@@ -32,7 +34,7 @@ export default function AboutVideo() {
     <div className="about-video-wrapper">
       <video
         ref={videoRef}
-        src="/home/julian-chiquito.mp4"
+        src={`${bp}/home/julian-chiquito.mp4`}
         autoPlay
         loop
         muted

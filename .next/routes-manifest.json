@@ -2,8 +2,17 @@
   "version": 3,
   "pages404": true,
   "caseSensitive": false,
-  "basePath": "",
+  "basePath": "/julian-alvarez-v2",
   "redirects": [
+    {
+      "source": "/julian-alvarez-v2/",
+      "destination": "/julian-alvarez-v2",
+      "basePath": false,
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^/julian-alvarez-v2/$"
+    },
     {
       "source": "/:path+/",
       "destination": "/:path+",

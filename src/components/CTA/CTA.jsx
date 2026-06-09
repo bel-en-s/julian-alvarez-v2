@@ -60,7 +60,7 @@ const CTA = () => {
       <div className="container">
         <div className="cta-col">
           <div className="cta-side-img">
-           
+            {/* <img src="/bio/3.jpeg" alt="" /> */}
           </div>
           <div className="cta-col-copy">
             <Copy>
@@ -79,7 +79,7 @@ const CTA = () => {
           </div>
            <div className="cta-header">
             <Copy>
-              <h5>“Mi pueblo, mis amigos, el potrero. Acá nació todo: la pasión por el fútbol y las ganas de ir siempre un paso más allá. Acá aprendí a soñar en grande” </h5>
+              <h5>“Mi pueblo, mis amigos, el potrero. Acá nació todo: la pasión por el fútbol y las ganas de ir siempre un paso más allá. Acá aprendí a soñar en grande.”  </h5>
             </Copy>
           </div>
         </div>
@@ -92,18 +92,18 @@ const CTA = () => {
       <div className="container">
         
         <div className="cta-main-copy">
-          <div className="btn">
+          {/* <div className="btn">
             <Copy type="flicker">
               <Link href="/wardrobe">VEr mas</Link>
             </Copy>
-          </div>
+          </div> */}
         </div>
       </div>
 
       <div className="container">
         <div className="cta-col">
           <div className="cta-side-img">
-      
+            <img src="/bio/3.jpeg" alt="" />
           </div>
           <div className="cta-col-copy">
             <Copy>
@@ -117,7 +117,7 @@ const CTA = () => {
         <div className="cta-col">
           <h2 className="cta-title">El Doble Salto (2018)</h2>
           <div className="cta-main-img">
-            <img src="/bio/Anexo-3.jpeg" alt="" />
+            <img src="/bio/2.jpeg" alt="" />
             
           </div>
            <div className="cta-header">
@@ -128,18 +128,18 @@ const CTA = () => {
         </div>
         <div className="cta-col">
           <div className="cta-side-img">
-            <img src="public/bio/Anexo-4.jpg" alt="" />
+            <img src="/bio/1.jpeg" alt="" />
           </div>
         </div>
       </div>
       <div className="container">
         
         <div className="cta-main-copy">
-          <div className="btn">
+          {/* <div className="btn">
             <Copy type="flicker">
               <Link href="/wardrobe">VEr mas</Link>
             </Copy>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
