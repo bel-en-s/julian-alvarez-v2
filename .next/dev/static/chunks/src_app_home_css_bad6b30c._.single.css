@@ -43,9 +43,7 @@
 
 .hero .hero-header .hero-name {
   text-transform: uppercase;
-  color: #0000;
-  -webkit-text-stroke: 2px var(--ja-amethyst-900);
-  text-stroke: 2px var(--ja-amethyst-900);
+  color: #1f1535;
   line-height: .85;
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   z-index: 5;
@@ -166,8 +164,8 @@
   pointer-events: none;
   width: auto;
   position: absolute;
-  top: 8%;
-  left: 3.5rem;
+  top: 20%;
+  left: 8vw;
 }
 
 .slide-title h1 {
