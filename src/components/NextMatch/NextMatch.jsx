@@ -1,6 +1,6 @@
 "use client";
 import "./NextMatch.css";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
 import gsap from "gsap";
 
 function getTimeLeft(kickoff) {
@@ -24,6 +24,10 @@ const NextMatch = ({
   const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(kickoff));
   const canvasRef = useRef(null);
   const cardRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (window.innerWidth < 1000) setMinimized(true);
+  }, []);
 
   useEffect(() => {
     const tick = () => setTimeLeft(getTimeLeft(kickoff));

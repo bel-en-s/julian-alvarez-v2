@@ -8,7 +8,6 @@ import TextBlock from "@/components/TextBlock/TextBlock";
 import PeelReveal from "@/components/PeelReveal/PeelReveal";
 import CTA from "@/components/CTA/CTA";
 import NextMatch from "@/components/NextMatch/NextMatch";
-import Mascara3D from "@/components/Mascara3D/Mascara3D";
 import HeroAtmos from "@/components/HeroAtmos/HeroAtmos";
 import MiHistoria from "@/components/MiHistoria/MiHistoria";
 import AboutVideo from "@/components/AboutVideo/AboutVideo";
@@ -254,7 +253,7 @@ export default function Index() {
           <div className="hero-gradient"></div>
           <canvas className="hero-alvarez-canvas" ref={alvarezCanvasRef} aria-hidden="true" />
         </div>
-        <div className="section-footer">
+        {/* <div className="section-footer">
           <Copy
             type="flicker"
             delay={isInitialLoad ? 7.5 : 0.65}
@@ -269,7 +268,7 @@ export default function Index() {
           >
             <p>Model v.23</p>
           </Copy>
-        </div>
+        </div> */}
       </section>
 
       <NextMatch />
@@ -294,51 +293,19 @@ export default function Index() {
             </Copy>
           </div>
         </div>
-        <div className="section-footer light">
+        {/* <div className="section-footer light">
           <Copy type="flicker">
             <p>/ Core State /</p>
           </Copy>
-        </div>
+        </div> */}
       </section>
-
-      <Mascara3D />
 
       <div className="scroll-track" ref={scrollTrackRef}>
         <Curtain />
         <MiHistoria />
       </div>
-      <section className="anexo-section">
-        <div className="container">
-          <div className="anexo-col">
-            <div className="anexo-img">
-              <img src="/bio/Anexo%201.jpeg" alt="" />
-            </div>
-          </div>
-          <div className="anexo-col">
-            <div className="anexo-text">
-              <Copy>
-                <p>"Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid."</p>
-              </Copy>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="anexo-section anexo-section--inverted">
-        <div className="container">
-          <div className="anexo-col">
-            <div className="anexo-text">
-              <Copy>
-                <p>"De esos potreros de Calchín a los grandes escenarios, siempre supe que el fútbol era mi destino. Cada paso, cada sacrificio, me fue llevando a donde siempre quise estar".</p>
-              </Copy>
-            </div>
-          </div>
-          <div className="anexo-col">
-            <div className="anexo-img">
-              <img src="/bio/Anexo%202.jpeg" alt="" />
-            </div>
-          </div>
-        </div>
-      </section>
+    
+     
       <CTA />
       <MarqueeBanner />
 

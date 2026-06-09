@@ -88,7 +88,7 @@ const Preloader = () => {
           duration: 1,
         })
           .add(animateProgress(), "<")
-          .set(".preloader-progress-bar", { backgroundColor: "#fff" })
+          .set(".preloader-progress-bar", { backgroundColor: "var(--violet)" })
           .to(
             logoSplit.chars,
             {

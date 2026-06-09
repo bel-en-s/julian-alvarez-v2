@@ -72,7 +72,7 @@ const CTA = () => {
           </div>
         </div>
         <div className="cta-col">
-          <h2 className="cta-title">El Doble Salto (2018)</h2>
+          <h2 className="cta-title">Club Atlético Calchín (2016) </h2>
           <div className="cta-main-img">
             <img src="/bio/2.jpeg" alt="" />
             
@@ -86,6 +86,49 @@ const CTA = () => {
         <div className="cta-col">
           <div className="cta-side-img">
             <img src="/bio/1.jpeg" alt="" />
+          </div>
+        </div>
+      </div>
+      <div className="container">
+        
+        <div className="cta-main-copy">
+          <div className="btn">
+            <Copy type="flicker">
+              <Link href="/wardrobe">VEr mas</Link>
+            </Copy>
+          </div>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="cta-col">
+          <div className="cta-side-img">
+            <img src="/bio/3.jpeg" alt="" />
+          </div>
+          <div className="cta-col-copy">
+            <Copy>
+              {/* <p className="bodyCopy sm">
+                Built to exist outside context, these forms prioritize
+                neutrality, and distortion.
+              </p> */}
+            </Copy>
+          </div>
+        </div>
+        <div className="cta-col">
+          <h2 className="cta-title">El Doble Salto (2018)</h2>
+          <div className="cta-main-img">
+            <img src="/bio/3.jpeg" alt="" />
+            
+          </div>
+           <div className="cta-header">
+            <Copy>
+              <h5>“Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid.” </h5>
+            </Copy>
+          </div>
+        </div>
+        <div className="cta-col">
+          <div className="cta-side-img">
+            <img src="/bio/4.jpeg" alt="" />
           </div>
         </div>
       </div>

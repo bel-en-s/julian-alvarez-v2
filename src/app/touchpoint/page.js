@@ -4,7 +4,6 @@ import { useRef, useEffect } from "react";
 
 import Copy from "@/components/Copy/Copy";
 import BrandIcon from "@/components/BrandIcon/BrandIcon";
-import MascaraHero from "@/components/MascaraHero/MascaraHero";
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -89,11 +88,7 @@ export default function Touchpoint() {
               </div>
             </div>
           </div>
-          <div className="contact-hero-col contact-hero-img-wrapper">
-            <div className="contact-hero-img" ref={contactHeroImgRef}>
-              <MascaraHero />
-            </div>
-          </div>
+        
         </div>
       </section>
 

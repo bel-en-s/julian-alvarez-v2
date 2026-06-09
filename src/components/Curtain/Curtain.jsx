@@ -9,8 +9,8 @@ export default function Curtain() {
         <img src="/curtain/cuerpo.png" alt="" />
       </div>
       <div className="curtain-copy">
-        <div className="curtain-header"><h1>Julián</h1></div>
-        <div className="curtain-header"><h1>Álvarez</h1></div>
+        <div className="curtain-header"><h1>Sigan</h1></div>
+        <div className="curtain-header"><h1>Soñando</h1></div>
       </div>
     </section>
   );
