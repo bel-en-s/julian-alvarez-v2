@@ -105,7 +105,7 @@
 }
 
 .about {
-  background: var(--base-100);
+  background: #1f1635;
   width: 100%;
   height: 100svh;
   position: relative;
@@ -113,7 +113,7 @@
 }
 
 .about .slide-title h1, .about .slide-description h1 {
-  color: #000;
+  color: #fff;
 }
 
 .scroll-track .curtain {
@@ -129,9 +129,16 @@
 }
 
 .about-bg .about-video-wrapper {
+  will-change: transform;
   border-radius: 0;
-  width: 30%;
+  width: 38%;
   max-width: 900px;
+}
+
+@media (min-width: 1000px) {
+  .about-bg .about-video-wrapper {
+    transform: scale(var(--video-scale, .88));
+  }
 }
 
 .about-bg .about-video-wrapper video {
@@ -155,42 +162,44 @@
 }
 
 .slide-title {
-  color: #fff;
-  width: max-content;
+  z-index: 3;
+  pointer-events: none;
+  width: auto;
   position: absolute;
-  top: 50%;
-  left: 5rem;
-  transform: translate(0%, -50%);
+  top: 8%;
+  left: 3.5rem;
 }
 
 .slide-title h1 {
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  letter-spacing: -.02em;
+  letter-spacing: -.04em;
   color: #fff;
-  font-size: clamp(2rem, 10vw, 16rem);
-  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(4rem, 8vw, 18rem);
+  font-weight: 900;
+  line-height: .78;
 }
 
 .slide-description {
-  color: #fff;
+  color: #fffc;
   z-index: 2;
   flex-direction: column;
-  gap: 2rem;
-  width: 15%;
-  min-width: 250px;
+  gap: 1.5rem;
+  width: 30%;
+  min-width: 320px;
+  max-width: 500px;
   display: flex;
   position: absolute;
-  top: 50%;
-  right: 15rem;
-  transform: translate(0%, -50%);
+  bottom: 12%;
+  right: 4rem;
 }
 
 .slide-description h1 {
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  letter-spacing: -.02em;
-  color: #fff;
-  font-size: clamp(1.2rem, 2.5vw, 3.5rem);
-  font-weight: 800;
+  letter-spacing: -.01em;
+  color: #fffc;
+  font-size: clamp(1.4rem, 2.8vw, 3.8rem);
+  font-weight: 600;
 }
 
 .about .section-footer {
@@ -433,10 +442,10 @@ html.is-h-scroll {
   .slide-description {
     text-align: center;
     width: 75%;
-    top: unset;
+    max-width: none;
     bottom: 5%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%);
   }
 
   .anexo-section {

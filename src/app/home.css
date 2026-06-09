@@ -113,13 +113,13 @@
   position: relative;
   width: 100%;
   height: 100svh;
-  background: var(--base-100);
+  background:#1F1635;
   overflow: hidden;
 }
 
 .about .slide-title h1,
 .about .slide-description h1 {
-  color: black;
+  color: #fff;
 }
 
 .scroll-track .curtain {
@@ -135,9 +135,16 @@
 }
 
 .about-bg .about-video-wrapper {
-  width: 30%;
+  width: 38%;
   max-width: 900px;
   border-radius: 0;
+  will-change: transform;
+}
+
+@media (min-width: 1000px) {
+  .about-bg .about-video-wrapper {
+    transform: scale(var(--video-scale, 0.88));
+  }
 }
 
 .about-bg .about-video-wrapper video {
@@ -162,43 +169,44 @@
 
 .slide-title {
   position: absolute;
-  top: 50%;
-  left: 5rem;
-  transform: translate(0%, -50%);
-  width: max-content;
-  color: #fff;
+  top: 8%;
+  left: 3.5rem;
+  z-index: 3;
+  width: auto;
+  pointer-events: none;
 }
 
 .slide-title h1 {
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  font-weight: 800;
-  font-size: clamp(2rem, 10vw, 16rem);
-  letter-spacing: -0.02em;
-  /* line-height: 1.25; */
+  font-weight: 900;
+  font-size: clamp(4rem, 8vw, 18rem);
+  letter-spacing: -0.04em;
+  line-height: 0.78;
   color: #fff;
+  text-transform: uppercase;
 }
 
 .slide-description {
   position: absolute;
-  top: 50%;
-  right: 15rem;
-  transform: translate(0%, -50%);
-  width: 15%;
-  min-width: 250px;
-  color: #fff;
+  bottom: 12%;
+  right: 4rem;
+  width: 30%;
+  min-width: 320px;
+  max-width: 500px;
+  color: rgba(255,255,255,0.8);
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  z-index: 2;
+  gap: 1.5rem;
 }
 
 .slide-description h1 {
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.2rem, 2.5vw, 3.5rem);
-  letter-spacing: -0.02em;
-  /* line-height: 1.25; */
-  color: #fff;
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.8vw, 3.8rem);
+  letter-spacing: -0.01em;
+  /* line-height: 1.35; */
+  color: rgba(255,255,255,0.8);
 }
 
 .about .section-footer {
@@ -448,11 +456,11 @@ html.is-h-scroll {
 
   .slide-description {
     width: 75%;
+    max-width: none;
     text-align: center;
-    top: unset;
     bottom: 5%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
   }
 
   .anexo-section {

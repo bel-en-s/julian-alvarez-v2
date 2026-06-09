@@ -1,175 +1,109 @@
 /* [project]/src/components/MiHistoria/MiHistoria.css [app-client] (css) */
-.mi-historia {
-  z-index: 0;
-  background: linear-gradient(180deg, var(--ja-amethyst-900), #1a1a2e);
+.behind-the-lock {
+  background: var(--base-100);
   width: 100%;
   height: 100svh;
+  position: relative;
+  overflow: hidden;
+}
+
+.behind-the-lock .btl-header {
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  padding: 0 var(--page-pad);
+  pointer-events: none;
+  margin-top: 2rem;
+  position: absolute;
+  top: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.behind-the-lock .btl-header h2 {
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  margin-top: 2rem;
+}
+
+.behind-the-lock .btl-header h3 {
+  justify-self: center;
+  max-width: 900px;
+  margin-top: 20px;
+  font-size: clamp(1.75rem, 1vw, 3.5rem);
+  line-height: 1.2;
+}
+
+.behind-the-lock .btl-cards {
+  justify-content: center;
+  align-items: center;
+  display: flex;
   position: absolute;
   inset: 0;
-  overflow: hidden;
 }
 
-.mi-historia .mh-desktop {
-  background: none;
-  width: 100%;
-  height: 100svh;
-  position: relative;
-}
-
-.mi-historia .mh-header {
+.behind-the-lock .btl-card {
   will-change: transform;
+  backface-visibility: hidden;
+  flex-direction: column;
   align-items: center;
-  width: 320vw;
-  height: 100svh;
+  gap: .75rem;
   display: flex;
-  position: relative;
+  position: absolute;
 }
 
-.mi-historia .mh-video {
-  cursor: pointer;
-  border-radius: .75rem;
+.behind-the-lock .btl-card-img {
+  border: 2px solid var(--violet);
+  border-radius: 50%;
   flex-shrink: 0;
-  align-self: center;
-  width: 70vw;
-  height: 70svh;
-  margin-left: 80vw;
-  position: relative;
+  width: 140px;
+  height: 140px;
   overflow: hidden;
 }
 
-.mi-historia .mh-video video {
+.behind-the-lock .btl-card-img img {
   object-fit: cover;
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.mi-historia .mh-video-indicator {
-  pointer-events: none;
-  background: #00000080;
-  border-radius: 2rem;
-  padding: .5rem .75rem;
-  font-size: 1.5rem;
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-}
-
-.mi-historia .mh-header h1 {
-  font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  text-transform: uppercase;
-  color: #000;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-left: 150vw;
-  font-size: 20vw;
-  line-height: 1;
-}
-
-.mi-historia .mh-card {
-  z-index: 10;
-  will-change: transform;
-  width: 170px;
-  position: absolute;
-  top: 12%;
-  left: 100%;
-}
-
-.mi-historia .mh-card .mh-card-img {
-  width: 100%;
-  height: 170px;
-  overflow: hidden;
-}
-
-.mi-historia .mh-card .mh-card-img img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.mi-historia .mh-quote {
+.behind-the-lock .btl-card-content {
   text-align: center;
-  z-index: 10;
-  width: 80%;
-  max-width: 800px;
-  position: absolute;
-  bottom: 8%;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
-.mi-historia .mh-quote p {
-  font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  color: var(--base-100);
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  font-weight: 600;
-  line-height: 1.3;
+.behind-the-lock .btl-card-content .lg {
+  font-family: var(--font-big-shoulders), sans-serif;
+  color: var(--violet);
+  text-transform: uppercase;
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-.mi-historia .mh-mobile {
-  display: none;
+.behind-the-lock .btl-card-content .mono {
+  font-family: var(--font-dm-mono), monospace;
+  color: var(--base-400);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: clamp(.65rem, .7vw, .8rem);
 }
 
-@media (max-width: 999px) {
-  .mi-historia {
-    height: auto;
-    min-height: auto;
-    position: static;
+@media (max-width: 900px) {
+  .behind-the-lock .btl-header {
+    top: 1.5rem;
   }
 
-  .mi-historia .mh-desktop {
-    display: none;
+  .behind-the-lock .btl-header h2 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
   }
 
-  .mi-historia .mh-mobile {
-    background: linear-gradient(180deg, var(--ja-amethyst-900), #1a1a2e);
-    flex-direction: column;
-    gap: 1.25rem;
-    width: 100%;
-    padding: 6rem 2rem;
-    display: flex;
+  .behind-the-lock .btl-card-img {
+    width: 100px;
+    height: 100px;
   }
 
-  .mi-historia .mh-mobile-video {
-    border-radius: .5rem;
-    width: 100%;
-    height: 50vh;
-    overflow: hidden;
-  }
-
-  .mi-historia .mh-mobile-video video {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  .mi-historia .mh-mobile-header {
-    width: 100%;
-    margin-bottom: .5rem;
-  }
-
-  .mi-historia .mh-mobile-header h1 {
-    font-family: var(--font-big-shoulders), "Humane", sans-serif;
-    text-transform: uppercase;
-    color: var(--fg-1);
-    font-size: 4rem;
-    line-height: 1;
-  }
-
-  .mi-historia .mh-card {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    margin: 0 auto;
-    position: static;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .mi-historia .mh-card .mh-card-img {
-    aspect-ratio: 1;
-    width: 100%;
-    height: auto;
+  .behind-the-lock .btl-card-content .lg {
+    font-size: clamp(.85rem, 3vw, 1rem);
   }
 }
 

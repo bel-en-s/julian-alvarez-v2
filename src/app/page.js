@@ -18,7 +18,6 @@ import Copy from "@/components/Copy/Copy";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import BehindTheLock from "@/components/BehindTheLock/BehindTheLock";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,6 +69,12 @@ export default function Index() {
         onUpdate: (self) => {
           const p = self.progress;
 
+          // ---- VIDEO SCALE (tied to overall scroll, not phase) ----
+          document.documentElement.style.setProperty(
+            "--video-scale",
+            0.88 + 0.14 * p
+          );
+
           if (p < curtainEnd) {
             // ---- CURTAIN PHASE ----
             const rp = p / curtainEnd;
@@ -103,7 +108,6 @@ export default function Index() {
               const maxTranslate = Math.max(0, header.offsetWidth - window.innerWidth);
               gsap.set(header, { x: -cp * maxTranslate });
             }
-
 
           }
 
@@ -305,7 +309,7 @@ export default function Index() {
      
         {/* <MiHistoria /> */}
       </div>
-      <BehindTheLock />
+      <MiHistoria />
       <CTA />
       <MarqueeBanner />
 
