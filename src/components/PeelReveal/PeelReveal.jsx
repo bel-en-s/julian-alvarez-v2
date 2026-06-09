@@ -10,6 +10,8 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const PeelReveal = () => {
   const peelRevealContainerRef = useRef(null);
 
@@ -139,25 +141,25 @@ const PeelReveal = () => {
         </div>
         <div className="peel-reveal-img-container">
           <div className="pr-img">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="Peel reveal" />
+            <img src={bp + "/peel-reveal/peel-reveal-img.jpg"} alt="Peel reveal" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src={bp + "/peel-reveal/peel-reveal-img.jpg"} alt="" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src={bp + "/peel-reveal/peel-reveal-img.jpg"} alt="" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src={bp + "/peel-reveal/peel-reveal-img.jpg"} alt="" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src={bp + "/peel-reveal/peel-reveal-img.jpg"} alt="" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src={bp + "/peel-reveal/peel-reveal-img.jpg"} alt="" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src={bp + "/peel-reveal/peel-reveal-img.jpg"} alt="" />
           </div>
           <div className="peel-reveal-header">
             <h1>The uniform holds no allegiance</h1>

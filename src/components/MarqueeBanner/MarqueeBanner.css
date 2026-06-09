@@ -60,11 +60,11 @@
 }
 
 .marquee-banner .banner .banner-img--face {
-  background-image: url("/marquee-banner/mask-face.webp");
+  background-image: url("/julian-alvarez-v2/marquee-banner/mask-face.webp");
 }
 
 .marquee-banner .banner .banner-img--reveal {
-  background-image: url("/marquee-banner/mask-bg.png");
+  background-image: url("/julian-alvarez-v2/marquee-banner/mask-bg.png");
   mask: url(#smudge-mask);
   -webkit-mask: url(#smudge-mask);
   pointer-events: none;

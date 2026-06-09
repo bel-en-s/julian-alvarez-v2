@@ -11,6 +11,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function Touchpoint() {
   const calloutRef = useRef(null);
   const contactHeroImgRef = useRef(null);
@@ -108,7 +110,7 @@ export default function Touchpoint() {
               <h1>Connect to the silent grid</h1>
             </Copy>
             <div className="contact-callout-img">
-              <img src="/contact/contact-callout.jpg" alt="" />
+              <img src={bp + "/contact/contact-callout.jpg"} alt="" />
             </div>
           </div>
         </div>

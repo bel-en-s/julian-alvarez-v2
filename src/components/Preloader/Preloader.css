@@ -65,10 +65,10 @@
 .preloader-mask {
   background-color: #000;
   -webkit-mask: linear-gradient(var(--base-300), var(--base-300)),
-    url("/home/mask.svg") center/50% no-repeat;
+    url("/julian-alvarez-v2/home/mask.svg") center/50% no-repeat;
   -webkit-mask-composite: subtract;
   mask: linear-gradient(var(--base-300), var(--base-300)),
-    url("/home/mask.svg") center/50% no-repeat;
+    url("/julian-alvarez-v2/home/mask.svg") center/50% no-repeat;
   mask-composite: subtract;
   will-change: transform;
   z-index: 1;
@@ -117,10 +117,10 @@
 
   .preloader-mask {
     -webkit-mask: linear-gradient(#f5f5f5, #f5f5f5),
-      url("/home/mask.svg") center/90% no-repeat;
+      url("/julian-alvarez-v2/home/mask.svg") center/90% no-repeat;
     -webkit-mask-composite: subtract;
     mask: linear-gradient(#f5f5f5, #f5f5f5),
-      url("/home/mask.svg") center/90% no-repeat;
+      url("/julian-alvarez-v2/home/mask.svg") center/90% no-repeat;
     mask-composite: subtract;
   }
 }
