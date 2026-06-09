@@ -31,6 +31,8 @@ export default function Index() {
   const alvarezCanvasRef = useRef(null);
   const alvarezContainerRef = useRef(null);
   const scrollTrackRef = useRef(null);
+  const hScrollRef = useRef(null);
+  const hScrollContentRef = useRef(null);
 
   const handlePreloaderComplete = () => {
     setLoaderAnimating(false);
@@ -48,105 +50,54 @@ export default function Index() {
     });
 
     const track = scrollTrackRef.current;
-    if (!track) return;
-
-    const CURTAIN_VH = 2;
-    const CARDS_VH = 3;
-    const TOTAL_VH = CURTAIN_VH + CARDS_VH;
-    const curtainEnd = CURTAIN_VH / TOTAL_VH;
-
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 1000px)", () => {
-      ScrollTrigger.refresh();
-
-      const st = ScrollTrigger.create({
+    if (track) {
+      ScrollTrigger.create({
         trigger: track,
-        start: "top top",
-        end: `+=${window.innerHeight * TOTAL_VH}px`,
-        pin: true,
-        pinSpacing: true,
+        start: "top bottom",
+        end: "bottom top",
         scrub: true,
-        invalidateOnRefresh: true,
-        refreshPriority: 10,
         onUpdate: (self) => {
-          const p = self.progress;
-
-          // ---- VIDEO SCALE (tied to overall scroll, not phase) ----
           document.documentElement.style.setProperty(
             "--video-scale",
-            0.88 + 0.14 * p
+            0.88 + 0.14 * self.progress
           );
-
-          if (p < curtainEnd) {
-            // ---- CURTAIN PHASE ----
-            const rp = p / curtainEnd;
-            document.documentElement.classList.remove("is-h-scroll");
-
-            const eased = gsap.parseEase("power3.out")(rp);
-            gsap.set(".curtain-img", {
-              rotation: 30 * (1 - eased),
-              scale: 0.75 + 0.25 * eased,
-            });
-            gsap.set(".curtain-header:nth-child(1)", {
-              x: -innerWidth * 3 * rp,
-              y: innerHeight * 0.5 * rp,
-              scale: 1 + 9 * rp,
-            });
-            gsap.set(".curtain-header:nth-child(2)", {
-              x: innerWidth * 3 * rp,
-              y: innerHeight * 0.5 * rp,
-              scale: 1 + 9 * rp,
-            });
-            gsap.set(".scroll-track .curtain", { x: "0vw" });
-          } else {
-            // ---- CARDS PHASE (horizontal scroll) ----
-            const cp = (p - curtainEnd) / (1 - curtainEnd);
-            document.documentElement.classList.add("is-h-scroll");
-
-            gsap.set(".scroll-track .curtain", { x: -100 * cp + "vw" });
-
-            const header = document.querySelector(".mh-header");
-            if (header) {
-              const maxTranslate = Math.max(0, header.offsetWidth - window.innerWidth);
-              gsap.set(header, { x: -cp * maxTranslate });
-            }
-
-          }
-
-          // ---- BALL BOUNCE (starts when name scales off screen) ----
-          const ballStart = 0.15;
-          const bp = p < ballStart ? 0 : Math.min((p - ballStart) / (1 - ballStart), 1);
-
-          if (bp > 0) {
-            const card = document.querySelector(".mh-desktop .mh-card");
-            if (card) {
-              const shaped = Math.pow(bp, 0.5);
-              const cx = gsap.utils.interpolate(150, -900, bp);
-
-              const yKeyframes = [10, 400, 50, 420];
-              const yProgress = shaped * (yKeyframes.length - 1);
-              const yIndex = Math.min(Math.floor(yProgress), yKeyframes.length - 2);
-              const cy = gsap.utils.interpolate(yKeyframes[yIndex], yKeyframes[yIndex + 1], yProgress - yIndex);
-
-              const rKeyframes = [15, 480, 960, 1440];
-              const cr = gsap.utils.interpolate(rKeyframes[yIndex], rKeyframes[yIndex + 1], yProgress - yIndex);
-
-              const s = 0.7 - 0.12 * Math.sin(Math.PI * shaped);
-
-              gsap.set(card, {
-                xPercent: cx,
-                yPercent: cy,
-                rotation: cr,
-                opacity: 1,
-                scale: s,
-              });
-            }
-          }
         },
       });
+    }
 
-      return () => st.kill();
-    });
+    const hScroll = hScrollRef.current;
+    const hContent = hScrollContentRef.current;
+    if (hScroll && hContent) {
+      const setup = () => {
+        const totalWidth = hContent.scrollWidth;
+        if (totalWidth <= 0) { requestAnimationFrame(setup); return; }
+
+        ScrollTrigger.create({
+          trigger: hScroll,
+          pin: true,
+          start: "top top",
+          end: () => `+=${totalWidth - window.innerWidth}`,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const gp = self.progress;
+            const x = -(totalWidth - window.innerWidth) * gp;
+            gsap.set(hContent, { x });
+
+            const panels = hContent.querySelectorAll(".h-panel");
+            panels.forEach((panel) => {
+              const panelLeft = panel.offsetLeft;
+              const panelWidth = panel.offsetWidth;
+              const panelStart = panelLeft / totalWidth;
+              const panelEnd = (panelLeft + panelWidth) / totalWidth;
+              const lp = gp <= panelStart ? 0 : gp >= panelEnd ? 1 : (gp - panelStart) / (panelEnd - panelStart);
+              panel.style.setProperty("--h-progress", lp);
+            });
+          },
+        });
+      };
+      requestAnimationFrame(setup);
+    }
 
   });
 
@@ -311,8 +262,19 @@ export default function Index() {
      
         {/* <MiHistoria /> */}
       </div>
-      <MiHistoria />
-      <CTA />
+      <div className="h-scroll" ref={hScrollRef}>
+        <div className="h-scroll__track" ref={hScrollContentRef}>
+          <div className="h-scroll__panel h-panel">
+            <MiHistoria />
+          </div>
+          <div className="h-scroll__panel h-panel">
+            <CTA blocks={[1]} />
+          </div>
+          <div className="h-scroll__panel h-panel">
+            <CTA blocks={[2]} />
+          </div>
+        </div>
+      </div>
       <MarqueeBanner />
 
       <TextBlock />

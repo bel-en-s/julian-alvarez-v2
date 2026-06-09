@@ -382,10 +382,50 @@ html.is-h-scroll {
 }
 
 @media (max-width: 1000px) {
-  .hero .hero-header {
-    padding: 0 1.5rem;
+  .hero .container {
+    padding: 0;
   }
 
+  .hero .hero-header {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero .hero-name--julian,
+  .hero .hero-name--alvarez {
+    font-size: clamp(2rem, 20vw, 4rem);
+  }
+}
+
+
+/* ── Horizontal scroll (MiHistoria + CTA) ── */
+
+.h-scroll {
+  position: relative;
+  overflow: hidden;
+}
+
+.h-scroll__track {
+  display: flex;
+  width: max-content;
+}
+
+.h-scroll__panel {
+  width: 100vw;
+  height: 100svh;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.h-scroll__panel .cta {
+  padding: 0;
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
   .hero .hero-header [data-copy-wrapper] {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;

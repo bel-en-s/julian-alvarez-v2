@@ -44,8 +44,20 @@
   justify-content: center;
 }
 
+.behind-the-lock .btl-cuerpo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: auto;
+  pointer-events: none;
+  z-index: 5;
+}
+
 .behind-the-lock .btl-card {
   position: absolute;
+  top: 50%;
+  left: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -60,7 +60,7 @@
 }
 
 .cta .container .cta-col:nth-child(1) .cta-side-img {
-  transform: translateY(20rem);
+  transform: translateY(calc(20rem - var(--h-progress, 0) * 30rem));
   will-change: transform;
   overflow: hidden;
   border-radius: 0.75rem;
@@ -73,7 +73,7 @@
 }
 
 .cta .container .cta-col:nth-child(3) .cta-side-img {
-  transform: translateY(0rem);
+  transform: translateY(calc(0rem - var(--h-progress, 0) * 30rem));
   will-change: transform;
   overflow: hidden;
   border-radius: 0.75rem;
@@ -177,11 +177,11 @@
 }
 
 .cta-block--split .cta-img-left img {
-  transform: translateY(20rem);
+  transform: translateY(calc(20rem - var(--h-progress, 0) * 30rem));
 }
 
 .cta-block--split .cta-img-right img {
-  transform: translateY(0rem);
+  transform: translateY(calc(0rem - var(--h-progress, 0) * 30rem));
 }
 
 .cta-block--split .cta-side-text {

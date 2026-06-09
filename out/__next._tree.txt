@@ -1,4 +1,6 @@
-:HL["/julian-alvarez-v2/_next/static/chunks/5f8dca644b115787.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/27470e2f11a3646a.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/baff962ef6ec0d92.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/e7028919fd90e1bb.css","style"]
 :HL["/julian-alvarez-v2/_next/static/media/0c89a48fa5027cee-s.p.4564287c.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/julian-alvarez-v2/_next/static/media/36363bfb06833f56-s.p.d8302362.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/julian-alvarez-v2/_next/static/media/3a11180d498b75c0-s.p.cb76a30f.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -8,8 +10,8 @@
 :HL["/julian-alvarez-v2/_next/static/media/a73419dd2ba2d841-s.p.f2813c2a.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/julian-alvarez-v2/_next/static/media/bdef460321aa07a0-s.p.c4530df2.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/julian-alvarez-v2/_next/static/media/f9fc8f485db6b190-s.p.01f2a084.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/julian-alvarez-v2/_next/static/chunks/5a17020389c0bf53.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/5af031ac6c0109ef.css","style"]
 :HL["/julian-alvarez-v2/_next/static/chunks/127d21979ced9bb6.css","style"]
 :HL["/julian-alvarez-v2/_next/static/chunks/7d348b145035f40c.css","style"]
-:HL["/julian-alvarez-v2/_next/static/chunks/dba5a4a5415cb7f5.css","style"]
-0:{"buildId":"S0peCdFDzppwY14j1G_aP","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+:HL["/julian-alvarez-v2/_next/static/chunks/13511ccf01f82e07.css","style"]
+0:{"buildId":"R6QJMKs9NJsOAlp57w2Z5","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}

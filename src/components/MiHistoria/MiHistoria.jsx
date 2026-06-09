@@ -2,15 +2,9 @@
 
 import "./MiHistoria.css";
 
-import { useRef } from "react";
-
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 import Copy from "../Copy/Copy";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const CARDS = [
   {
@@ -18,108 +12,77 @@ const CARDS = [
     role: "Creative Director",
     img: "/curtain/balon.png",
   },
-
 ];
 
 export default function MiHistoria() {
-  const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
+  const cardRef = useRef(null);
+  const cuerpoRef = useRef(null);
 
-  useGSAP(() => {
-    const section = sectionRef.current;
-    const cards = cardsRef.current;
-    if (!section || !cards.length) return;
+  useEffect(() => {
+    const card = cardRef.current;
+    const cuerpo = cuerpoRef.current;
 
-    const stickyHeight = window.innerHeight * 7;
-    const totalCards = cards.length;
+    const update = () => {
+      const el = card || cuerpo;
+      if (!el) return;
 
-    const arcAngle = Math.PI * 0.4;
-    const startAngle = Math.PI / 2 - arcAngle / 2;
+      const p =
+        parseFloat(
+          getComputedStyle(el).getPropertyValue("--h-progress")
+        ) || 0;
 
-    function getRadius() {
-      return window.innerWidth < 900
-        ? window.innerWidth * 7.5
-        : window.innerWidth * 2.5;
-    }
+      const ww = window.innerWidth;
 
-    function positionCards(progress = 0) {
-      const radius = getRadius();
-      const cardSpacing = 0.15;
-      const initialOffset = -cardSpacing * (totalCards - 1);
-      const totalTravel = 1 - initialOffset;
-      const arcProgress = initialOffset + progress * totalTravel;
-
-      cards.forEach((card, i) => {
-        if (!card) return;
-        const cardOffset = (totalCards - 1 - i) * cardSpacing;
-        const cardProgress = cardOffset + arcProgress;
-        const angle = startAngle + arcAngle * cardProgress;
-
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-        const rotation = (angle - Math.PI / 2) * (180 / Math.PI);
-
-        gsap.set(card, {
-          x,
-          y: -y + radius,
-          rotation: -rotation,
-          transformOrigin: "center center",
+      if (cuerpo) {
+        const pc = Math.min(p / 0.45, 1);
+        const scale = 0.3 + pc * 1.2;
+        const fadeOut = Math.max(0, Math.min((p - 0.35) / 0.25, 1));
+        gsap.set(cuerpo, {
+          xPercent: -50,
+          yPercent: -50,
+          scale: scale * (1 - fadeOut * 0.6),
+          opacity: 1 - fadeOut,
+          y: fadeOut * -80,
         });
-      });
-    }
+      }
 
-    positionCards(0);
-
-    const trigger = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: `+=${stickyHeight}px`,
-      pin: true,
-      pinSpacing: true,
-      scrub: true,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        positionCards(self.progress);
-      },
-    });
-
-    const handleResize = () => {
-      positionCards(trigger.progress);
+      if (card) {
+        const pb = Math.max(0, Math.min((p - 0.35) / 0.65, 1));
+        gsap.set(card, {
+          xPercent: -50,
+          yPercent: -50,
+          x: (1 - pb) * ww,
+          y: (1 - pb) * 200 - pb * (1 - pb) * 300,
+          rotation: (1 - pb) * 720,
+          scale: 0.5 + 0.5 * pb,
+          opacity: 0.3 + 0.7 * pb,
+        });
+      }
     };
-    window.addEventListener("resize", handleResize);
 
-    return () => {
-      trigger.kill();
-      window.removeEventListener("resize", handleResize);
-    };
-  });
+    gsap.ticker.add(update);
+    return () => gsap.ticker.remove(update);
+  }, []);
 
   return (
-    <section className="behind-the-lock" ref={sectionRef}>
+    <section className="behind-the-lock">
       <div className="btl-header">
         <Copy>
           <h2>MI HISTORIA</h2>
           <h3>“Antes de los estadios llenos, los títulos y las finales, hubo un sueño. Desde chico fui hincha de River. Esa camiseta no era solo un club, era una ilusión que me acompañó desde el primer día que toqué una pelota.” </h3>
-          
-          {/* <h3>"Antes de los estadios llenos, los títulos y las finales, hubo un sueño. Desde chico fui hincha de River. Esa camiseta no era solo un club, era una ilusión que me acompañó desde el primer día que toqué una pelota"</h3> */}
         </Copy>
-       
       </div>
 
-      {/* <div className="btl-footer">
-        <div className="container">
-          <p className="mono">Roster Verified</p>
-          <p className="mono">Defectors: None</p>
-        </div>
-      </div> */}
+      <img
+        ref={cuerpoRef}
+        className="btl-cuerpo"
+        src="/curtain/cuerpo.png"
+        alt=""
+      />
 
       <div className="btl-cards">
         {CARDS.map((member, i) => (
-          <div
-            key={member.name}
-            className="btl-card"
-            ref={(el) => (cardsRef.current[i] = el)}
-          >
+          <div key={member.name} className="btl-card" ref={cardRef}>
             <div className="btl-card-img">
               <img src={member.img} alt={member.name} />
             </div>

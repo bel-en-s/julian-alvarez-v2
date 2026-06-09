@@ -364,10 +364,46 @@ html.is-h-scroll {
 }
 
 @media (max-width: 1000px) {
-  .hero .hero-header {
-    padding: 0 1.5rem;
+  .hero .container {
+    padding: 0;
   }
 
+  .hero .hero-header {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero .hero-name--julian, .hero .hero-name--alvarez {
+    font-size: clamp(2rem, 20vw, 4rem);
+  }
+}
+
+.h-scroll {
+  position: relative;
+  overflow: hidden;
+}
+
+.h-scroll__track {
+  width: max-content;
+  display: flex;
+}
+
+.h-scroll__panel {
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100svh;
+  display: flex;
+}
+
+.h-scroll__panel .cta {
+  width: 100%;
+  padding: 0;
+}
+
+@media (max-width: 1000px) {
   .hero .hero-header [data-copy-wrapper] {
     text-align: center;
     grid-template-rows: auto auto auto;
