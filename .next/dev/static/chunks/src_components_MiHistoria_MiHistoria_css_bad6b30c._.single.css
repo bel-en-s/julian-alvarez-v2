@@ -6,6 +6,7 @@
   height: 100svh;
   position: absolute;
   inset: 0;
+  overflow: hidden;
 }
 
 .mi-historia .mh-desktop {
@@ -57,7 +58,7 @@
 .mi-historia .mh-header h1 {
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   text-transform: uppercase;
-  color: var(--fg-1);
+  color: #000;
   white-space: nowrap;
   flex-shrink: 0;
   margin-left: 150vw;

@@ -18,6 +18,7 @@ import Copy from "@/components/Copy/Copy";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import BehindTheLock from "@/components/BehindTheLock/BehindTheLock";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -272,7 +273,7 @@ export default function Index() {
       </section>
 
       <NextMatch />
-
+      <div className="scroll-track" ref={scrollTrackRef}>
       <section className="about">
         <div className="about-bg">
           <AboutVideo />
@@ -300,12 +301,11 @@ export default function Index() {
         </div> */}
       </section>
 
-      <div className="scroll-track" ref={scrollTrackRef}>
-        <Curtain />
-        <MiHistoria />
-      </div>
-    
      
+     
+        {/* <MiHistoria /> */}
+      </div>
+      <BehindTheLock />
       <CTA />
       <MarqueeBanner />
 

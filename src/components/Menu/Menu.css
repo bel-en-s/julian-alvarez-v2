@@ -291,3 +291,32 @@
 .ja-menu-arana__item.i1 { left: 580px; top: 238px; }
 .ja-menu-arana__item.i2 { left: 490px; top: 328px; }
 .ja-menu-arana__item.i4 { left: 656px; top: 278px; }
+
+@media (max-width: 768px) {
+  .ja-menu-arana__frame {
+    transform: none !important;
+    width: 100%;
+    height: 100%;
+    right: auto;
+    left: 0;
+    top: 0;
+  }
+
+  .ja-menu-arana__item.i1,
+  .ja-menu-arana__item.i2,
+  .ja-menu-arana__item.i4 {
+    left: 50% !important;
+  }
+
+  .ja-menu-arana__item.i1 {
+    top: 25% !important;
+  }
+
+  .ja-menu-arana__item.i2 {
+    top: 45% !important;
+  }
+
+  .ja-menu-arana__item.i4 {
+    top: 60% !important;
+  }
+}

@@ -5,6 +5,7 @@
   background: linear-gradient(180deg, var(--ja-amethyst-900), #1a1a2e);
   width: 100%;
   height: 100svh;
+  overflow: hidden;
 }
 
 .mi-historia .mh-desktop {
@@ -58,7 +59,7 @@
   font-size: 20vw;
   line-height: 1;
   text-transform: uppercase;
-  color: var(--fg-1);
+  color: #000;
   margin-left: 150vw;
   white-space: nowrap;
   flex-shrink: 0;

@@ -101,6 +101,7 @@
   height: 100vh;
   display: flex;
   gap: 4em;
+  overflow: hidden;
 }
 
 .project-preview .project-preview-wrapper .preview-col {

@@ -1,4 +1,4 @@
-.btl {
+.behind-the-lock {
   position: relative;
   width: 100%;
   height: 100svh;
@@ -6,12 +6,28 @@
   overflow: hidden;
 }
 
-.btl .btl-title h1,
-.btl .btl-description h1 {
-  color: var(--violet);
+.behind-the-lock .btl-header {
+  position: absolute;
+  top: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  padding: 0 var(--page-pad);
+  pointer-events: none;
 }
 
-.btl-bg {
+.behind-the-lock .btl-header h2 {
+  font-family: var(--font-big-shoulders), "Humane", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3vw, 3.5rem);
+  letter-spacing: -0.02em;
+  color: var(--violet);
+  text-transform: uppercase;
+}
+
+.behind-the-lock .btl-cards {
   position: absolute;
   inset: 0;
   display: flex;
@@ -19,97 +35,68 @@
   justify-content: center;
 }
 
-.btl-image-wrapper {
-  width: 20%;
-  max-width: 600px;
+.behind-the-lock .btl-card {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-.btl-image-wrapper img {
+.behind-the-lock .btl-card-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--violet);
+  flex-shrink: 0;
+}
+
+.behind-the-lock .btl-card-img img {
   width: 100%;
-  height: auto;
-  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
-.btl-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  user-select: none;
-  pointer-events: none;
-  z-index: 2;
+.behind-the-lock .btl-card-content {
+  text-align: center;
 }
 
-.btl-title {
-  position: absolute;
-  top: 50%;
-  left: 5rem;
-  transform: translate(0%, -50%);
-  width: max-content;
-}
-
-.btl-title h1 {
-  font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  font-weight: 800;
-  font-size: clamp(2rem, 10vw, 16rem);
-  letter-spacing: -0.02em;
+.behind-the-lock .btl-card-content .lg {
+  font-family: var(--font-big-shoulders), sans-serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
   color: var(--violet);
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
-.btl-description {
-  position: absolute;
-  top: 50%;
-  right: 15rem;
-  transform: translate(0%, -50%);
-  width: 15%;
-  min-width: 250px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  z-index: 2;
+.behind-the-lock .btl-card-content .mono {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: clamp(0.65rem, 0.7vw, 0.8rem);
+  color: var(--base-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.btl-description h1 {
-  font-family: var(--font-big-shoulders), "Humane", sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.2rem, 2.5vw, 3.5rem);
-  letter-spacing: -0.02em;
-  color: var(--violet);
-}
-
-@media (max-width: 1000px) {
-  .btl {
-    height: auto;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+@media (max-width: 900px) {
+  .behind-the-lock .btl-header {
+    top: 1.5rem;
   }
 
-  .btl-image-wrapper {
-    max-width: 500px;
+  .behind-the-lock .btl-header h2 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
   }
 
-  .btl-title {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .behind-the-lock .btl-card-img {
+    width: 100px;
+    height: 100px;
   }
 
-  .btl-title h1 {
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
-    text-align: center;
-  }
-
-  .btl-description {
-    width: 75%;
-    text-align: center;
-    top: unset;
-    bottom: 5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .behind-the-lock .btl-card-content .lg {
+    font-size: clamp(0.85rem, 3vw, 1rem);
   }
 }

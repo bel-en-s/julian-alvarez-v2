@@ -2,9 +2,10 @@
 
 import "./BehindTheLock.css";
 
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import Copy from "../Copy/Copy";
@@ -24,7 +25,7 @@ export default function BehindTheLock() {
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
 
-  useLayoutEffect(() => {
+  useGSAP(() => {
     const section = sectionRef.current;
     const cards = cardsRef.current;
     if (!section || !cards.length) return;
@@ -77,14 +78,13 @@ export default function BehindTheLock() {
       pinSpacing: true,
       scrub: true,
       invalidateOnRefresh: true,
-      refreshPriority: -1,
       onUpdate: (self) => {
         positionCards(self.progress);
       },
     });
 
     const handleResize = () => {
-      positionCards(0);
+      positionCards(trigger.progress);
     };
     window.addEventListener("resize", handleResize);
 
@@ -92,22 +92,24 @@ export default function BehindTheLock() {
       trigger.kill();
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  });
 
   return (
     <section className="behind-the-lock" ref={sectionRef}>
       <div className="btl-header">
         <Copy>
           <h2>MI HISTORIA</h2>
+          
+          {/* <h3>"Antes de los estadios llenos, los títulos y las finales, hubo un sueño. Desde chico fui hincha de River. Esa camiseta no era solo un club, era una ilusión que me acompañó desde el primer día que toqué una pelota"</h3> */}
         </Copy>
       </div>
 
-      <div className="btl-footer">
+      {/* <div className="btl-footer">
         <div className="container">
           <p className="mono">Roster Verified</p>
           <p className="mono">Defectors: None</p>
         </div>
-      </div>
+      </div> */}
 
       <div className="btl-cards">
         {CARDS.map((member, i) => (

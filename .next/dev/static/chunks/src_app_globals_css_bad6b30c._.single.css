@@ -113,6 +113,10 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--base-100);
   color: var(--base-700);
