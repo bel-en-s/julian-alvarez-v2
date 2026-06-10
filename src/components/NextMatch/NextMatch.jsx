@@ -1,7 +1,11 @@
 "use client";
 import "./NextMatch.css";
-import { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function getTimeLeft(kickoff) {
   const diff = new Date(kickoff).getTime() - Date.now();
@@ -28,6 +32,27 @@ const NextMatch = ({
   useLayoutEffect(() => {
     if (window.innerWidth < 1000) setMinimized(true);
   }, []);
+
+  useGSAP(() => {
+    ScrollTrigger.create({
+      trigger: ".hero",
+      start: "bottom top",
+      onLeave: () => setMinimized(true),
+      onEnter: () => setMinimized(false),
+    });
+  }, []);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    gsap.to(card, {
+      scale: minimized ? 0.92 : 1,
+      transformOrigin: "bottom left",
+      duration: 0.45,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+  }, [minimized]);
 
   useEffect(() => {
     const tick = () => setTimeLeft(getTimeLeft(kickoff));

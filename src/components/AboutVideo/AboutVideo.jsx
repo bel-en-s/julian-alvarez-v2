@@ -17,22 +17,12 @@ export default function AboutVideo() {
   const wrapperRef = useRef(null);
   const [playing, setPlaying] = useState(true);
   const [volState, setVolState] = useState("muted");
-  const activeVolume = useRef(LOW_VOL);
+  const activeVolume = useRef(0);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const unMute = () => {
-      video.muted = false;
-      video.volume = LOW_VOL;
-      setVolState("low");
-    };
-    if (video.readyState >= 3 && !video.paused) {
-      unMute();
-    } else {
-      video.addEventListener("canplay", unMute, { once: true });
-    }
-    return () => video.removeEventListener("canplay", unMute);
+    video.play().catch(() => {});
   }, []);
 
   const toggleSound = useCallback((e) => {
@@ -92,26 +82,27 @@ export default function AboutVideo() {
         ref={videoRef}
         src={`${bp}/home/julian-chiquito.mp4`}
         autoPlay
-        loop
-        muted
         playsInline
+        muted
+        loop
+        preload="auto"
         onClick={togglePlay}
       />
       <div className="about-video-controls">
         <button onClick={togglePlay} aria-label={playing ? "Pausar" : "Reproducir"}>
           {playing ? (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
           ) : (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           )}
         </button>
         <button onClick={toggleSound} aria-label="Alternar sonido">
           {volState === "muted" ? (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/><path d="M17 7l-2 2 2 2-2 2 2 2 2-2 2 2 2-2-2-2 2-2-2-2-2 2-2-2z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15" stroke="#fff" strokeWidth="2"/><line x1="17" y1="9" x2="23" y2="15" stroke="#fff" strokeWidth="2"/></svg>
           ) : volState === "low" ? (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="#fff" strokeWidth="2" fill="none"/></svg>
           ) : (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="#fff" strokeWidth="2" fill="none"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="#fff" strokeWidth="2" fill="none"/></svg>
           )}
         </button>
       </div>

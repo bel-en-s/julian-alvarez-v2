@@ -13466,3 +13466,168 @@ Import traces:
 [02:12:54.185] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
 [02:12:54.185] Browser WARN    GSAP target  not found. https://gsap.com
 [02:12:54.185] Browser WARN    GSAP target  not found. https://gsap.com
+[02:14:24.654] Server  LOG      ✓ Compiled in 16ms
+[02:17:18.819] Server  LOG      ✓ Compiled in 10ms
+[02:17:30.353] Server  LOG      ✓ Compiled in 9ms
+[02:19:46.189] Server  LOG      ✓ Compiled in 34ms
+[02:19:53.685] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:19:53.949] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'aboutSection' before initialization
+[02:19:53.949] Browser WARN    GSAP target  not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target  not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target  not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-progress not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-video not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-mask not found. https://gsap.com
+[02:19:53.949] Browser WARN    GSAP target .preloader-bg not found. https://gsap.com
+[02:19:54.054] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:54.054] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:54.054] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:54.054] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:54.054] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:54.054] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:54.054] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:54.054] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:58.675] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:19:58.929] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'aboutSection' before initialization
+[02:19:58.929] Browser WARN    GSAP target  not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target  not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target  not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-progress not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-video not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-mask not found. https://gsap.com
+[02:19:58.929] Browser WARN    GSAP target .preloader-bg not found. https://gsap.com
+[02:19:59.031] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:59.031] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:59.031] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:59.031] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:59.031] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:59.031] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:59.031] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:19:59.031] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:00.226] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:20:00.484] Browser ERROR   uncaughtError: ReferenceError: Cannot access 'aboutSection' before initialization
+[02:20:00.484] Browser WARN    GSAP target  not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target  not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-progress-bar not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target  not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-progress not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-video not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-mask not found. https://gsap.com
+[02:20:00.484] Browser WARN    GSAP target .preloader-bg not found. https://gsap.com
+[02:20:00.587] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:00.587] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:00.587] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:00.587] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:00.587] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:00.587] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:00.587] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:00.587] Browser ERROR   unhandledRejection: TypeError: Cannot read properties of null (reading 'hasAttribute')
+[02:20:09.025] Server  LOG     
+[02:20:09.025] Server  LOG     Could not open page.js in the editor.
+[02:20:09.025] Server  LOG     The editor process exited with an error: (code 1).
+[02:20:09.025] Server  LOG     
+[02:20:09.025] Server  LOG     To set up the editor integration, add something like REACT_EDITOR=atom to the .env.local file in your project folder and restart the development server.
+[02:20:09.025] Server  LOG     
+[02:20:19.309] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:20:19.394] Server  LOG      ✓ Compiled in 23ms
+[02:20:19.612] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:20:19.908] Browser WARN    GSAP target  not found. https://gsap.com
+[02:20:19.908] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:20:19.908] Browser WARN    GSAP target  not found. https://gsap.com
+[02:20:19.908] Browser WARN    GSAP target  not found. https://gsap.com
+[02:20:59.454] Server  LOG      ✓ Compiled in 11ms
+[02:21:03.467] Server  LOG      ✓ Compiled in 6ms
+[02:21:08.336] Server  LOG      ✓ Compiled in 5ms
+[02:21:23.246] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:21:23.429] Browser WARN    GSAP target  not found. https://gsap.com
+[02:21:23.429] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:21:23.429] Browser WARN    GSAP target  not found. https://gsap.com
+[02:21:23.429] Browser WARN    GSAP target  not found. https://gsap.com
+[02:21:57.185] Server  LOG      ✓ Compiled in 10ms
+[02:24:31.937] Server  LOG      ✓ Compiled in 38ms
+[02:24:38.251] Server  LOG      ✓ Compiled in 5ms
+[02:24:54.680] Server  LOG      ✓ Compiled in 10ms
+[02:25:05.766] Server  LOG      ✓ Compiled in 5ms
+[02:25:19.605] Server  LOG      ✓ Compiled in 6ms
+[02:25:48.206] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:25:48.409] Browser WARN    GSAP target  not found. https://gsap.com
+[02:25:48.409] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:25:48.409] Browser WARN    GSAP target  not found. https://gsap.com
+[02:25:48.409] Browser WARN    GSAP target  not found. https://gsap.com
+[02:26:13.514] Server  LOG      ✓ Compiled in 12ms
+[02:27:11.190] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:27:11.369] Browser WARN    GSAP target  not found. https://gsap.com
+[02:27:11.369] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:27:11.369] Browser WARN    GSAP target  not found. https://gsap.com
+[02:27:11.369] Browser WARN    GSAP target  not found. https://gsap.com
+[02:29:33.071] Server  LOG      ✓ Compiled in 63ms
+[02:29:37.133] Server  LOG      ✓ Compiled in 13ms
+[02:29:38.008] Browser ERROR   uncaughtError: NotFoundError: Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.
+[02:33:09.443] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:33:09.653] Browser WARN    GSAP target  not found. https://gsap.com
+[02:33:09.653] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:33:09.653] Browser WARN    GSAP target  not found. https://gsap.com
+[02:33:09.653] Browser WARN    GSAP target  not found. https://gsap.com
+[02:34:07.417] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:34:07.562] Browser WARN    GSAP target  not found. https://gsap.com
+[02:34:07.562] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:34:07.562] Browser WARN    GSAP target  not found. https://gsap.com
+[02:34:07.562] Browser WARN    GSAP target  not found. https://gsap.com
+[02:34:41.717] Server  LOG      ✓ Compiled in 47ms
+[02:35:51.290] Server  LOG      ✓ Compiled in 44ms
+[02:36:01.855] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:36:02.069] Browser WARN    GSAP target  not found. https://gsap.com
+[02:36:02.069] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:36:02.069] Browser WARN    GSAP target  not found. https://gsap.com
+[02:36:02.069] Browser WARN    GSAP target  not found. https://gsap.com
+[02:36:17.701] Server  LOG      ✓ Compiled in 21ms
+[02:37:21.094] Server  LOG      ✓ Compiled in 7ms
+[02:37:49.527] Server  LOG      ✓ Compiled in 10ms
+[02:38:00.661] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:38:00.871] Browser WARN    GSAP target  not found. https://gsap.com
+[02:38:00.873] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:38:00.873] Browser WARN    GSAP target  not found. https://gsap.com
+[02:38:00.873] Browser WARN    GSAP target  not found. https://gsap.com
+[02:38:24.039] Server  LOG      ✓ Compiled in 9ms
+[02:38:57.465] Server  LOG      ✓ Compiled in 19ms
+[02:39:25.086] Server  LOG      ✓ Compiled in 6ms
+[02:40:13.945] Server  LOG      ✓ Compiled in 7ms
+[02:40:20.288] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:40:20.548] Browser WARN    GSAP target  not found. https://gsap.com
+[02:40:20.548] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:40:20.548] Browser WARN    GSAP target  not found. https://gsap.com
+[02:40:20.548] Browser WARN    GSAP target  not found. https://gsap.com
+[02:40:31.720] Server  LOG      ✓ Compiled in 7ms
+[02:42:15.385] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:42:15.719] Browser WARN    GSAP target  not found. https://gsap.com
+[02:42:15.719] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:42:15.719] Browser WARN    GSAP target  not found. https://gsap.com
+[02:42:15.719] Browser WARN    GSAP target  not found. https://gsap.com
+[02:42:53.546] Server  LOG      ✓ Compiled in 20ms
+[02:43:08.365] Server  LOG      ✓ Compiled in 5ms
+[02:43:26.425] Server  LOG      ✓ Compiled in 10ms
+[02:44:19.542] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:44:19.827] Browser WARN    GSAP target  not found. https://gsap.com
+[02:44:19.827] Browser WARN    GSAP target .preloader-logo h1 not found. https://gsap.com
+[02:44:19.827] Browser WARN    GSAP target  not found. https://gsap.com
+[02:44:19.827] Browser WARN    GSAP target  not found. https://gsap.com
