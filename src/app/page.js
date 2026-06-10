@@ -65,6 +65,37 @@ export default function Index() {
       });
     }
 
+    const aboutSection = document.querySelector(".about");
+    if (aboutSection) {
+      const lerpColor = (t, c1, c2) => {
+        const r = Math.round(parseInt(c1.slice(1,3),16) + (parseInt(c2.slice(1,3),16) - parseInt(c1.slice(1,3),16)) * t);
+        const g = Math.round(parseInt(c1.slice(3,5),16) + (parseInt(c2.slice(3,5),16) - parseInt(c1.slice(3,5),16)) * t);
+        const b = Math.round(parseInt(c1.slice(5,7),16) + (parseInt(c2.slice(5,7),16) - parseInt(c1.slice(5,7),16)) * t);
+        return `rgb(${r},${g},${b})`;
+      };
+
+     ScrollTrigger.create({
+  trigger: aboutSection,
+  start: "center center",
+  end: "top top",
+  scrub: true,
+  onUpdate: (self) => {
+  // La transición se completa en el primer 60% del recorrido
+  const p = Math.min(self.progress / 0.8, 1);
+
+  aboutSection.style.setProperty(
+    "--about-bg",
+    lerpColor(p, "#1F1635", "#edf1e8")
+  );
+
+  aboutSection.style.setProperty(
+    "--about-text",
+    lerpColor(p, "#ffffff", "#000000")
+  );
+},
+});
+    }
+
     const hScroll = hScrollRef.current;
     const hContent = hScrollContentRef.current;
     if (hScroll && hContent) {
@@ -83,16 +114,6 @@ export default function Index() {
             const gp = self.progress;
             const x = -(totalWidth - window.innerWidth) * gp;
             gsap.set(hContent, { x });
-
-            const panels = hContent.querySelectorAll(".h-panel");
-            panels.forEach((panel) => {
-              const panelLeft = panel.offsetLeft;
-              const panelWidth = panel.offsetWidth;
-              const panelStart = panelLeft / totalWidth;
-              const panelEnd = (panelLeft + panelWidth) / totalWidth;
-              const lp = gp <= panelStart ? 0 : gp >= panelEnd ? 1 : (gp - panelStart) / (panelEnd - panelStart);
-              panel.style.setProperty("--h-progress", lp);
-            });
           },
         });
       };
@@ -203,7 +224,7 @@ export default function Index() {
             <Copy animateOnScroll={false} delay={isInitialLoad ? 5.5 : 0.65}>
               <span className="hero-name hero-name--julian">Julián</span>
               <span className="hero-header-img" ref={heroImgRef}>
-                <img src={`${bp}/home/test.png`} alt="" />
+                <img src={`${bp}/home/hero.png`} alt="" />
               </span>
               <span className="hero-name hero-name--alvarez" ref={alvarezContainerRef}>Alvarez</span>
             </Copy>

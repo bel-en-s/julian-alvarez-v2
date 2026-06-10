@@ -20,7 +20,7 @@ const TextBlock = () => {
         </div>
         <div className="text-block-col">
           <div className="text-block-copy">
-          <ContactForm />
+          <ContactForm cardOnly />
           </div>
         </div>
       </div>

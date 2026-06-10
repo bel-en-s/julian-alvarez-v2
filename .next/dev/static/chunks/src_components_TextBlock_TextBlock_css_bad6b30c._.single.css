@@ -32,8 +32,8 @@
 }
 
 .text-block .container .text-block-col:nth-child(2) {
-  align-items: flex-end;
-  gap: 2rem;
+  justify-content: center;
+  align-items: center;
   display: flex;
 }
 
@@ -54,6 +54,19 @@
 
 .text-block .container .text-block-copy {
   flex: 1;
+  justify-content: center;
+  display: flex;
+}
+
+.text-block .contact-form-container {
+  gap: 2rem;
+  max-width: 500px;
+  min-height: 500px;
+  width: 100% !important;
+  height: auto !important;
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
 }
 
 @media (max-width: 1000px) {
