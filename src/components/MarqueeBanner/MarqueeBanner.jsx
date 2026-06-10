@@ -4,10 +4,7 @@ import { useRef, useEffect } from "react";
 import Copy from "../Copy/Copy";
 
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const config = {
   stampInterval: 8,
@@ -33,26 +30,28 @@ const MarqueeBanner = () => {
   const smudgeSVGRef = useRef(null);
   const bannerRef = useRef(null);
 
-  useGSAP(
-    () => {
-      ScrollTrigger.create({
-        trigger: marqueeBannerRef.current,
-        start: "top bottom",
-        end: "150% top",
-        scrub: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
+  useEffect(() => {
+    const el = marqueeBannerRef.current;
+    if (!el) return;
 
-          const marquee1X = 25 - progress * 50;
-          gsap.set(marquee1Ref.current, { x: `${marquee1X}%` });
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: "top bottom",
+      end: "150% top",
+      scrub: true,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        gsap.set(marquee1Ref.current, { x: `${25 - progress * 50}%` });
+        gsap.set(marquee2Ref.current, { x: `${-25 + progress * 50}%` });
+      },
+    });
 
-          const marquee2X = -25 + progress * 50;
-          gsap.set(marquee2Ref.current, { x: `${marquee2X}%` });
-        },
-      });
-    },
-    { scope: marqueeBannerRef }
-  );
+    ScrollTrigger.refresh();
+
+    return () => {
+      st.kill();
+    };
+  }, []);
 
   useEffect(() => {
     const banner = bannerRef.current;

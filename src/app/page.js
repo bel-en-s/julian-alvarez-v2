@@ -76,12 +76,15 @@ export default function Index() {
 
      ScrollTrigger.create({
   trigger: aboutSection,
-  start: "center center",
-  end: "top top",
+  // start/end control el rango de scroll donde progress va de 0 a 1
+  // Mueve "center" mas arriba (ej "top bottom") para arrancar antes
+  // Mueve "center" mas abajo (ej "bottom bottom") para arrancar despues
+  start: "center bottom",
+  end: "center top",
   scrub: true,
   onUpdate: (self) => {
-  // La transición se completa en el primer 60% del recorrido
-  const p = Math.min(self.progress / 0.8, 1);
+  // Cambia 1 por un numero menor (ej 0.8) para que llegue a blanco antes del final del rango
+  const p = self.progress;
 
   aboutSection.style.setProperty(
     "--about-bg",
