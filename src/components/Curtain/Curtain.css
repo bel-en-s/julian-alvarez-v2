@@ -1,10 +1,27 @@
+
 .curtain {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
+  position: relative;
   width: 100%;
   height: 100svh;
   overflow: hidden;
+}
+
+.curtain-ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 110px;
+  aspect-ratio: 1;
+  z-index: 20;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.curtain-ball img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .curtain-img {
@@ -66,7 +83,11 @@
 
 @media (max-width: 999px) {
   .curtain {
-    position: relative;
     height: 100svh;
   }
+
+  .curtain-ball {
+    width: 70px;
+  }
 }
+

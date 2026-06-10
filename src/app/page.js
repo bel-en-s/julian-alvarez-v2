@@ -3,15 +3,15 @@ import "./home.css";
 import { useState, useEffect, useRef } from "react";
 import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
 import DotMatrix from "@/components/DotMatrix/DotMatrix";
-import MarqueeBanner from "@/components/MarqueeBanner/MarqueeBanner";
+
 import TextBlock from "@/components/TextBlock/TextBlock";
 import PeelReveal from "@/components/PeelReveal/PeelReveal";
+import MarqueeBanner from "@/components/MarqueeBanner/MarqueeBanner";
 import CTA from "@/components/CTA/CTA";
 import NextMatch from "@/components/NextMatch/NextMatch";
 import HeroAtmos from "@/components/HeroAtmos/HeroAtmos";
 import MiHistoria from "@/components/MiHistoria/MiHistoria";
 import AboutVideo from "@/components/AboutVideo/AboutVideo";
-import Curtain from "@/components/Curtain/Curtain";
 
 import Copy from "@/components/Copy/Copy";
 
@@ -336,10 +336,10 @@ const updateColors = () => {
           </div>
         </div>
       </div>
+
       <MarqueeBanner />
 
       <TextBlock />
-
 
 
     

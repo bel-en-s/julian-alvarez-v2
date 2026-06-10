@@ -166,6 +166,7 @@
   user-select: none;
   pointer-events: none;
   z-index: 2;
+   mix-blend-mode: hard-light;
 }
 
 .slide-title {

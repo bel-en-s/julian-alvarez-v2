@@ -9,6 +9,8 @@
   overflow: hidden;
 }
 
+
+
 .marquee-banner .marquees {
   position: absolute;
   top: 0;
@@ -69,6 +71,9 @@
   -webkit-mask: url(#smudge-mask);
   pointer-events: none;
 }
+
+
+
 
 .marquee-banner > .banner-content {
   position: absolute;

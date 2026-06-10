@@ -223,6 +223,12 @@ const MarqueeBanner = () => {
        <div className="banner-content">
     <Copy type="flicker">
       <p>[ Las dos caras ]</p>
+       <button
+            className="btn"
+  
+          >
+            Add to Cart
+          </button>
     </Copy>
 
     <Copy>
@@ -244,6 +250,7 @@ const MarqueeBanner = () => {
   
         <div className="banner-img banner-img--face"></div>
         <div className="banner-img banner-img--reveal"></div>
+        
         <svg
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
@@ -266,7 +273,9 @@ const MarqueeBanner = () => {
         {/* <div className="banner-logo">
           <img src="public/logo.png" alt="" />
         </div> */}
+        
       </div>
+       
     </section>
   );
 };

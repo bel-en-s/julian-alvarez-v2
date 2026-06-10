@@ -5,6 +5,7 @@ import "./MiHistoria.css";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Copy from "../Copy/Copy";
+import Curtain from "../Curtain/Curtain";
 
 const CARDS = [
   {
@@ -22,6 +23,7 @@ export default function MiHistoria() {
 
   return (
     <section className="behind-the-lock">
+      <Curtain />
       <div className="btl-header">
         <Copy>
           <h2>MI HISTORIA</h2>
