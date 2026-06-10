@@ -239,7 +239,7 @@ button.secondary {
 .container {
   width: 100%;
   max-width: 2000px;
-  height: 80vh;
+  height: 100vh;
   margin: 0 auto;
   padding: 2rem;
 }

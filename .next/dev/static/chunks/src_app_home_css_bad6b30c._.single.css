@@ -137,7 +137,7 @@
 
 @media (min-width: 1000px) {
   .about-bg .about-video-wrapper {
-    transform: scale(var(--video-scale, .88));
+    transform: scale(calc(var(--video-scale, .88) * var(--pin-scale, 1)));
   }
 }
 
@@ -402,7 +402,6 @@ html.is-h-scroll {
 
 .h-scroll__panel .cta {
   width: 100%;
-  padding: 0;
 }
 
 @media (max-width: 1000px) {

@@ -49,21 +49,23 @@ export default function Index() {
       delay: isInitialLoad ? 5.75 : 1,
     });
 
-    const track = scrollTrackRef.current;
-    if (track) {
-      ScrollTrigger.create({
-        trigger: track,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-        onUpdate: (self) => {
-          document.documentElement.style.setProperty(
-            "--video-scale",
-            0.88 + 0.14 * self.progress
-          );
-        },
-      });
-    }
+   const track = scrollTrackRef.current;
+if (track) {
+  ScrollTrigger.create({
+    trigger: track,
+    start: "top top",
+    end: "+=800",
+    pin: true,
+    scrub: true,
+
+    onUpdate: (self) => {
+      document.documentElement.style.setProperty(
+        "--video-scale",
+        1 + self.progress * 0.2
+      );
+    },
+  });
+}
 
     const aboutSection = document.querySelector(".about");
     if (aboutSection) {
@@ -74,29 +76,63 @@ export default function Index() {
         return `rgb(${r},${g},${b})`;
       };
 
-     ScrollTrigger.create({
+    ScrollTrigger.create({
   trigger: aboutSection,
-  // start/end control el rango de scroll donde progress va de 0 a 1
-  // Mueve "center" mas arriba (ej "top bottom") para arrancar antes
-  // Mueve "center" mas abajo (ej "bottom bottom") para arrancar despues
-  start: "center bottom",
-  end: "center top",
-  scrub: true,
-  onUpdate: (self) => {
-  // Cambia 1 por un numero menor (ej 0.8) para que llegue a blanco antes del final del rango
-  const p = self.progress;
+  start: "top top", // cuando la sección ocupa toda la pantalla
+  once: true,
 
+  onEnter: () => {
+    gsap.to(aboutSection, {
+      "--about-bg": "#edf1e8",
+      "--about-text": "#000000",
+      duration: 0.8,
+      ease: "power2.out",
+    });
+  },
+
+});
+
+const state = { progress: 0 };
+
+const updateColors = () => {
   aboutSection.style.setProperty(
     "--about-bg",
-    lerpColor(p, "#1F1635", "#edf1e8")
+    lerpColor(state.progress, "#1F1635", "#edf1e8")
   );
 
   aboutSection.style.setProperty(
     "--about-text",
-    lerpColor(p, "#ffffff", "#000000")
+    lerpColor(state.progress, "#ffffff", "#000000")
   );
-},
-});
+};
+
+// ScrollTrigger.create({
+//   trigger: aboutSection,
+
+//   // Ajustá este punto hasta que coincida con el momento
+//   // en que el hero ya quedó atrás.
+//   start: "top top",
+
+//   onEnter: () => {
+//     gsap.to(state, {
+//       progress: 1,
+//       duration: 0.7,
+//       ease: "power2.out",
+//       overwrite: true,
+//       onUpdate: updateColors,
+//     });
+//   },
+
+//   onLeaveBack: () => {
+//     gsap.to(state, {
+//       progress: 0,
+//       duration: 0.7,
+//       ease: "power2.out",
+//       overwrite: true,
+//       onUpdate: updateColors,
+//     });
+//   },
+// });
     }
 
     const hScroll = hScrollRef.current;
@@ -117,6 +153,7 @@ export default function Index() {
             const gp = self.progress;
             const x = -(totalWidth - window.innerWidth) * gp;
             gsap.set(hContent, { x });
+            document.documentElement.style.setProperty("--h-progress", gp);
           },
         });
       };
@@ -134,8 +171,8 @@ export default function Index() {
     let anchors = [];
     let lastPt = null;
     let raf = null;
-    const LIFETIME = 900;
-    const MAX_LINES = 400;
+    const LIFETIME = 1900;
+    const MAX_LINES = 1400;
     let lines = [];
 
     const repaint = () => {

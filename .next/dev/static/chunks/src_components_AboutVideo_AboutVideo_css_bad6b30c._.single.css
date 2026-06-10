@@ -18,8 +18,8 @@
   transition: opacity .3s;
   display: flex;
   position: absolute;
-  bottom: .75rem;
-  right: .75rem;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .about-video-wrapper:hover .about-video-controls {
@@ -29,19 +29,26 @@
 .about-video-controls button {
   color: #fff;
   cursor: pointer;
-  background: #0000008c;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  background: #00000080;
   border: none;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  transition: background .2s;
+  width: 2.5rem;
+  height: 2.5rem;
+  transition: background .2s, transform .15s;
   display: flex;
 }
 
 .about-video-controls button:hover {
-  background: #000c;
+  background: #000000bf;
+  transform: scale(1.08);
+}
+
+.about-video-controls button:active {
+  transform: scale(.92);
 }
 
 /*# sourceMappingURL=src_components_AboutVideo_AboutVideo_css_bad6b30c._.single.css.map*/

@@ -13,8 +13,8 @@
 
 .about-video-controls {
   position: absolute;
-  bottom: 0.75rem;
-  right: 0.75rem;
+  bottom: 1rem;
+  right: 1rem;
   display: flex;
   gap: 0.5rem;
   opacity: 0;
@@ -26,19 +26,25 @@
 }
 
 .about-video-controls button {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   border: none;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.15s;
+  backdrop-filter: blur(4px);
 }
 
 .about-video-controls button:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.75);
+  transform: scale(1.08);
+}
+
+.about-video-controls button:active {
+  transform: scale(0.92);
 }
