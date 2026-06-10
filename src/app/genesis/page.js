@@ -12,8 +12,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 export default function Genesis() {
   const containerRef = useRef(null);
 
@@ -64,57 +62,57 @@ export default function Genesis() {
         <div className="project-preview-wrapper">
           <div className="preview-col">
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_03.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_03.jpg" alt="" />
             </div>
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_06.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_06.jpg" alt="" />
             </div>
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_09.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_09.jpg" alt="" />
             </div>
           </div>
           <div className="preview-col">
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_01.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_01.jpg" alt="" />
             </div>
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_04.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_04.jpg" alt="" />
             </div>
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_07.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_07.jpg" alt="" />
             </div>
           </div>
           <div className="preview-col main-preview-col">
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_02.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_02.jpg" alt="" />
             </div>
             <div className="preview-img main-preview-img">
-              <img src={bp + "/spotlight/spotlight_img_05.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_05.jpg" alt="" />
             </div>
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_08.jpg"} alt="" />
-            </div>
-          </div>
-          <div className="preview-col">
-            <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_03.jpg"} alt="" />
-            </div>
-            <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_06.jpg"} alt="" />
-            </div>
-            <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_09.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_08.jpg" alt="" />
             </div>
           </div>
           <div className="preview-col">
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_01.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_03.jpg" alt="" />
             </div>
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_04.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_06.jpg" alt="" />
             </div>
             <div className="preview-img">
-              <img src={bp + "/spotlight/spotlight_img_07.jpg"} alt="" />
+              <img src="/spotlight/spotlight_img_09.jpg" alt="" />
+            </div>
+          </div>
+          <div className="preview-col">
+            <div className="preview-img">
+              <img src="/spotlight/spotlight_img_01.jpg" alt="" />
+            </div>
+            <div className="preview-img">
+              <img src="/spotlight/spotlight_img_04.jpg" alt="" />
+            </div>
+            <div className="preview-img">
+              <img src="/spotlight/spotlight_img_07.jpg" alt="" />
             </div>
           </div>
         </div>
@@ -122,7 +120,7 @@ export default function Genesis() {
 
       <section className="genesis-hero">
         <div className="gen-hero-img">
-          <img src={bp + "/genesis/hero.jpg"} alt="" />
+          <img src="/genesis/hero.jpg" alt="" />
         </div>
         <div className="container">
           <div className="gen-hero-copy">

@@ -4,8 +4,6 @@ import Link from "next/link";
 
 import Copy from "../Copy/Copy";
 
-const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 const CTA = ({ blocks = [1, 2] }) => {
   return (
     <section className="cta">
@@ -28,7 +26,7 @@ const CTA = ({ blocks = [1, 2] }) => {
             <div className="cta-col">
               <h2 className="cta-title">Club Atlético Calchín (2016) </h2>
               <div className="cta-main-img">
-                <img src={bp + "/bio/2.jpeg"} alt="" />
+                <img src="/bio/2.jpeg" alt="" />
                 
               </div>
               <div className="cta-header">
@@ -39,7 +37,7 @@ const CTA = ({ blocks = [1, 2] }) => {
             </div>
             <div className="cta-col">
               <div className="cta-side-img">
-                <img src={bp + "/bio/1.jpeg"} alt="" />
+                <img src="/bio/1.jpeg" alt="" />
               </div>
             </div>
           </div>
@@ -63,7 +61,7 @@ const CTA = ({ blocks = [1, 2] }) => {
             <div className="cta-images-row">
               <div className="cta-side">
                 <div className="cta-img cta-img-left">
-                  <img src={bp + "/bio/Anexo-4.jpg"} alt="" />
+                  <img src="/bio/Anexo-4.jpg" alt="" />
                 </div>
                 <div className="cta-side-text">
                   <Copy>
@@ -73,7 +71,7 @@ const CTA = ({ blocks = [1, 2] }) => {
               </div>
               <div className="cta-side">
                 <div className="cta-img cta-img-right">
-                  <img src={bp + "/bio/Anexo-3.jpeg"} alt="" />
+                  <img src="/bio/Anexo-3.jpeg" alt="" />
                 </div>
                 <div className="cta-side-text">
                   <Copy>

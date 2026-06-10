@@ -6,13 +6,11 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Copy from "../Copy/Copy";
 
-const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 const CARDS = [
   {
     name: "Kai Tanaka",
     role: "Creative Director",
-    img: bp + "/curtain/balon.png",
+    img: "/curtain/balon.png",
   },
 ];
 
@@ -78,7 +76,7 @@ export default function MiHistoria() {
       <img
         ref={cuerpoRef}
         className="btl-cuerpo"
-        src={bp + "/curtain/cuerpo.png"}
+        src="/curtain/cuerpo.png"
         alt=""
       />
 

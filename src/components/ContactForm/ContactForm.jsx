@@ -2,14 +2,12 @@ import "./ContactForm.css";
 
 import { MdOutlineArrowOutward } from "react-icons/md";
 
-const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 const ContactForm = () => {
   return (
     <section className="contact-form">
       <div className="contact-parallax-image-wrapper">
         <h1>Nrmlss</h1>
-        <img src={bp + "/contact-form/contact-parallax.png"} alt="" />
+        <img src="/contact-form/contact-parallax.png" alt="" />
       </div>
       <div className="contact-form-container">
         <div className="cf-header">

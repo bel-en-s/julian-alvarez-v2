@@ -3,8 +3,6 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 function createGradientTexture() {
   const canvas = document.createElement("canvas");
   canvas.width = 512;
@@ -69,7 +67,7 @@ const MascaraHero = () => {
     const gradientTexture = createGradientTexture();
 
     const loader = new GLTFLoader();
-    loader.load(bp + "/home/mascara.glb", (gltf) => {
+    loader.load("/home/mascara.glb", (gltf) => {
       model = gltf.scene;
       model.rotation.y = 0;
       model.rotation.x = 0;

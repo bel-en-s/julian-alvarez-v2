@@ -26,8 +26,8 @@
 }
 
 .peel-reveal .peel-reveal-img-container .pr-img.mask {
-  -webkit-mask-image: url("/julian-alvarez-v2/peel-reveal/peel-reveal-img-mask.png");
-  mask-image: url("/julian-alvarez-v2/peel-reveal/peel-reveal-img-mask.png");
+  -webkit-mask-image: url("/peel-reveal/peel-reveal-img-mask.png");
+  mask-image: url("/peel-reveal/peel-reveal-img-mask.png");
   -webkit-mask-size: cover;
   mask-size: cover;
   -webkit-mask-position: center;

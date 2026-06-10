@@ -5,8 +5,6 @@ import { useRef, useState, useEffect } from "react";
 
 import gsap from "gsap";
 
-const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -155,7 +153,7 @@ const Menu = () => {
   return (
     <nav className="menu" ref={menuRef}>
       <div className={`menu-header${isOpen ? " is-open" : ""}`} onClick={toggleMenu}>
-        <img className="menu-logo" src={bp + "/logo.png"} alt="Julian Alvarez" />
+        <img className="menu-logo" src="./logo.png" alt="Julian Alvarez" />
         <button className="menu-toggle" aria-label="Toggle menu" onClick={(e) => { e.stopPropagation(); toggleMenu(); }}>
           <div className={`menu-hamburger-icon${isOpen ? " open" : ""}`}>
             <span className="menu-item"></span>
