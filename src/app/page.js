@@ -335,6 +335,15 @@ const updateColors = () => {
           <div className="h-scroll__panel h-panel">
             <CTA blocks={[2]} />
           </div>
+          <div className="h-scroll__panel h-panel">
+            <CTA blocks={[3]} />
+          </div>
+          <div className="h-scroll__panel h-panel">
+            <CTA blocks={[4]} />
+          </div>
+          <div className="h-scroll__panel h-panel">
+            <CTA blocks={[5]} />
+          </div>
         </div>
       </div>
 
