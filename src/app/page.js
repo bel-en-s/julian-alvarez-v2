@@ -137,7 +137,7 @@ const updateColors = () => {
 
     const hScroll = hScrollRef.current;
     const hContent = hScrollContentRef.current;
-    if (hScroll && hContent) {
+    if (hScroll && hContent && window.innerWidth >= 1000) {
       const setup = () => {
         const totalWidth = hContent.scrollWidth;
         if (totalWidth <= 0) { requestAnimationFrame(setup); return; }

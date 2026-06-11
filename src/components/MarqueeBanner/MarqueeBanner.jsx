@@ -2,6 +2,7 @@ import "./MarqueeBanner.css";
 import { useRef, useEffect } from "react";
 
 import Copy from "../Copy/Copy";
+import SpiderButton from "../SpiderButton/SpiderButton";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -223,12 +224,7 @@ const MarqueeBanner = () => {
        <div className="banner-content">
     <Copy type="flicker">
       <p>[ Las dos caras ]</p>
-       <button
-            className="btn"
-  
-          >
-            Add to Cart
-          </button>
+       <SpiderButton>Add to Cart</SpiderButton>
     </Copy>
 
     <Copy>

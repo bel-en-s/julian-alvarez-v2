@@ -85,6 +85,21 @@ footer .footer-row:nth-child(2) .footer-copyright p:nth-child(2) {
   }
 }
 
+@media (max-width: 480px) {
+  footer .container {
+    gap: 3rem;
+    padding: 2rem 1.25rem;
+  }
+
+  footer .footer-row:first-child {
+    gap: 2.5rem;
+  }
+
+  footer .footer-row:nth-child(2) .footer-copyright h5 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+}
+
 @media (min-width: 2000px) {
   footer {
     margin-top: -40svh;

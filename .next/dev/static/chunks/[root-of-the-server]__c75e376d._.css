@@ -1153,6 +1153,21 @@ footer .footer-row:nth-child(2) .footer-copyright p:nth-child(2) {
   }
 }
 
+@media (max-width: 480px) {
+  footer .container {
+    gap: 3rem;
+    padding: 2rem 1.25rem;
+  }
+
+  footer .footer-row:first-child {
+    gap: 2.5rem;
+  }
+
+  footer .footer-row:nth-child(2) .footer-copyright h5 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+}
+
 @media (min-width: 2000px) {
   footer {
     margin-top: -40svh;
@@ -1293,6 +1308,30 @@ footer .footer-row:nth-child(2) .footer-copyright p:nth-child(2) {
     padding: 5rem 2rem;
     top: 80svh;
     right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form {
+    height: 140svh;
+  }
+
+  .contact-form .contact-form-container {
+    min-height: 70svh;
+    padding: 3rem 1.25rem;
+    top: 60svh;
+  }
+
+  .contact-form .contact-form-container h4 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .contact-form .cf-copy p {
+    font-size: clamp(.75rem, 3vw, .9rem);
+  }
+
+  .contact-form .cf-footer .cf-footer-copy p {
+    width: 100%;
   }
 }
 

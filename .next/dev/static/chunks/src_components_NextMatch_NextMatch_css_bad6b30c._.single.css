@@ -34,11 +34,12 @@
   pointer-events: auto;
   transition: transform .35s var(--easing), border-color .35s, box-shadow .35s;
   font-family: var(--font-support);
+  border: 1px solid var(--ja-amethyst-900);
   background: linear-gradient(#1f1535 0%, #1a0f2d 100%);
-  border-radius: 12px;
+  border-radius: 8px;
   flex-direction: column;
   gap: 10px;
-  padding: 18px 20px 16px;
+  padding: 12px 28px;
   display: flex;
   position: fixed;
   bottom: clamp(20px, 4vh, 40px);
@@ -54,7 +55,6 @@
 
 .next-match:after {
   content: "";
-  border-radius: inherit;
   background: conic-gradient(from var(--ring-angle, 0deg), transparent 0%, #a88ce6e6 8%, #d8c8f58c 14%, transparent 28%, transparent 100%);
   -webkit-mask-composite: xor;
   pointer-events: none;
@@ -272,7 +272,6 @@
 }
 
 .next-match.is-min {
-  border-radius: 999px;
   flex-direction: row;
   align-items: center;
   gap: 14px;
@@ -316,11 +315,34 @@
 
 @media (max-width: 760px) {
   .next-match {
-    width: calc(100vw - var(--page-pad) * 2);
+    left: var(--page-pad);
+    right: var(--page-pad);
+    width: auto;
+    padding: 14px 16px 12px;
+    bottom: 16px;
   }
 
   .next-match .countdown .n {
-    font-size: 26px;
+    font-size: 22px;
+  }
+
+  .next-match .eyebrow {
+    font-size: 14px;
+  }
+
+  .next-match .teams {
+    font-size: 12px;
+  }
+
+  .next-match.is-min {
+    width: auto;
+    left: var(--page-pad);
+    right: var(--page-pad);
+    padding: 8px 12px 8px 16px;
+  }
+
+  .next-match.is-min .countdown .n {
+    font-size: 16px;
   }
 }
 

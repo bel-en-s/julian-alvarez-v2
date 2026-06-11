@@ -135,6 +135,30 @@
   }
 }
 
+@media (max-width: 480px) {
+  .contact-form {
+    height: 140svh;
+  }
+
+  .contact-form .contact-form-container {
+    min-height: 70svh;
+    padding: 3rem 1.25rem;
+    top: 60svh;
+  }
+
+  .contact-form .contact-form-container h4 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .contact-form .cf-copy p {
+    font-size: clamp(.75rem, 3vw, .9rem);
+  }
+
+  .contact-form .cf-footer .cf-footer-copy p {
+    width: 100%;
+  }
+}
+
 @media (min-width: 2000px) {
   .contact-form .contact-form-container {
     width: 25%;

@@ -93,4 +93,36 @@
   .text-block .container .text-block-col:nth-child(2) p {
     margin-bottom: 1rem;
   }
+
+  .text-block .contact-form-container {
+    max-width: 100%;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-block {
+    min-height: 500px;
+    height: auto;
+    padding: 3rem 0;
+  }
+
+  .text-block .container {
+    padding: 1rem 1rem;
+    gap: 1rem;
+  }
+
+  .text-block .container .text-block-col:nth-child(1) {
+    gap: 5rem;
+  }
+
+  .text-block .container .text-block-logo {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .text-block .contact-form-container {
+    min-height: 350px;
+    padding: 2rem 1rem;
+  }
 }

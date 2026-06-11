@@ -136,6 +136,30 @@
   }
 }
 
+@media (max-width: 480px) {
+  .contact-form {
+    height: calc(60svh + 80svh);
+  }
+
+  .contact-form .contact-form-container {
+    top: 60svh;
+    padding: 3rem 1.25rem;
+    min-height: 70svh;
+  }
+
+  .contact-form .contact-form-container h4 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .contact-form .cf-copy p {
+    font-size: clamp(0.75rem, 3vw, 0.9rem);
+  }
+
+  .contact-form .cf-footer .cf-footer-copy p {
+    width: 100%;
+  }
+}
+
 @media (min-width: 2000px) {
   .contact-form .contact-form-container {
     height: 60svh;
