@@ -30,10 +30,12 @@ const CTA = ({ blocks = [1, 2] }) => {
       {blocks.includes(2) && (
         <>
           <div className="container cta-block--doble">
-            <h2 className="cta-title">El Doble Salto</h2>
+            <h2 className="cta-title">El Doble Salto (2018)</h2>
             <div className="cta-doble-row">
               <div className="cta-doble-item">
-                <img src="/cta/cta_img_01.jpg" alt="" />
+                <div className="cta-doble-img">
+                  <img src="/bio/3.jpeg" alt="" />
+                </div>
                 <div className="cta-doble-text">
                   <Copy>
                     <h5>“Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid.”</h5>
@@ -41,7 +43,9 @@ const CTA = ({ blocks = [1, 2] }) => {
                 </div>
               </div>
               <div className="cta-doble-item">
-                <img src="/cta/cta_img_02.jpg" alt="" />
+                <div className="cta-doble-img">
+                  <img src="/bio/4.jpg" className="img-focus-4" alt="" />
+                </div>
                 <div className="cta-doble-text">
                   <Copy>
                     <h5>“El primer llamado para vestir la camiseta de Argentina fue un momento único… un orgullo enorme y una responsabilidad que te marca para siempre.”</h5>

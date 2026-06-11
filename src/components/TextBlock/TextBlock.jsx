@@ -19,9 +19,7 @@ const TextBlock = () => {
           </div>
         </div>
         <div className="text-block-col">
-          <div className="text-block-copy">
-          <ContactForm cardOnly />
-          </div>
+
         </div>
       </div>
     </section>

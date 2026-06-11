@@ -27,6 +27,7 @@
 
 .cta-block--default .cta-title {
   text-align: center;
+  z-index: 3;
   width: 100%;
   padding-top: 2rem;
   font-size: 2.5rem;
@@ -52,11 +53,13 @@
   border-radius: .75rem;
   flex: 1;
   max-width: 400px;
+  max-height: 50vh;
   overflow: hidden;
 }
 
 .cta-block--default .cta-gallery-img img {
   object-fit: cover;
+  object-position: center;
   will-change: transform;
   border-radius: .75rem;
   width: 100%;
@@ -88,6 +91,7 @@
 
   .cta-block--default .cta-gallery-img {
     max-width: 80%;
+    max-height: 40vh;
   }
 }
 
@@ -99,6 +103,7 @@
 
   .cta-block--default .cta-gallery-img {
     max-width: 95%;
+    max-height: 35vh;
   }
 
   .cta-block--default .cta-header {
@@ -124,6 +129,7 @@
 
 .cta-block--doble .cta-title {
   text-align: center;
+  z-index: 3;
   width: 100%;
   padding-top: 2rem;
   font-size: 2.5rem;
@@ -143,26 +149,31 @@
 }
 
 .cta-block--doble .cta-doble-item {
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  gap: 1rem;
+  display: flex;
+}
+
+.cta-block--doble .cta-doble-item:first-child {
+  flex-direction: row-reverse;
+}
+
+.cta-block--doble .cta-doble-img {
   aspect-ratio: 4 / 5;
   border: 1px solid #ffffff26;
   border-radius: .75rem;
-  flex: 1;
+  flex: 3;
   max-width: 400px;
+  max-height: 50vh;
   position: relative;
   overflow: hidden;
 }
 
-.cta-block--doble .cta-doble-item:after {
-  content: "";
-  z-index: 1;
-  background: #00000059;
-  border-radius: .75rem;
-  position: absolute;
-  inset: 0;
-}
-
-.cta-block--doble .cta-doble-item img {
+.cta-block--doble .cta-doble-img img {
   object-fit: cover;
+  object-position: center;
   border-radius: .75rem;
   width: 100%;
   height: 100%;
@@ -170,14 +181,19 @@
 }
 
 .cta-block--doble .cta-doble-text {
-  text-align: center;
-  z-index: 2;
   pointer-events: none;
-  width: 85%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  flex: 1;
+  width: auto;
+  position: static;
+  transform: none;
+}
+
+.cta-block--doble .cta-doble-item:first-child .cta-doble-text {
+  text-align: right;
+}
+
+.cta-block--doble .cta-doble-item:last-child .cta-doble-text {
+  text-align: left;
 }
 
 .cta-block--doble .cta-doble-text h5 {
@@ -193,7 +209,16 @@
   }
 
   .cta-block--doble .cta-doble-item {
+    gap: 1rem;
     max-width: 80%;
+  }
+
+  .cta-block--doble .cta-doble-img {
+    max-height: 40vh;
+  }
+
+  .cta-block--doble .cta-doble-item:first-child .cta-doble-text, .cta-block--doble .cta-doble-item:last-child .cta-doble-text {
+    text-align: center;
   }
 }
 
@@ -204,12 +229,28 @@
   }
 
   .cta-block--doble .cta-doble-item {
+    flex-direction: column;
+    gap: .75rem;
     max-width: 95%;
+  }
+
+  .cta-block--doble .cta-doble-item:last-child {
+    flex-direction: column;
+  }
+
+  .cta-block--doble .cta-doble-img {
+    flex: none;
+    width: 100%;
+    max-height: 35vh;
   }
 
   .cta-block--doble .cta-doble-text h5 {
     font-size: clamp(1rem, 4vw, 1.25rem);
   }
+}
+
+.img-focus-4 {
+  object-position: 0% 180%;
 }
 
 /*# sourceMappingURL=src_components_CTA_CTA_css_bad6b30c._.single.css.map*/

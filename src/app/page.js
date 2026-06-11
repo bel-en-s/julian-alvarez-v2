@@ -18,6 +18,7 @@ import Copy from "@/components/Copy/Copy";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Footer from "@/components/Footer/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -341,7 +342,7 @@ const updateColors = () => {
 
       <TextBlock />
 
-
+      <Footer />
     
      
     </>

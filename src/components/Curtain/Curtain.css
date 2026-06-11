@@ -43,6 +43,7 @@
   object-fit: contain;
   transform-origin: 50% 50%;
   backface-visibility: hidden;
+  margin-top: 5svh;
 }
 
 .curtain-copy {
