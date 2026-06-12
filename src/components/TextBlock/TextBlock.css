@@ -1,6 +1,6 @@
 .text-block {
   position: relative;
-  width: 100%;
+  width: 10%;
   height: 10%;
   min-height: 600px;
   background-color: var(--ja-amethyst-900);

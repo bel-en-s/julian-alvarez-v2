@@ -84,6 +84,7 @@
   --ja-amethyst-300: #8a75b8;
   --ja-amethyst-400: #6b549f;
   --ja-amethyst-900: #1f1535;
+  --dark-violet: #1f1535;
   --fg-1: #f4f4f4;
   --fg-2: #f4f4f4b8;
   --fg-3: #f4f4f47a;
@@ -1069,9 +1070,13 @@ button.secondary {
 footer {
   background-color: var(--base-100);
   width: 100%;
-  height: 100%;
+  height: 50%;
   margin-top: -45svh;
   position: relative;
+}
+
+footer .container {
+  height: 50vh;
 }
 
 footer p.bodyCopy {
@@ -1176,7 +1181,7 @@ footer .footer-row:nth-child(2) .footer-copyright p:nth-child(2) {
 
 /* [project]/src/components/ContactForm/ContactForm.css [app-client] (css) */
 .contact-form {
-  background-color: var(--base-100);
+  background-color: var(--dark-violet);
   width: 100%;
   height: 125svh;
   position: relative;
@@ -1207,7 +1212,7 @@ footer .footer-row:nth-child(2) .footer-copyright p:nth-child(2) {
 }
 
 .contact-form .contact-form-container {
-  background-color: var(--base-700);
+  background-color: var(--dark-violet);
   width: 35%;
   height: 80svh;
   max-height: 900px;

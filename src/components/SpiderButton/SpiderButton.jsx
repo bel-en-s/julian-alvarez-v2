@@ -100,7 +100,7 @@ const SpiderButton = ({ children, className = "", ...props }) => {
   return (
     <button className={`spider-btn ${className}`} ref={btnRef} {...props}>
       <canvas className="spider-btn-web" ref={canvasRef} aria-hidden="true" />
-      <span className="spider-btn-text">{children}</span>
+      <p className="spider-btn-text bodyCopy sm">{children}</p>
     </button>
   );
 };

@@ -55,7 +55,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="footer-row">
+          {/* <div className="footer-row">
             <div className="footer-copyright">
               <h5>Nrmlss</h5>
               <p className="bodyCopy">&copy;2025 All modules reserved.</p>
@@ -63,7 +63,7 @@ const Footer = () => {
                 Built by Julián Alvarez
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
       </footer>
     </>

@@ -15,7 +15,7 @@
 
 .next-match {
   position: fixed;
-  left: 6vw;
+  left: 3.5vw;
   bottom: clamp(20px, 4vh, 40px);
   z-index: 7;
   width: min(300px, 88vw);

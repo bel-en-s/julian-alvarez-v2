@@ -1,5 +1,6 @@
-:HL["/julian-alvarez-v2/_next/static/chunks/d1f3e9fd1a889b56.css","style"]
-:HL["/julian-alvarez-v2/_next/static/chunks/f234915c6f4fd555.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/64ed8a3df0b4bccd.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/0758a4f01fe2d15c.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/31ee65fb4f8a7524.css","style"]
 :HL["/julian-alvarez-v2/_next/static/chunks/e7028919fd90e1bb.css","style"]
 :HL["/julian-alvarez-v2/_next/static/media/0c89a48fa5027cee-s.p.4564287c.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/julian-alvarez-v2/_next/static/media/36363bfb06833f56-s.p.d8302362.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -13,4 +14,4 @@
 :HL["/julian-alvarez-v2/_next/static/chunks/d4671613028ac928.css","style"]
 :HL["/julian-alvarez-v2/_next/static/chunks/447cca4e73cec99d.css","style"]
 :HL["/julian-alvarez-v2/_next/static/chunks/127d21979ced9bb6.css","style"]
-0:{"buildId":"rDvcL4EPKEOvNP8ulYc1i","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"wardrobe","paramType":null,"paramKey":"wardrobe","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"w0EKmDbFwjWGozZIX60Ls","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"wardrobe","paramType":null,"paramKey":"wardrobe","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}

@@ -10,7 +10,7 @@ const CTA = ({ blocks = [1, 2] }) => {
       {blocks.includes(1) && (
         <>
           <div className="container cta-block--default">
-            <h2 className="cta-title">Club Atlético Calchín (2016)</h2>
+            <Copy><h2 className="cta-title">Club Atlético Calchín (2016)</h2></Copy>
             <div className="cta-gallery">
               <div className="cta-gallery-img cta-gallery-img--left">
                 <img src="/bio/2.jpeg" alt="" />
@@ -30,7 +30,7 @@ const CTA = ({ blocks = [1, 2] }) => {
       {blocks.includes(2) && (
         <>
           <div className="container cta-block--doble">
-            <h2 className="cta-title">El Doble Salto (2018)</h2>
+            <Copy><h2 className="cta-title">El Doble Salto (2018)</h2></Copy>
             <div className="cta-doble-row">
               <div className="cta-doble-item">
                 <div className="cta-doble-img">
@@ -60,7 +60,7 @@ const CTA = ({ blocks = [1, 2] }) => {
       {blocks.includes(3) && (
         <>
           <div className="container cta-block--triple">
-            <h2 className="cta-title">Un año inolvidable (2021)</h2>
+            <Copy><h2 className="cta-title">Un año inolvidable (2021)</h2></Copy>
             <div className="cta-triple-row">
               <div className="cta-triple-card">
                 <img src="/cta/cta_img_03.jpg" alt="" />
@@ -94,7 +94,7 @@ const CTA = ({ blocks = [1, 2] }) => {
       {blocks.includes(4) && (
         <>
           <div className="container cta-block--europa">
-            <h2 className="cta-title">Europa & El Mundo (2022)</h2>
+            <Copy><h2 className="cta-title">Europa & El Mundo (2022)</h2></Copy>
             <div className="cta-europa-row">
               <div className="cta-europa-card">
                 <img src="/bio/Anexo 8.webp" alt="" />
@@ -120,7 +120,7 @@ const CTA = ({ blocks = [1, 2] }) => {
       {blocks.includes(5) && (
         <>
           <div className="container cta-block--presente">
-            <h2 className="cta-title">Presente (2024)</h2>
+            <Copy><h2 className="cta-title">Presente (2024)</h2></Copy>
             <div className="cta-presente-row">
               <div className="cta-presente-card">
                 <img src="/bio/Anexo 10.jpg" alt="" />

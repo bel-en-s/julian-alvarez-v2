@@ -8,7 +8,7 @@ R.c("server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-e
 R.c("server/chunks/ssr/node_modules_react-icons_md_index_mjs_333b8024._.js")
 R.c("server/chunks/ssr/node_modules_react-icons_lib_2ebb85a8._.js")
 R.c("server/chunks/ssr/node_modules_next_dist_236b5090._.js")
-R.c("server/chunks/ssr/[root-of-the-server]__b0a57ce0._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__735059f4._.js")
 R.c("server/chunks/ssr/node_modules_next_dist_client_components_9774470f._.js")
 R.c("server/chunks/ssr/node_modules_next_dist_client_components_builtin_forbidden_45780354.js")
 R.c("server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_15817684.js")

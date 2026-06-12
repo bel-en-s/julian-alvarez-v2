@@ -3,7 +3,7 @@
   width: 100%;
   height: calc(45svh + 80svh);
   overflow-x: hidden;
-  background-color: var(--base-100);
+  background-color: var(--dark-violet);
 }
 
 .contact-form .contact-parallax-image-wrapper {
@@ -39,7 +39,7 @@
   width: 35%;
   height: 80svh;
   max-height: 900px;
-  background-color: var(--base-700);
+  background-color: var(--dark-violet);
   color: var(--base-100);
   border-radius: 0.75rem;
   z-index: 2;

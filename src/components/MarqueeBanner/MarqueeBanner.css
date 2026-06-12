@@ -9,6 +9,41 @@
   overflow: hidden;
 }
 
+.marquee-half {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.marquee-half--left {
+  left: 0;
+  /* background: #0d0a1a; */
+}
+
+.marquee-half--right {
+  right: 0;
+  /* background: #1a0d14; */
+}
+
+.marquee-btn {
+  position: absolute;
+  bottom: 4rem;
+  z-index: 25;
+}
+
+.marquee-btn--left {
+  left: 25%;
+  transform: translateX(-50%);
+}
+
+.marquee-btn--right {
+  right: 25%;
+  transform: translateX(50%);
+}
+
 
 
 .marquee-banner .marquees {

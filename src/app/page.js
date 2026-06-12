@@ -3,6 +3,8 @@ import "./home.css";
 import { useState, useEffect, useRef } from "react";
 import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
 import DotMatrix from "@/components/DotMatrix/DotMatrix";
+import BackgroundWeb from "@/components/BackgroundWeb/BackgroundWeb";
+import BrandIcon from "@/components/BrandIcon/BrandIcon";
 
 import TextBlock from "@/components/TextBlock/TextBlock";
 import PeelReveal from "@/components/PeelReveal/PeelReveal";
@@ -248,6 +250,7 @@ const updateColors = () => {
 
   return (
     <>
+      <BackgroundWeb />
       <Preloader onAnimationComplete={handlePreloaderComplete} />
 
       <section className="hero" ref={heroSectionRef}>
@@ -349,8 +352,9 @@ const updateColors = () => {
 
       <MarqueeBanner />
 
-      <TextBlock />
+     
 
+ 
       <Footer />
     
      
