@@ -6,7 +6,7 @@
   padding: 12px 28px;
   border: 1px solid var(--border-soft);
   border-radius: 8px;
-  background: transparent;
+  background: var(--dark-violet);
   cursor: pointer;
   overflow: hidden;
   isolation: isolate;
@@ -22,7 +22,7 @@
 
 .spider-btn:hover {
   border-color: var(--border-strong);
-  background: rgba(138, 117, 184, 0.08);
+  background: var(--base-300);
 }
 
 .spider-btn .spider-btn-web {

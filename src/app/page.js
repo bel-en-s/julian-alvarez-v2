@@ -3,6 +3,8 @@ import "./home.css";
 import { useState, useEffect, useRef } from "react";
 import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
 import DotMatrix from "@/components/DotMatrix/DotMatrix";
+import BackgroundWeb from "@/components/BackgroundWeb/BackgroundWeb";
+import BrandIcon from "@/components/BrandIcon/BrandIcon";
 
 import TextBlock from "@/components/TextBlock/TextBlock";
 import PeelReveal from "@/components/PeelReveal/PeelReveal";
@@ -248,6 +250,7 @@ const updateColors = () => {
 
   return (
     <>
+      <BackgroundWeb />
       <Preloader onAnimationComplete={handlePreloaderComplete} />
 
       <section className="hero" ref={heroSectionRef}>
@@ -335,13 +338,23 @@ const updateColors = () => {
           <div className="h-scroll__panel h-panel">
             <CTA blocks={[2]} />
           </div>
+          <div className="h-scroll__panel h-panel">
+            <CTA blocks={[3]} />
+          </div>
+          <div className="h-scroll__panel h-panel">
+            <CTA blocks={[4]} />
+          </div>
+          <div className="h-scroll__panel h-panel">
+            <CTA blocks={[5]} />
+          </div>
         </div>
       </div>
 
       <MarqueeBanner />
 
-      <TextBlock />
+     
 
+ 
       <Footer />
     
      

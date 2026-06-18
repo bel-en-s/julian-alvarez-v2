@@ -1,17 +1,18 @@
 import "./ContactForm.css";
 
 import { MdOutlineArrowOutward } from "react-icons/md";
+import BrandIcon from "../BrandIcon/BrandIcon";
 
 const ContactForm = ({ cardOnly }) => {
   if (cardOnly) {
     return (
       <div className="contact-form-container">
         <div className="cf-header">
-          <h4>Transmit updates, not noise.</h4>
+          <h4>Entremos en contacto</h4>
         </div>
         <div className="cf-copy">
           <p className="bodyCopy sm">
-            You’ll only hear from us when something built is worth showing.
+            Entremos en contacto
           </p>
         </div>
         <div className="cf-input">
@@ -40,11 +41,11 @@ const ContactForm = ({ cardOnly }) => {
       </div>
       <div className="contact-form-container">
         <div className="cf-header">
-          <h4>Transmit updates, not noise.</h4>
+          <h4>Entremos en contacto</h4>
         </div>
         <div className="cf-copy">
           <p className="bodyCopy sm">
-            You’ll only hear from us when something built is worth showing.
+            Entremos en contacto
           </p>
         </div>
         <div className="cf-input">

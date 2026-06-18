@@ -221,16 +221,24 @@ const MarqueeBanner = () => {
 
   return (
     <section className="marquee-banner" ref={marqueeBannerRef}>
-       <div className="banner-content">
-    <Copy type="flicker">
-      <p>[ Las dos caras ]</p>
-       <SpiderButton>Add to Cart</SpiderButton>
-    </Copy>
+      <div className="marquee-half marquee-half--left" />
+      <div className="marquee-half marquee-half--right" />
 
-    <Copy>
-      <h4>Dentro y fuera de las canchas</h4>
-    </Copy>
-  </div>
+      <div className="marquee-btn marquee-btn--left">
+        <SpiderButton>Dentro</SpiderButton>
+      </div>
+      <div className="marquee-btn marquee-btn--right">
+        <SpiderButton>Fuera</SpiderButton>
+      </div>
+
+      <div className="banner-content">
+        <Copy type="flicker">
+          <p className="bodyCopy sm">[ Las dos caras ]</p>
+        </Copy>
+        <Copy>
+          <h4>Dentro y fuera de las canchas</h4>
+        </Copy>
+      </div>
 
       <div className="marquees">
         <div className="marquee-header marquee-header-1" ref={marquee1Ref}>

@@ -10,7 +10,7 @@ const CTA = ({ blocks = [1, 2] }) => {
       {blocks.includes(1) && (
         <>
           <div className="container cta-block--default">
-            <h2 className="cta-title">Club Atlético Calchín (2016)</h2>
+            <Copy><h2 className="cta-title">Club Atlético Calchín (2016)</h2></Copy>
             <div className="cta-gallery">
               <div className="cta-gallery-img cta-gallery-img--left">
                 <img src="/bio/2.jpeg" alt="" />
@@ -30,7 +30,7 @@ const CTA = ({ blocks = [1, 2] }) => {
       {blocks.includes(2) && (
         <>
           <div className="container cta-block--doble">
-            <h2 className="cta-title">El Doble Salto (2018)</h2>
+            <Copy><h2 className="cta-title">El Doble Salto (2018)</h2></Copy>
             <div className="cta-doble-row">
               <div className="cta-doble-item">
                 <div className="cta-doble-img">
@@ -49,6 +49,84 @@ const CTA = ({ blocks = [1, 2] }) => {
                 <div className="cta-doble-text">
                   <Copy>
                     <h5>“El primer llamado para vestir la camiseta de Argentina fue un momento único… un orgullo enorme y una responsabilidad que te marca para siempre.”</h5>
+                  </Copy>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {blocks.includes(3) && (
+        <>
+          <div className="container cta-block--triple">
+            <Copy><h2 className="cta-title">Un año inolvidable (2021)</h2></Copy>
+            <div className="cta-triple-row">
+              <div className="cta-triple-card">
+                <img src="/cta/cta_img_03.jpg" alt="" />
+                <div className="cta-triple-text">
+                  <Copy>
+                    <h5>“Ganar la Copa América con Argentina fue un sueño hecho realidad. Ese grupo y ese momento quedan grabados para siempre.”</h5>
+                  </Copy>
+                </div>
+              </div>
+              <div className="cta-triple-card">
+                <img src="/bio/Anexo 10.jpg" alt="" />
+                <div className="cta-triple-text">
+                  <Copy>
+                    <h5>“Con River vivimos un año increíble, compitiendo en cada torneo y demostrando de qué estábamos hechos.”</h5>
+                  </Copy>
+                </div>
+              </div>
+              <div className="cta-triple-card">
+                <img src="/bio/Anexo 6.webp" alt="" />
+                <div className="cta-triple-text">
+                  <Copy>
+                    <h5>“El 2021 fue el año que todo cambió. Llegó la oportunidad de dar el salto a Europa y cumplir otro sueño.”</h5>
+                  </Copy>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {blocks.includes(4) && (
+        <>
+          <div className="container cta-block--europa">
+            <Copy><h2 className="cta-title">Europa & El Mundo (2022)</h2></Copy>
+            <div className="cta-europa-row">
+              <div className="cta-europa-card">
+                <img src="/bio/Anexo 8.webp" alt="" />
+                <div className="cta-europa-text">
+                  <Copy>
+                    <h5>“Desde las juveniles hasta levantar la Copa del Mundo… Es dejarlo todo por una camiseta que representa a millones.”</h5>
+                  </Copy>
+                </div>
+              </div>
+              <div className="cta-europa-card">
+                <img src="/bio/Anexo 9.jpg" alt="" />
+                <div className="cta-europa-text">
+                  <Copy>
+                    <h5>“Crecer al lado de los mejores del mundo fue un privilegio. Cada entrenamiento y cada partido fueron una enseñanza para mejorar, adaptarme y entender el fútbol de otra manera.”</h5>
+                  </Copy>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {blocks.includes(5) && (
+        <>
+          <div className="container cta-block--presente">
+            <Copy><h2 className="cta-title">Presente (2024)</h2></Copy>
+            <div className="cta-presente-row">
+              <div className="cta-presente-card">
+                <img src="/bio/Anexo 10.jpg" alt="" />
+                <div className="cta-presente-text">
+                  <Copy>
+                    <h5>“Llegar al Atlético es aceptar un desafío enorme. Acá se juega con carácter, compromiso y corazón… Estoy listo para dejarlo todo.”</h5>
                   </Copy>
                 </div>
               </div>

@@ -1,8 +1,8 @@
 /* [project]/src/components/TextBlock/TextBlock.css [app-client] (css) */
 .text-block {
   background-color: var(--ja-amethyst-900);
-  width: 100%;
-  height: 100%;
+  width: 10%;
+  height: 10%;
   min-height: 600px;
   color: var(--base-100);
   justify-content: center;
