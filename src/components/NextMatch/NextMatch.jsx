@@ -1,6 +1,7 @@
 "use client";
 import "./NextMatch.css";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { fetchNextMatch } from "@/lib/sheets";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -9,25 +10,39 @@ gsap.registerPlugin(ScrollTrigger);
 
 function getTimeLeft(kickoff) {
   const diff = new Date(kickoff).getTime() - Date.now();
-  if (diff <= 0) return { days: "00", hours: "00", minutes: "00" };
+  if (diff <= 0) return { days: "00", hours: "00", minutes: "00", seconds: "00" };
   return {
     days: String(Math.floor(diff / 86400000)).padStart(2, "0"),
     hours: String(Math.floor((diff % 86400000) / 3600000)).padStart(2, "0"),
     minutes: String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0"),
+    seconds: String(Math.floor((diff % 60000) / 1000)).padStart(2, "0"),
   };
 }
 
 const NextMatch = ({
-  kickoff = "2026-06-15T21:00:00+02:00",
-  home = "Atlético de Madrid",
-  away = "Real Madrid",
-  competition = "LaLiga",
-  extra = "Metropolitano",
+  kickoff: kickoffProp = "2026-06-15T21:00:00+02:00",
+  home: homeProp = "Atlético de Madrid",
+  away: awayProp = "Real Madrid",
+  competition: competitionProp = "LaLiga",
+  extra: extraProp = "Metropolitano",
 }) => {
-   const [minimized, setMinimized] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(kickoff));
+  const [match, setMatch] = useState({
+    kickoff: kickoffProp,
+    home: homeProp,
+    away: awayProp,
+    competition: competitionProp,
+    extra: extraProp,
+  });
+  const [minimized, setMinimized] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(match.kickoff));
   const canvasRef = useRef(null);
   const cardRef = useRef(null);
+
+  useEffect(() => {
+    fetchNextMatch().then((data) => {
+      if (data) setMatch(data);
+    });
+  }, []);
 
   useLayoutEffect(() => {
     if (window.innerWidth < 1000) setMinimized(true);
@@ -55,11 +70,11 @@ const NextMatch = ({
   }, [minimized]);
 
   useEffect(() => {
-    const tick = () => setTimeLeft(getTimeLeft(kickoff));
+    const tick = () => setTimeLeft(getTimeLeft(match.kickoff));
     tick();
-    const id = setInterval(tick, 10000);
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [kickoff]);
+  }, [match.kickoff]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -185,18 +200,23 @@ const NextMatch = ({
           <span className="n n-m">{timeLeft.minutes}</span>
           <span className="u">Min</span>
         </div>
+        <span className="sep">:</span>
+        <div className="unit">
+          <span className="n n-s">{timeLeft.seconds}</span>
+          <span className="u">Seg</span>
+        </div>
       </div>
 
       <div className="nm-extra">
           <div className="teams">
-            <span className="t home">{home}</span>
+            <span className="t home">{match.home}</span>
             <span className="vs">vs</span>
-            <span className="t away">{away}</span>
+            <span className="t away">{match.away}</span>
           </div>
           <div className="meta">
-            <span className="comp">{competition}</span>
+            <span className="comp">{match.competition}</span>
             <span className="dot">·</span>
-            <span className="extra">{extra}</span>
+            <span className="extra">{match.extra}</span>
           </div>
         </div>
     </article>
