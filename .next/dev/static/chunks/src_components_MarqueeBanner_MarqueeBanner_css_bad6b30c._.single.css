@@ -30,7 +30,7 @@
 .marquee-btn {
   z-index: 25;
   position: absolute;
-  bottom: 4rem;
+  bottom: 15rem;
 }
 
 .marquee-btn--left {

@@ -323,8 +323,8 @@ const updateColors = () => {
         </div> */}
       </section>
 
-     
-     
+      
+      
         {/* <MiHistoria /> */}
       </div>
       <div className="h-scroll" ref={hScrollRef}>

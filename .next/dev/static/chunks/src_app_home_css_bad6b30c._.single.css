@@ -377,8 +377,14 @@ html.is-h-scroll {
 }
 
 @media (max-width: 600px) {
-  .hero .hero-name--julian, .hero .hero-name--alvarez {
+  .hero .hero-name--julian {
     font-size: clamp(2rem, 20vw, 4rem);
+    line-height: 1;
+  }
+
+  .hero .hero-name--alvarez {
+    font-size: clamp(3.5rem, 30vw, 6rem);
+    line-height: 1;
   }
 }
 
@@ -410,23 +416,13 @@ html.is-h-scroll {
     text-align: center;
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr;
-    gap: .5rem;
+    gap: 0;
   }
 
-  .hero .hero-header .hero-name--julian {
+  .hero .hero-header .hero-name--julian, .hero .hero-header .hero-name--alvarez {
     text-align: center;
     justify-self: center;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-right: 0;
-  }
-
-  .hero .hero-header .hero-name--alvarez {
-    text-align: center;
-    justify-self: center;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 0;
+    margin: 0;
   }
 
   .hero .hero-header .hero-header-img {
@@ -454,32 +450,28 @@ html.is-h-scroll {
     position: relative;
   }
 
-  .scroll-track .curtain {
-    height: 100svh;
-    position: relative;
-  }
-
   .about-bg .about-video-wrapper {
     width: 85%;
     max-width: 500px;
   }
 
   .slide-title {
-    top: 50%;
+    width: 90%;
+    top: 12%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
   }
 
   .slide-title h1 {
     text-align: center;
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-size: clamp(2.5rem, 10vw, 4rem);
   }
 
   .slide-description {
     text-align: center;
     width: 75%;
     max-width: none;
-    bottom: 5%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%);
   }

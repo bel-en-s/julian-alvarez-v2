@@ -225,10 +225,10 @@ const MarqueeBanner = () => {
       <div className="marquee-half marquee-half--right" />
 
       <div className="marquee-btn marquee-btn--left">
-        <SpiderButton>Dentro</SpiderButton>
+        <SpiderButton>Ver Dentro</SpiderButton>
       </div>
       <div className="marquee-btn marquee-btn--right">
-        <SpiderButton>Fuera</SpiderButton>
+        <SpiderButton>Ver Fuera</SpiderButton>
       </div>
 
       <div className="banner-content">

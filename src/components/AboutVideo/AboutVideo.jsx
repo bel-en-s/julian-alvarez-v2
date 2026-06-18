@@ -58,11 +58,11 @@ export default function AboutVideo() {
       end: "bottom top",
       onUpdate: (self) => {
         const p = self.progress;
-        const isVisible = p > 0.15 && p < 0.85;
-        const target = isVisible ? activeVolume.current : 0;
+        const fullyVisible = p > 0 && p < 1;
+        const target = fullyVisible ? activeVolume.current : 0;
         gsap.to(video, {
           volume: target,
-          duration: 0.5,
+          duration: 0.3,
           ease: "power2.out",
           onUpdate: () => {
             if (video.volume < 0.05) setVolState("muted");

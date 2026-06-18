@@ -1,6 +1,6 @@
-:HL["/julian-alvarez-v2/_next/static/chunks/64ed8a3df0b4bccd.css","style"]
-:HL["/julian-alvarez-v2/_next/static/chunks/0758a4f01fe2d15c.css","style"]
-:HL["/julian-alvarez-v2/_next/static/chunks/31ee65fb4f8a7524.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/9a23ce422f661f01.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/7ac96e70bf1a0dff.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/9b2347d49ffab8d8.css","style"]
 :HL["/julian-alvarez-v2/_next/static/chunks/e7028919fd90e1bb.css","style"]
 :HL["/julian-alvarez-v2/_next/static/media/0c89a48fa5027cee-s.p.4564287c.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/julian-alvarez-v2/_next/static/media/36363bfb06833f56-s.p.d8302362.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -12,7 +12,7 @@
 :HL["/julian-alvarez-v2/_next/static/media/bdef460321aa07a0-s.p.c4530df2.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/julian-alvarez-v2/_next/static/media/f9fc8f485db6b190-s.p.01f2a084.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/julian-alvarez-v2/_next/static/chunks/f92e12523b238174.css","style"]
-:HL["/julian-alvarez-v2/_next/static/chunks/94f97134cc696266.css","style"]
+:HL["/julian-alvarez-v2/_next/static/chunks/f49a526a2fe25bde.css","style"]
 :HL["/julian-alvarez-v2/_next/static/chunks/127d21979ced9bb6.css","style"]
-:HL["/julian-alvarez-v2/_next/static/chunks/5483e7dc7f4a0d45.css","style"]
-0:{"buildId":"w0EKmDbFwjWGozZIX60Ls","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+:HL["/julian-alvarez-v2/_next/static/chunks/699f3f80d65ca73e.css","style"]
+0:{"buildId":"zuGQcUtCDe-CrhJ0eOp5W","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}

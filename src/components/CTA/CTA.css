@@ -290,15 +290,18 @@
 .cta-block--triple .cta-triple-row {
   display: flex;
   gap: 2rem;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   width: 100%;
   max-width: 1200px;
+  min-height: 0;
 }
 
 .cta-block--triple .cta-triple-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex: 1;
   max-width: 350px;
   gap: 1rem;
@@ -307,7 +310,7 @@
 .cta-block--triple .cta-triple-card img {
   width: 100%;
   aspect-ratio: 4/5;
-  max-height: 50vh;
+  max-height: 45vh;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -317,6 +320,7 @@
 
 .cta-block--triple .cta-triple-text {
   text-align: center;
+  width: 100%;
 }
 
 .cta-block--triple .cta-triple-text h5 {

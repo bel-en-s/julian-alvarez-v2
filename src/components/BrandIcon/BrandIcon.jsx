@@ -5,7 +5,29 @@ const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const BrandIcon = ({ width, height, style, showSoundButton, ...props }) => {
   const videoRef = useRef(null);
+  const wrapperRef = useRef(null);
   const [muted, setMuted] = useState(true);
+  const userMuted = useRef(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const wrapper = wrapperRef.current;
+    if (!video || !wrapper) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.muted = userMuted.current;
+        } else {
+          video.muted = true;
+        }
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(wrapper);
+    return () => observer.disconnect();
+  }, []);
 
   const toggleSound = useCallback((e) => {
     e.stopPropagation();
@@ -13,24 +35,27 @@ const BrandIcon = ({ width, height, style, showSoundButton, ...props }) => {
     if (!video) return;
     if (video.muted) {
       video.muted = false;
+      userMuted.current = false;
       video.play();
       setMuted(false);
     } else {
       video.muted = true;
+      userMuted.current = true;
       setMuted(true);
     }
   }, []);
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: width || "100%",
-        height: height || "100%",
-        ...style,
-      }}
-      {...props}
-    >
+      <div
+        ref={wrapperRef}
+        style={{
+          position: "relative",
+          width: width || "100%",
+          height: height || "100%",
+          ...style,
+        }}
+        {...props}
+      >
       <div
         style={{
           width: "100%",

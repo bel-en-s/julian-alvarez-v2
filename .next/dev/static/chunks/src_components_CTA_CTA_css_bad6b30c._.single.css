@@ -274,16 +274,19 @@
 
 .cta-block--triple .cta-triple-row {
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   gap: 2rem;
   width: 100%;
   max-width: 1200px;
+  min-height: 0;
   display: flex;
 }
 
 .cta-block--triple .cta-triple-card {
   flex-direction: column;
   flex: 1;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
   max-width: 350px;
   display: flex;
@@ -296,12 +299,13 @@
   border: 1px solid #ffffff26;
   border-radius: .75rem;
   width: 100%;
-  max-height: 50vh;
+  max-height: 45vh;
   display: block;
 }
 
 .cta-block--triple .cta-triple-text {
   text-align: center;
+  width: 100%;
 }
 
 .cta-block--triple .cta-triple-text h5 {
