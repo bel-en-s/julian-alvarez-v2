@@ -7,8 +7,6 @@ import "./AboutVideo.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 const LOW_VOL = 0.15;
 const FULL_VOL = 1.0;
 
@@ -80,7 +78,7 @@ export default function AboutVideo() {
     <div className="about-video-wrapper" ref={wrapperRef}>
       <video
         ref={videoRef}
-        src={`${bp}/home/julian-chiquito.mp4`}
+        src="/home/julian-chiquito.mp4"
         autoPlay
         playsInline
         muted

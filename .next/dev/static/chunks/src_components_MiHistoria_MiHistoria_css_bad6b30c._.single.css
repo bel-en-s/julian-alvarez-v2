@@ -1,5 +1,6 @@
 /* [project]/src/components/MiHistoria/MiHistoria.css [app-client] (css) */
 .behind-the-lock {
+  isolation: isolate;
   background: var(--base-100);
   width: 100%;
   height: 100svh;

@@ -1,8 +1,10 @@
 .cta {
   position: relative;
+  z-index: 3;
   width: 100%;
   height: 100%;
   padding: 4rem 0;
+  isolation: isolate;
 }
 
 .cta-header h5 {
@@ -80,42 +82,7 @@
   pointer-events: none;
 }
 
-@media (max-width: 1000px) {
-  .cta-block--default .cta-header {
-    width: 90%;
-  }
 
-  .cta-block--default .cta-gallery {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .cta-block--default .cta-gallery-img {
-    max-width: 80%;
-    max-height: 40vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--default .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--default .cta-gallery-img {
-    max-width: 95%;
-    max-height: 35vh;
-  }
-
-  .cta-block--default .cta-header {
-    width: 95%;
-    padding: 0 0.5rem;
-  }
-
-  .cta-block--default .cta-header h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
-}
 
 /* ── Block 2: El Doble Salto (photo + text side by side) ── */
 
@@ -213,54 +180,7 @@
   font-size: clamp(0.85rem, 1.2vw, 1.1rem);
 }
 
-@media (max-width: 1000px) {
-  .cta-block--doble .cta-doble-row {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-  }
 
-  .cta-block--doble .cta-doble-item {
-    max-width: 80%;
-    gap: 1rem;
-  }
-
-  .cta-block--doble .cta-doble-img {
-    max-height: 40vh;
-  }
-
-  .cta-block--doble .cta-doble-item:first-child .cta-doble-text,
-  .cta-block--doble .cta-doble-item:last-child .cta-doble-text {
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--doble .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--doble .cta-doble-item {
-    flex-direction: column;
-    max-width: 95%;
-    gap: 0.75rem;
-  }
-
-  .cta-block--doble .cta-doble-item:last-child {
-    flex-direction: column;
-  }
-
-  .cta-block--doble .cta-doble-img {
-    flex: none;
-    width: 100%;
-    max-height: 35vh;
-  }
-
-  .cta-block--doble .cta-doble-text h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
-}
 
 /* ── Block 3: Un año inolvidable (2021) ── */
 
@@ -328,32 +248,7 @@
   font-size: clamp(0.85rem, 1.2vw, 1.1rem);
 }
 
-@media (max-width: 1000px) {
-  .cta-block--triple .cta-triple-row {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-  }
 
-  .cta-block--triple .cta-triple-card {
-    max-width: 80%;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--triple .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--triple .cta-triple-card {
-    max-width: 95%;
-  }
-
-  .cta-block--triple .cta-triple-text h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
-}
 
 /* ── Block 4: Europa & El Mundo (2022) ── */
 
@@ -386,30 +281,33 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
 }
 
-.cta-block--europa .cta-europa-card {
-  position: relative;
+.cta-block--europa .cta-europa-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
   flex: 1;
+}
+
+.cta-block--europa .cta-europa-item:first-child {
+  flex-direction: row-reverse;
+}
+
+.cta-block--europa .cta-europa-img {
+  flex: 3;
   max-width: 400px;
   max-height: 50vh;
   aspect-ratio: 4/5;
   border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.15);
+  position: relative;
 }
 
-.cta-block--europa .cta-europa-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  z-index: 1;
-  border-radius: 0.75rem;
-}
-
-.cta-block--europa .cta-europa-card img {
+.cta-block--europa .cta-europa-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -419,14 +317,19 @@
 }
 
 .cta-block--europa .cta-europa-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 85%;
-  text-align: center;
-  z-index: 2;
+  flex: 1;
+  position: static;
+  transform: none;
+  width: auto;
   pointer-events: none;
+}
+
+.cta-block--europa .cta-europa-item:first-child .cta-europa-text {
+  text-align: right;
+}
+
+.cta-block--europa .cta-europa-item:last-child .cta-europa-text {
+  text-align: left;
 }
 
 .cta-block--europa .cta-europa-text h5 {
@@ -434,34 +337,7 @@
   font-size: clamp(0.85rem, 1.2vw, 1.1rem);
 }
 
-@media (max-width: 1000px) {
-  .cta-block--europa .cta-europa-row {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-  }
 
-  .cta-block--europa .cta-europa-card {
-    max-width: 80%;
-    max-height: 40vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--europa .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--europa .cta-europa-card {
-    max-width: 95%;
-    max-height: 35vh;
-  }
-
-  .cta-block--europa .cta-europa-text h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
-}
 
 /* ── Block 5: Presente (2024) ── */
 
@@ -542,34 +418,7 @@
   font-size: clamp(0.85rem, 1.2vw, 1.1rem);
 }
 
-@media (max-width: 1000px) {
-  .cta-block--presente .cta-presente-row {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-  }
 
-  .cta-block--presente .cta-presente-card {
-    max-width: 80%;
-    max-height: 40vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--presente .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--presente .cta-presente-card {
-    max-width: 95%;
-    max-height: 35vh;
-  }
-
-  .cta-block--presente .cta-presente-text h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
-}
 
 .img-focus-4 {
   object-position: 0% 180%;

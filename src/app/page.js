@@ -24,8 +24,6 @@ import Footer from "@/components/Footer/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const bp = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 export default function Index() {
   const [loaderAnimating, setLoaderAnimating] = useState(isInitialLoad);
   const heroImgRef = useRef(null);
@@ -161,7 +159,14 @@ const updateColors = () => {
         });
       };
       requestAnimationFrame(setup);
+    } else if (hContent) {
+      gsap.set(hContent, { x: 0 });
+      document.documentElement.style.setProperty("--h-progress", 0);
     }
+
+    const refreshOnResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", refreshOnResize);
+    return () => window.removeEventListener("resize", refreshOnResize);
 
   });
 
@@ -268,7 +273,7 @@ const updateColors = () => {
             <Copy animateOnScroll={false} delay={isInitialLoad ? 5.5 : 0.65}>
               <span className="hero-name hero-name--julian">Julián</span>
               <span className="hero-header-img" ref={heroImgRef}>
-                <img src={`${bp}/home/hero.png`} alt="" />
+                <img src="/home/hero.png" alt="" />
               </span>
               <span className="hero-name hero-name--alvarez" ref={alvarezContainerRef}>Alvarez</span>
             </Copy>
@@ -344,9 +349,9 @@ const updateColors = () => {
           <div className="h-scroll__panel h-panel">
             <CTA blocks={[4]} />
           </div>
-          <div className="h-scroll__panel h-panel">
+          {/* <div className="h-scroll__panel h-panel">
             <CTA blocks={[5]} />
-          </div>
+          </div> */}
         </div>
       </div>
 

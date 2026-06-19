@@ -349,7 +349,7 @@
   }
 
   .next-match.is-min {
-    width: 150px;
+    width: 160px;
     left: var(--page-pad);
     right: var(--page-pad);
     padding: 8px 12px 8px 16px;

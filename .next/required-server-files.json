@@ -1,9 +1,7 @@
 {
   "version": 1,
   "config": {
-    "env": {
-      "NEXT_PUBLIC_BASE_PATH": "/julian-alvarez-v2"
-    },
+    "env": {},
     "webpack": null,
     "typescript": {
       "ignoreBuildErrors": false
@@ -11,7 +9,7 @@
     "typedRoutes": false,
     "distDir": ".next",
     "cleanDistDir": true,
-    "assetPrefix": "/julian-alvarez-v2",
+    "assetPrefix": "",
     "cacheMaxMemorySize": 52428800,
     "configOrigin": "next.config.mjs",
     "useFileSystemPublicRoutes": true,
@@ -44,7 +42,7 @@
         256,
         384
       ],
-      "path": "/julian-alvarez-v2/_next/image",
+      "path": "/_next/image/",
       "loader": "default",
       "loaderFile": "",
       "domains": [],
@@ -77,9 +75,9 @@
       "maxInactiveAge": 60000,
       "pagesBufferLength": 5
     },
-    "basePath": "/julian-alvarez-v2",
+    "basePath": "",
     "sassOptions": {},
-    "trailingSlash": false,
+    "trailingSlash": true,
     "i18n": null,
     "productionBrowserSourceMaps": false,
     "excludeDefaultMomentLocales": true,

@@ -200,9 +200,16 @@ const Menu = () => {
                 <circle className="dangle-tip t3" cx="446" cy="400" r="1.2" />
               </g>
             </svg>
-
+ <Link
+  href="/"
+  className="ja-menu-arana__item i0"
+  onClick={handleLinkClick}
+>
+  <span className="ja-menu-arana__dot"></span>
+  INICIO
+</Link>
             <Link
-              href="/"
+              href="/dentro-de-las-canchas"
               className="ja-menu-arana__item i1"
               onClick={handleLinkClick}
             >

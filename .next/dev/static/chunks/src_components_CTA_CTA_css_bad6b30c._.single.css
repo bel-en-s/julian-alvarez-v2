@@ -1,5 +1,7 @@
 /* [project]/src/components/CTA/CTA.css [app-client] (css) */
 .cta {
+  z-index: 3;
+  isolation: isolate;
   width: 100%;
   height: 100%;
   padding: 4rem 0;
@@ -77,43 +79,6 @@
   top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-@media (max-width: 1000px) {
-  .cta-block--default .cta-header {
-    width: 90%;
-  }
-
-  .cta-block--default .cta-gallery {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .cta-block--default .cta-gallery-img {
-    max-width: 80%;
-    max-height: 40vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--default .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--default .cta-gallery-img {
-    max-width: 95%;
-    max-height: 35vh;
-  }
-
-  .cta-block--default .cta-header {
-    width: 95%;
-    padding: 0 .5rem;
-  }
-
-  .cta-block--default .cta-header h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
 }
 
 .cta .cta-block--doble {
@@ -201,54 +166,6 @@
   line-height: 1.2;
 }
 
-@media (max-width: 1000px) {
-  .cta-block--doble .cta-doble-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .cta-block--doble .cta-doble-item {
-    gap: 1rem;
-    max-width: 80%;
-  }
-
-  .cta-block--doble .cta-doble-img {
-    max-height: 40vh;
-  }
-
-  .cta-block--doble .cta-doble-item:first-child .cta-doble-text, .cta-block--doble .cta-doble-item:last-child .cta-doble-text {
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--doble .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--doble .cta-doble-item {
-    flex-direction: column;
-    gap: .75rem;
-    max-width: 95%;
-  }
-
-  .cta-block--doble .cta-doble-item:last-child {
-    flex-direction: column;
-  }
-
-  .cta-block--doble .cta-doble-img {
-    flex: none;
-    width: 100%;
-    max-height: 35vh;
-  }
-
-  .cta-block--doble .cta-doble-text h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
-}
-
 .cta .cta-block--triple {
   flex-direction: column;
   justify-content: center;
@@ -313,33 +230,6 @@
   line-height: 1.2;
 }
 
-@media (max-width: 1000px) {
-  .cta-block--triple .cta-triple-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .cta-block--triple .cta-triple-card {
-    max-width: 80%;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--triple .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--triple .cta-triple-card {
-    max-width: 95%;
-  }
-
-  .cta-block--triple .cta-triple-text h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
-}
-
 .cta .cta-block--europa {
   flex-direction: column;
   justify-content: center;
@@ -368,31 +258,34 @@
   align-items: center;
   gap: 2rem;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   display: flex;
 }
 
-.cta-block--europa .cta-europa-card {
+.cta-block--europa .cta-europa-item {
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  gap: 1rem;
+  display: flex;
+}
+
+.cta-block--europa .cta-europa-item:first-child {
+  flex-direction: row-reverse;
+}
+
+.cta-block--europa .cta-europa-img {
   aspect-ratio: 4 / 5;
   border: 1px solid #ffffff26;
   border-radius: .75rem;
-  flex: 1;
+  flex: 3;
   max-width: 400px;
   max-height: 50vh;
   position: relative;
   overflow: hidden;
 }
 
-.cta-block--europa .cta-europa-card:after {
-  content: "";
-  z-index: 1;
-  background: #00000059;
-  border-radius: .75rem;
-  position: absolute;
-  inset: 0;
-}
-
-.cta-block--europa .cta-europa-card img {
+.cta-block--europa .cta-europa-img img {
   object-fit: cover;
   object-position: center;
   border-radius: .75rem;
@@ -402,48 +295,24 @@
 }
 
 .cta-block--europa .cta-europa-text {
-  text-align: center;
-  z-index: 2;
   pointer-events: none;
-  width: 85%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  flex: 1;
+  width: auto;
+  position: static;
+  transform: none;
+}
+
+.cta-block--europa .cta-europa-item:first-child .cta-europa-text {
+  text-align: right;
+}
+
+.cta-block--europa .cta-europa-item:last-child .cta-europa-text {
+  text-align: left;
 }
 
 .cta-block--europa .cta-europa-text h5 {
   font-size: clamp(.85rem, 1.2vw, 1.1rem);
   line-height: 1.2;
-}
-
-@media (max-width: 1000px) {
-  .cta-block--europa .cta-europa-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .cta-block--europa .cta-europa-card {
-    max-width: 80%;
-    max-height: 40vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--europa .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--europa .cta-europa-card {
-    max-width: 95%;
-    max-height: 35vh;
-  }
-
-  .cta-block--europa .cta-europa-text h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
 }
 
 .cta .cta-block--presente {
@@ -521,35 +390,6 @@
 .cta-block--presente .cta-presente-text h5 {
   font-size: clamp(.85rem, 1.2vw, 1.1rem);
   line-height: 1.2;
-}
-
-@media (max-width: 1000px) {
-  .cta-block--presente .cta-presente-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .cta-block--presente .cta-presente-card {
-    max-width: 80%;
-    max-height: 40vh;
-  }
-}
-
-@media (max-width: 480px) {
-  .cta-block--presente .cta-title {
-    font-size: 1.5rem;
-    top: 1rem;
-  }
-
-  .cta-block--presente .cta-presente-card {
-    max-width: 95%;
-    max-height: 35vh;
-  }
-
-  .cta-block--presente .cta-presente-text h5 {
-    font-size: clamp(1rem, 4vw, 1.25rem);
-  }
 }
 
 .img-focus-4 {

@@ -124,6 +124,12 @@ body {
   overflow-x: hidden;
 }
 
+.page {
+  isolation: isolate;
+  z-index: 1;
+  position: relative;
+}
+
 img, svg {
   object-fit: cover;
   width: 100%;
@@ -1064,6 +1070,11 @@ button.secondary {
   .ja-menu-arana__item.i4 {
     top: 60% !important;
   }
+}
+
+.ja-menu-arana__item.i0 {
+  top: 160px;
+  left: 690px;
 }
 
 /* [project]/src/components/Footer/Footer.css [app-client] (css) */

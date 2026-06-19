@@ -96,16 +96,20 @@ const CTA = ({ blocks = [1, 2] }) => {
           <div className="container cta-block--europa">
             <Copy><h2 className="cta-title">Europa & El Mundo (2022)</h2></Copy>
             <div className="cta-europa-row">
-              <div className="cta-europa-card">
-                <img src="/bio/Anexo 8.webp" alt="" />
+              <div className="cta-europa-item">
+                <div className="cta-europa-img">
+                  <img src="/bio/Anexo 8.webp" alt="" />
+                </div>
                 <div className="cta-europa-text">
                   <Copy>
                     <h5>“Desde las juveniles hasta levantar la Copa del Mundo… Es dejarlo todo por una camiseta que representa a millones.”</h5>
                   </Copy>
                 </div>
               </div>
-              <div className="cta-europa-card">
-                <img src="/bio/Anexo 9.jpg" alt="" />
+              <div className="cta-europa-item">
+                <div className="cta-europa-img">
+                  <img src="/bio/Anexo 9.jpg" alt="" />
+                </div>
                 <div className="cta-europa-text">
                   <Copy>
                     <h5>“Crecer al lado de los mejores del mundo fue un privilegio. Cada entrenamiento y cada partido fueron una enseñanza para mejorar, adaptarme y entender el fútbol de otra manera.”</h5>
