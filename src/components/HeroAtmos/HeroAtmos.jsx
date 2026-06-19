@@ -84,6 +84,8 @@ export default function HeroAtmos() {
     return () => {
       window.removeEventListener("mousemove", onMove);
       if (raf) cancelAnimationFrame(raf);
+      document.documentElement.style.removeProperty("--mx");
+      document.documentElement.style.removeProperty("--my");
     };
   }, []);
 

@@ -24,6 +24,7 @@
 }
 
 .marquee-half--right {
+  background: linear-gradient(#edf1e8 0%, #382e4a 100%);
   right: 0;
 }
 
@@ -146,6 +147,17 @@
   .marquee-banner .banner .banner-img {
     top: 5rem;
   }
+
+  .marquee-btn {
+    z-index: 25;
+    position: absolute;
+    bottom: 3rem;
+  }
+
+  .marquee-banner .banner {
+    max-height: 30rem;
+    margin-top: 10vh;
+  }
 }
 
 @media (min-width: 2000px) {
@@ -153,8 +165,13 @@
     font-size: 8vw;
   }
 
-  .marquee-banner .marquee-banner {
+  .marquee-banner {
     height: 80svh;
+  }
+
+  .marquee-banner .banner {
+    max-height: 30rem;
+    margin-top: 10vh;
   }
 }
 

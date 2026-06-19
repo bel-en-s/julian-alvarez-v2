@@ -117,7 +117,7 @@ const PeelReveal = () => {
       if (timer) {
         clearTimeout(timer);
       }
-      ctx.revert();
+      try { ctx.revert(); } catch (_) {}
     };
   }, []);
 

@@ -27,6 +27,8 @@ export default function Touchpoint() {
     });
   });
 
+  const stRef = useRef(null);
+
   useEffect(() => {
     const container = calloutRef.current;
     if (!container) return;
@@ -34,7 +36,7 @@ export default function Touchpoint() {
     const timer = setTimeout(() => {
       const image = container.querySelector(".contact-callout-img");
 
-      const st = ScrollTrigger.create({
+      stRef.current = ScrollTrigger.create({
         trigger: container,
         start: "top bottom",
         end: "bottom top",
@@ -48,14 +50,14 @@ export default function Touchpoint() {
           });
         },
       });
-
-      return () => {
-        st.kill();
-      };
     }, 500);
 
     return () => {
       clearTimeout(timer);
+      if (stRef.current) {
+        stRef.current.kill();
+        stRef.current = null;
+      }
     };
   }, []);
 

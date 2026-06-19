@@ -63,26 +63,29 @@ const CTA = ({ blocks = [1, 2] }) => {
             <Copy><h2 className="cta-title">Un año inolvidable (2021)</h2></Copy>
             <div className="cta-triple-row">
               <div className="cta-triple-card">
-                <img src="/cta/cta_img_03.jpg" alt="" />
+                <img src="/cta/cta_img_05.jpg" alt="" />
                 <div className="cta-triple-text">
                   <Copy>
-                    <h5>“Ganar la Copa América con Argentina fue un sueño hecho realidad. Ese grupo y ese momento quedan grabados para siempre.”</h5>
+
+
+
+                    <h5>Máximo goleador de la Primera División. </h5>
                   </Copy>
                 </div>
               </div>
               <div className="cta-triple-card">
-                <img src="/bio/Anexo 10.jpg" alt="" />
+                <img src="/bio/Anexo 6.jpg" alt="" />
                 <div className="cta-triple-text">
                   <Copy>
-                    <h5>“Con River vivimos un año increíble, compitiendo en cada torneo y demostrando de qué estábamos hechos.”</h5>
+                    <h5>Mejor Jugador de América.</h5>
                   </Copy>
                 </div>
               </div>
               <div className="cta-triple-card">
-                <img src="/bio/Anexo 6.webp" alt="" />
+                <img src="/bio/Anexo 7.webp" alt="" />
                 <div className="cta-triple-text">
                   <Copy>
-                    <h5>“El 2021 fue el año que todo cambió. Llegó la oportunidad de dar el salto a Europa y cumplir otro sueño.”</h5>
+                    <h5>La noche de los seis goles. </h5>
                   </Copy>
                 </div>
               </div>

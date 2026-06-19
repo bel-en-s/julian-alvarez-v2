@@ -294,7 +294,7 @@ button.secondary {
 }
 
 .transition-block {
-  background-color: var(--base-500);
+  background-color: var(--ja-amethyst-900);
   transform-origin: 0;
   position: absolute;
   top: 0;

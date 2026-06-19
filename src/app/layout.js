@@ -40,7 +40,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${koulen.variable} ${hostGrotesk.variable} ${dmMono.variable} ${spaceGrotesk.variable}`}
       >

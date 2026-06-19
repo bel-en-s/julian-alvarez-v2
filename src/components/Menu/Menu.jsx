@@ -153,7 +153,7 @@ const Menu = () => {
   return (
     <nav className="menu" ref={menuRef}>
       <div className={`menu-header${isOpen ? " is-open" : ""}`} onClick={toggleMenu}>
-        <img className="menu-logo" src="./logo.png" alt="Julian Alvarez" />
+        <img className="menu-logo" src="/logo.png" alt="Julian Alvarez" />
         <button className="menu-toggle" aria-label="Toggle menu" onClick={(e) => { e.stopPropagation(); toggleMenu(); }}>
           <div className={`menu-hamburger-icon${isOpen ? " open" : ""}`}>
             <span className="menu-item"></span>

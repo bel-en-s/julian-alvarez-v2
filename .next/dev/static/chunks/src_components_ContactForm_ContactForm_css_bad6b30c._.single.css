@@ -65,7 +65,7 @@
 }
 
 .contact-form .cf-input input {
-  background-color: var(--base-600);
+  background-color: var(--base-100);
   text-transform: uppercase;
   width: 100%;
   color: var(--base-100);
@@ -127,6 +127,10 @@
 
   .contact-form .cf-footer .cf-footer-copy p {
     width: 75%;
+  }
+
+  .contact-form .contact-parallax-image-wrapper img {
+    object-position: center;
   }
 
   .contact-form .contact-form-container {

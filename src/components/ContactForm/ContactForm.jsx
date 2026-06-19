@@ -37,7 +37,7 @@ const ContactForm = ({ cardOnly }) => {
     <section className="contact-form">
       <div className="contact-parallax-image-wrapper">
         {/* <h1>Nrmlss</h1> */}
-        <img src="contact-form/gol.jpg" alt="" />
+        <img src="/contact-form/gol.jpg" alt="" />
       </div>
       <div className="contact-form-container">
         <div className="cf-header">
@@ -45,7 +45,7 @@ const ContactForm = ({ cardOnly }) => {
         </div>
         <div className="cf-copy">
           <p className="bodyCopy sm">
-            Entremos en contacto
+           BUISNESS INQUIRIES
           </p>
         </div>
         <div className="cf-input">
@@ -58,7 +58,7 @@ const ContactForm = ({ cardOnly }) => {
           <div className="cf-divider"></div>
           <div className="cf-footer-copy">
             <p className="bodyCopy sm">
-              No marketing cycles. Just rare, coded dispatches.
+              «Diseñado por Ulah Marketing · 2026».
             </p>
           </div>
         </div>

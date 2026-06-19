@@ -1,6 +1,6 @@
 "use client";
 import "./Copy.css";
-import React, { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -44,6 +44,7 @@ export default function Copy({
 
       const initializeSplitText = async () => {
         await waitForFonts();
+        if (!containerRef.current) return;
 
         splitRefs.current = [];
         elementRefs.current = [];
@@ -146,19 +147,12 @@ export default function Copy({
       initializeSplitText();
 
       return () => {
-        splitRefs.current.forEach((split) => {
-          if (split) {
-            split.revert();
-          }
-        });
+        splitRefs.current = [];
+        elementRefs.current = [];
       };
     },
     { scope: containerRef, dependencies: [animateOnScroll, delay, type] }
   );
-
-  if (React.Children.count(children) === 1) {
-    return React.cloneElement(children, { ref: containerRef });
-  }
 
   return (
     <div ref={containerRef} data-copy-wrapper="true">

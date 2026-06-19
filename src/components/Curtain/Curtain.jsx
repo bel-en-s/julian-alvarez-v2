@@ -43,14 +43,12 @@ export default function Curtain() {
       trigger: section,
       start: "top top",
       end: `+=${window.innerHeight * 3}`,
-      pin: true,
-      pinSpacing: true,
       scrub: true,
       invalidateOnRefresh: true,
       refreshPriority: 10,
       onUpdate: (self) => {
         updateCurtain(self.progress);
-        ballTl.progress(self.progress);
+        try { ballTl.progress(self.progress); } catch (_) {}
       },
     });
 

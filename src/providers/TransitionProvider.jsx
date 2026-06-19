@@ -9,12 +9,15 @@ const BLOCK_COUNT = 10;
 export default function TransitionProvider({ children }) {
   const transitionGridRef = useRef(null);
   const blocksRef = useRef([]);
+  const isTransitioning = useRef(false);
 
   const createTransitionGrid = () => {
-    if (!transitionGridRef.current) return;
+    if (isTransitioning.current || !transitionGridRef.current) return;
 
     const container = transitionGridRef.current;
-    container.innerHTML = "";
+    blocksRef.current.forEach((block) => {
+      if (block.parentNode === container) container.removeChild(block);
+    });
     blocksRef.current = [];
 
     const blockWidth = window.innerWidth / BLOCK_COUNT;
@@ -44,16 +47,23 @@ export default function TransitionProvider({ children }) {
   return (
     <TransitionRouter
       auto
-      leave={(next) => {
+      leave={(next, pathname) => {
         gsap.set(blocksRef.current, { scaleX: 0, transformOrigin: "left" });
         const tween = gsap.to(blocksRef.current, {
           scaleX: 1,
           duration: 0.5,
           ease: "power3.out",
           stagger: { amount: 0.3, from: "start" },
-          onComplete: next,
+          onComplete: () => {
+            isTransitioning.current = false;
+            next();
+          },
         });
-        return () => tween.kill();
+        isTransitioning.current = true;
+        return () => {
+          tween.kill();
+          isTransitioning.current = false;
+        };
       }}
       enter={(next) => {
         gsap.set(blocksRef.current, { scaleX: 1, transformOrigin: "right" });
@@ -63,9 +73,16 @@ export default function TransitionProvider({ children }) {
           delay: 0.5,
           ease: "power3.out",
           stagger: { amount: 0.3, from: "start" },
-          onComplete: next,
+          onComplete: () => {
+            isTransitioning.current = false;
+            next();
+          },
         });
-        return () => tween.kill();
+        isTransitioning.current = true;
+        return () => {
+          tween.kill();
+          isTransitioning.current = false;
+        };
       }}
     >
       <div ref={transitionGridRef} className="transition-grid" />

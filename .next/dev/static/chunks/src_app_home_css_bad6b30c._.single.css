@@ -379,13 +379,18 @@ html.is-h-scroll {
 }
 
 @media (max-width: 600px) {
+  .hero .hero-name--julian .line, .hero .hero-name--alvarez .line {
+    position: static !important;
+    transform: translateY(0%) !important;
+  }
+
   .hero .hero-name--julian {
     font-size: clamp(2rem, 20vw, 4rem);
     line-height: 1;
   }
 
   .hero .hero-name--alvarez {
-    font-size: clamp(3.5rem, 30vw, 6rem);
+    font-size: clamp(4.5rem, 38vw, 8rem);
     line-height: 1;
   }
 }
@@ -563,10 +568,17 @@ html.is-h-scroll {
     gap: 0;
   }
 
-  .hero .hero-header .hero-name--julian, .hero .hero-header .hero-name--alvarez {
+  .hero .hero-header .hero-name--julian {
     text-align: center;
     justify-self: center;
     margin: 0;
+  }
+
+  .hero .hero-header .hero-name--alvarez {
+    text-align: center;
+    justify-self: center;
+    margin: 0;
+    font-size: clamp(4rem, 20vw, 15rem);
   }
 
   .hero .hero-header .hero-header-img {

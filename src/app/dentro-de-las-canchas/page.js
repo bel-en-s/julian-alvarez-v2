@@ -73,7 +73,7 @@ export default function DentroDeLasCanchas() {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => { try { ctx.revert(); } catch (_) {} };
   }, []);
 
   return (

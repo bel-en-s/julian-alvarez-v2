@@ -71,7 +71,7 @@
   border: 1.5px dashed rgba(255, 255, 255, 0.15);
   border-radius: 0.5rem;
   outline: none;
-  background-color: var(--base-600);
+  background-color: var(--base-100);
   padding: 1rem;
   text-transform: uppercase;
   color: var(--base-100);
@@ -130,6 +130,10 @@
 
   .contact-form .cf-footer .cf-footer-copy p {
     width: 75%;
+  }
+
+  .contact-form .contact-parallax-image-wrapper img {
+    object-position: center;
   }
 
   .contact-form .contact-form-container {

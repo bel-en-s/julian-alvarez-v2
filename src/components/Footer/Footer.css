@@ -1,17 +1,8 @@
 footer {
   position: relative;
   width: 100%;
-  height: 50%;
   background-color: var(--base-100);
   margin-top: -45svh;
-}
-
-footer .container {
- height: 50vh;
-}
-
-footer p.bodyCopy {
-  font-size: 0.95rem;
 }
 
 footer .container {
@@ -19,6 +10,18 @@ footer .container {
   flex-direction: column;
   gap: 10rem;
   padding: 3rem;
+  height: 50vh;
+}
+
+footer a,
+footer p {
+  font-family: var(--font-host-grotesk), sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.3;
+  letter-spacing: -0.01rem;
+  text-decoration: none;
+  color: var(--base-700);
 }
 
 footer .footer-row:nth-child(1) {
@@ -36,6 +39,10 @@ footer .footer-row:nth-child(1) .footer-col {
 
 footer .footer-row:nth-child(1) .footer-col .footer-col-header p {
   color: var(--base-500);
+  font-family: var(--font-host-grotesk), sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.01rem;
 }
 
 footer .footer-row:nth-child(1) .footer-col .footer-col-links {
@@ -44,22 +51,14 @@ footer .footer-row:nth-child(1) .footer-col .footer-col-links {
   gap: 1rem;
 }
 
-footer .footer-row:nth-child(2) {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+footer .footer-col-links a,
+footer .footer-col-links p {
+  font-size: clamp(0.85rem, 0.7vw, 1rem);
+  transition: opacity 0.2s;
 }
 
-footer .footer-row:nth-child(2) .footer-copyright {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-footer .footer-row:nth-child(2) .footer-copyright p:nth-child(2) {
-  margin-bottom: 1.5rem;
-  color: var(--base-500);
-  line-height: 1.25;
+footer .footer-col-links a:hover {
+  opacity: 0.6;
 }
 
 @media (max-width: 1000px) {
@@ -81,12 +80,6 @@ footer .footer-row:nth-child(2) .footer-copyright p:nth-child(2) {
   footer .footer-row:first-child .footer-col .footer-col-links {
     gap: 0.5rem;
   }
-
-  footer .footer-row:nth-child(2) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -97,15 +90,5 @@ footer .footer-row:nth-child(2) .footer-copyright p:nth-child(2) {
 
   footer .footer-row:first-child {
     gap: 2.5rem;
-  }
-
-  footer .footer-row:nth-child(2) .footer-copyright h5 {
-    font-size: clamp(1.5rem, 6vw, 2rem);
-  }
-}
-
-@media (min-width: 2000px) {
-  footer {
-    margin-top: -40svh;
   }
 }

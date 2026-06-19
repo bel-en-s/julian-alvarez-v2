@@ -324,7 +324,7 @@ button.secondary {
 .transition-block {
   position: absolute;
   top: 0;
-  background-color: var(--base-500);
+  background-color: var(--ja-amethyst-900);
   transform-origin: left;
 }
 

@@ -302,22 +302,27 @@
     top: 0;
   }
 
+  .ja-menu-arana__item.i0,
   .ja-menu-arana__item.i1,
   .ja-menu-arana__item.i2,
   .ja-menu-arana__item.i4 {
     left: 50% !important;
   }
 
+  .ja-menu-arana__item.i0 {
+    top: 18% !important;
+  }
+
   .ja-menu-arana__item.i1 {
-    top: 25% !important;
+    top: 33% !important;
   }
 
   .ja-menu-arana__item.i2 {
-    top: 45% !important;
+    top: 48% !important;
   }
 
   .ja-menu-arana__item.i4 {
-    top: 60% !important;
+    top: 63% !important;
   }
 }
 
