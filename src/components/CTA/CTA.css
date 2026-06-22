@@ -30,7 +30,7 @@
 
 .cta-block--default .cta-title {
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
   font-size: 2.5rem;
   padding-top: 2rem;
   position: absolute;

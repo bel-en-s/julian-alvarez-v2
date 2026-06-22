@@ -20,6 +20,27 @@ export default function Curtain() {
 
     const isMobile = window.innerWidth <= 999;
 
+    const updateCurtain = (p) => {
+      gsap.set(header1Ref.current, {
+        x: -innerWidth * 3 * p,
+        y: innerHeight * 0.5 * p,
+        scale: 1 + 9 * p,
+      });
+
+      gsap.set(header2Ref.current, {
+        x: innerWidth * 3 * p,
+        y: innerHeight * 0.5 * p,
+        scale: 1 + 9 * p,
+      });
+
+      const eased = gsap.parseEase("power3.out")(p);
+
+      gsap.set(imgRef.current, {
+        rotation: 30 * (1 - eased),
+        scale: 0.75 + 0.25 * eased,
+      });
+    };
+
     if (!isMobile) {
       gsap.set(ballRef.current, {
         x: window.innerWidth + 300,
@@ -65,33 +86,10 @@ export default function Curtain() {
       });
     }
 
-    const updateCurtain = (p) => {
-      gsap.set(header1Ref.current, {
-        x: -innerWidth * 3 * p,
-        y: innerHeight * 0.5 * p,
-        scale: 1 + 9 * p,
-      });
-
-      gsap.set(header2Ref.current, {
-        x: innerWidth * 3 * p,
-        y: innerHeight * 0.5 * p,
-        scale: 1 + 9 * p,
-      });
-
-      const eased = gsap.parseEase("power3.out")(p);
-
-      gsap.set(imgRef.current, {
-        rotation: 30 * (1 - eased),
-        scale: 0.75 + 0.25 * eased,
-      });
-    };
-
     const st = ScrollTrigger.create({
       trigger: section,
       start: "top top",
       end: `+=${isMobile ? window.innerHeight * 5 : window.innerHeight * 3}`,
-      pin: true,
-      pinSpacing: true,
       scrub: true,
       invalidateOnRefresh: true,
       refreshPriority: 10,
@@ -131,7 +129,6 @@ export default function Curtain() {
     document.fonts?.ready?.then(refreshSoon).catch(() => {});
 
     return () => {
-      st.revert?.();
       st.kill();
       if (!isMobile) ballTl.kill();
     };

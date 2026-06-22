@@ -89,10 +89,9 @@
 
   .curtain-ball {
     width: 55px;
-    top: 62%;
-    left: 58%;
+    top: 50%;
+    left: 89%;
     translate: -50% -50%;
-    will-change: auto;
   }
 
   .curtain-img img {
