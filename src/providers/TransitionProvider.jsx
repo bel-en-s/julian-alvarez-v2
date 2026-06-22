@@ -3,6 +3,9 @@ import { useRef, useEffect } from "react";
 
 import { TransitionRouter } from "next-transition-router";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BLOCK_COUNT = 10;
 
@@ -48,6 +51,7 @@ export default function TransitionProvider({ children }) {
     <TransitionRouter
       auto
       leave={(next, pathname) => {
+        ScrollTrigger.getAll().forEach(st => st.kill());
         gsap.set(blocksRef.current, { scaleX: 0, transformOrigin: "left" });
         const tween = gsap.to(blocksRef.current, {
           scaleX: 1,

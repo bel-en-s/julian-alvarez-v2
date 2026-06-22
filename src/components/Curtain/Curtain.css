@@ -99,3 +99,26 @@
   }
 }
 
+@media (min-width: 1000px) {
+  .curtain {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .curtain-ball {
+    width: 55px;
+  }
+
+  .curtain-img {
+    width: 35vw;
+    max-width: 400px;
+    height: 65vh;
+    margin-top: 3vh;
+  }
+
+  .curtain-img img {
+    margin-top: 0;
+  }
+}
+

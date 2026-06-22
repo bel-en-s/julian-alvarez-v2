@@ -97,6 +97,11 @@ export default function Copy({
             ease: "power4.out",
             delay: delay,
             paused: animateOnScroll,
+            onComplete: () => {
+              allLines.forEach(line => {
+                line.style.overflow = "visible";
+              });
+            },
           });
 
           if (animateOnScroll) {
@@ -156,7 +161,9 @@ export default function Copy({
         mountedRef.current = false;
         triggerRefs.current.forEach(st => st.kill());
         triggerRefs.current = [];
-        splitRefs.current.forEach(s => s.revert());
+        splitRefs.current.forEach(s => {
+          try { s.revert(); } catch (_) {}
+        });
         splitRefs.current = [];
         elementRefs.current = [];
       };

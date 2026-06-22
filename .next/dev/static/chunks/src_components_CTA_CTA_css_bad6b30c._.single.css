@@ -62,10 +62,13 @@
   object-fit: cover;
   object-position: center;
   will-change: transform;
-  border-radius: .75rem;
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.cta-block--default .cta-gallery-img--right img {
+  object-position: 50% 0%;
 }
 
 .cta-block--default .cta-header {
@@ -138,10 +141,13 @@
 .cta-block--doble .cta-doble-img img {
   object-fit: cover;
   object-position: center;
-  border-radius: .75rem;
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.cta-block--doble .cta-doble-img .img-focus-4 {
+  object-position: 50% 0%;
 }
 
 .cta-block--doble .cta-doble-text {

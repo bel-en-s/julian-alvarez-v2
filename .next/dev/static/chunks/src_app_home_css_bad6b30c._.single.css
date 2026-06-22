@@ -412,6 +412,7 @@ html.is-h-scroll {
   .h-scroll__panel .cta {
     height: auto;
     min-height: auto;
+    margin-top: -10vh;
     padding: 2rem 0;
   }
 

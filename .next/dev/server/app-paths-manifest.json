@@ -1,4 +1,6 @@
 {
+  "/dentro-de-las-canchas/page": "app/dentro-de-las-canchas/page.js",
   "/fuera-de-las-canchas/page": "app/fuera-de-las-canchas/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/touchpoint/page": "app/touchpoint/page.js"
 }
