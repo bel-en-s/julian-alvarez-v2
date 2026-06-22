@@ -1,7 +1,9 @@
+"use client";
 import "./Footer.css";
 import Link from "next/link";
 
 import ContactForm from "../ContactForm/ContactForm";
+import Copy from "../Copy/Copy";
 
 const Footer = () => {
   return (
@@ -13,35 +15,50 @@ const Footer = () => {
           <div className="footer-row">
             <div className="footer-col">
               <div className="footer-col-header">
-                <p className="bodyCopy">Navegación</p>
+                <Copy animateOnScroll={true}>
+                  <p className="bodyCopy">Navegación</p>
+                </Copy>
               </div>
               <div className="footer-col-links">
-                <Link href="/">Index</Link>
-                <Link href="/wardrobe">Dentro de las canchas</Link>
-                <Link href="/genesis">Fuera de las canchas</Link>
-                <Link href="/touchpoint">Contacto</Link>
-
+                <Copy animateOnScroll={true} delay={0.1}>
+                  <Link href="/">Index</Link>
+                </Copy>
+                <Copy animateOnScroll={true} delay={0.15}>
+                  <Link href="/wardrobe">Dentro de las canchas</Link>
+                </Copy>
+                <Copy animateOnScroll={true} delay={0.2}>
+                  <Link href="/genesis">Fuera de las canchas</Link>
+                </Copy>
+                <Copy animateOnScroll={true} delay={0.25}>
+                  <Link href="/touchpoint">Contacto</Link>
+                </Copy>
               </div>
             </div>
             <div className="footer-col">
               <div className="footer-col-header">
-                <p className="bodyCopy">Conectar redes sociales</p>
+                <Copy animateOnScroll={true}>
+                  <p className="bodyCopy">Conectar redes sociales</p>
+                </Copy>
               </div>
               <div className="footer-col-links">
-                <a
-                  href="https://www.instagram.com/julianalvarez/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Instagram
-                </a>
-                <a
-                  href="https://www.youtube.com/@julianalvarez"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  YouTube
-                </a>
+                <Copy animateOnScroll={true} delay={0.1}>
+                  <a
+                    href="https://www.instagram.com/julianalvarez/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Instagram
+                  </a>
+                </Copy>
+                <Copy animateOnScroll={true} delay={0.15}>
+                  <a
+                    href="https://www.youtube.com/@julianalvarez"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    YouTube
+                  </a>
+                </Copy>
               </div>
             </div>
           </div>

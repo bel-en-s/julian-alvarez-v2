@@ -63,7 +63,7 @@ const CTA = ({ blocks = [1, 2] }) => {
             <Copy><h2 className="cta-title">Un año inolvidable (2021)</h2></Copy>
             <div className="cta-triple-row">
               <div className="cta-triple-card">
-                <img src="/cta/cta_img_05.jpg" alt="" />
+                <img src="/bio/Anexo 5.jpeg" alt="" />
                 <div className="cta-triple-text">
                   <Copy>
 
@@ -74,7 +74,7 @@ const CTA = ({ blocks = [1, 2] }) => {
                 </div>
               </div>
               <div className="cta-triple-card">
-                <img src="/bio/Anexo 6.jpg" alt="" />
+                <img src="/bio/Anexo 6.webp" alt="" />
                 <div className="cta-triple-text">
                   <Copy>
                     <h5>Mejor Jugador de América.</h5>
@@ -82,7 +82,7 @@ const CTA = ({ blocks = [1, 2] }) => {
                 </div>
               </div>
               <div className="cta-triple-card">
-                <img src="/bio/Anexo 7.webp" alt="" />
+                 <img src="/bio/Anexo 7.jpg" alt="" />
                 <div className="cta-triple-text">
                   <Copy>
                     <h5>La noche de los seis goles. </h5>
@@ -124,7 +124,7 @@ const CTA = ({ blocks = [1, 2] }) => {
         </>
       )}
 
-      {blocks.includes(5) && (
+      {/* {blocks.includes(5) && (
         <>
           <div className="container cta-block--presente">
             <Copy><h2 className="cta-title">Presente (2024)</h2></Copy>
@@ -140,7 +140,7 @@ const CTA = ({ blocks = [1, 2] }) => {
             </div>
           </div>
         </>
-      )}
+      )} */}
 
     </section>
   );

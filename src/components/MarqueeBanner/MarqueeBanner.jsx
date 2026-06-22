@@ -90,24 +90,14 @@ const MarqueeBanner = () => {
     };
 
     banner.addEventListener("mousemove", handleMouseMove);
-    banner.addEventListener(
-      "touchstart",
-      (e) => {
-        e.preventDefault();
-        const pos = getRelativePos(e.touches[0].clientX, e.touches[0].clientY);
-        onPointerMove(pos.x, pos.y);
-      },
-      { passive: false },
-    );
-    banner.addEventListener(
-      "touchmove",
-      (e) => {
-        e.preventDefault();
-        const pos = getRelativePos(e.touches[0].clientX, e.touches[0].clientY);
-        onPointerMove(pos.x, pos.y);
-      },
-      { passive: false },
-    );
+    banner.addEventListener("touchstart", (e) => {
+      const pos = getRelativePos(e.touches[0].clientX, e.touches[0].clientY);
+      onPointerMove(pos.x, pos.y);
+    }, { passive: true });
+    banner.addEventListener("touchmove", (e) => {
+      const pos = getRelativePos(e.touches[0].clientX, e.touches[0].clientY);
+      onPointerMove(pos.x, pos.y);
+    }, { passive: true });
 
     const matchSVGToViewport = () => {
       const rect = banner.getBoundingClientRect();

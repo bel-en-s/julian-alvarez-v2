@@ -61,7 +61,6 @@
 .ph-lede {
   max-width: 46ch;
   margin: 28px 0 0;
-  font-family: var(--font-support);
   font-weight: 500;
   color: var(--fg-2);
   font-size: clamp(16px, 1.5vw, 21px);
@@ -90,7 +89,6 @@
 
 .ph-stat span {
   margin-top: 8px;
-  font-family: var(--font-support);
   font-size: 11px;
   letter-spacing: .18em;
   text-transform: uppercase;

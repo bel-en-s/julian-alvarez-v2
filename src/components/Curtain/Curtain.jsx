@@ -18,44 +18,6 @@ export default function Curtain() {
     const section = sectionRef.current;
     if (!section) return;
 
-    const updateCurtain = (p) => {
-      gsap.set(header1Ref.current, {
-        x: -innerWidth * 3 * p,
-        y: innerHeight * 0.5 * p,
-        scale: 1 + 9 * p,
-      });
-
-      gsap.set(header2Ref.current, {
-        x: innerWidth * 3 * p,
-        y: innerHeight * 0.5 * p,
-        scale: 1 + 9 * p,
-      });
-
-      const eased = gsap.parseEase("power3.out")(p);
-
-      gsap.set(imgRef.current, {
-        rotation: 30 * (1 - eased),
-        scale: 0.75 + 0.25 * eased,
-      });
-    };
-
-    const st = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: `+=${window.innerHeight * 3}`,
-      scrub: true,
-      invalidateOnRefresh: true,
-      refreshPriority: 10,
-      onUpdate: (self) => {
-        updateCurtain(self.progress);
-        try { ballTl.progress(self.progress); } catch (_) {}
-      },
-    });
-
-    // ------------------------
-    // PELOTA
-    // ------------------------
-
     gsap.set(ballRef.current, {
       x: window.innerWidth + 300,
       y: window.innerHeight * 0.25,
@@ -99,6 +61,42 @@ export default function Curtain() {
       rotation: 1500,
       ease: "power2.out",
       duration: 0.25,
+    });
+
+    const updateCurtain = (p) => {
+      gsap.set(header1Ref.current, {
+        x: -innerWidth * 3 * p,
+        y: innerHeight * 0.5 * p,
+        scale: 1 + 9 * p,
+      });
+
+      gsap.set(header2Ref.current, {
+        x: innerWidth * 3 * p,
+        y: innerHeight * 0.5 * p,
+        scale: 1 + 9 * p,
+      });
+
+      const eased = gsap.parseEase("power3.out")(p);
+
+      gsap.set(imgRef.current, {
+        rotation: 30 * (1 - eased),
+        scale: 0.75 + 0.25 * eased,
+      });
+    };
+
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: `+=${window.innerHeight * 3}`,
+      pin: true,
+      pinSpacing: true,
+      scrub: true,
+      invalidateOnRefresh: true,
+      refreshPriority: 10,
+      onUpdate: (self) => {
+        updateCurtain(self.progress);
+        ballTl.progress(self.progress);
+      },
     });
 
     const img = imgRef.current;

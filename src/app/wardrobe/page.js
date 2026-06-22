@@ -1,127 +1,140 @@
 "use client";
-import "./wardrobe.css";
-import { useEffect, useRef, useState } from "react";
 
-import { products } from "./products";
-import Product from "@/components/Product/Product";
+import "./wardrobe.css";
+import { useRef, useEffect, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Copy from "@/components/Copy/Copy";
 
-import { gsap } from "gsap";
+gsap.registerPlugin(ScrollTrigger);
 
-export default function Wardrobe() {
-  const [activeTag, setActiveTag] = useState("All");
-  const [activeColor, setActiveColor] = useState(null);
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const productRefs = useRef([]);
-  const isInitialMount = useRef(true);
+const MOMENTOS = [
+  {
+    title: "De la Quiaca a…",
+    desc: "las giras más locas del mundo. Cada destino nuevo es un partido que no está en el fixture pero se juega con la misma intensidad.",
+  },
+  {
+    title: "Conexión con la gente",
+    desc: "No hay título más grande que el cariño de la gente. Un abrazo, una foto, un \"gracias, crack\"… eso no se entrena, se vive.",
+  },
+  {
+    title: "Días libres",
+    desc: "Cuando el partido termina, la vida real empieza. Familia, amigos, el pueblo, el asado, la siesta, los que siempre estuvieron.",
+  },
+];
 
-  const handleFilterChange = (newTag, newColor) => {
-    if (isAnimating) return;
-    if (newTag === activeTag && newColor === activeColor) return;
-
-    setIsAnimating(true);
-    setActiveTag(newTag);
-    setActiveColor(newColor);
-
-    gsap.killTweensOf(productRefs.current);
-
-    gsap.to(productRefs.current, {
-      opacity: 0,
-      scale: 0.5,
-      duration: 0.25,
-      stagger: 0.05,
-      ease: "power3.out",
-      onComplete: () => {
-        const filtered = products.filter((product) => {
-          if (newTag !== "All" && product.tag !== newTag) return false;
-          if (newColor && product.color !== newColor) return false;
-          return true;
-        });
-
-        setFilteredProducts(filtered);
-      },
-    });
-  };
+export default function FueraDeLasCanchas() {
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(true);
 
   useEffect(() => {
-    productRefs.current = productRefs.current.slice(0, filteredProducts.length);
-    gsap.killTweensOf(productRefs.current);
+    const video = videoRef.current;
+    if (!video) return;
+    video.play().catch(() => {});
+  }, []);
 
-    gsap.fromTo(
-      productRefs.current,
-      { opacity: 0, scale: 0.5 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: isInitialMount.current ? 0.5 : 0.25,
-        stagger: isInitialMount.current ? 0.05 : 0.05,
-        ease: "power3.out",
-        onComplete: () => {
-          setIsAnimating(false);
-          isInitialMount.current = false;
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          gsap.to(headerRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power4.out",
+          });
         },
-      }
-    );
-  }, [filteredProducts]);
+      });
+    }, sectionRef);
+
+    return () => { try { ctx.revert(); } catch (_) {} };
+  }, []);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) { video.play(); setPlaying(true); }
+    else { video.pause(); setPlaying(false); }
+  };
 
   return (
-    <>
-      <section className="products-header">
-        <div className="container">
-          <Copy animateOnScroll={false} delay={0.65}>
-            <h1>Wardrobe Circulation</h1>
+    <section className="fdc" ref={sectionRef}>
+      <div className="fdc-herald" aria-hidden="true">9</div>
+
+      <div className="fdc-hero">
+        <div className="fdc-hero-inner">
+          <p className="eyebrow fdc-eyebrow">Fuera de las canchas</p>
+          <Copy animateOnScroll={false}>
+            <h1>FUERA<em>DE LAS CANCHAS</em></h1>
           </Copy>
-          <div className="products-header-divider"></div>
-          <div className="product-filter-bar">
-            <div className="filter-bar-header">
-              <p className="bodyCopy">Filters</p>
-            </div>
-            <div className="filter-bar-tags">
-              {["All", "Sheerform", "Functionary", "Deform"].map((tag) => (
-                <p
-                  key={tag}
-                  className={`bodyCopy ${activeTag === tag ? "active" : ""}`}
-                  onClick={() => handleFilterChange(tag, activeColor)}
-                >
-                  {tag}
-                </p>
-              ))}
-            </div>
-            <div className="filter-bar-colors">
-              {["Black", "Stone", "Ice", "Grey", "White"].map((color) => (
-                <span
-                  key={color}
-                  className={`color-selector ${color.toLowerCase()} ${
-                    activeColor === color ? "active" : ""
-                  }`}
-                  onClick={() =>
-                    handleFilterChange(
-                      activeTag,
-                      activeColor === color ? null : color
-                    )
-                  }
-                  style={{ cursor: isAnimating ? "not-allowed" : "pointer" }}
-                ></span>
-              ))}
-            </div>
+          <Copy animateOnScroll={false}>
+            <p className="fdc-lede">
+              Detrás de los 90 minutos hay una vida entera. Viajes, descanso, gente, momentos que no aparecen en la planilla pero construyen al jugador.
+            </p>
+          </Copy>
+          <div className="fdc-stats">
+            <div className="fdc-stat"><b>+50</b><span>Ciudades visitadas</span></div>
+            <div className="fdc-stat"><b>∞</b><span>Historias</span></div>
+            <div className="fdc-stat"><b>1</b><span>Pasión</span></div>
           </div>
         </div>
-      </section>
-      <section className="product-list">
-        <div className="container">
-          {filteredProducts.map((product, index) => (
-            <Product
-              key={product.name}
-              product={product}
-              productIndex={products.indexOf(product) + 1}
-              showAddToCart={true}
-              innerRef={(el) => (productRefs.current[index] = el)}
-              style={{ opacity: 0, transform: "scale(0.5)" }}
-            />
+      </div>
+
+      <div className="fdc-video-section">
+        <header ref={headerRef} className="fdc-head">
+          <Copy><p className="eyebrow">01 · Fuera del radar</p></Copy>
+          <Copy><h2>La otra cara del 9</h2></Copy>
+          <Copy><p className="fdc-sub">Lo que pasa cuando nadie está mirando. Los días libres, los viajes, la vida que no sale en la tele.</p></Copy>
+        </header>
+
+        <div className="fdc-video-wrapper">
+          <video
+            ref={videoRef}
+            src="/home/julian-chiquito.mp4"
+            autoPlay
+            playsInline
+            muted
+            loop
+            preload="auto"
+            onClick={togglePlay}
+          />
+          <button className="fdc-play-btn" onClick={togglePlay} aria-label={playing ? "Pausar" : "Reproducir"}>
+            {playing ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            )}
+          </button>
+        </div>
+      </div>
+
+      <div className="fdc-momentos">
+        <header className="fdc-head momentos-head">
+          <Copy><p className="eyebrow">02 · Galería</p></Copy>
+          <Copy><h2>Momentos<br />que quedan</h2></Copy>
+          <Copy><p className="fdc-sub">Tres historias, un solo protagonista. Fuera de la cancha también se construye el mito.</p></Copy>
+        </header>
+
+        <div className="fdc-grid">
+          {MOMENTOS.map((m, i) => (
+            <article key={i} className="fdc-card">
+              <div className="fdc-card-img">
+                <img src={`/bio/${i + 1}.jpeg`} alt="" loading="lazy" />
+              </div>
+              <div className="fdc-card-body">
+                <span className="fdc-card-num">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="fdc-card-title">{m.title}</h3>
+                <p className="fdc-card-desc">{m.desc}</p>
+              </div>
+            </article>
           ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

@@ -165,11 +165,19 @@ h4 {
 
 h5 {
   letter-spacing: clamp(0rem, -.25vw, -.05rem);
+  font-transform: none;
   font-size: clamp(1.25rem, 1vw, 3rem);
 }
 
 a, p, span {
+  text-transform: uppercase;
+  color: var(--base-700);
+  font-family: var(--font-host-grotesk), sans-serif;
   font-size: clamp(.8rem, .75vw, .85rem);
+  font-weight: 500;
+  line-height: 1;
+  font-family: var(--font-host-grotesk), sans-serif;
+  text-decoration: none;
 }
 
 a.md, p.md, span.md {
