@@ -1,5 +1,6 @@
 .hero {
   position: relative;
+  z-index: 2;
   width: 100%;
   height: 100svh;
   background: linear-gradient(to bottom, transparent 10%, #51398D 100%);
@@ -30,7 +31,7 @@
   justify-content: center;
   align-items: flex-end;
   line-height: 1;
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -59,6 +60,9 @@
   position: relative;
   z-index: 5;
   margin-bottom: 10svh;
+  transform: translate3d(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 4px), 0);
+  transition: transform 0.15s ease-out;
+  will-change: transform;
 }
 
 .hero .hero-header .hero-name--julian {
@@ -88,6 +92,9 @@
   width: auto;
   object-fit: contain;
   max-height: 90svh;
+  transform: translate3d(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 8px), 0);
+  transition: transform 0.15s ease-out;
+  will-change: transform;
 }
 
 .hero-alvarez-canvas {
@@ -96,7 +103,7 @@
   left: 0;
   display: block;
   pointer-events: none;
-  z-index: 5;
+  z-index: 1;
 }
 
 .hero .hero-img {
@@ -105,6 +112,7 @@
 
 .scroll-track {
   position: relative;
+  z-index: 2;
   width: 100%;
   height: 100svh;
   overflow: hidden;
@@ -222,6 +230,7 @@ html.is-h-scroll {
 
 .anexo-section {
   position: relative;
+  z-index: 2;
   width: 100%;
   min-height: 600px;
   background: linear-gradient(180deg, #1A1A2E 10%, #EDF1E8 100%);
@@ -296,6 +305,8 @@ html.is-h-scroll {
 }
 
 .featured-products {
+  position: relative;
+  z-index: 2;
   padding: 6rem 0;
 }
 
@@ -404,6 +415,7 @@ html.is-h-scroll {
 
 .h-scroll {
   position: relative;
+  z-index: 2;
   overflow: hidden;
 }
 

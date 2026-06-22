@@ -143,7 +143,7 @@ export default function BackgroundWeb() {
         width: "100%",
         height: "100%",
         pointerEvents: "none",
-        zIndex: 9999,
+        zIndex: -1,
         display: "block",
         mixBlendMode: "multiply",
       }}

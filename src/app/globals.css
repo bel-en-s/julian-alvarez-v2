@@ -122,6 +122,10 @@ body {
   overflow-x: hidden;
 }
 
+.page {
+  position: relative;
+}
+
 img,
 svg {
   width: 100%;
