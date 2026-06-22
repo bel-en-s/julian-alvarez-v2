@@ -18,7 +18,7 @@
   left: 3em;
   bottom: clamp(20px, 4vh, 40px);
   z-index: 7;
-  width: min(300px, 88vw);
+  /* width: min(300px, 88vw); */
   background: linear-gradient(180deg, #1F1535 0%, #1A0F2D 100%);
   border: 1px solid var(--border-soft);
   /* border-radius: 12px;
@@ -222,7 +222,7 @@
 }
 
 .next-match .countdown .u {
-  font-family: var(--font-support);
+  /* font-family: var(--font-support); */
   font-size: 9px;
   letter-spacing: .22em;
   text-transform: uppercase;

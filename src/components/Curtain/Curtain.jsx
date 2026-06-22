@@ -18,6 +18,8 @@ export default function Curtain() {
     const section = sectionRef.current;
     if (!section) return;
 
+    const isMobile = window.innerWidth <= 999;
+
     gsap.set(ballRef.current, {
       x: window.innerWidth + 300,
       y: window.innerHeight * 0.25,
@@ -39,7 +41,7 @@ export default function Curtain() {
     // rebote
     ballTl.to(ballRef.current, {
       x: window.innerWidth * 0.25,
-      y: window.innerHeight * 0.28,
+      y: isMobile ? window.innerHeight * 0.18 : window.innerHeight * 0.28,
       rotation: 900,
       ease: "power2.out",
       duration: 0.18,
@@ -48,7 +50,7 @@ export default function Curtain() {
     // vuelve a caer
     ballTl.to(ballRef.current, {
       x: window.innerWidth * 0.05,
-      y: window.innerHeight * 0.65,
+      y: isMobile ? window.innerHeight * 0.55 : window.innerHeight * 0.65,
       rotation: 1180,
       ease: "power2.in",
       duration: 0.15,
@@ -57,7 +59,7 @@ export default function Curtain() {
     // sale hacia la izquierda
     ballTl.to(ballRef.current, {
       x: -250,
-      y: window.innerHeight * 0.45,
+      y: isMobile ? window.innerHeight * 0.35 : window.innerHeight * 0.45,
       rotation: 1500,
       ease: "power2.out",
       duration: 0.25,
@@ -80,7 +82,7 @@ export default function Curtain() {
 
       gsap.set(imgRef.current, {
         rotation: 30 * (1 - eased),
-        scale: 0.75 + 0.25 * eased,
+        scale: 0.6 + 0.4 * eased,
       });
     };
 

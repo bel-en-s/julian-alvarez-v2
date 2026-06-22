@@ -185,6 +185,7 @@
 }
 
 .slide-description {
+  text-transform: uppercase;
   width: 30%;
   min-width: 320px;
   max-width: 500px;

@@ -30,7 +30,7 @@
   height: 100vh;
   overflow: hidden;
   transform-origin: 50% 50%;
-  transform: scale(0.75) rotate(30deg);
+  transform: scale(0.6) rotate(30deg);
   backface-visibility: hidden;
   will-change: transform;
 }
@@ -43,7 +43,7 @@
   object-fit: contain;
   transform-origin: 50% 50%;
   backface-visibility: hidden;
-  margin-top: 5svh;
+  margin-top: -5vh;
 }
 
 .curtain-copy {
@@ -93,7 +93,7 @@
   }
 
   .curtain-img img {
-    margin-top: -6svh;
+    margin-top: -10vh;
   }
 }
 

@@ -27,6 +27,16 @@
 
 .behind-the-lock .btl-header h4 {
   mix-blend-mode: difference;
+  font-transform: uppercase;
+  justify-self: center;
+  max-width: 900px;
+  font-size: clamp(1.75rem, 1vw, 3.5rem);
+  line-height: 1.2;
+}
+
+.btl-header-text {
+  text-transform: uppercase;
+  mix-blend-mode: difference;
   justify-self: center;
   max-width: 900px;
   font-size: clamp(1.75rem, 1vw, 3.5rem);
@@ -120,10 +130,6 @@
 @media (max-width: 900px) {
   .behind-the-lock .btl-header {
     top: 75%;
-  }
-
-  .behind-the-lock .btl-header h2 {
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
   }
 
   .behind-the-lock .btl-card-img {

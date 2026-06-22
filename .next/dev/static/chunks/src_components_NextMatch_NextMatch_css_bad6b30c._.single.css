@@ -29,7 +29,6 @@
   z-index: 10;
   isolation: isolate;
   opacity: 0;
-  width: min(300px, 88vw);
   animation: nm-hero-fade 1s var(--easing) .2s forwards;
   pointer-events: auto;
   transition: transform .35s var(--easing), border-color .35s, box-shadow .35s;
@@ -215,7 +214,6 @@
 }
 
 .next-match .countdown .u {
-  font-family: var(--font-support);
   letter-spacing: .22em;
   text-transform: uppercase;
   color: #ffffff8c;

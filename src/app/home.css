@@ -192,6 +192,7 @@
 
 .slide-description {
   position: absolute;
+  text-transform: uppercase;
   bottom: 12%;
   right: 4rem;
   width: 30%;

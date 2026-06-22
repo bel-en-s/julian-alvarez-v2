@@ -32,8 +32,18 @@
   justify-self: center;
   line-height: 1.2;
   mix-blend-mode: difference;
-}
 
+  font-transform: uppercase;
+}
+.btl-header-text {
+  text-transform: uppercase;
+ mix-blend-mode: difference;
+    justify-self: center;
+    max-width: 900px;
+    font-size: clamp(1.75rem, 1vw, 3.5rem);
+    line-height: 1.2;
+
+}
 
 .behind-the-lock .btl-cards {
   position: absolute;
@@ -124,9 +134,9 @@
     top: 75%;
   }
 
-  .behind-the-lock .btl-header h2 {
+  /* .behind-the-lock .btl-header h2 {
     font-size: clamp(1.25rem, 5vw, 1.75rem);
-  }
+  } */
 
   .behind-the-lock .btl-card-img {
     width: 100px;
