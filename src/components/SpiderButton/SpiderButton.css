@@ -6,7 +6,7 @@
   padding: 12px 28px;
   border: 1px solid var(--border-soft);
   border-radius: 8px;
-  background: black;
+  background: var(--base-300);
   cursor: pointer;
   overflow: hidden;
   isolation: isolate;
@@ -15,14 +15,15 @@
   font-size: 14px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var( --ja-amethyst-300);
+  /* color: var( --ja-amethyst-300); */
   line-height: 1;
   pointer-events: auto;
 }
 
 .spider-btn:hover {
   border-color: var(--border-strong);
-  background: var(--base-300);
+  
+    background: var(--ja-amethyst-300);;
 }
 
 .spider-btn .spider-btn-web {

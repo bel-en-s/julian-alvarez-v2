@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
         className={`${koulen.variable} ${hostGrotesk.variable} ${dmMono.variable} ${spaceGrotesk.variable}`}
       >
         <TransitionProvider>
-          <ClientLayout footer={null}>
+          <ClientLayout footer={<Footer />}>
             <Menu />
             {children}
           </ClientLayout>

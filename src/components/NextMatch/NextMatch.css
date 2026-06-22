@@ -12,10 +12,13 @@
 @keyframes nm-ring-rotate {
   to { --ring-angle: 360deg; }
 }
+span {
+   color : #fff;;}
 
 .next-match {
   position: fixed;
   left: 3em;
+  color : #fff;
   bottom: clamp(20px, 4vh, 40px);
   z-index: 7;
   /* width: min(300px, 88vw); */

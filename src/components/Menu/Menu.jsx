@@ -217,7 +217,7 @@ const Menu = () => {
               DENTRO DE LAS CANCHAS
             </Link>
             <Link
-              href="/wardrobe"
+              href="/fuera-de-las-canchas"
               className="ja-menu-arana__item i2"
               onClick={handleLinkClick}
             >

@@ -18,6 +18,8 @@ export default function Copy({
   const containerRef = useRef(null);
   const elementRefs = useRef([]);
   const splitRefs = useRef([]);
+  const triggerRefs = useRef([]);
+  const mountedRef = useRef(true);
 
   const waitForFonts = async () => {
     try {
@@ -41,13 +43,15 @@ export default function Copy({
   useGSAP(
     () => {
       if (!containerRef.current) return;
+      mountedRef.current = true;
 
       const initializeSplitText = async () => {
         await waitForFonts();
-        if (!containerRef.current) return;
+        if (!mountedRef.current || !containerRef.current) return;
 
         splitRefs.current = [];
         elementRefs.current = [];
+        triggerRefs.current = [];
 
         let elements = [];
         if (containerRef.current.hasAttribute("data-copy-wrapper")) {
@@ -96,13 +100,14 @@ export default function Copy({
           });
 
           if (animateOnScroll) {
-            ScrollTrigger.create({
+            const st = ScrollTrigger.create({
               trigger: containerRef.current,
               start: "top 80%",
               animation: animation,
               once: true,
               refreshPriority: -1,
             });
+            triggerRefs.current.push(st);
           }
         } else if (type === "flicker") {
           const allChars = [];
@@ -134,12 +139,13 @@ export default function Copy({
           });
 
           if (animateOnScroll) {
-            ScrollTrigger.create({
+            const st = ScrollTrigger.create({
               trigger: containerRef.current,
               start: "top 85%",
               animation: animation,
               once: true,
             });
+            triggerRefs.current.push(st);
           }
         }
       };
@@ -147,6 +153,10 @@ export default function Copy({
       initializeSplitText();
 
       return () => {
+        mountedRef.current = false;
+        triggerRefs.current.forEach(st => st.kill());
+        triggerRefs.current = [];
+        splitRefs.current.forEach(s => s.revert());
         splitRefs.current = [];
         elementRefs.current = [];
       };

@@ -1,6 +1,6 @@
 "use client";
 
-import "./wardrobe.css";
+import "./fuera-de-las-canchas.css";
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

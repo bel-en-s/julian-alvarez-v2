@@ -2,7 +2,7 @@
 import "./ShoppingCart.css";
 import { useState, useEffect } from "react";
 
-import { products } from "@/app/wardrobe/products";
+import { products } from "@/app/fuera-de-las-canchas/products";
 import { useCartStore, useCartCount, useCartSubtotal } from "@/store/cartStore";
 
 const ShoppingCart = () => {

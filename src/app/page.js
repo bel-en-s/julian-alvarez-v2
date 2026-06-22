@@ -9,18 +9,15 @@ import BrandIcon from "@/components/BrandIcon/BrandIcon";
 import TextBlock from "@/components/TextBlock/TextBlock";
 import PeelReveal from "@/components/PeelReveal/PeelReveal";
 import MarqueeBanner from "@/components/MarqueeBanner/MarqueeBanner";
-import CTA from "@/components/CTA/CTA";
-import NextMatch from "@/components/NextMatch/NextMatch";
 import HeroAtmos from "@/components/HeroAtmos/HeroAtmos";
-import MiHistoria from "@/components/MiHistoria/MiHistoria";
-import AboutVideo from "@/components/AboutVideo/AboutVideo";
-
 import Copy from "@/components/Copy/Copy";
-
+import NextMatch from "@/components/NextMatch/NextMatch";
+import AboutVideo from "@/components/AboutVideo/AboutVideo";
+import MiHistoria from "@/components/MiHistoria/MiHistoria";
+import CTA from "@/components/CTA/CTA";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import Footer from "@/components/Footer/Footer";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,6 +31,7 @@ export default function Index() {
   const scrollTrackRef = useRef(null);
   const hScrollRef = useRef(null);
   const hScrollContentRef = useRef(null);
+  const stRefs = useRef([]);
 
   const handlePreloaderComplete = () => {
     setLoaderAnimating(false);
@@ -50,23 +48,22 @@ export default function Index() {
       delay: isInitialLoad ? 5.75 : 1,
     });
 
-   const track = scrollTrackRef.current;
-if (track) {
-  ScrollTrigger.create({
-    trigger: track,
-    start: "top top",
-    end: "+=800",
-    pin: true,
-    scrub: true,
+    const track = scrollTrackRef.current;
+    const st = ScrollTrigger.create({
+      trigger: track,
+      start: "top top",
+      end: "+=800",
+      pin: true,
+      scrub: true,
 
-    onUpdate: (self) => {
-      document.documentElement.style.setProperty(
-        "--video-scale",
-        1 + self.progress * 0.2
-      );
-    },
-  });
-}
+      onUpdate: (self) => {
+        document.documentElement.style.setProperty(
+          "--video-scale",
+          1 + self.progress * 0.2
+        );
+      },
+    });
+    stRefs.current.push(st);
 
     const aboutSection = document.querySelector(".about");
     if (aboutSection) {
@@ -143,7 +140,7 @@ const updateColors = () => {
         const totalWidth = hContent.scrollWidth;
         if (totalWidth <= 0) { requestAnimationFrame(setup); return; }
 
-        ScrollTrigger.create({
+        const st2 = ScrollTrigger.create({
           trigger: hScroll,
           pin: true,
           start: "top top",
@@ -157,6 +154,7 @@ const updateColors = () => {
             document.documentElement.style.setProperty("--h-progress", gp);
           },
         });
+        stRefs.current.push(st2);
       };
       requestAnimationFrame(setup);
     } else if (hContent) {
@@ -166,7 +164,14 @@ const updateColors = () => {
 
     const refreshOnResize = () => ScrollTrigger.refresh();
     window.addEventListener("resize", refreshOnResize);
-    return () => window.removeEventListener("resize", refreshOnResize);
+    return () => {
+      window.removeEventListener("resize", refreshOnResize);
+      stRefs.current.forEach(st => {
+        st.revert?.();
+        st.kill();
+      });
+      stRefs.current = [];
+    };
 
   });
 
@@ -360,9 +365,6 @@ const updateColors = () => {
      
 
  
-      <Footer />
-    
-     
     </>
   );
 }

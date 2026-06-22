@@ -30,7 +30,7 @@
   height: 100vh;
   overflow: hidden;
   transform-origin: 50% 50%;
-  transform: scale(0.6) rotate(30deg);
+  transform: scale(0.75) rotate(30deg);
   backface-visibility: hidden;
   will-change: transform;
 }
@@ -43,7 +43,7 @@
   object-fit: contain;
   transform-origin: 50% 50%;
   backface-visibility: hidden;
-  margin-top: -5vh;
+  margin-top: 5svh;
 }
 
 .curtain-copy {
@@ -88,8 +88,11 @@
   }
 
   .curtain-ball {
-    width: 70px;
-    top: -8vh;
+    width: 55px;
+    top: 62%;
+    left: 58%;
+    translate: -50% -50%;
+    will-change: auto;
   }
 
   .curtain-img img {

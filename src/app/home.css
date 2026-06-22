@@ -43,13 +43,12 @@
 }
 
 .hero .hero-header .hero-name {
-  line-height: .84;
+  line-height: 0.85;
   text-transform: uppercase;
   margin: 0;
   color: transparent;
   -webkit-text-stroke: 2px var(--ja-amethyst-900);
   text-stroke: 2px var(--ja-amethyst-900);
-  letter-spacing: -.022em;
   font-family: var(--font-big-shoulders), "Humane", sans-serif;
   font-weight: 800;
   font-size: clamp(4rem, 16vw, 15rem);
@@ -423,14 +422,14 @@ html.is-h-scroll {
   .h-scroll__panel {
     width: 100%;
     height: auto;
-    min-height: 100svh;
-    padding: 2rem 0;
+    min-height: auto;
+    padding: 1rem 0;
   }
 
   .h-scroll__panel .cta {
     height: auto;
     min-height: auto;
-    padding: 2rem 0;
+    padding: 1rem 0;
   }
 
   .h-scroll__panel .cta .container {
@@ -439,10 +438,10 @@ html.is-h-scroll {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     height: auto;
     min-height: auto;
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
   }
 
   .cta-block--default .cta-title,
@@ -460,7 +459,7 @@ html.is-h-scroll {
   .cta-block--default .cta-gallery {
     flex-direction: column;
     gap: 1rem;
-    margin-top: 20vh;
+    margin-top: 5vh;
   }
 
   .cta-block--default .cta-gallery-img {
@@ -476,18 +475,18 @@ html.is-h-scroll {
     width: 100%;
     max-width: 100%;
     padding: 0;
-    margin-top: 20vh;
+    margin-top: 5vh;
   }
 
   .cta .cta-block--default {
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 0;
     height: auto;
   }
 
   .cta .cta-block--doble,
   .cta .cta-block--europa {
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 0;
     height: auto;
   }
@@ -495,7 +494,7 @@ html.is-h-scroll {
   .cta-block--doble .cta-doble-row,
   .cta-block--europa .cta-europa-row {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .cta-block--doble .cta-doble-item,
@@ -503,7 +502,7 @@ html.is-h-scroll {
     flex-direction: column;
     max-width: 100%;
     gap: 0.75rem;
-    margin-top: 20vh;
+    margin-top: 5vh;
   }
 
   .cta-block--doble .cta-doble-item:first-child,
@@ -538,15 +537,15 @@ html.is-h-scroll {
   }
 
   .cta .cta-block--triple {
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 0;
     height: auto;
   }
 
   .cta-block--triple .cta-triple-row {
     flex-direction: column;
-    gap: 2rem;
-    margin-top: 20vh;
+    gap: 1.5rem;
+    margin-top: 5vh;
   }
 
   .cta-block--triple .cta-triple-card {
@@ -559,7 +558,8 @@ html.is-h-scroll {
   }
 
   .behind-the-lock {
-    height: 100svh;
+    height: auto;
+    min-height: 100svh;
   }
 }
 

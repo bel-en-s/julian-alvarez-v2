@@ -3,7 +3,7 @@ import "./unit.css";
 import { useRef, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-import { products } from "../wardrobe/products";
+import { products } from "../fuera-de-las-canchas/products";
 import Copy from "@/components/Copy/Copy";
 import Product from "@/components/Product/Product";
 import { useCartStore } from "@/store/cartStore";

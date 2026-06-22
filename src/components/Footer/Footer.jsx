@@ -24,7 +24,7 @@ const Footer = () => {
                   <Link href="/">Index</Link>
                 </Copy>
                 <Copy animateOnScroll={true} delay={0.15}>
-                  <Link href="/wardrobe">Dentro de las canchas</Link>
+                  <Link href="/fuera-de-las-canchas">Fuera de las canchas</Link>
                 </Copy>
                 <Copy animateOnScroll={true} delay={0.2}>
                   <Link href="/genesis">Fuera de las canchas</Link>

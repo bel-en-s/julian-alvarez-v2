@@ -23,7 +23,12 @@
   }
 }
 
+span {
+  color: #fff;
+}
+
 .next-match {
+  color: #fff;
   z-index: 7;
   border: 1px solid var(--border-soft);
   z-index: 10;

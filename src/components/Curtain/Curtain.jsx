@@ -20,50 +20,50 @@ export default function Curtain() {
 
     const isMobile = window.innerWidth <= 999;
 
-    gsap.set(ballRef.current, {
-      x: window.innerWidth + 300,
-      y: window.innerHeight * 0.25,
-      rotation: 0,
-      scale: 1,
-    });
+    if (!isMobile) {
+      gsap.set(ballRef.current, {
+        x: window.innerWidth + 300,
+        y: window.innerHeight * 0.25,
+        rotation: 0,
+        scale: 1,
+      });
+    }
 
     const ballTl = gsap.timeline({ paused: true });
 
-    // entra desde la derecha
-    ballTl.to(ballRef.current, {
-      x: window.innerWidth * 0.58,
-      y: window.innerHeight * 0.72,
-      rotation: 540,
-      ease: "power2.in",
-      duration: 0.42,
-    });
+    if (!isMobile) {
+      ballTl.to(ballRef.current, {
+        x: window.innerWidth * 0.58,
+        y: window.innerHeight * 0.72,
+        rotation: 540,
+        ease: "power2.in",
+        duration: 0.42,
+      });
 
-    // rebote
-    ballTl.to(ballRef.current, {
-      x: window.innerWidth * 0.25,
-      y: isMobile ? window.innerHeight * 0.18 : window.innerHeight * 0.28,
-      rotation: 900,
-      ease: "power2.out",
-      duration: 0.18,
-    });
+      ballTl.to(ballRef.current, {
+        x: window.innerWidth * 0.25,
+        y: window.innerHeight * 0.28,
+        rotation: 900,
+        ease: "power2.out",
+        duration: 0.18,
+      });
 
-    // vuelve a caer
-    ballTl.to(ballRef.current, {
-      x: window.innerWidth * 0.05,
-      y: isMobile ? window.innerHeight * 0.55 : window.innerHeight * 0.65,
-      rotation: 1180,
-      ease: "power2.in",
-      duration: 0.15,
-    });
+      ballTl.to(ballRef.current, {
+        x: window.innerWidth * 0.05,
+        y: window.innerHeight * 0.65,
+        rotation: 1180,
+        ease: "power2.in",
+        duration: 0.15,
+      });
 
-    // sale hacia la izquierda
-    ballTl.to(ballRef.current, {
-      x: -250,
-      y: isMobile ? window.innerHeight * 0.35 : window.innerHeight * 0.45,
-      rotation: 1500,
-      ease: "power2.out",
-      duration: 0.25,
-    });
+      ballTl.to(ballRef.current, {
+        x: -250,
+        y: window.innerHeight * 0.45,
+        rotation: 1500,
+        ease: "power2.out",
+        duration: 0.25,
+      });
+    }
 
     const updateCurtain = (p) => {
       gsap.set(header1Ref.current, {
@@ -82,14 +82,14 @@ export default function Curtain() {
 
       gsap.set(imgRef.current, {
         rotation: 30 * (1 - eased),
-        scale: 0.6 + 0.4 * eased,
+        scale: 0.75 + 0.25 * eased,
       });
     };
 
     const st = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: `+=${window.innerHeight * 3}`,
+      end: `+=${isMobile ? window.innerHeight * 5 : window.innerHeight * 3}`,
       pin: true,
       pinSpacing: true,
       scrub: true,
@@ -97,7 +97,7 @@ export default function Curtain() {
       refreshPriority: 10,
       onUpdate: (self) => {
         updateCurtain(self.progress);
-        ballTl.progress(self.progress);
+        if (!isMobile) ballTl.progress(self.progress);
       },
     });
 
@@ -131,8 +131,9 @@ export default function Curtain() {
     document.fonts?.ready?.then(refreshSoon).catch(() => {});
 
     return () => {
+      st.revert?.();
       st.kill();
-      ballTl.kill();
+      if (!isMobile) ballTl.kill();
     };
   }, []);
 
