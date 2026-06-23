@@ -5,6 +5,8 @@ import Link from "next/link";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Copy from "../Copy/Copy";
 
+const CONTACT_API = "/api/contact.php";
+
 const CONTACT_TYPES = [
   { value: "partnership", label: "Partnership / Sponsorship" },
   { value: "press", label: "Press / Media" },
@@ -18,16 +20,30 @@ const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle");
   const headerRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !email || !type || !message) return;
-    setSent(true);
+    setStatus("sending");
+    try {
+      const res = await fetch(CONTACT_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, type, message }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
-  if (sent) {
+  if (status === "sent") {
     return (
       <section className="contact-form">
         <div className="contact-parallax-image-wrapper">
@@ -69,14 +85,14 @@ const ContactForm = () => {
             <div className="cf-nav-ulah">
                 <p style={{ color: "#ffffff" }}>«Diseñado por Ulah Marketing · 2026».</p>
             </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="contact-form-container">
-        <div className="cf-header" ref={headerRef}>
-          <Copy animateOnScroll={true}>
-            <h4>Entremos en contacto</h4>
-          </Copy>
+        <div className="contact-form-container">
+          <div className="cf-header" ref={headerRef}>
+            <Copy animateOnScroll={true}>
+              <h4>Entremos en contacto</h4>
+            </Copy>
           </div>
           <div className="cf-copy">
             <Copy animateOnScroll={true} delay={0.15}>
@@ -85,7 +101,7 @@ const ContactForm = () => {
               </p>
             </Copy>
           </div>
-          <button className="cf-reset" onClick={() => { setSent(false); setName(""); setEmail(""); setType(""); setMessage(""); }}>
+          <button className="cf-reset" onClick={() => { setStatus("idle"); setName(""); setEmail(""); setType(""); setMessage(""); }}>
             Enviar otro mensaje
           </button>
           <div className="cf-footer">
@@ -137,7 +153,7 @@ const ContactForm = () => {
                 <a href="https://www.youtube.com/@julianalvarez" target="_blank" rel="noopener noreferrer">YouTube</a>
               </Copy>
             </div>
-           
+
           </div>
         </div>
       </div>
@@ -199,7 +215,8 @@ const ContactForm = () => {
               required
             />
           </div>
-          <button type="submit" className="cf-submit">
+          {status === "error" && <p className="cf-msg error">Error al enviar. Intentá de nuevo.</p>}
+          <button type="submit" className="cf-submit" disabled={status === "sending"}>
             <MdOutlineArrowOutward />
           </button>
         </form>
