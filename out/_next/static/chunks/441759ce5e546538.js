@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,95104,t=>{"use strict";var e=t.i(43476),i=t.i(36414);function s(){return(0,e.jsxs)("div",{className:"touchpoint-page",children:[(0,e.jsx)("div",{style:{height:"5rem"}}),(0,e.jsx)(i.default,{})]})}t.s(["default",()=>s])}]);
