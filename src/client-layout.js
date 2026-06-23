@@ -11,6 +11,18 @@ export default function ClientLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  }, []);
+
+  useEffect(() => {
+    const onPopState = () => {
+      window.location.reload();
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 1000);
     };

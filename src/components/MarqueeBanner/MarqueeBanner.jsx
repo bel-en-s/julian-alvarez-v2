@@ -215,10 +215,10 @@ const MarqueeBanner = () => {
       <div className="marquee-half marquee-half--right" />
 
       <div className="marquee-btn marquee-btn--left">
-        <SpiderButton>Ver Dentro</SpiderButton>
+        <SpiderButton onClick={() => { window.location.href = "/dentro-de-las-canchas?t=" + Date.now(); }}>Ver Dentro</SpiderButton>
       </div>
       <div className="marquee-btn marquee-btn--right">
-        <SpiderButton>Ver Fuera</SpiderButton>
+        <SpiderButton onClick={() => { window.location.href = "/fuera-de-las-canchas?t=" + Date.now(); }}>Ver Fuera</SpiderButton>
       </div>
 
       <div className="banner-content">

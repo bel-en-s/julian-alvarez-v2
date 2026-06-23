@@ -139,9 +139,13 @@ const updateColors = () => {
     const hScroll = hScrollRef.current;
     const hContent = hScrollContentRef.current;
     if (hScroll && hContent && window.innerWidth >= 1000) {
+      let retries = 0;
       const setup = () => {
         const totalWidth = hContent.scrollWidth;
-        if (totalWidth <= 0) { requestAnimationFrame(setup); return; }
+        if (totalWidth <= 0) {
+          if (retries++ < 30) { requestAnimationFrame(setup); }
+          return;
+        }
 
         ScrollTrigger.create({
           trigger: hScroll,
@@ -166,7 +170,11 @@ const updateColors = () => {
 
     const refreshOnResize = () => ScrollTrigger.refresh();
     window.addEventListener("resize", refreshOnResize);
-    return () => window.removeEventListener("resize", refreshOnResize);
+
+    return () => {
+      window.removeEventListener("resize", refreshOnResize);
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
 
   });
 
@@ -204,7 +212,9 @@ const updateColors = () => {
 
     window.addEventListener("resize", repaint);
 
+    let mounted = true;
     const render = (now) => {
+      if (!mounted || !ctx) return;
       ctx.clearRect(0, 0, ww, wh);
       const cutoff = now - LIFETIME;
       let write = 0;
@@ -223,7 +233,7 @@ const updateColors = () => {
         ctx.stroke();
       }
       lines.length = write;
-      raf = requestAnimationFrame(render);
+      if (mounted) raf = requestAnimationFrame(render);
     };
 
     raf = requestAnimationFrame(render);
@@ -247,9 +257,10 @@ const updateColors = () => {
     document.addEventListener("pointermove", onMove);
 
     return () => {
+      mounted = false;
       window.removeEventListener("resize", repaint);
       document.removeEventListener("pointermove", onMove);
-      if (raf) cancelAnimationFrame(raf);
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
     };
   }, []);
 

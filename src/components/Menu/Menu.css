@@ -5,14 +5,15 @@
   right: 0;
   padding: 0 1.5rem;
   z-index: 100001;
+  mix-blend-mode: difference;
 }
 
 .menu .menu-logo {
-  filter: brightness(0);
+  filter: none;
 }
 
 .menu .menu-hamburger-icon .menu-item {
-  background: #000;
+  background: #fff;
 }
 
 .menu.has-hero {
@@ -41,6 +42,18 @@
 
 .menu:has(.is-open) {
   mix-blend-mode: unset;
+}
+
+.menu.white {
+  mix-blend-mode: difference;
+}
+
+.menu.white .menu-logo {
+  filter: none;
+}
+
+.menu.white .menu-hamburger-icon .menu-item {
+  background: #fff;
 }
 
 .menu .menu-header {

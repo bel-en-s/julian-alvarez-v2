@@ -7,7 +7,6 @@ import { useGSAP } from "@gsap/react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import Copy from "@/components/Copy/Copy";
 import ContactForm from "@/components/ContactForm/ContactForm";
-import CursorWeb from "@/components/CursorWeb/CursorWeb";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,113 +34,71 @@ const SOCIALS = [
 ];
 
 export default function Touchpoint() {
-  const heroRef = useRef(null);
-  const heroContentRef = useRef(null);
-  const infoRef = useRef(null);
+  const sectionRef = useRef(null);
 
   useGSAP(() => {
-    const heroImg = heroRef.current?.querySelector(".tp-hero-bg");
-    if (heroImg) {
-      gsap.to(heroImg, {
-        scale: 1.1,
-        duration: 1.5,
-        ease: "power2.out",
-      });
-    }
-
     ScrollTrigger.create({
-      trigger: heroRef.current,
-      start: "top top",
-      end: "bottom top",
-      scrub: 1.5,
-      onUpdate: (self) => {
-        if (heroImg) {
-          heroImg.style.transform = `scale(${1 + self.progress * 0.4})`;
-        }
+      trigger: sectionRef.current,
+      start: "top 80%",
+      once: true,
+      onEnter: () => {
+        gsap.to(".tp-head", { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" });
       },
     });
-  }, { scope: heroRef });
+  }, []);
 
   return (
-    <div className="touchpoint-page">
-      <CursorWeb />
-      <section className="tp-hero" ref={heroRef}>
+    <div className="touchpoint-page" ref={sectionRef}>
+      <section className="tp-hero">
         <div className="tp-hero-bg">
           <img src="/contact/arg.jpg" alt="" />
         </div>
         <div className="tp-hero-overlay" />
-        <div className="tp-hero-content" ref={heroContentRef}>
-          <Copy animateOnScroll={false}>
-            <p className="tp-hero-eyebrow">Contacto</p>
-          </Copy>
-          <Copy animateOnScroll={false} delay={0.15}>
-            <h1 className="tp-hero-title">Touchpoint</h1>
-          </Copy>
-          <Copy animateOnScroll={false} delay={0.3}>
-            <p className="tp-hero-sub">
-              Conectemos. Ya sea para prensa, partnerships o simplemente para
-              compartir tu idea — este es el canal directo.
-            </p>
-          </Copy>
-          <div className="tp-hero-scroll">
-            <span className="tp-scroll-indicator">
-              <MdOutlineArrowOutward />
-            </span>
-          </div>
+          <div className="tp-hero-content">
+            <h1 className="tp-title">Touchpoint</h1>
+          {/* <p className="tp-sub">
+            Conectemos. Ya sea para prensa, partnerships o simplemente para compartir tu idea — este es el canal directo.
+          </p> */}
         </div>
       </section>
 
-      <section className="tp-info" ref={infoRef}>
-        <div className="tp-info-grid">
-          <div className="tp-info-header">
-            <Copy animateOnScroll={true}>
-              <h2>Canales oficiales</h2>
-            </Copy>
-            <Copy animateOnScroll={true} delay={0.15}>
-              <p className="bodyCopy">
-                Para consultas profesionales, contactanos a través de los
-                siguientes canales.
-              </p>
-            </Copy>
-          </div>
-          <div className="tp-info-cards">
+      <section className="tp-section">
+        <div className="tp-section-inner">
+          <header className="tp-head">
+            <p className="eyebrow">Canales oficiales</p>
+            <h2>Escribinos</h2>
+            <p className="tp-section-desc">
+              Para consultas profesionales, contactanos a través de los siguientes canales.
+            </p>
+          </header>
+
+          <div className="tp-grid">
             {CONTACT_INFO.map((item, i) => (
-              <div className="tp-info-card" key={i}>
-                <Copy animateOnScroll={true} delay={0.1 * i}>
-                  <p className="tp-info-card-label">{item.label}</p>
-                </Copy>
-                <Copy animateOnScroll={true} delay={0.1 * i + 0.1}>
-                  <p className="tp-info-card-line">{item.line1}</p>
-                </Copy>
-                <Copy animateOnScroll={true} delay={0.1 * i + 0.2}>
-                  <p className="tp-info-card-email">{item.line2}</p>
-                </Copy>
+              <div key={i} className="tp-card">
+                <div className="tp-card-top">
+                  <span className="tp-card-num">0{i + 1}</span>
+                  <span className="tp-card-label">{item.label}</span>
+                </div>
+                <p className="tp-card-line">{item.line1}</p>
+                <a href={`mailto:${item.line2}`} className="tp-card-email">{item.line2}</a>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="tp-social">
-        <div className="tp-social-grid">
-          <Copy animateOnScroll={true}>
-            <h2>Redes sociales</h2>
-          </Copy>
-          <div className="tp-social-links">
+      <section className="tp-section tp-section--alt">
+        <div className="tp-section-inner">
+          <header className="tp-head">
+            <p className="eyebrow">Redes sociales</p>
+            <h2>Seguime</h2>
+          </header>
+
+          <div className="tp-social-list">
             {SOCIALS.map((s, i) => (
-              <a
-                key={i}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tp-social-link"
-              >
-                <Copy animateOnScroll={true} delay={0.1 * i}>
-                  <span className="tp-social-name">{s.name}</span>
-                </Copy>
-                <Copy animateOnScroll={true} delay={0.1 * i + 0.1}>
-                  <span className="tp-social-handle">{s.handle}</span>
-                </Copy>
+              <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="tp-social-link">
+                <span className="tp-social-name">{s.name}</span>
+                <span className="tp-social-handle">{s.handle}</span>
                 <MdOutlineArrowOutward className="tp-social-arrow" />
               </a>
             ))}

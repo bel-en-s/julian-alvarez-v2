@@ -1,7 +1,7 @@
 "use client";
 import "./Menu.css";
-import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const pathname = usePathname();
 
   const menuRef = useRef(null);
 
@@ -133,10 +134,6 @@ const Menu = () => {
     tl.to(layer, { opacity: 0, duration: 0.3, ease: "power2.in" }, 0);
   };
 
-  const handleLinkClick = () => {
-    if (isOpen) closeMenu();
-  };
-
   useEffect(() => {
     primeWeb();
 
@@ -171,6 +168,12 @@ const Menu = () => {
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);
+
+  useEffect(() => {
+    const menu = menuRef.current;
+    if (!menu) return;
+    menu.classList.toggle("white", pathname === "/fuera-de-las-canchas" || pathname === "/dentro-de-las-canchas");
+  }, [pathname]);
 
   return (
     <nav className="menu" ref={menuRef}>
@@ -222,38 +225,38 @@ const Menu = () => {
                 <circle className="dangle-tip t3" cx="446" cy="400" r="1.2" />
               </g>
             </svg>
- <Link
+ <a
   href="/"
   className="ja-menu-arana__item i0"
-  onClick={handleLinkClick}
+  onClick={(e) => { e.preventDefault(); window.location.href = "/?t=" + Date.now(); }}
 >
   <span className="ja-menu-arana__dot"></span>
   INICIO
-</Link>
-            <Link
+</a>
+            <a
               href="/dentro-de-las-canchas"
               className="ja-menu-arana__item i1"
-              onClick={handleLinkClick}
+               onClick={(e) => { e.preventDefault(); window.location.href = "/dentro-de-las-canchas?t=" + Date.now(); }}
             >
               <span className="ja-menu-arana__dot"></span>
               DENTRO DE LAS CANCHAS
-            </Link>
-            <Link
+            </a>
+            <a
               href="/fuera-de-las-canchas"
               className="ja-menu-arana__item i2"
-              onClick={handleLinkClick}
+               onClick={(e) => { e.preventDefault(); window.location.href = "/fuera-de-las-canchas?t=" + Date.now(); }}
             >
               <span className="ja-menu-arana__dot"></span>
               FUERA DE LAS CANCHAS
-            </Link>
-            <Link
+            </a>
+            <a
               href="/touchpoint"
               className="ja-menu-arana__item i4"
-              onClick={handleLinkClick}
+               onClick={(e) => { e.preventDefault(); window.location.href = "/touchpoint?t=" + Date.now(); }}
             >
               <span className="ja-menu-arana__dot"></span>
               CONTACTO
-            </Link>
+            </a>
           </div>
         </div>
       </div>
