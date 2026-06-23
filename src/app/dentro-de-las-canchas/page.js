@@ -2,10 +2,11 @@
 
 import "./dentro.css";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Copy from "@/components/Copy/Copy";
+import { fetchPartidos } from "@/lib/sheets";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,13 +29,14 @@ const TROFEOS = [
   { name: "Goleador", n: 2, desc: ["18 goles", "2 goles"] },
 ];
 
-const PARTIDOS = [
+const PARTIDOS_FALLBACK = [
   {
     n: 1,
     fecha: "18 · Oct · 2024 · LaLiga · Jornada 9",
     fixture: "Atlético de Madrid",
     rival: "Real Sociedad",
     lugar: "Estadio Metropolitano · Madrid",
+    fotos: ["/bio/1.jpeg", "/bio/Anexo 1.jpeg", "/bio/Anexo 2.jpg", "/bio/3.jpeg", "/bio/Anexo 4.jpeg"],
   },
   {
     n: 2,
@@ -42,6 +44,7 @@ const PARTIDOS = [
     fixture: "Atlético de Madrid",
     rival: "AC Milan",
     lugar: "San Siro · Milán",
+    fotos: ["/bio/2.jpeg", "/bio/Anexo 2.jpeg", "/bio/Anexo 3.jpg", "/bio/4.jpeg", "/bio/Anexo 5.jpeg"],
   },
   {
     n: 3,
@@ -49,12 +52,20 @@ const PARTIDOS = [
     fixture: "Atlético de Madrid",
     rival: "FC Barcelona",
     lugar: "Spotify Camp Nou · Barcelona",
+    fotos: ["/bio/3.jpeg", "/bio/Anexo-3.jpeg", "/bio/4.jpg", "/bio/Anexo 5.jpeg", "/bio/Anexo 6.webp"],
   },
 ];
 
 export default function DentroDeLasCanchas() {
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
+  const [partidos, setPartidos] = useState(PARTIDOS_FALLBACK);
+
+  useEffect(() => {
+    fetchPartidos().then((data) => {
+      if (data.length) setPartidos(data);
+    });
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -144,7 +155,7 @@ export default function DentroDeLasCanchas() {
           </Copy>
         </header>
 
-        {PARTIDOS.map((p) => (
+        {partidos.map((p) => (
           <article key={p.n} className="partido">
             <header className="partido-head">
               <div>
@@ -157,21 +168,11 @@ export default function DentroDeLasCanchas() {
               <span className="partido-num" aria-hidden="true">{String(p.n).padStart(2, "0")}</span>
             </header>
             <div className="partido-grid">
-              <div className="partido-img slot-a">
-                <img src={`/bio/${p.n}.jpeg`} alt="" loading="lazy" />
-              </div>
-              <div className="partido-img">
-                <img src={`/bio/Anexo ${p.n}.jpeg`} alt="" loading="lazy" />
-              </div>
-              <div className="partido-img">
-                <img src={`/bio/Anexo ${p.n + 1}.jpg`} alt="" loading="lazy" />
-              </div>
-              <div className="partido-img">
-                <img src={`/bio/${p.n + 2}.jpeg`} alt="" loading="lazy" />
-              </div>
-              <div className="partido-img">
-                <img src={`/bio/Anexo ${p.n + 3}.jpeg`} alt="" loading="lazy" />
-              </div>
+              {p.fotos.map((foto, i) => (
+                <div key={i} className={`partido-img${i === 0 ? " slot-a" : ""}`}>
+                  <img src={foto} alt="" loading="lazy" />
+                </div>
+              ))}
             </div>
           </article>
         ))}
