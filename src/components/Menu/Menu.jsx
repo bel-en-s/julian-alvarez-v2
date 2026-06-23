@@ -4,6 +4,10 @@ import Link from "next/link";
 import { useRef, useState, useEffect } from "react";
 
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -148,6 +152,24 @@ const Menu = () => {
     window.addEventListener("resize", fit);
 
     return () => window.removeEventListener("resize", fit);
+  }, []);
+
+  useEffect(() => {
+    const menu = menuRef.current;
+    if (!menu) return;
+    const hero = document.querySelector(".hero");
+    if (hero) {
+      menu.classList.add("has-hero");
+      ScrollTrigger.create({
+        trigger: hero,
+        start: "bottom top",
+        onEnter: () => menu.classList.add("scrolled"),
+        onLeaveBack: () => menu.classList.remove("scrolled"),
+      });
+    }
+    return () => {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
   }, []);
 
   return (

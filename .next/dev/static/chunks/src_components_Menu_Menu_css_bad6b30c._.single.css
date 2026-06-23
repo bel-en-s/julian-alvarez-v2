@@ -1,12 +1,43 @@
 /* [project]/src/components/Menu/Menu.css [app-client] (css) */
 .menu {
   z-index: 100001;
-  mix-blend-mode: difference;
   padding: 0 1.5rem;
   position: fixed;
   top: 1.5rem;
   left: 0;
   right: 0;
+}
+
+.menu .menu-logo {
+  filter: brightness(0);
+}
+
+.menu .menu-hamburger-icon .menu-item {
+  background: #000;
+}
+
+.menu.has-hero {
+  mix-blend-mode: difference;
+}
+
+.menu.has-hero .menu-logo {
+  filter: none;
+}
+
+.menu.has-hero .menu-hamburger-icon .menu-item {
+  background: #fff;
+}
+
+.menu.has-hero.scrolled {
+  mix-blend-mode: unset;
+}
+
+.menu.has-hero.scrolled .menu-logo {
+  filter: brightness(0);
+}
+
+.menu.has-hero.scrolled .menu-hamburger-icon .menu-item {
+  background: #000;
 }
 
 .menu:has(.is-open) {

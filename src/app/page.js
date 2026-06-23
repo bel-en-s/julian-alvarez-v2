@@ -16,6 +16,7 @@ import MiHistoria from "@/components/MiHistoria/MiHistoria";
 import AboutVideo from "@/components/AboutVideo/AboutVideo";
 
 import Copy from "@/components/Copy/Copy";
+import ContactForm from "@/components/ContactForm/ContactForm";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -78,12 +79,12 @@ if (track) {
 
     ScrollTrigger.create({
   trigger: aboutSection,
-  start: "top top", // cuando la sección ocupa toda la pantalla
+  start: "top top",
   once: true,
 
   onEnter: () => {
     gsap.to(aboutSection, {
-      "--about-bg": "#edf1e8",
+      backgroundColor: "transparent",
       "--about-text": "#000000",
       duration: 0.8,
       ease: "power2.out",
@@ -355,10 +356,8 @@ const updateColors = () => {
       </div>
 
       <MarqueeBanner />
+      <ContactForm />
 
-     
-
- 
     </>
   );
 }

@@ -4,7 +4,6 @@ import { Koulen, DM_Mono, Host_Grotesk, Space_Grotesk } from "next/font/google";
 import ClientLayout from "@/client-layout";
 
 import Menu from "@/components/Menu/Menu";
-import Footer from "@/components/Footer/Footer";
 import ShoppingCart from "@/components/ShoppingCart/ShoppingCart";
 import TransitionProvider from "@/providers/TransitionProvider";
 
@@ -45,7 +44,7 @@ export default function RootLayout({ children }) {
         className={`${koulen.variable} ${hostGrotesk.variable} ${dmMono.variable} ${spaceGrotesk.variable}`}
       >
         <TransitionProvider>
-          <ClientLayout footer={<Footer />}>
+          <ClientLayout>
             <Menu />
             {children}
           </ClientLayout>

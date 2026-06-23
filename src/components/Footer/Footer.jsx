@@ -2,14 +2,10 @@
 import "./Footer.css";
 import Link from "next/link";
 
-import ContactForm from "../ContactForm/ContactForm";
 import Copy from "../Copy/Copy";
 
 const Footer = () => {
   return (
-    <>
-      <ContactForm />
-
       <footer>
         <div className="container">
           <div className="footer-row">
@@ -64,7 +60,6 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-    </>
   );
 };
 

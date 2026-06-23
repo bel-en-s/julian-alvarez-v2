@@ -3,7 +3,7 @@ footer {
   z-index: 2;
   width: 100%;
   background-color: var(--base-100);
-  margin-top: -45svh;
+  margin-top: 0;
 }
 
 footer .container {

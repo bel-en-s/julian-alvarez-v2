@@ -173,7 +173,7 @@
 }
 
 .t-meta li {
-  font-family: var(--font-support);
+  font-family: var(--font-big-shoulders);
   font-size: 12px;
   letter-spacing: .07em;
   text-transform: uppercase;
@@ -189,7 +189,7 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  font-family: var(--font-support);
+  font-family: var(--font-big-shoulders);
   font-weight: 600;
   font-size: 11px;
   letter-spacing: .1em;
@@ -255,7 +255,7 @@
 }
 
 .partido-fixture .vs {
-  font-family: var(--font-support);
+  font-family: var(--font-big-shoulders);
   font-weight: 500;
   font-size: .42em;
   letter-spacing: .18em;
@@ -265,7 +265,7 @@
 }
 
 .partido-lugar {
-  font-family: var(--font-support);
+  font-family: var(--font-big-shoulders);
   font-size: 13px;
   letter-spacing: .06em;
   color: var(--fg-3);

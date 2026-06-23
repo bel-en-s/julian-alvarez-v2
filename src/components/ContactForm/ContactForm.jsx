@@ -1,54 +1,148 @@
 "use client";
 import "./ContactForm.css";
-import { useRef, useCallback } from "react";
-
+import { useRef, useState } from "react";
+import Link from "next/link";
 import { MdOutlineArrowOutward } from "react-icons/md";
-import BrandIcon from "../BrandIcon/BrandIcon";
 import Copy from "../Copy/Copy";
 
+const CONTACT_TYPES = [
+  { value: "partnership", label: "Partnership / Sponsorship" },
+  { value: "press", label: "Press / Media" },
+  { value: "management", label: "Management" },
+  { value: "booking", label: "Booking / Events" },
+  { value: "other", label: "Other" },
+];
 
-
-const ContactForm = ({ cardOnly }) => {
+const ContactForm = () => {
+  const [type, setType] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
   const headerRef = useRef(null);
- 
 
-  if (cardOnly) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name || !email || !type || !message) return;
+    setSent(true);
+  };
+
+  if (sent) {
     return (
-      <div className="contact-form-container">
-        <div className="cf-header">
-          <h4>Entremos en contacto</h4>
+      <section className="contact-form">
+        <div className="contact-parallax-image-wrapper">
+          <img src="/contact-form/gol.jpg" alt="" />
         </div>
-        <div className="cf-copy">
-          <p className="bodyCopy sm">
-            Entremos en contacto
-          </p>
-        </div>
-        <div className="cf-input">
-          <input type="text" placeholder="Deja tu mail" />
-        </div>
-        <div className="cf-submit">
-          <MdOutlineArrowOutward />
-        </div>
-        <div className="cf-footer">
-          <div className="cf-divider"></div>
-          <div className="cf-footer-copy">
-            <p className="bodyCopy sm">
-              No marketing cycles. Just rare, coded dispatches.
-            </p>
+        <div className="cf-nav">
+          <div className="cf-nav-row">
+            <div className="cf-nav-col">
+              <Copy animateOnScroll={true}>
+                <p className="bodyCopy cf-nav-header">Navegación</p>
+              </Copy>
+              <div className="cf-nav-links">
+                <Copy animateOnScroll={true} delay={0.1}>
+                  <Link href="/">Index</Link>
+                </Copy>
+                <Copy animateOnScroll={true} delay={0.15}>
+                  <Link href="/fuera-de-las-canchas">Fuera de las canchas</Link>
+                </Copy>
+                <Copy animateOnScroll={true} delay={0.2}>
+                  <Link href="/genesis">Genesis</Link>
+                </Copy>
+                <Copy animateOnScroll={true} delay={0.25}>
+                  <Link href="/touchpoint">Contacto</Link>
+                </Copy>
+              </div>
+            </div>
+            <div className="cf-nav-col">
+              <Copy animateOnScroll={true}>
+                <p className="bodyCopy cf-nav-header">Conectar redes sociales</p>
+              </Copy>
+              <div className="cf-nav-links">
+                <Copy animateOnScroll={true} delay={0.1}>
+                  <a href="https://www.instagram.com/julianalvarez/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                </Copy>
+                <Copy animateOnScroll={true} delay={0.15}>
+                  <a href="https://www.youtube.com/@julianalvarez" target="_blank" rel="noopener noreferrer">YouTube</a>
+                </Copy>
+              </div>
+            <div className="cf-nav-ulah">
+                <p style={{ color: "#ffffff" }}>«Diseñado por Ulah Marketing · 2026».</p>
+            </div>
           </div>
         </div>
       </div>
+      <div className="contact-form-container">
+        <div className="cf-header" ref={headerRef}>
+          <Copy animateOnScroll={true}>
+            <h4>Entremos en contacto</h4>
+          </Copy>
+          </div>
+          <div className="cf-copy">
+            <Copy animateOnScroll={true} delay={0.15}>
+              <p className="bodyCopy sm">
+                Recibimos tu mensaje. Te responderemos pronto.
+              </p>
+            </Copy>
+          </div>
+          <button className="cf-reset" onClick={() => { setSent(false); setName(""); setEmail(""); setType(""); setMessage(""); }}>
+            Enviar otro mensaje
+          </button>
+          <div className="cf-footer">
+            <div className="cf-divider"></div>
+            <div className="cf-footer-copy">
+              <p className="bodyCopy sm" style={{ color: "#ffffff" }}>«Diseñado por Ulah Marketing · 2026».</p>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 
   return (
     <section className="contact-form">
       <div className="contact-parallax-image-wrapper">
-        {/* <h1>Nrmlss</h1> */}
         <img src="/contact-form/gol.jpg" alt="" />
       </div>
+      <div className="cf-nav">
+        <div className="cf-nav-row">
+          <div className="cf-nav-col">
+            <Copy animateOnScroll={true}>
+              <p className="bodyCopy cf-nav-header">Navegación</p>
+            </Copy>
+            <div className="cf-nav-links">
+              <Copy animateOnScroll={true} delay={0.1}>
+                <Link href="/">Index</Link>
+              </Copy>
+              <Copy animateOnScroll={true} delay={0.15}>
+                <Link href="/fuera-de-las-canchas">Fuera de las canchas</Link>
+              </Copy>
+              <Copy animateOnScroll={true} delay={0.2}>
+                <Link href="/genesis">Genesis</Link>
+              </Copy>
+              <Copy animateOnScroll={true} delay={0.25}>
+                <Link href="/touchpoint">Contacto</Link>
+              </Copy>
+            </div>
+          </div>
+          <div className="cf-nav-col">
+            <Copy animateOnScroll={true}>
+              <p className="bodyCopy cf-nav-header">Conectar redes sociales</p>
+            </Copy>
+            <div className="cf-nav-links">
+              <Copy animateOnScroll={true} delay={0.1}>
+                <a href="https://www.instagram.com/julianalvarez/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              </Copy>
+              <Copy animateOnScroll={true} delay={0.15}>
+                <a href="https://www.youtube.com/@julianalvarez" target="_blank" rel="noopener noreferrer">YouTube</a>
+              </Copy>
+            </div>
+           
+          </div>
+        </div>
+      </div>
       <div className="contact-form-container">
-        <div className="cf-header" ref={headerRef} >
+        <div className="cf-header" ref={headerRef}>
           <Copy animateOnScroll={true}>
             <h4>Entremos en contacto</h4>
           </Copy>
@@ -56,24 +150,64 @@ const ContactForm = ({ cardOnly }) => {
         <div className="cf-copy">
           <Copy animateOnScroll={true} delay={0.15}>
             <p className="bodyCopy sm">
-             BUISNESS INQUIRIES
+              BUSINESS INQUIRIES
             </p>
           </Copy>
         </div>
-        <div className="cf-input">
-          <input type="text" placeholder="Deja tu mail" />
-        </div>
-        <div className="cf-submit">
-          <MdOutlineArrowOutward />
-        </div>
+
+        <form className="cf-fields" onSubmit={handleSubmit}>
+          <div className="cf-field">
+            <input
+              type="text"
+              placeholder="Nombre completo"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="cf-field">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="cf-field">
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              required
+            >
+              <option value="" disabled hidden>
+                Tipo de consulta
+              </option>
+              {CONTACT_TYPES.map((t) => (
+                <option key={t.value} value={t.value}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="cf-field">
+            <textarea
+              placeholder="Mensaje"
+              rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="cf-submit">
+            <MdOutlineArrowOutward />
+          </button>
+        </form>
+
         <div className="cf-footer">
           <div className="cf-divider"></div>
           <div className="cf-footer-copy">
-            <Copy animateOnScroll={true} delay={0.3}>
-              <p className="bodyCopy sm">
-                «Diseñado por Ulah Marketing · 2026».
-              </p>
-            </Copy>
+            <p className="bodyCopy sm" style={{ color: "#ffffff" }}>«Diseñado por Ulah Marketing · 2026».</p>
           </div>
         </div>
       </div>
