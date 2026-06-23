@@ -255,6 +255,7 @@ const updateColors = () => {
   return (
     <>
       <BackgroundWeb />
+      <canvas className="hero-alvarez-canvas" ref={alvarezCanvasRef} aria-hidden="true" />
       <Preloader onAnimationComplete={handlePreloaderComplete} />
 
       <section className="hero" ref={heroSectionRef}>
@@ -278,7 +279,6 @@ const updateColors = () => {
             </Copy>
           </div>
           <div className="hero-gradient"></div>
-          <canvas className="hero-alvarez-canvas" ref={alvarezCanvasRef} aria-hidden="true" />
         </div>
         {/* <div className="section-footer">
           <Copy
