@@ -124,6 +124,16 @@
   transform: scale(1.05);
 }
 
+.cf-msg {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.cf-msg.error {
+  color: #f87171;
+}
+
 .contact-form .cf-submit svg {
   transform: scale(0.35);
 }
