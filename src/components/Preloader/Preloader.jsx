@@ -14,7 +14,36 @@ const Preloader = () => {
   const [showPreloader, setShowPreloader] = useState(isInitialLoad);
   const [loaderAnimating, setLoaderAnimating] = useState(isInitialLoad);
   const wrapperRef = useRef(null);
+  const videoRef = useRef(null);
   const lenis = useLenis();
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const attemptPlay = () => {
+      video.play().catch(() => {
+        const onInteraction = () => {
+          video.play().catch(() => {});
+          document.removeEventListener("touchstart", onInteraction);
+          document.removeEventListener("click", onInteraction);
+        };
+        document.addEventListener("touchstart", onInteraction, { once: true });
+        document.addEventListener("click", onInteraction, { once: true });
+      });
+    };
+
+    if (video.readyState >= 2) {
+      attemptPlay();
+    } else {
+      video.addEventListener("canplaythrough", attemptPlay, { once: true });
+      video.load();
+    }
+
+    return () => {
+      video.removeEventListener("canplaythrough", attemptPlay);
+    };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -146,7 +175,7 @@ const Preloader = () => {
   return (
     <div className="preloader-wrapper" ref={wrapperRef}>
       <div className="preloader-bg"></div>
-      <video className="preloader-video" src="/loader/loader-opt.mp4" autoPlay muted loop playsInline webkit-playsinline="true" preload="auto" />
+      <video ref={videoRef} className="preloader-video" src="/loader/loader-opt.mp4" autoPlay muted loop playsInline webkit-playsinline="true" disablePictureInPicture controlsList="nodownload noremoteplayback" preload="auto" />
       <div className="preloader-progress">
         <div className="preloader-progress-bar"></div>
       </div>
