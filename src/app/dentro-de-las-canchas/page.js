@@ -36,7 +36,7 @@ const PARTIDOS_FALLBACK = [
     fixture: "Atlético de Madrid",
     rival: "Real Sociedad",
     lugar: "Estadio Metropolitano · Madrid",
-    fotos: ["/bio/1.jpeg", "/bio/Anexo 1.jpeg", "/bio/Anexo 2.jpg", "/bio/3.jpeg", "/bio/Anexo 4.jpeg"],
+    fotos: ["/bio/1.jpeg", "/bio/Anexo 1.jpeg", "/bio/Anexo 2.jpeg", "/bio/3.jpeg", "/bio/Anexo 5.jpeg"],
   },
   {
     n: 2,
@@ -44,7 +44,7 @@ const PARTIDOS_FALLBACK = [
     fixture: "Atlético de Madrid",
     rival: "AC Milan",
     lugar: "San Siro · Milán",
-    fotos: ["/bio/2.jpeg", "/bio/Anexo 2.jpeg", "/bio/Anexo 3.jpg", "/bio/4.jpeg", "/bio/Anexo 5.jpeg"],
+    fotos: ["/bio/2.jpeg", "/bio/Anexo 2.jpeg", "/bio/Anexo-3.jpeg", "/bio/4.jpg", "/bio/Anexo 5.jpeg"],
   },
   {
     n: 3,
