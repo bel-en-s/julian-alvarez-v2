@@ -330,6 +330,10 @@ button.secondary {
 }
 
 @media (max-width: 1000px) {
+  html {
+    overflow-x: hidden;
+  }
+
   .container,
   .section-header,
   .section-footer {

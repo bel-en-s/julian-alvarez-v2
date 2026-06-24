@@ -102,7 +102,7 @@
 
 .cta-block--doble .cta-title {
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
   font-size: 2.5rem;
   padding-top: 2rem;
   position: absolute;
@@ -203,7 +203,7 @@
 
 .cta-block--triple .cta-title {
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
   font-size: 2.5rem;
   padding-top: 2rem;
   position: absolute;
@@ -271,7 +271,7 @@
 
 .cta-block--europa .cta-title {
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
   font-size: 2.5rem;
   padding-top: 2rem;
   position: absolute;
@@ -360,7 +360,7 @@
 
 .cta-block--presente .cta-title {
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
   font-size: 2.5rem;
   padding-top: 2rem;
   position: absolute;

@@ -193,6 +193,7 @@ const DotMatrix = ({
     if (!wrapper) return;
 
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.innerWidth < 1000) return;
 
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });

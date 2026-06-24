@@ -60,6 +60,9 @@ const MarqueeBanner = () => {
     const smudgeSVG = smudgeSVGRef.current;
     if (!banner || !smudgeContainer || !smudgeSVG) return;
 
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const touchScale = isTouchDevice ? 0.45 : 1;
+
     const pointer = { x: 0, y: 0, lx: 0, ly: 0 };
     let hasStarted = false;
     let stampAccum = 0;
@@ -93,11 +96,12 @@ const MarqueeBanner = () => {
     banner.addEventListener("touchstart", (e) => {
       const pos = getRelativePos(e.touches[0].clientX, e.touches[0].clientY);
       onPointerMove(pos.x, pos.y);
-    }, { passive: true });
+    }, { passive: false });
     banner.addEventListener("touchmove", (e) => {
+      e.preventDefault();
       const pos = getRelativePos(e.touches[0].clientX, e.touches[0].clientY);
       onPointerMove(pos.x, pos.y);
-    }, { passive: true });
+    }, { passive: false });
 
     const matchSVGToViewport = () => {
       const rect = banner.getBoundingClientRect();
@@ -191,7 +195,7 @@ const MarqueeBanner = () => {
             stampSmudgeAt(
               pointer.x - dx * t,
               pointer.y - dy * t,
-              config.sizeBase + dist * config.sizeFromSpeed,
+              (config.sizeBase + dist * config.sizeFromSpeed) * touchScale,
             );
           }
         }

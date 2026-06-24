@@ -52,20 +52,24 @@ export default function Index() {
 
    const track = scrollTrackRef.current;
 if (track) {
-  ScrollTrigger.create({
-    trigger: track,
-    start: "top top",
-    end: "+=800",
-    pin: true,
-    scrub: true,
+  if (window.innerWidth >= 1000) {
+    ScrollTrigger.create({
+      trigger: track,
+      start: "top top",
+      end: "+=800",
+      pin: true,
+      scrub: true,
 
-    onUpdate: (self) => {
-      document.documentElement.style.setProperty(
-        "--video-scale",
-        1 + self.progress * 0.2
-      );
-    },
-  });
+      onUpdate: (self) => {
+        document.documentElement.style.setProperty(
+          "--video-scale",
+          1 + self.progress * 0.2
+        );
+      },
+    });
+  } else {
+    document.documentElement.style.setProperty("--video-scale", 1);
+  }
 }
 
     const aboutSection = document.querySelector(".about");
@@ -179,6 +183,7 @@ const updateColors = () => {
   });
 
   useEffect(() => {
+    if (window.innerWidth < 1000) return;
     const canvas = alvarezCanvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");

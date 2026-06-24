@@ -99,6 +99,8 @@ export default function Copy({
             paused: animateOnScroll,
             onComplete: () => {
               allLines.forEach(line => {
+                const mask = line.parentElement?.closest?.(".line-mask");
+                if (mask) mask.style.overflow = "visible";
                 line.style.overflow = "visible";
               });
             },

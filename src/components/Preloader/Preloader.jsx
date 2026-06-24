@@ -146,7 +146,7 @@ const Preloader = () => {
   return (
     <div className="preloader-wrapper" ref={wrapperRef}>
       <div className="preloader-bg"></div>
-      <video className="preloader-video" src="/loader/loader.mp4" autoPlay muted loop playsInline />
+      <video className="preloader-video" src="/loader/loader-opt.mp4" autoPlay muted loop playsInline webkit-playsinline="true" preload="auto" />
       <div className="preloader-progress">
         <div className="preloader-progress-bar"></div>
       </div>

@@ -85,6 +85,16 @@
   height: auto;
   object-fit: contain;
   z-index: 2;
+  pointer-events: none;
+}
+.preloader-video::-webkit-media-controls {
+  display: none !important;
+}
+.preloader-video::-webkit-media-controls-play-button {
+  display: none !important;
+}
+.preloader-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
 }
 
 .preloader-content {

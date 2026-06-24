@@ -49,44 +49,9 @@ export default function Touchpoint() {
 
   return (
     <div className="touchpoint-page" ref={sectionRef}>
-      <section className="tp-hero">
-        <div className="tp-hero-bg">
-          <img src="/contact/arg.jpg" alt="" />
-        </div>
-        <div className="tp-hero-overlay" />
-          <div className="tp-hero-content">
-            <h1 className="tp-title">Touchpoint</h1>
-          {/* <p className="tp-sub">
-            Conectemos. Ya sea para prensa, partnerships o simplemente para compartir tu idea — este es el canal directo.
-          </p> */}
-        </div>
-      </section>
+      
 
-      <section className="tp-section">
-        <div className="tp-section-inner">
-          <header className="tp-head">
-            <p className="eyebrow">Canales oficiales</p>
-            <h2>Escribinos</h2>
-            <p className="tp-section-desc">
-              Para consultas profesionales, contactanos a través de los siguientes canales.
-            </p>
-          </header>
-
-          <div className="tp-grid">
-            {CONTACT_INFO.map((item, i) => (
-              <div key={i} className="tp-card">
-                <div className="tp-card-top">
-                  <span className="tp-card-num">0{i + 1}</span>
-                  <span className="tp-card-label">{item.label}</span>
-                </div>
-                <p className="tp-card-line">{item.line1}</p>
-                <a href={`mailto:${item.line2}`} className="tp-card-email">{item.line2}</a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+   
       <section className="tp-section tp-section--alt">
         <div className="tp-section-inner">
           <header className="tp-head">

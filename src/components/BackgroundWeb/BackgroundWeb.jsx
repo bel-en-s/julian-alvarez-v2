@@ -5,6 +5,7 @@ export default function BackgroundWeb() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    if (window.innerWidth < 1000) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");

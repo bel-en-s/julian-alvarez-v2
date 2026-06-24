@@ -165,6 +165,11 @@
   transition: color 0.2s ease;
   word-break: break-all;
 }
+.tp-section-inner {
+  margin-top: 10vh;
+
+}
+
 
 .tp-card-email:hover {
   color: var(--violet);
@@ -211,6 +216,7 @@
 .tp-social-arrow {
   margin-left: auto;
   color: var(--base-400);
+  width: 50px;
   font-size: 0.6rem;
   transition: transform 0.2s ease;
 }
