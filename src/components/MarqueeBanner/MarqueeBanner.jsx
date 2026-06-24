@@ -7,20 +7,17 @@ import SpiderButton from "../SpiderButton/SpiderButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+const easeOutQuad = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+const easeInCubic = (t) => t * t * t;
+
 const config = {
-  stampInterval: 8,
-  sizeBase: 55,
-  sizeFromSpeed: 0.06,
-  expandMultiplier: 1.0,
-  expandTime: 0.2,
-  expandEase: "power2.out",
-  dissolveStart: 0.2,
-  dissolveTime: 1.5,
-  dissolveEase: "power2.inOut",
-  brushDensity: 10,
-  brushSpread: 4,
-  brushAspectMin: 0.5,
-  brushAspectMax: 1,
+  smoothing: 0.12,
+  threshold: 0.01,
+  sizeFromSpeed: 0.2,
+  expandMultiplier: 2,
+  expandTime: 2000,
+  dissolveStart: 2000,
+  dissolveTime: 3000,
 };
 
 const MarqueeBanner = () => {
@@ -60,19 +57,17 @@ const MarqueeBanner = () => {
     const smudgeSVG = smudgeSVGRef.current;
     if (!banner || !smudgeContainer || !smudgeSVG) return;
 
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    const touchScale = isTouchDevice ? 0.45 : 1;
-
-    const pointer = { x: 0, y: 0, lx: 0, ly: 0 };
-    let hasStarted = false;
-    let stampAccum = 0;
+    const NS = "http://www.w3.org/2000/svg";
+    const pointer = { x: 0, y: 0 };
+    const smooth = { x: 0, y: 0 };
+    let started = false;
     let raf = null;
 
     const onPointerMove = (x, y) => {
-      if (!hasStarted) {
-        pointer.x = pointer.lx = x;
-        pointer.y = pointer.ly = y;
-        hasStarted = true;
+      if (!started) {
+        pointer.x = smooth.x = x;
+        pointer.y = smooth.y = y;
+        started = true;
         return;
       }
       pointer.x = x;
@@ -105,102 +100,57 @@ const MarqueeBanner = () => {
 
     const matchSVGToViewport = () => {
       const rect = banner.getBoundingClientRect();
+      smudgeSVG.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
       smudgeSVG.style.width = rect.width + "px";
       smudgeSVG.style.height = rect.height + "px";
-      smudgeSVG.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
     };
 
     matchSVGToViewport();
     window.addEventListener("resize", matchSVGToViewport);
 
-    const stampSmudgeAt = (x, y, radius) => {
-      const count = config.brushDensity;
-      const spread = config.brushSpread;
+    const stampAt = (x, y, radius) => {
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", x);
+      c.setAttribute("cy", y);
+      c.setAttribute("r", radius);
+      c.setAttribute("fill", "#fff");
+      smudgeContainer.prepend(c);
 
-      for (let b = 0; b < count; b++) {
-        const ox = (Math.random() - 0.5) * spread;
-        const oy = (Math.random() - 0.5) * spread;
-        const size = radius * (0.4 + Math.random() * 0.6);
+      const start = performance.now();
+      const expandEnd = start + config.expandTime;
+      const fadeStart = start + config.dissolveStart;
+      const fadeEnd = fadeStart + config.dissolveTime;
 
-        const ellipse = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "ellipse",
-        );
-
-        const aspect =
-          config.brushAspectMin +
-          Math.random() * (config.brushAspectMax - config.brushAspectMin);
-        const angle = Math.random() * Math.PI * 2;
-
-        ellipse.setAttribute("cx", x + ox);
-        ellipse.setAttribute("cy", y + oy);
-        ellipse.setAttribute("rx", size);
-        ellipse.setAttribute("ry", size * aspect);
-        ellipse.setAttribute("fill", "#fff");
-        ellipse.setAttribute(
-          "transform",
-          `rotate(${angle * (180 / Math.PI)} ${x + ox} ${y + oy})`,
-        );
-
-        smudgeContainer.prepend(ellipse);
-
-        const animatedSize = { current: size };
-
-        const timeline = gsap.timeline({
-          onUpdate() {
-            const s = Math.max(0, animatedSize.current);
-            ellipse.setAttribute("rx", s);
-            ellipse.setAttribute("ry", s * aspect);
-          },
-          onComplete() {
-            timeline.kill();
-            ellipse.remove();
-          },
-        });
-
-        timeline.to(animatedSize, {
-          current: size * config.expandMultiplier,
-          duration: config.expandTime,
-          ease: config.expandEase,
-        });
-
-        timeline.to(
-          animatedSize,
-          {
-            current: 0,
-            duration: config.dissolveTime,
-            ease: config.dissolveEase,
-          },
-          config.dissolveStart,
-        );
-      }
+      const tick = () => {
+        const now = performance.now();
+        if (now >= fadeEnd) {
+          if (c.parentNode) c.parentNode.removeChild(c);
+          return;
+        }
+        let r = radius;
+        if (now < expandEnd) {
+          const t = (now - start) / config.expandTime;
+          r = radius + (radius * config.expandMultiplier - radius) * easeOutQuad(t);
+        }
+        if (now >= fadeStart) {
+          const t = (now - fadeStart) / config.dissolveTime;
+          r *= 1 - easeInCubic(Math.min(t, 1));
+        }
+        c.setAttribute("r", Math.max(0, r));
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
     };
 
     const update = () => {
-      if (hasStarted) {
-        const dx = pointer.x - pointer.lx;
-        const dy = pointer.y - pointer.ly;
-        const dist = Math.hypot(dx, dy);
-
-        pointer.lx = pointer.x;
-        pointer.ly = pointer.y;
-
-        if (dist > 0) {
-          stampAccum += dist;
-          const interval = config.stampInterval;
-
-          while (stampAccum >= interval) {
-            stampAccum -= interval;
-            const t = 1 - stampAccum / dist;
-            stampSmudgeAt(
-              pointer.x - dx * t,
-              pointer.y - dy * t,
-              (config.sizeBase + dist * config.sizeFromSpeed) * touchScale,
-            );
-          }
+      if (started) {
+        smooth.x += (pointer.x - smooth.x) * config.smoothing;
+        smooth.y += (pointer.y - smooth.y) * config.smoothing;
+        const speed = Math.hypot(pointer.x - smooth.x, pointer.y - smooth.y);
+        if (speed > config.threshold) {
+          stampAt(smooth.x, smooth.y, speed * config.sizeFromSpeed);
         }
       }
-
       raf = requestAnimationFrame(update);
     };
 
@@ -257,10 +207,10 @@ const MarqueeBanner = () => {
         >
           <defs>
             <filter id="smudge-goo">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="50" />
+              <feGaussianBlur in="SourceGraphic" stdDeviation="25" />
               <feColorMatrix
                 type="matrix"
-                values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 4 -0.35"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 60 -14"
               />
             </filter>
           </defs>
