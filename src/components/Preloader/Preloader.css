@@ -5,6 +5,11 @@
   width: 100%;
   height: 100svh;
   z-index: 100010;
+  pointer-events: none;
+}
+
+.preloader-wrapper > * {
+  pointer-events: none;
 }
 
 .preloader-bg,

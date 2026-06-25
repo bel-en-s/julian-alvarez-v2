@@ -294,6 +294,7 @@
   cursor: pointer;
   text-decoration: none;
   width: max-content;
+  pointer-events: auto;
   overflow: hidden;
   isolation: isolate;
   transform: translate(-50%, -50%) scale(.6);

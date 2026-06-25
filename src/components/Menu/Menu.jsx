@@ -110,8 +110,8 @@ const Menu = () => {
     if (items.length) {
       tl.fromTo(
         items,
-        { opacity: 0, xPercent: -50, yPercent: -50, scale: 0.6 },
-        { opacity: 1, xPercent: -50, yPercent: -50, scale: 1, duration: 0.5, ease: "back.out(1.7)", stagger: 0.08 },
+        { opacity: 0, xPercent: -50, yPercent: -50, scale: 0.6, pointerEvents: "none" },
+        { opacity: 1, xPercent: -50, yPercent: -50, scale: 1, pointerEvents: "auto", duration: 0.5, ease: "back.out(1.7)", stagger: 0.08 },
         0.35
       );
     }
@@ -129,6 +129,13 @@ const Menu = () => {
         setIsOpen(false);
         setIsAnimating(false);
         if (layerRef.current) layerRef.current.classList.remove("is-open");
+        if (frameRef.current) {
+          gsap.set(frameRef.current.querySelectorAll(".ja-menu-arana__item"), {
+            opacity: 0,
+            scale: 0.6,
+            pointerEvents: "none",
+          });
+        }
       },
     });
 
@@ -146,7 +153,9 @@ const Menu = () => {
     }
     if (frameRef.current) {
       gsap.set(frameRef.current.querySelectorAll(".ja-menu-arana__item"), {
-        clearProps: "all",
+        opacity: 0,
+        scale: 0.6,
+        pointerEvents: "none",
       });
     }
     router.push(path);
