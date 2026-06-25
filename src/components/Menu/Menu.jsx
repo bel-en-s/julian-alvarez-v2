@@ -123,6 +123,7 @@ const Menu = () => {
   };
 
   const closeMenu = () => {
+    setIsAnimating(true);
     const tl = gsap.timeline({
       onComplete: () => {
         setIsOpen(false);
@@ -134,6 +135,21 @@ const Menu = () => {
     const layer = layerRef.current;
 
     tl.to(layer, { opacity: 0, duration: 0.3, ease: "power2.in" }, 0);
+  };
+
+  const navigateAndClose = (path) => {
+    setIsOpen(false);
+    setIsAnimating(false);
+    if (layerRef.current) {
+      gsap.set(layerRef.current, { clearProps: "opacity" });
+      layerRef.current.classList.remove("is-open");
+    }
+    if (frameRef.current) {
+      gsap.set(frameRef.current.querySelectorAll(".ja-menu-arana__item"), {
+        clearProps: "all",
+      });
+    }
+    router.push(path);
   };
 
   useEffect(() => {
@@ -230,7 +246,7 @@ const Menu = () => {
  <a
   href="/"
   className="ja-menu-arana__item i0"
-  onClick={(e) => { e.preventDefault(); router.push("/"); }}
+  onClick={(e) => { e.preventDefault(); navigateAndClose("/"); }}
 >
   <span className="ja-menu-arana__dot"></span>
   INICIO
@@ -238,7 +254,7 @@ const Menu = () => {
             <a
               href="/dentro-de-las-canchas"
               className="ja-menu-arana__item i1"
-               onClick={(e) => { e.preventDefault(); router.push("/dentro-de-las-canchas"); }}
+               onClick={(e) => { e.preventDefault(); navigateAndClose("/dentro-de-las-canchas"); }}
             >
               <span className="ja-menu-arana__dot"></span>
               DENTRO DE LAS CANCHAS
@@ -246,7 +262,7 @@ const Menu = () => {
             <a
               href="/fuera-de-las-canchas"
               className="ja-menu-arana__item i2"
-               onClick={(e) => { e.preventDefault(); router.push("/fuera-de-las-canchas"); }}
+               onClick={(e) => { e.preventDefault(); navigateAndClose("/fuera-de-las-canchas"); }}
             >
               <span className="ja-menu-arana__dot"></span>
               FUERA DE LAS CANCHAS
@@ -254,7 +270,7 @@ const Menu = () => {
             <a
               href="/touchpoint"
               className="ja-menu-arana__item i4"
-               onClick={(e) => { e.preventDefault(); router.push("/touchpoint"); }}
+               onClick={(e) => { e.preventDefault(); navigateAndClose("/touchpoint"); }}
             >
               <span className="ja-menu-arana__dot"></span>
               CONTACTO

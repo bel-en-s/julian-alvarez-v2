@@ -39,6 +39,9 @@ export default function Index() {
     setLoaderAnimating(false);
   };
 
+  const killTouch = (e) => { e.preventDefault(); e.stopPropagation(); };
+  const killClick = (e) => { e.preventDefault(); e.stopPropagation(); };
+
   useGSAP(() => {
     if (!heroImgRef.current || !heroHeaderRef.current) return;
 
@@ -69,7 +72,7 @@ if (track && window.innerWidth >= 1000) {
 }
 
     const aboutSection = document.querySelector(".about");
-    if (aboutSection) {
+    if (aboutSection && window.innerWidth >= 1000) {
       const lerpColor = (t, c1, c2) => {
         const r = Math.round(parseInt(c1.slice(1,3),16) + (parseInt(c2.slice(1,3),16) - parseInt(c1.slice(1,3),16)) * t);
         const g = Math.round(parseInt(c1.slice(3,5),16) + (parseInt(c2.slice(3,5),16) - parseInt(c1.slice(3,5),16)) * t);
@@ -271,7 +274,7 @@ const updateColors = () => {
       <canvas className="hero-alvarez-canvas" ref={alvarezCanvasRef} aria-hidden="true" />
       <Preloader onAnimationComplete={handlePreloaderComplete} />
 
-      <section className="hero" ref={heroSectionRef}>
+      <section className="hero" ref={heroSectionRef} onClick={killClick} onTouchStart={killTouch}>
         <HeroAtmos />
         <DotMatrix
           color1="#51398D"

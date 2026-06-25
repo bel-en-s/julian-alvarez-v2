@@ -10,15 +10,24 @@ gsap.registerPlugin(SplitText);
 
 let isInitialLoad = true;
 
-const Preloader = () => {
+const Preloader = ({ onAnimationComplete }) => {
   const [showPreloader, setShowPreloader] = useState(isInitialLoad);
   const [loaderAnimating, setLoaderAnimating] = useState(isInitialLoad);
   const wrapperRef = useRef(null);
   const lenis = useLenis();
 
   useEffect(() => {
+    const onPageShow = (e) => {
+      if (e.persisted) {
+        isInitialLoad = true;
+        setShowPreloader(true);
+        setLoaderAnimating(true);
+      }
+    };
+    window.addEventListener("pageshow", onPageShow);
     return () => {
       isInitialLoad = false;
+      window.removeEventListener("pageshow", onPageShow);
     };
   }, []);
 
@@ -95,6 +104,7 @@ const Preloader = () => {
           delay: 0.5,
           onComplete: () => {
             setLoaderAnimating(false);
+            onAnimationComplete?.();
             setTimeout(() => {
               setShowPreloader(false);
             }, 100);

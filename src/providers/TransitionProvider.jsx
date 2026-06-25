@@ -49,7 +49,6 @@ export default function TransitionProvider({ children }) {
 
   return (
     <TransitionRouter
-      auto
       leave={(next, pathname) => {
         ScrollTrigger.getAll().forEach(st => st.kill());
         gsap.set(blocksRef.current, { scaleX: 0, transformOrigin: "left" });
