@@ -2,6 +2,7 @@
 
 import "./fuera-de-las-canchas.css";
 import { useRef, useEffect, useState } from "react";
+
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -19,6 +20,11 @@ const GRID = [
 
 export default function FueraDeLasCanchas() {
   const sectionRef = useRef(null);
+
+  useEffect(() => {
+    document.body.style.backgroundColor = "#fff";
+    return () => { document.body.style.backgroundColor = ""; };
+  }, []);
 
   useGSAP(() => {
     gsap.set(".fdc-hero-inner > *", { y: 60, opacity: 0 });

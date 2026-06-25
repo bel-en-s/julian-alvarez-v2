@@ -5,6 +5,7 @@ import "./dentro.css";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import Copy from "@/components/Copy/Copy";
 import { fetchPartidos } from "@/lib/sheets";
 
@@ -68,24 +69,24 @@ export default function DentroDeLasCanchas() {
   }, []);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top 80%",
-        once: true,
-        onEnter: () => {
-          gsap.to(headerRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power4.out",
-          });
-        },
-      });
-    }, sectionRef);
-
-    return () => { try { ctx.revert(); } catch (_) {} };
+    document.body.style.backgroundColor = "var(--base-600)";
+    return () => { document.body.style.backgroundColor = ""; };
   }, []);
+
+  useGSAP(() => {
+    gsap.set(".ph-inner > *", { y: 60, opacity: 0 });
+
+    const tl = gsap.timeline({ delay: 0.3 });
+    tl.to(".ph-inner > *", {
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      stagger: 0.15,
+      ease: "power4.out",
+    });
+
+    ScrollTrigger.refresh();
+  }, { dependencies: [] });
 
   return (
     <>

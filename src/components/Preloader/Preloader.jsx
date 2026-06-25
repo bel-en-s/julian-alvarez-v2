@@ -52,14 +52,19 @@ const Preloader = () => {
       if (!showPreloader) return;
 
       document.fonts.ready.then(() => {
-        const logoSplit = SplitText.create(".preloader-logo h1", {
-          type: "chars",
-          charsClass: "char",
-          mask: "chars",
-        });
+        const logoEl = document.querySelector(".preloader-logo h1");
+        const logoSplit = logoEl
+          ? SplitText.create(".preloader-logo h1", {
+              type: "chars",
+              charsClass: "char",
+              mask: "chars",
+            })
+          : null;
 
-        gsap.set(logoSplit.chars, { x: "110%" });
-        gsap.set(".preloader-logo h1", { opacity: 1 });
+        if (logoSplit) {
+          gsap.set(logoSplit.chars, { x: "110%" });
+          gsap.set(".preloader-logo h1", { opacity: 1 });
+        }
 
         function animateProgress(duration = 4.75) {
           const tl = gsap.timeline();
@@ -96,15 +101,20 @@ const Preloader = () => {
           },
         });
 
-        tl.to(logoSplit.chars, {
-          x: "0%",
-          stagger: 0.05,
-          ease: "power4.out",
-          duration: 1,
-        })
-          .add(animateProgress(), "<")
-          .set(".preloader-progress-bar", { backgroundColor: "var(--violet)" })
-          .to(
+        if (logoSplit) {
+          tl.to(logoSplit.chars, {
+            x: "0%",
+            stagger: 0.05,
+            ease: "power4.out",
+            duration: 1,
+          });
+        }
+
+        tl.add(animateProgress(), "<")
+          .set(".preloader-progress-bar", { backgroundColor: "var(--violet)" });
+
+        if (logoSplit) {
+          tl.to(
             logoSplit.chars,
             {
               x: "-110%",
@@ -113,8 +123,10 @@ const Preloader = () => {
               ease: "power4.out",
             },
             "-=0.5"
-          )
-          .to(
+          );
+        }
+
+        tl.to(
             ".preloader-progress",
             {
               opacity: 0,

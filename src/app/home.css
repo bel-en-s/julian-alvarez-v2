@@ -593,6 +593,33 @@ html.is-h-scroll {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1000px) {
+  .cta-block--default .cta-title,
+  .cta-block--doble .cta-title,
+  .cta-block--triple .cta-title,
+  .cta-block--europa .cta-title {
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+  }
+
+  .cta-block--default .cta-header {
+    margin-top: 30vh;
+  }
+
+  .cta-block--default .cta-gallery {
+    margin-top: 15vh;
+  }
+
+  .cta-block--doble .cta-doble-item,
+  .cta-block--europa .cta-europa-item {
+    margin-top: 15vh;
+  }
+
+  .cta-block--triple .cta-triple-row {
+    margin-top: 15vh;
+  }
+}
+
 
 /* ── Horizontal scroll (MiHistoria + CTA) ── */
 
