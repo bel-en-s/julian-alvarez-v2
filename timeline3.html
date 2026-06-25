@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+
+    <title>Julián Álvarez — Mi Historia</title>
+</head>
+<body>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Raleway:400,900);
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+body{
+  font-family: 'Raleway', sans-serif;
+  color: #333;
+  background: #1f1635;
+}
+
+header h1{
+  text-align: center;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+ header p{
+   text-align: center;
+   margin-bottom: 0;
+ }
+
+.hexa{
+  border: 0px;
+  float: left;
+  text-align: center;
+  height: 35px;
+  width: 60px;
+  font-size: 22px;
+  background: #f0f0f0;
+  color: #3c3c3c;
+  position: relative;
+  margin-top: 15px;
+}
+
+.container{
+    width:100%;
+}
+
+
+.timeline {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  margin-top: 20px;
+  list-style-type: none;
+}
+
+.timeline:before {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  content: ' ';
+  display: block;
+  width: 0;
+  height: 100%;
+  margin-left: -1px;
+  background: rgb(213,213,213);
+  background: -moz-linear-gradient(top, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(100%,rgba(125,185,232,1)));
+  background: -webkit-linear-gradient(top, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  background: -o-linear-gradient(top, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  background: -ms-linear-gradient(top, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  background: linear-gradient(to bottom, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  z-index: 5;
+}
+
+.timeline li {
+  padding: 2em 0;
+}
+
+.timeline .hexa{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  background: #8A75B8;
+  box-shadow: 0 0 6px rgba(138, 117, 184, 0.5);
+  z-index: 5;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: -30px;
+  margin-top: 0;
+  transition: background .3s, box-shadow .3s;
+}
+
+.timeline li:hover .hexa {
+  background: #F4ECFF;
+  box-shadow: 0 0 8px rgba(216, 200, 245, .9), 0 0 16px rgba(216, 200, 245, .5);
+}
+
+.direction-l,
+.direction-r {
+  float: none;
+  width: 100%;
+  text-align: center;
+}
+
+.flag-wrapper {
+  text-align: center;
+  position: relative;
+}
+
+.flag {
+  position: relative;
+  display: inline;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  z-index: 15;
+  padding: 6px 10px;
+  text-align: left;
+  border-radius: 5px;
+  color:white;
+}
+
+.direction-l .flag:after,
+.direction-r .flag:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -15px;
+  height: 0;
+  width: 0;
+  margin-left: -8px;
+  border: solid transparent;
+  border-bottom-color: rgb(255,255,255);
+  border-width: 8px;
+  pointer-events: none;
+}
+
+.time-wrapper {
+  display: block;
+  position: relative;
+  margin: 4px 0 0 0;
+  z-index: 14;
+  line-height: 1em;
+  vertical-align: middle;
+  color: #fff;
+}
+
+.direction-l .time-wrapper {
+  float: none;
+}
+
+.direction-r .time-wrapper {
+  float: none;
+}
+
+.time {
+  background: #8a75b8;
+  display: inline-block;
+  padding: 8px;
+}
+
+.desc {
+  position: relative;
+  margin: 1em 0 0 0;
+  padding: 1em;
+  z-index: 15;
+  color:white;
+}
+
+.direction-l .desc,
+.direction-r .desc {
+  position: relative;
+  margin: 1em 1em 0 1em;
+  padding: 1em;
+  z-index: 15;
+}
+
+.timeline-gallery {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.timeline-gallery img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.timeline-gallery.timeline-gallery--small img {
+  width: 90px;
+  height: 90px;
+}
+
+.timeline-gallery.timeline-gallery--large img {
+  width: 140px;
+  height: 100px;
+}
+
+@media(min-width: 768px){
+  .timeline:before {
+    width: 2px;
+  }
+
+  .timeline {
+    width: 660px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .timeline li:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+
+  .timeline .hexa {
+    left: -25px;
+    right: auto;
+    top: 8px;
+  }
+
+  .timeline .direction-l .hexa {
+    left: auto;
+    right: -25px;
+  }
+
+  .direction-l {
+    position: relative;
+    width: 310px;
+    float: left;
+    text-align: right;
+  }
+
+  .direction-r {
+    position: relative;
+    width: 310px;
+    float: right;
+    text-align: left;
+  }
+
+  .flag-wrapper {
+    display: inline-block;
+  }
+
+  .flag {
+    font-size: 23px;
+  }
+
+  .direction-l .flag:after {
+    left: auto;
+    right: -16px;
+    top: 50%;
+    margin-top: -8px;
+    border: solid transparent;
+    border-left-color: rgb(254,254,254);
+    border-width: 8px;
+  }
+
+  .direction-r .flag:after {
+    top: 50%;
+    margin-top: -8px;
+    border: solid transparent;
+    border-right-color: rgb(254,254,254);
+    border-width: 8px;
+    left: -8px;
+  }
+
+  .time-wrapper {
+    display: inline;
+    vertical-align: middle;
+    margin: 0;
+  }
+
+  .direction-l .time-wrapper {
+    float: left;
+  }
+
+  .direction-r .time-wrapper {
+    float: right;
+  }
+
+  .time {
+    padding: 5px 10px;
+  }
+
+.direction-r .desc {
+    margin: 1em 0 0 0.75em;
+  }
+
+  .direction-l .desc {
+    overflow: visible;
+  }
+
+  .direction-l .timeline-gallery {
+    position: absolute;
+    left: calc(100% + 60px);
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 0;
+  }
+}
+
+@media(min-width: 992px){
+  .timeline {
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .direction-l {
+    position: relative;
+    width: 380px;
+    float: left;
+    text-align: right;
+  }
+
+  .direction-r {
+    position: relative;
+    width: 380px;
+    float: right;
+    text-align: left;
+  }
+}
+
+/* ── Cursor Circle (Flip deck) ── */
+#cursor-circle {
+  position: fixed;
+  width: 280px;
+  height: 280px;
+  pointer-events: none;
+  z-index: 9999;
+  /* GSAP manages transform/opacity — no CSS transition here */
+}
+
+/* Each image is a circular card */
+.circle-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  /* Flip will animate the transition between these states */
+}
+
+/* Deck stacking: nth-child(3) = front, nth-child(1) = back */
+#cursor-circle .circle-img:nth-child(1) {
+  transform: translate(-18%, 18%) scale(0.68);
+  opacity: 0.3;
+  z-index: 1;
+}
+#cursor-circle .circle-img:nth-child(2) {
+  transform: translate(-9%, 9%) scale(0.84);
+  opacity: 0.6;
+  z-index: 2;
+}
+#cursor-circle .circle-img:nth-child(3) {
+  transform: translate(0, 0) scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+
+@media(max-width: 767px) {
+  #cursor-circle {
+    display: none;
+  }
+
+  .flag-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .flag-wrapper .time-wrapper {
+    order: -1;
+  }
+
+  .direction-l .flag:after,
+  .direction-r .flag:after {
+    display: none;
+  }
+
+  .time {
+    background: transparent;
+    color: #8a75b8;
+    font-weight: 700;
+  }
+
+  .mobile-img {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    border-radius: 8px;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+}
+
+@media(min-width: 768px) {
+  .mobile-img {
+    display: none;
+  }
+}
+
+</style>
+
+<header>
+    <h1>Mi Historia</h1>
+    <p>Julián Álvarez</p>
+</header>
+<div class="container">
+
+<ul class="timeline">
+  <!-- Item 1: MI HISTORIA (Intro) -->
+  <li style="display:none;" data-images="/curtain/balon.png,/curtain/cuerpo.png">
+    <div class="direction-r">
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">MI HISTORIA</span>
+      </div>
+      <div class="desc">
+        "Antes de los estadios llenos, los títulos y las finales, hubo un sueño. Desde chico fui hincha de River. Esa camiseta no era solo un club, era una ilusión que me acompañó desde el primer día que toqué una pelota."
+      </div>
+    </div>
+  </li>
+
+  <!-- Item 2: Club Atlético Calchín (2016) -->
+  <li data-images="/bio/cachin-2.jpg,/bio/2.jpeg">
+    <div class="direction-r" >
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">Club Atlético Calchín</span>
+        <span class="time-wrapper"><span class="time">2016</span></span>
+      </div>
+      <div class="desc">
+        "Mi pueblo, mis amigos, el potrero. Acá nació todo: la pasión por el fútbol y las ganas de ir siempre un paso más allá. Acá aprendí a soñar en grande."
+      </div>
+      <img class="mobile-img" src="/bio/cachin-2.jpg" alt="">
+    </div>
+  </li>
+
+  <!-- Item 3: El Doble Salto (2018) -->
+  <li data-images="/bio/3-circle.jpg,/bio/4-circle.jpg">
+    <div class="direction-l" >
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">El Doble Salto</span>
+        <span class="time-wrapper"><span class="time">2018</span></span>
+      </div>
+      <div class="desc">
+        "Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid."
+        <br><br>
+        "El primer llamado para vestir la camiseta de Argentina fue un momento único… un orgullo enorme y una responsabilidad que te marca para siempre."
+
+      </div>
+      <img class="mobile-img" src="/bio/3-circle.jpg" alt="">
+    </div>
+  </li>
+
+  <!-- Item 4: Un año inolvidable (2021) -->
+  <li data-images="/bio/Anexo 5.jpeg,/bio/Anexo 6.webp,/bio/Anexo 7.jpg">
+    <div class="direction-r" >
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">Un año inolvidable</span>
+        <span class="time-wrapper"><span class="time">2021</span></span>
+      </div>
+      <div class="desc">
+        Máximo goleador de la Primera División. Mejor Jugador de América. La noche de los seis goles.
+
+      </div>
+      <img class="mobile-img" src="/bio/Anexo 5.jpeg" alt="">
+    </div>
+  </li>
+
+  <!-- Item 5: Europa & El Mundo (2022) -->
+  <li data-images="/bio/Anexo 8.webp,/bio/9-circle.jpg">
+    <div class="direction-l" >
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">Europa &amp; El Mundo</span>
+        <span class="time-wrapper"><span class="time">2022</span></span>
+      </div>
+      <div class="desc">
+        "Desde las juveniles hasta levantar la Copa del Mundo… Es dejarlo todo por una camiseta que representa a millones."
+        <br><br>
+        "Crecer al lado de los mejores del mundo fue un privilegio. Cada entrenamiento y cada partido fueron una enseñanza para mejorar, adaptarme y entender el fútbol de otra manera."
+
+      </div>
+      <img class="mobile-img" src="/bio/Anexo 8.webp" alt="">
+    </div>
+  </li>
+</ul>
+</div>
+
+<!-- Cursor circle — JS populates the .circle-img children -->
+<div id="cursor-circle"></div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger, Flip);
+
+/* ── ScrollTrigger: fade-in timeline items ── */
+document.querySelectorAll('.timeline li').forEach(function(li) {
+  gsap.from(li, {
+    scrollTrigger: {
+      trigger: li,
+      start: 'top 85%',
+      toggleActions: 'play none none none'
+    },
+    opacity: 0,
+    y: 60,
+    duration: 0.8,
+    ease: 'power3.out'
+  });
+});
+
+/* ── Cursor circle with GSAP Flip deck effect ── */
+(function () {
+  var circle = document.getElementById('cursor-circle');
+  var container = document.querySelector('.container');
+  if (!circle || !container) return;
+
+  var NUM_SLOTS = 3;
+
+  // Create the image deck slots
+  for (var i = 0; i < NUM_SLOTS; i++) {
+    var img = document.createElement('img');
+    img.className = 'circle-img';
+    img.alt = '';
+    circle.appendChild(img);
+  }
+
+  var srcs = [];      // current li's image sources
+  var srcIndex = 0;  // next src to assign to the back slot
+  var cycleTimer = null;
+  var currentLi = null;
+  var isVisible = false;
+  var isShrunk = false;
+
+  function slots() {
+    return Array.from(circle.querySelectorAll('.circle-img'));
+  }
+
+  function loadForLi(li) {
+    if (li === currentLi) return;
+    currentLi = li;
+
+    var raw = li ? li.getAttribute('data-images') : '';
+    srcs = raw ? raw.split(',').map(function (s) { return s.trim(); }) : [];
+    srcIndex = 0;
+
+    if (!srcs.length) return;
+
+    // Fill all slots (wrap if fewer images than slots)
+    slots().forEach(function (img, i) {
+      img.src = srcs[i % srcs.length];
+    });
+    srcIndex = NUM_SLOTS % srcs.length;
+  }
+
+  /* Core Flip cycle — mirrors the CodePen logic:
+     1. Capture current state (positions/transforms via nth-child CSS)
+     2. Move the front card (last child) to the back (first child position)
+     3. Flip.from animates from old state → new state
+     4. Preload the next src into the newly-demoted back card              */
+  function flipNext() {
+    if (srcs.length < 2 || isShrunk) return;
+
+    var current = slots();
+    var state = Flip.getState(current);
+
+    // Move front → back in DOM (changes nth-child → changes CSS transform/opacity)
+    circle.insertBefore(circle.lastElementChild, circle.firstElementChild);
+
+    // The new first child (demoted front) gets the next image queued
+    circle.firstElementChild.src = srcs[srcIndex % srcs.length];
+    srcIndex = (srcIndex + 1) % srcs.length;
+
+    Flip.from(state, {
+      targets: slots(),
+      duration: 0.65,
+      ease: 'power2.inOut',
+      absolute: true,
+      onLeave: function (els) {
+        // The card leaving the "front" position
+        return gsap.to(els, {
+          duration: 0.3,
+          opacity: 0,
+          scale: 1.08,
+          ease: 'expo.out'
+        });
+      },
+      onEnter: function (els) {
+        // The card entering the "front" position (new image from back)
+        return gsap.from(els, {
+          duration: 0.3,
+          opacity: 0,
+          scale: 0.6,
+          ease: 'expo.out'
+        });
+      }
+    });
+  }
+
+  function updateScale() {
+    if (!isVisible) {
+      gsap.to(circle, { scale: 0, opacity: 0, duration: 0.3, ease: 'power2.in' });
+    } else if (isShrunk) {
+      gsap.to(circle, { scale: 0.28, opacity: 0.85, duration: 0.3, ease: 'power2.out' });
+    } else {
+      gsap.to(circle, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.2)' });
+    }
+  }
+
+  // GSAP owns the circle transform — no CSS transform on #cursor-circle
+  gsap.set(circle, { xPercent: -50, yPercent: -50, scale: 0, opacity: 0 });
+
+  container.addEventListener('mouseenter', function () {
+    isVisible = true;
+    updateScale();
+    cycleTimer = setInterval(flipNext, 1800);
+  });
+
+  container.addEventListener('mouseleave', function () {
+    isVisible = false;
+    isShrunk = false;
+    updateScale();
+    clearInterval(cycleTimer);
+    currentLi = null;
+  });
+
+  container.addEventListener('mousemove', function (e) {
+    gsap.set(circle, { x: e.clientX, y: e.clientY });
+
+    var li = e.target.closest('li[data-images]');
+    loadForLi(li);
+
+    var overText = e.target.closest('.desc, .flag, .flag-wrapper, h5, p, blockquote');
+    if (overText && !isShrunk) {
+      isShrunk = true;
+      updateScale();
+    } else if (!overText && isShrunk) {
+      isShrunk = false;
+      updateScale();
+    }
+  });
+}());
+</script>
+
+</body>
+</html>

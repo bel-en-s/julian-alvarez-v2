@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <title>Julián Álvarez — Mi Historia</title>
+</head>
+<body>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Raleway:400,900);
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+body{
+  font-family: 'Raleway', sans-serif;
+  color: #333;
+  background: #1f1635;
+}
+
+header h1{
+  text-align: center;
+  font-weight: bold;
+  margin-top: 0;
+}
+  
+ header p{
+   text-align: center;
+   margin-bottom: 0;
+ }
+
+.hexa{
+  border: 0px;
+  float: left;
+  text-align: center;
+  height: 35px;
+  width: 60px;
+  font-size: 22px;
+  background: #f0f0f0;
+  color: #3c3c3c;
+  position: relative;
+  margin-top: 15px;
+}
+
+.container{
+    width:100%;
+}
+
+
+.timeline {
+  position: relative;
+  padding: 0;
+  width: 100%;
+  margin-top: 20px;
+  list-style-type: none;
+}
+
+.timeline:before {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  content: ' ';
+  display: block;
+  width: 0;
+  height: 100%;
+  margin-left: -1px;
+  background: rgb(213,213,213);
+  background: -moz-linear-gradient(top, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(100%,rgba(125,185,232,1)));
+  background: -webkit-linear-gradient(top, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  background: -o-linear-gradient(top, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  background: -ms-linear-gradient(top, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  background: linear-gradient(to bottom, rgba(213,213,213,0) 0%, rgb(213,213,213) 8%, rgb(213,213,213) 92%, rgba(213,213,213,0) 100%);
+  z-index: 5;
+}
+
+.timeline li {
+  padding: 2em 0;
+}
+
+.timeline .hexa{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  background: #8A75B8;
+  box-shadow: 0 0 6px rgba(138, 117, 184, 0.5);
+  z-index: 5;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: -30px;
+  margin-top: 0;
+  transition: background .3s, box-shadow .3s;
+}
+
+@media (max-width: 767px) {
+  .timeline .hexa {
+    top: -28px;
+  }
+}
+
+@media (min-width: 768px) {
+ .mobile-img{
+  display:none !important;
+}
+}
+
+.timeline li:hover .hexa {
+  background: #F4ECFF;
+  box-shadow: 0 0 8px rgba(216, 200, 245, .9), 0 0 16px rgba(216, 200, 245, .5);
+}
+
+.direction-l,
+.direction-r {
+  float: none;
+  width: 100%;
+  text-align: center;
+}
+
+.flag-wrapper {
+  text-align: center;
+  position: relative;
+}
+
+.flag {
+  position: relative;
+  display: inline;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  z-index: 15;
+  padding: 6px 10px;
+  text-align: left;
+  border-radius: 5px;
+  color:white;
+}
+
+.direction-l .flag:after,
+.direction-r .flag:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -15px;
+  height: 0;
+  width: 0;
+  margin-left: -8px;
+  border: solid transparent;
+  border-bottom-color: rgb(255,255,255);
+  border-width: 8px;
+  pointer-events: none;
+}
+
+.direction-l .flag {
+ /* -webkit-box-shadow: -1px 1px 1px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.15);
+  -moz-box-shadow: -1px 1px 1px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.15);
+  box-shadow: -1px 1px 1px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.15);*/
+}
+
+
+
+.time-wrapper {
+  display: block;
+  position: relative;
+  margin: 4px 0 0 0;
+  z-index: 14;
+  line-height: 1em;
+  vertical-align: middle;
+  color: #fff;
+}
+
+.direction-l .time-wrapper {
+  float: none;
+}
+
+.direction-r .time-wrapper {
+  float: none;
+}
+
+.time {
+  background: #8a75b8;
+  display: inline-block;
+  padding: 8px;
+}
+
+.desc {
+  position: relative;
+  margin: 1em 0 0 0;
+  padding: 1em;
+  z-index: 15;
+  color:white;
+}
+
+.direction-l .desc,
+.direction-r .desc {
+  position: relative;
+  margin: 1em 1em 0 1em;
+  padding: 1em;
+  z-index: 15;
+}
+
+.timeline-gallery {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.timeline-gallery img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.timeline-gallery.timeline-gallery--small img {
+  width: 90px;
+  height: 90px;
+}
+
+.timeline-gallery.timeline-gallery--large img {
+  width: 140px;
+  height: 100px;
+}
+
+@media(min-width: 768px){
+  .timeline:before {
+    width: 2px;
+  }
+
+  .timeline {
+    width: 660px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .timeline li:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  
+  .timeline .hexa {
+    left: -25px;
+    right: auto;
+    top: 12px;
+  }
+
+
+
+  .timeline .direction-l .hexa {
+    left: auto;
+    right: -25px;
+  }
+
+  .direction-l {
+    position: relative;
+    width: 310px;
+    float: left;
+    text-align: right;
+  }
+
+  .direction-r {
+    position: relative;
+    width: 310px;
+    float: right;
+    text-align: left;
+  }
+
+  .flag-wrapper {
+    display: inline-block;
+  }
+  
+  .flag {
+    font-size: 23px;
+  }
+
+  .direction-l .flag:after {
+    left: auto;
+    right: -16px;
+    top: 50%;
+    margin-top: -8px;
+    border: solid transparent;
+    border-left-color: rgb(254,254,254);
+    border-width: 8px;
+  }
+
+  .direction-r .flag:after {
+    top: 50%;
+    margin-top: -8px;
+    border: solid transparent;
+    border-right-color: rgb(254,254,254);
+    border-width: 8px;
+    left: -8px;
+  }
+
+  .time-wrapper {
+    display: inline;
+    vertical-align: middle;
+    margin: 0;
+  }
+
+  .direction-l .time-wrapper {
+    float: left;
+  }
+
+  .direction-r .time-wrapper {
+    float: right;
+  }
+
+  .time {
+    padding: 5px 10px;
+
+  }
+
+.direction-r .desc {
+    margin: 1em 0 0 0.75em;
+  }
+
+  .direction-l .desc {
+    overflow: visible;
+  }
+
+  .direction-l .timeline-gallery {
+    position: absolute;
+    left: calc(100% + 60px);
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 0;
+  }
+}
+
+@media(min-width: 992px){
+  .timeline {
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .direction-l {
+    position: relative;
+    width: 380px;
+    float: left;
+    text-align: right;
+  }
+
+  .direction-r {
+    position: relative;
+    width: 380px;
+    float: right;
+    text-align: left;
+  }
+}
+
+/* ── Cursor Circle ── */
+#cursor-circle {
+  position: fixed;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s, width 0.4s ease, height 0.4s ease;
+}
+
+#cursor-circle.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#cursor-circle.shrink {
+  width: 100px;
+  height: 100px;
+}
+
+#cursor-circle.shrink img {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+#cursor-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media(max-width: 767px) {
+  #cursor-circle {
+    display: none;
+  }
+
+  .flag-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .flag-wrapper .time-wrapper {
+    order: -1;
+  }
+
+  .direction-l .flag:after,
+  .direction-r .flag:after {
+    display: none;
+  }
+
+  .time {
+    background: transparent;
+    color: #8a75b8;
+    font-weight: 700;
+    font-size:25px;
+  }
+
+  .flag {
+    padding: 0px 0px 15px 0px;
+    font-size:22px;
+  }
+}
+
+  .mobile-img {
+    display: block;
+    width: 90%;
+    margin-top: 16px;
+    border-radius: 8px;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    margin:auto;
+  }
+}
+
+@media(min-width: 768px) {
+  .mobile-img {
+    display: none;
+  }
+}
+
+</style>
+
+<header>
+    <h1>Mi Historia</h1>
+    <p>Julián Álvarez</p>
+</header>
+<div class="container">
+
+
+
+<ul class="timeline">
+  <!-- Item 1: MI HISTORIA (Intro) -->
+  <li style="display:none;" data-images="/curtain/balon.png,/curtain/cuerpo.png">
+    <div class="direction-r">
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">MI HISTORIA</span>
+      </div>
+      <div class="desc">
+        "Antes de los estadios llenos, los títulos y las finales, hubo un sueño. Desde chico fui hincha de River. Esa camiseta no era solo un club, era una ilusión que me acompañó desde el primer día que toqué una pelota."
+      </div>
+    </div>
+  </li>
+
+  <!-- Item 2: Club Atlético Calchín (2016) -->
+  <li data-images="/bio/cachin-2.jpg,/bio/2.jpeg">
+    <div class="direction-r" >
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">Club Atlético Calchín</span>
+        <span class="time-wrapper"><span class="time">2016</span></span>
+      </div>
+      <img class="mobile-img" src="/bio/cachin-2.jpg" alt="">
+      <div class="desc">
+        "Mi pueblo, mis amigos, el potrero. Acá nació todo: la pasión por el fútbol y las ganas de ir siempre un paso más allá. Acá aprendí a soñar en grande."
+      </div>
+    </div>
+  </li>
+
+  <!-- Item 3: El Doble Salto (2018) -->
+  <li data-images="/bio/3-circle.jpg,/bio/4-circle.jpg">
+    <div class="direction-l" >
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">El Doble Salto</span>
+        <span class="time-wrapper"><span class="time">2018</span></span>
+      </div>
+      <img class="mobile-img" src="/bio/3-circle.jpg" alt="">
+      <div class="desc">
+        "Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid."
+        <br><br>
+        "El primer llamado para vestir la camiseta de Argentina fue un momento único… un orgullo enorme y una responsabilidad que te marca para siempre."
+
+      </div>
+    </div>
+  </li>
+
+  <!-- Item 4: Un año inolvidable (2021) -->
+  <li data-images="/bio/Anexo 5.jpeg,/bio/Anexo 6.webp,/bio/Anexo 7.jpg">
+    <div class="direction-r" >
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">Un año inolvidable</span>
+        <span class="time-wrapper"><span class="time">2021</span></span>
+      </div>
+      <img class="mobile-img" src="/bio/Anexo 5.jpeg" alt="">
+      <div class="desc">
+        Máximo goleador de la Primera División. Mejor Jugador de América. La noche de los seis goles.
+
+      </div>
+    </div>
+  </li>
+
+  <!-- Item 5: Europa & El Mundo (2022) -->
+  <li data-images="/bio/Anexo 8.webp,/bio/9-circle.jpg">
+    <div class="direction-l" >
+      <div class="flag-wrapper">
+        <span class="hexa"></span>
+        <span class="flag">Europa &amp; El Mundo</span>
+        <span class="time-wrapper"><span class="time">2022</span></span>
+      </div>
+      <img class="mobile-img" src="/bio/Anexo 8.webp" alt="">
+      <div class="desc">
+        "Desde las juveniles hasta levantar la Copa del Mundo… Es dejarlo todo por una camiseta que representa a millones."
+        <br><br>
+        "Crecer al lado de los mejores del mundo fue un privilegio. Cada entrenamiento y cada partido fueron una enseñanza para mejorar, adaptarme y entender el fútbol de otra manera."
+
+      </div>
+    </div>
+  </li>
+</ul>
+</div>
+
+<div id="cursor-circle">
+  <img src="/bio/Anexo 8.webp" alt="">
+</div>
+
+<script>
+(function() {
+  var circle = document.getElementById('cursor-circle');
+  var img = circle && circle.querySelector('img');
+  var container = document.querySelector('.container');
+  if (!circle || !img || !container) return;
+
+  var images = [];
+  var index = 0;
+  var interval = null;
+  var currentLi = null;
+  var savedSrc = '';
+  var wasShrunk = false;
+
+  function loadImages(li) {
+    if (li === currentLi) return;
+    currentLi = li;
+    var raw = li ? li.getAttribute('data-images') : '';
+    images = raw ? raw.split(',') : [];
+    index = 0;
+    if (images.length) {
+      img.src = images[0];
+    }
+  }
+
+  function glitchNext() {
+    if (!images.length || wasShrunk) return;
+    index = (index + 1) % images.length;
+    img.src = images[index];
+  }
+
+  container.addEventListener('mouseenter', function() {
+    circle.classList.add('visible');
+    interval = setInterval(glitchNext, 1500);
+  });
+
+  container.addEventListener('mouseleave', function() {
+    circle.classList.remove('visible');
+    clearInterval(interval);
+    currentLi = null;
+  });
+
+  container.addEventListener('mousemove', function(e) {
+    circle.style.left = e.clientX + 'px';
+    circle.style.top = e.clientY + 'px';
+    var li = e.target.closest('li[data-images]');
+    loadImages(li);
+    var overText = e.target.closest('.desc, .flag, .flag-wrapper, h5, p, blockquote');
+    if (overText) {
+      if (!wasShrunk) {
+        savedSrc = img.src;
+        wasShrunk = true;
+      }
+      img.src = '/curtain/balon.png';
+      circle.classList.add('shrink');
+    } else {
+      if (wasShrunk) {
+        img.src = savedSrc;
+        wasShrunk = false;
+      }
+      circle.classList.remove('shrink');
+    }
+  });
+})();
+</script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.matchMedia().add('(max-width: 767px)', function () {
+  document.querySelectorAll('.timeline li').forEach(function (li) {
+    gsap.from(li, {
+      scrollTrigger: {
+        trigger: li,
+        start: 'top 90%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: 'back.out(1.7)'
+    });
+  });
+});
+</script>
+
+</body>
+</html>

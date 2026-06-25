@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julián Alvarez</title>
+  <meta name="description" content="Julián Alvarez — Web Personal">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+
+<!-- Background Web Canvas -->
+<canvas id="bg-web-canvas" aria-hidden="true" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;display:block;mix-blend-mode:multiply"></canvas>
+
+<!-- Hero Alvarez Canvas -->
+<canvas class="hero-alvarez-canvas" id="hero-alvarez-canvas" aria-hidden="true"></canvas>
+
+<!-- ==================== PRELOADER ==================== -->
+<div class="preloader-wrapper" id="preloader">
+  <div class="preloader-bg"></div>
+  <video class="preloader-video" src="/loader/loader.mp4" autoplay muted loop playsinline></video>
+  <div class="preloader-progress">
+    <div class="preloader-progress-bar"></div>
+  </div>
+  <div class="preloader-logo">
+    <h1>Julián Alvarez</h1>
+  </div>
+  <div class="preloader-mask"></div>
+</div>
+
+<!-- ==================== MENU ==================== -->
+<nav class="menu has-hero" id="menu">
+  <div class="menu-header" id="menu-header">
+    <img class="menu-logo" src="/logo.png" alt="Julián Alvarez">
+    <button class="menu-toggle" aria-label="Toggle menu" id="menu-toggle-btn">
+      <div class="menu-hamburger-icon" id="menu-hamburger">
+        <span class="menu-item"></span>
+        <span class="menu-item"></span>
+        <span class="menu-item"></span>
+      </div>
+    </button>
+  </div>
+
+  <div class="ja-menu-arana">
+    <div class="ja-menu-arana__layer" id="menu-layer">
+      <div class="ja-menu-arana__scrim" id="menu-scrim"></div>
+      <div class="ja-menu-arana__frame" id="menu-frame">
+        <svg class="ja-menu-arana__web" id="menu-web" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <circle class="anchor origin" cx="740" cy="110" r="3.5"/>
+          <path class="strand s1" d="M 740 110 Q 520 170 340 240"/>
+          <path class="strand s2" d="M 740 110 Q 460 240 220 340"/>
+          <path class="strand s3" d="M 740 110 Q 510 320 320 440"/>
+          <path class="strand s4" d="M 740 110 Q 560 190 440 260"/>
+          <path class="auxiliary a1" d="M 740 110 Q 580 130 440 160"/>
+          <path class="auxiliary a2" d="M 740 110 Q 520 140 340 180"/>
+          <path class="auxiliary a3" d="M 740 110 Q 600 220 500 340"/>
+          <path class="auxiliary a4" d="M 740 110 Q 560 300 400 480"/>
+          <path class="auxiliary a5" d="M 740 110 Q 500 390 320 440"/>
+          <path class="nine" d="M 340 240 C 400 230 430 260 440 280 C 460 310 420 350 220 340 C 190 340 280 290 340 240 Z"/>
+          <circle class="anchor k1" cx="340" cy="240" r="2.4"/>
+          <circle class="anchor k4" cx="440" cy="280" r="2.4"/>
+          <circle class="anchor k2" cx="220" cy="340" r="2.4"/>
+          <g class="dangles">
+            <path class="dangle g1" d="M 340 290 Q 342 330 336 360 Q 332 380 340 390"/>
+            <circle class="dangle-tip t1" cx="340" cy="390" r="1.3"/>
+            <path class="dangle g2" d="M 220 380 Q 210 420 206 450 Q 204 470 214 480"/>
+            <circle class="dangle-tip t2" cx="214" cy="480" r="1.4"/>
+            <path class="dangle g3" d="M 440 320 Q 448 350 442 370 Q 438 390 446 400"/>
+            <circle class="dangle-tip t3" cx="446" cy="400" r="1.2"/>
+          </g>
+        </svg>
+        <a href="/" class="ja-menu-arana__item i0" data-menu-link>
+          <span class="ja-menu-arana__dot"></span>INICIO
+        </a>
+        <a href="/dentro-de-las-canchas" class="ja-menu-arana__item i1" data-menu-link>
+          <span class="ja-menu-arana__dot"></span>DENTRO DE LAS CANCHAS
+        </a>
+        <a href="/fuera-de-las-canchas" class="ja-menu-arana__item i2" data-menu-link>
+          <span class="ja-menu-arana__dot"></span>FUERA DE LAS CANCHAS
+        </a>
+        <a href="/touchpoint" class="ja-menu-arana__item i4" data-menu-link>
+          <span class="ja-menu-arana__dot"></span>CONTACTO
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== MAIN PAGE ==================== -->
+<div class="page" id="page-content">
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="hero-section">
+    <!-- HeroAtmos -->
+    <div class="hero-atmos" aria-hidden="true">
+      <span class="ha-fog f1"></span>
+      <span class="ha-fog f2"></span>
+      <span class="ha-fog f3"></span>
+      <span class="ha-vignette"></span>
+      <div class="ha-halo"></div>
+      <div class="ha-webs">
+        <div class="ha-corner tl"><svg viewBox="0 0 600 600"><path class="web-ray" d="M 0 0 L 587.1 0"/><path class="web-ray" d="M 0 0 L 520.4 272.8"/><path class="web-ray" d="M 0 0 L 340.4 480.6"/><path class="web-ray" d="M 0 0 L 104.6 581.2"/><path class="web-ray" d="M 0 0 L -90.4 585.6"/><path class="web-ray" d="M 0 0 L -110.0 588.0"/><path class="web-ray" d="M 0 0 L -188.6 572.6"/><path class="web-ray" d="M 0 0 L -344.0 484.2"/><path class="web-ray" d="M 0 0 L -543.1 225.4"/><path class="web-arc" d="M 108.0 20.7 Q 106.9 19.7 104.1 18.6"/><path class="web-arc" d="M 196.3 37.7 Q 197.7 36.5 196.7 34.3"/><path class="web-arc" d="M 294.4 56.5 Q 297.7 55.1 298.7 51.7"/><path class="web-arc" d="M 412.2 79.2 Q 417.3 77.5 420.8 73.6"/><path class="web-arc" d="M 529.9 101.8 Q 536.8 99.9 543.0 95.2"/><circle class="web-dew" cx="104.1" cy="18.6" r="1.4"/></svg></div>
+        <div class="ha-corner tr"><svg viewBox="0 0 600 600"><path class="web-ray" d="M 0 0 L 587.1 0"/><path class="web-ray" d="M 0 0 L 520.4 272.8"/><path class="web-ray" d="M 0 0 L 340.4 480.6"/><path class="web-ray" d="M 0 0 L 104.6 581.2"/><path class="web-ray" d="M 0 0 L -90.4 585.6"/><path class="web-ray" d="M 0 0 L -110.0 588.0"/><path class="web-ray" d="M 0 0 L -188.6 572.6"/><path class="web-ray" d="M 0 0 L -344.0 484.2"/><path class="web-ray" d="M 0 0 L -543.1 225.4"/><path class="web-arc" d="M 108.0 20.7 Q 106.9 19.7 104.1 18.6"/><path class="web-arc" d="M 196.3 37.7 Q 197.7 36.5 196.7 34.3"/><path class="web-arc" d="M 294.4 56.5 Q 297.7 55.1 298.7 51.7"/><path class="web-arc" d="M 412.2 79.2 Q 417.3 77.5 420.8 73.6"/><path class="web-arc" d="M 529.9 101.8 Q 536.8 99.9 543.0 95.2"/><circle class="web-dew" cx="104.1" cy="18.6" r="1.4"/></svg></div>
+        <div class="ha-corner bl"><svg viewBox="0 0 600 600"><path class="web-ray" d="M 0 0 L 587.1 0"/><path class="web-ray" d="M 0 0 L 520.4 272.8"/><path class="web-ray" d="M 0 0 L 340.4 480.6"/><path class="web-ray" d="M 0 0 L 104.6 581.2"/><path class="web-ray" d="M 0 0 L -90.4 585.6"/><path class="web-ray" d="M 0 0 L -110.0 588.0"/><path class="web-ray" d="M 0 0 L -188.6 572.6"/><path class="web-ray" d="M 0 0 L -344.0 484.2"/><path class="web-ray" d="M 0 0 L -543.1 225.4"/><path class="web-arc" d="M 108.0 20.7 Q 106.9 19.7 104.1 18.6"/><path class="web-arc" d="M 196.3 37.7 Q 197.7 36.5 196.7 34.3"/><path class="web-arc" d="M 294.4 56.5 Q 297.7 55.1 298.7 51.7"/><path class="web-arc" d="M 412.2 79.2 Q 417.3 77.5 420.8 73.6"/><path class="web-arc" d="M 529.9 101.8 Q 536.8 99.9 543.0 95.2"/><circle class="web-dew" cx="104.1" cy="18.6" r="1.4"/></svg></div>
+        <div class="ha-corner br"><svg viewBox="0 0 600 600"><path class="web-ray" d="M 0 0 L 587.1 0"/><path class="web-ray" d="M 0 0 L 520.4 272.8"/><path class="web-ray" d="M 0 0 L 340.4 480.6"/><path class="web-ray" d="M 0 0 L 104.6 581.2"/><path class="web-ray" d="M 0 0 L -90.4 585.6"/><path class="web-ray" d="M 0 0 L -110.0 588.0"/><path class="web-ray" d="M 0 0 L -188.6 572.6"/><path class="web-ray" d="M 0 0 L -344.0 484.2"/><path class="web-ray" d="M 0 0 L -543.1 225.4"/><path class="web-arc" d="M 108.0 20.7 Q 106.9 19.7 104.1 18.6"/><path class="web-arc" d="M 196.3 37.7 Q 197.7 36.5 196.7 34.3"/><path class="web-arc" d="M 294.4 56.5 Q 297.7 55.1 298.7 51.7"/><path class="web-arc" d="M 412.2 79.2 Q 417.3 77.5 420.8 73.6"/><path class="web-arc" d="M 529.9 101.8 Q 536.8 99.9 543.0 95.2"/><circle class="web-dew" cx="104.1" cy="18.6" r="1.4"/></svg></div>
+      </div>
+    </div>
+
+    <!-- DotMatrix -->
+    <div class="dot-matrix-wrapper" id="dot-matrix"></div>
+
+    <div class="container">
+      <div class="hero-header" id="hero-header">
+        <div data-copy-wrapper id="hero-copy">
+          <span class="hero-name hero-name--julian">Julián</span>
+          <span class="hero-header-img" id="hero-img">
+            <img src="/home/hero.png" alt="">
+          </span>
+          <span class="hero-name hero-name--alvarez" id="alvarez-container">Alvarez</span>
+        </div>
+      </div>
+      <div class="hero-gradient"></div>
+    </div>
+  </section>
+
+  <!-- ===== NEXT MATCH ===== -->
+  <article class="next-match" id="next-match">
+    <div class="watermark" aria-hidden="true"></div>
+    <canvas class="web" id="nm-canvas" aria-hidden="true"></canvas>
+    <header class="head">
+      <div class="eyebrow">Próximo partido</div>
+      <button type="button" class="toggle" aria-label="Minimizar tarjeta" aria-expanded="false" id="nm-toggle">
+        <span class="bar"></span>
+      </button>
+    </header>
+    <div class="countdown" aria-live="polite" id="nm-countdown">
+      <div class="unit"><span class="n n-d" id="nm-days">00</span><span class="u">Días</span></div>
+      <span class="sep">:</span>
+      <div class="unit"><span class="n n-h" id="nm-hours">00</span><span class="u">Horas</span></div>
+      <span class="sep">:</span>
+      <div class="unit"><span class="n n-m" id="nm-minutes">00</span><span class="u">Min</span></div>
+      <span class="sep">:</span>
+      <div class="unit"><span class="n n-s" id="nm-seconds">00</span><span class="u">Seg</span></div>
+    </div>
+    <div class="nm-extra">
+      <div class="teams">
+        <span class="t home" id="nm-home">Atlético de Madrid</span>
+        <span class="vs">vs</span>
+        <span class="t away" id="nm-away">Real Madrid</span>
+      </div>
+      <div class="meta">
+        <span class="comp" id="nm-comp">LaLiga</span>
+        <span class="dot">·</span>
+        <span class="extra" id="nm-extra">Metropolitano</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <div class="scroll-track" id="scroll-track">
+    <section class="about" id="about-section">
+      <div class="about-bg">
+        <div class="about-video-wrapper" id="about-video-wrapper">
+          <video id="about-video" src="/home/julian-chiquito.mp4" autoplay playsinline muted loop preload="auto"></video>
+          <div class="about-video-controls">
+            <button id="about-video-play" aria-label="Pausar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+            <button id="about-video-sound" aria-label="Alternar sonido">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15" stroke="#fff" strokeWidth="2"/><line x1="17" y1="9" x2="23" y2="15" stroke="#fff" strokeWidth="2"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="slide-content">
+        <div class="slide-title">
+          <div data-copy-wrapper><h1>"Sigan <br>soñando.</h1></div>
+        </div>
+        <div class="slide-description">
+          <div data-copy-wrapper><h1><br>Con trabajo, sacrificio y siendo buenas personas, los sueños se acercan cada día."</h1></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== HORIZONTAL SCROLL ===== -->
+  <div style="displayL" class="h-scroll" id="h-scroll">
+    <div class="h-scroll__track" id="h-scroll-track">
+
+      <!-- Panel 1: MiHistoria -->
+      <div class="h-scroll__panel h-panel">
+        <section class="behind-the-lock">
+          <div class="curtain" id="curtain-section">
+            <div class="curtain-ball" id="curtain-ball">
+              <img src="/curtain/balon.png" alt="">
+            </div>
+            <div class="curtain-img" id="curtain-img">
+              <img src="/curtain/cuerpo.png" alt="">
+            </div>
+          </div>
+          <div class="btl-header">
+            <div data-copy-wrapper>
+              <h2>MI HISTORIA</h2>
+              <h5 class="btl-header-text">"Antes de los estadios llenos, los títulos y las finales, hubo un sueño. Desde chico fui hincha de River. Esa camiseta no era solo un club, era una ilusión que me acompañó desde el primer día que toqué una pelota."</h5>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panel 2: CTA Block 1 -->
+      <div class="h-scroll__panel h-panel">
+        <section class="cta">
+          <div class="container cta-block--default">
+            <div data-copy-wrapper><h2 class="cta-title">Club Atlético Calchín (2016)</h2></div>
+            <div class="cta-gallery">
+              <div class="cta-gallery-img cta-gallery-img--left"><img src="/bio/2.jpeg" alt=""></div>
+              <div class="cta-gallery-img cta-gallery-img--right"><img src="/bio/1.jpeg" alt=""></div>
+            </div>
+            <div class="cta-header">
+              <div data-copy-wrapper><h5>"Mi pueblo, mis amigos, el potrero. Acá nació todo: la pasión por el fútbol y las ganas de ir siempre un paso más allá. Acá aprendí a soñar en grande."</h5></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panel 3: CTA Block 2 -->
+      <div class="h-scroll__panel h-panel">
+        <section class="cta">
+          <div class="container cta-block--doble">
+            <div data-copy-wrapper><h2 class="cta-title">El Doble Salto (2018)</h2></div>
+            <div class="cta-doble-row">
+              <div class="cta-doble-item">
+                <div class="cta-doble-img"><img src="/bio/3.jpeg" alt=""></div>
+                <div class="cta-doble-text"><div data-copy-wrapper><h5>"Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid."</h5></div></div>
+              </div>
+              <div class="cta-doble-item">
+                <div class="cta-doble-img"><img src="/bio/4.jpg" class="img-focus-4" alt=""></div>
+                <div class="cta-doble-text"><div data-copy-wrapper><h5>"El primer llamado para vestir la camiseta de Argentina fue un momento único… un orgullo enorme y una responsabilidad que te marca para siempre."</h5></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panel 4: CTA Block 3 -->
+      <div class="h-scroll__panel h-panel">
+        <section class="cta">
+          <div class="container cta-block--triple">
+            <div data-copy-wrapper><h2 class="cta-title">Un año inolvidable (2021)</h2></div>
+            <div class="cta-triple-row">
+              <div class="cta-triple-card">
+                <img src="/bio/Anexo 5.jpeg" alt=""><div class="cta-triple-text"><div data-copy-wrapper><h5>Máximo goleador de la Primera División.</h5></div></div>
+              </div>
+              <div class="cta-triple-card">
+                <img src="/bio/Anexo 6.webp" alt=""><div class="cta-triple-text"><div data-copy-wrapper><h5>Mejor Jugador de América.</h5></div></div>
+              </div>
+              <div class="cta-triple-card">
+                <img src="/bio/Anexo 7.jpg" alt=""><div class="cta-triple-text"><div data-copy-wrapper><h5>La noche de los seis goles.</h5></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panel 5: CTA Block 4 -->
+      <div class="h-scroll__panel h-panel">
+        <section class="cta">
+          <div class="container cta-block--europa">
+            <div data-copy-wrapper><h2 class="cta-title">Europa & El Mundo (2022)</h2></div>
+            <div class="cta-europa-row">
+              <div class="cta-europa-item">
+                <div class="cta-europa-img"><img src="/bio/Anexo 8.webp" alt=""></div>
+                <div class="cta-europa-text"><div data-copy-wrapper><h5>"Desde las juveniles hasta levantar la Copa del Mundo… Es dejarlo todo por una camiseta que representa a millones."</h5></div></div>
+              </div>
+              <div class="cta-europa-item">
+                <div class="cta-europa-img"><img src="/bio/Anexo 9.jpg" alt=""></div>
+                <div class="cta-europa-text"><div data-copy-wrapper><h5>"Crecer al lado de los mejores del mundo fue un privilegio. Cada entrenamiento y cada partido fueron una enseñanza para mejorar, adaptarme y entender el fútbol de otra manera."</h5></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== MARQUEE BANNER ===== -->
+  <section class="marquee-banner" id="marquee-banner">
+    <div class="marquee-half marquee-half--left"></div>
+    <div class="marquee-half marquee-half--right"></div>
+
+    <div class="marquee-btn marquee-btn--left">
+      <button class="spider-btn" id="marquee-btn-left">
+        <canvas class="spider-btn-web" aria-hidden="true"></canvas>
+        <p class="spider-btn-text bodyCopy sm">Ver Dentro</p>
+      </button>
+    </div>
+    <div class="marquee-btn marquee-btn--right">
+      <button class="spider-btn" id="marquee-btn-right">
+        <canvas class="spider-btn-web" aria-hidden="true"></canvas>
+        <p class="spider-btn-text bodyCopy sm">Ver Fuera</p>
+      </button>
+    </div>
+
+    <div class="banner-content">
+      <div data-copy-wrapper data-copy-type="flicker"><p class="bodyCopy sm">[ Las dos caras ]</p></div>
+      <div data-copy-wrapper><h4>Dentro y fuera de las canchas</h4></div>
+    </div>
+
+    <div class="marquees">
+      <div class="marquee-header marquee-header-1" id="marquee-1"><h1>Cada partido cuenta una historia. Acá están los míos.</h1></div>
+      <div class="marquee-header marquee-header-2" id="marquee-2"><h1>Mi vida lejos del campo</h1></div>
+    </div>
+
+    <div class="banner" id="marquee-banner-container">
+      <div class="banner-img banner-img--face"></div>
+      <div class="banner-img banner-img--reveal"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="smudge-revealer" id="marquee-smudge-svg">
+        <defs>
+          <filter id="smudge-goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="50"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 4 -0.35"/>
+          </filter>
+        </defs>
+        <mask id="smudge-mask">
+          <g class="smudge-blobs" id="marquee-smudge-container" filter="url(#smudge-goo)"></g>
+        </mask>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT FORM ===== -->
+  <section class="contact-form" id="contact-form-section">
+    <div class="contact-parallax-image-wrapper">
+      <img src="/contact-form/gol.jpg" alt="">
+    </div>
+
+    <!-- Footer nav -->
+    <div class="cf-nav" id="cf-nav">
+      <div class="cf-nav-row">
+        <div class="cf-nav-col">
+          <div data-copy-wrapper><p class="bodyCopy cf-nav-header">Navegación</p></div>
+          <div class="cf-nav-links">
+            <div data-copy-wrapper><a href="/">Index</a></div>
+            <div data-copy-wrapper><a href="/fuera-de-las-canchas">Fuera de las canchas</a></div>
+            <div data-copy-wrapper><a href="/genesis">Genesis</a></div>
+            <div data-copy-wrapper><a href="/touchpoint">Contacto</a></div>
+          </div>
+        </div>
+        <div class="cf-nav-col">
+          <div data-copy-wrapper><p class="bodyCopy cf-nav-header">Conectar redes sociales</p></div>
+          <div class="cf-nav-links">
+            <div data-copy-wrapper><a href="https://www.instagram.com/julianalvarez/" target="_blank" rel="noopener noreferrer">Instagram</a></div>
+            <div data-copy-wrapper><a href="https://www.youtube.com/@julianalvarez" target="_blank" rel="noopener noreferrer">YouTube</a></div>
+          </div>
+          <div class="cf-nav-ulah">
+            <p style="color:#ffffff">«Diseñado por Ulah Marketing · 2026».</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact form container -->
+    <div class="contact-form-container" id="cf-container">
+      <div class="cf-header"><div data-copy-wrapper><h4>Entremos en contacto</h4></div></div>
+      <div class="cf-copy"><div data-copy-wrapper><p class="bodyCopy sm">BUSINESS INQUIRIES</p></div></div>
+
+      <form class="cf-fields" id="cf-form">
+        <div class="cf-field"><input type="text" name="name" placeholder="Nombre completo" required></div>
+        <div class="cf-field"><input type="email" name="email" placeholder="Email" required></div>
+        <div class="cf-field">
+          <select name="type" required>
+            <option value="" disabled selected hidden>Tipo de consulta</option>
+            <option value="partnership">Partnership / Sponsorship</option>
+            <option value="press">Press / Media</option>
+            <option value="management">Management</option>
+            <option value="booking">Booking / Events</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="cf-field"><textarea name="message" placeholder="Mensaje" rows="4" required></textarea></div>
+        <p class="cf-msg error" id="cf-error" style="display:none">Error al enviar. Intentá de nuevo.</p>
+        <button type="submit" class="cf-submit" id="cf-submit">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <div class="cf-footer">
+        <div class="cf-divider"></div>
+        <div class="cf-footer-copy">
+          <p class="bodyCopy sm" style="color:#ffffff">«Diseñado por Ulah Marketing · 2026».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end .page -->
+
+</body>
+</html>
