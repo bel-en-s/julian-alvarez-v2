@@ -12,37 +12,37 @@
 
 .cursor-web .cw-strand {
   fill: none;
-  stroke: rgba(168, 140, 230, 0.6);
+  stroke: rgba(168, 140, 230, 0.85);
   stroke-width: 1.2px;
-  filter: drop-shadow(0 0 8px rgba(168, 140, 230, 0.5))
-           drop-shadow(0 0 16px rgba(168, 140, 230, 0.2));
+  filter: drop-shadow(0 0 10px rgba(138, 117, 184, 0.6))
+           drop-shadow(0 0 24px rgba(138, 117, 184, 0.3));
   stroke-linecap: round;
 }
 
 .cursor-web .cw-dangle {
   fill: none;
-  stroke: rgba(216, 200, 245, 0.5);
+  stroke: rgba(216, 200, 245, 0.7);
   stroke-width: 0.8px;
-  filter: drop-shadow(0 0 6px rgba(168, 140, 230, 0.3));
+  filter: drop-shadow(0 0 8px rgba(138, 117, 184, 0.4));
   stroke-linecap: round;
 }
 
 .cursor-web .cw-anchor {
-  fill: rgba(232, 220, 255, 0.8);
+  fill: rgba(232, 220, 255, 1);
   stroke: none;
-  filter: drop-shadow(0 0 6px rgba(168, 140, 230, 0.6))
-           drop-shadow(0 0 12px rgba(168, 140, 230, 0.3));
+  filter: drop-shadow(0 0 8px rgba(138, 117, 184, 0.8))
+           drop-shadow(0 0 16px rgba(138, 117, 184, 0.4));
 }
 
 .cursor-web .cw-dangle-tip {
-  fill: rgba(244, 241, 234, 0.6);
+  fill: rgba(244, 241, 234, 0.8);
   stroke: none;
-  filter: drop-shadow(0 0 4px rgba(168, 140, 230, 0.3));
+  filter: drop-shadow(0 0 6px rgba(138, 117, 184, 0.5));
 }
 
 .cursor-web .cw-origin {
-  fill: rgba(232, 220, 255, 0.9);
+  fill: rgba(232, 220, 255, 1);
   stroke: none;
-  filter: drop-shadow(0 0 10px rgba(168, 140, 230, 0.7))
-           drop-shadow(0 0 20px rgba(168, 140, 230, 0.4));
+  filter: drop-shadow(0 0 12px rgba(138, 117, 184, 0.8))
+           drop-shadow(0 0 24px rgba(138, 117, 184, 0.5));
 }
