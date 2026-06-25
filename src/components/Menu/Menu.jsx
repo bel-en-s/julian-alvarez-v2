@@ -2,6 +2,7 @@
 import "./Menu.css";
 import { useRef, useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useTransitionRouter } from "next-transition-router";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,6 +14,7 @@ const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const pathname = usePathname();
+  const router = useTransitionRouter();
 
   const menuRef = useRef(null);
 
@@ -228,7 +230,7 @@ const Menu = () => {
  <a
   href="/"
   className="ja-menu-arana__item i0"
-  onClick={(e) => { e.preventDefault(); window.location.href = "/?t=" + Date.now(); }}
+  onClick={(e) => { e.preventDefault(); router.push("/"); }}
 >
   <span className="ja-menu-arana__dot"></span>
   INICIO
@@ -236,7 +238,7 @@ const Menu = () => {
             <a
               href="/dentro-de-las-canchas"
               className="ja-menu-arana__item i1"
-               onClick={(e) => { e.preventDefault(); window.location.href = "/dentro-de-las-canchas?t=" + Date.now(); }}
+               onClick={(e) => { e.preventDefault(); router.push("/dentro-de-las-canchas"); }}
             >
               <span className="ja-menu-arana__dot"></span>
               DENTRO DE LAS CANCHAS
@@ -244,7 +246,7 @@ const Menu = () => {
             <a
               href="/fuera-de-las-canchas"
               className="ja-menu-arana__item i2"
-               onClick={(e) => { e.preventDefault(); window.location.href = "/fuera-de-las-canchas?t=" + Date.now(); }}
+               onClick={(e) => { e.preventDefault(); router.push("/fuera-de-las-canchas"); }}
             >
               <span className="ja-menu-arana__dot"></span>
               FUERA DE LAS CANCHAS
@@ -252,7 +254,7 @@ const Menu = () => {
             <a
               href="/touchpoint"
               className="ja-menu-arana__item i4"
-               onClick={(e) => { e.preventDefault(); window.location.href = "/touchpoint?t=" + Date.now(); }}
+               onClick={(e) => { e.preventDefault(); router.push("/touchpoint"); }}
             >
               <span className="ja-menu-arana__dot"></span>
               CONTACTO

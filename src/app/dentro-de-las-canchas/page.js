@@ -58,6 +58,7 @@ const PARTIDOS_FALLBACK = [
 ];
 
 export default function DentroDeLasCanchas() {
+  const heroRef = useRef(null);
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const [partidos, setPartidos] = useState(PARTIDOS_FALLBACK);
@@ -73,24 +74,49 @@ export default function DentroDeLasCanchas() {
     return () => { document.body.style.backgroundColor = ""; };
   }, []);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          gsap.to(headerRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power4.out",
+            overwrite: "auto",
+          });
+        },
+      });
+    }, sectionRef);
+
+    return () => { try { ctx.revert(); } catch (_) {} };
+  }, []);
+
   useGSAP(() => {
-    gsap.set(".ph-inner > *", { y: 60, opacity: 0 });
+    const targets = heroRef.current?.querySelectorAll(
+      ".ph-inner > *:not([data-copy-wrapper])"
+    );
+    if (!targets?.length) return;
+
+    gsap.set(targets, { y: 60, opacity: 0 });
 
     const tl = gsap.timeline({ delay: 0.3 });
-    tl.to(".ph-inner > *", {
+    tl.to(targets, {
       y: 0,
       opacity: 1,
       duration: 1.2,
       stagger: 0.15,
       ease: "power4.out",
+      overwrite: "auto",
     });
-
-    ScrollTrigger.refresh();
-  }, { dependencies: [] });
+  }, { scope: heroRef, dependencies: [] });
 
   return (
     <>
-      <section className="ph" id="top">
+      <section className="ph" id="top" ref={heroRef}>
         <div className="ph-dorsal" aria-hidden="true">9</div>
         <div className="ph-inner">
           <p className="eyebrow ph-eyebrow">Dentro de las canchas</p>

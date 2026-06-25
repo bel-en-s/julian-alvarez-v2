@@ -36,7 +36,7 @@
 
 .marquee-btn {
   position: absolute;
-  bottom: 15rem;
+  bottom: 10rem;
   z-index: 25;
 }
 
@@ -165,11 +165,34 @@
   .marquee-btn {
     z-index: 25;
     position: absolute;
-    bottom: 10rem;
+    bottom: 3rem;
 }
   .marquee-banner .banner {
     max-height: 20rem;
       margin-top: 1vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee-banner {
+    height: 80svh;
+  }
+
+  .marquee-banner .banner {
+    width: calc(100% - 3rem);
+    max-height: 16rem;
+  }
+
+  .marquee-btn {
+    bottom: 1.5rem;
+  }
+
+  .marquee-banner .banner .banner-logo {
+    bottom: 1.5rem;
+  }
+
+  .marquee-banner > .banner-content {
+    top: 2rem;
   }
 }
 

@@ -27,19 +27,23 @@ export default function FueraDeLasCanchas() {
   }, []);
 
   useGSAP(() => {
-    gsap.set(".fdc-hero-inner > *", { y: 60, opacity: 0 });
+    const targets = sectionRef.current.querySelectorAll(
+      ".fdc-hero-inner > *:not([data-copy-wrapper])"
+    );
+    if (!targets.length) return;
+
+    gsap.set(targets, { y: 60, opacity: 0 });
 
     const tl = gsap.timeline({ delay: 0.3 });
-    tl.to(".fdc-hero-inner > *", {
+    tl.to(targets, {
       y: 0,
       opacity: 1,
       duration: 1.2,
       stagger: 0.15,
       ease: "power4.out",
+      overwrite: "auto",
     });
-
-    ScrollTrigger.refresh();
-  }, { dependencies: [] });
+  }, { scope: sectionRef, dependencies: [] });
 
   return (
     <section className="fdc" ref={sectionRef}>
