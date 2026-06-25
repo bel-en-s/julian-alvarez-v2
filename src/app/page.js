@@ -1,6 +1,6 @@
 "use client";
 import "./home.css";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Preloader, { isInitialLoad } from "@/components/Preloader/Preloader";
 import DotMatrix from "@/components/DotMatrix/DotMatrix";
 import BackgroundWeb from "@/components/BackgroundWeb/BackgroundWeb";
@@ -26,7 +26,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Index() {
   const [loaderAnimating, setLoaderAnimating] = useState(isInitialLoad);
-  const [preloaderDone, setPreloaderDone] = useState(false);
   const heroImgRef = useRef(null);
   const heroHeaderRef = useRef(null);
   const heroSectionRef = useRef(null);
@@ -36,23 +35,8 @@ export default function Index() {
   const hScrollRef = useRef(null);
   const hScrollContentRef = useRef(null);
 
-  const animateHeroImage = useCallback(() => {
-    if (!heroImgRef.current) return;
-    const img = heroImgRef.current;
-    if (gsap.getTweensOf(img).length) return;
-    gsap.set(img, { y: 1000 });
-    gsap.to(img, {
-      y: 0,
-      duration: 0.75,
-      ease: "power3.out",
-      delay: 0.15,
-    });
-  }, []);
-
   const handlePreloaderComplete = () => {
     setLoaderAnimating(false);
-    setPreloaderDone(true);
-    animateHeroImage();
   };
 
   const killTouch = (e) => { e.preventDefault(); e.stopPropagation(); };
@@ -60,10 +44,6 @@ export default function Index() {
 
   useGSAP(() => {
     if (!heroHeaderRef.current) return;
-
-    if (!isInitialLoad) {
-      animateHeroImage();
-    }
 
    const track = scrollTrackRef.current;
 if (track && window.innerWidth >= 1000) {
@@ -298,7 +278,7 @@ const updateColors = () => {
         />
         <div className="container">
           <div className="hero-header" ref={heroHeaderRef}>
-            <Copy animateOnScroll={false} delay={0.15} key={`hero-${preloaderDone}`}>
+            <Copy animateOnScroll={false} delay={0.15}>
               <span className="hero-name hero-name--julian">Julián</span>
               <span className="hero-header-img" ref={heroImgRef}>
                 <img src="/home/hero.webp" alt="" />

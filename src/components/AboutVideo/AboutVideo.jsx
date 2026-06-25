@@ -24,14 +24,12 @@ export default function AboutVideo() {
     video.muted = true;
     video.play().catch(() => {});
 
-    const onTouch = (e) => {
-      e.stopPropagation();
+    const onTouch = () => {
       touched.current = true;
       if (video.paused) { video.play(); setPlaying(true); }
       else { video.pause(); setPlaying(false); }
     };
-    const onClick = (e) => {
-      e.stopPropagation();
+    const onClick = () => {
       if (touched.current) { touched.current = false; return; }
       if (video.paused) { video.play(); setPlaying(true); }
       else { video.pause(); setPlaying(false); }
@@ -44,8 +42,7 @@ export default function AboutVideo() {
     };
   }, []);
 
-  const toggleSound = useCallback((e) => {
-    e.stopPropagation();
+  const toggleSound = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
     const newVol = video.volume > 0.5 ? LOW_VOL : FULL_VOL;
@@ -55,8 +52,7 @@ export default function AboutVideo() {
     setVolState(newVol === LOW_VOL ? "low" : "high");
   }, []);
 
-  const togglePlay = useCallback((e) => {
-    e.stopPropagation();
+  const togglePlay = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {

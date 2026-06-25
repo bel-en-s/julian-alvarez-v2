@@ -12,10 +12,10 @@ import ContactForm from "@/components/ContactForm/ContactForm";
 gsap.registerPlugin(ScrollTrigger);
 
 const GRID = [
-  { src: "/fuera-de-las-canchas/BAYER/BAYER-13.jpg", brand: "Bayer 04 Leverkusen" },
-  { src: "/fuera-de-las-canchas/XBOTGO/Xbotgo-4.jpg", brand: "Xbot Go" },
-  { src: "/fuera-de-las-canchas/XIAOMI/ANUNCIO/01.jpg", brand: "Xiaomi" },
-  { src: "/fuera-de-las-canchas/ADIDAS/597160232_1326487642847729_5803140599754485605_n.jpg", brand: "Adidas" },
+  { src: "/fuera-de-las-canchas/BAYER/BAYER-13.webp", brand: "Bayer 04 Leverkusen" },
+  { src: "/fuera-de-las-canchas/XBOTGO/Xbotgo-4.webp", brand: "Xbot Go" },
+  { src: "/fuera-de-las-canchas/XIAOMI/ANUNCIO/01.webp", brand: "Xiaomi" },
+  { src: "/fuera-de-las-canchas/ADIDAS/597160232_1326487642847729_5803140599754485605_n.webp", brand: "Adidas" },
 ];
 
 export default function FueraDeLasCanchas() {

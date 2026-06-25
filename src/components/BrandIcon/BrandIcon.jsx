@@ -58,8 +58,8 @@ const BrandIcon = ({ width, height, style, showSoundButton, ...props }) => {
         style={{
           width: "100%",
           height: "100%",
-          maskImage: `url(/logo.png)`,
-          WebkitMaskImage: `url(/logo.png)`,
+maskImage: `url(/logo.webp)`,
+        WebkitMaskImage: `url(/logo.webp)`,
           maskSize: "contain",
           WebkitMaskSize: "contain",
           maskRepeat: "no-repeat",

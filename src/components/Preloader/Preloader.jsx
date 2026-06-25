@@ -17,17 +17,8 @@ const Preloader = ({ onAnimationComplete }) => {
   const lenis = useLenis();
 
   useEffect(() => {
-    const onPageShow = (e) => {
-      if (e.persisted) {
-        isInitialLoad = true;
-        setShowPreloader(true);
-        setLoaderAnimating(true);
-      }
-    };
-    window.addEventListener("pageshow", onPageShow);
     return () => {
       isInitialLoad = false;
-      window.removeEventListener("pageshow", onPageShow);
     };
   }, []);
 

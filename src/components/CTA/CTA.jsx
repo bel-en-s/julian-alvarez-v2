@@ -13,10 +13,10 @@ const CTA = ({ blocks = [1, 2] }) => {
             <Copy><h2 className="cta-title">Club Atlético Calchín (2016)</h2></Copy>
             <div className="cta-gallery">
               <div className="cta-gallery-img cta-gallery-img--left">
-                <img src="/bio/2.jpeg" alt="" loading="lazy" />
+                <img src="/bio/2.webp" alt="" loading="lazy" />
               </div>
               <div className="cta-gallery-img cta-gallery-img--right">
-                <img src="/bio/1.jpeg" alt="" loading="lazy" />
+                <img src="/bio/1.webp" alt="" loading="lazy" />
               </div>
             </div>
             <div className="cta-header">
@@ -34,7 +34,7 @@ const CTA = ({ blocks = [1, 2] }) => {
             <div className="cta-doble-row">
               <div className="cta-doble-item">
                 <div className="cta-doble-img">
-                  <img src="/bio/3.jpeg" alt="" loading="lazy" />
+                  <img src="/bio/3.webp" alt="" loading="lazy" />
                 </div>
                 <div className="cta-doble-text">
                   <Copy>
@@ -44,7 +44,7 @@ const CTA = ({ blocks = [1, 2] }) => {
               </div>
               <div className="cta-doble-item">
                 <div className="cta-doble-img">
-                  <img src="/bio/4.jpg" className="img-focus-4" alt="" loading="lazy" />
+                  <img src="/bio/4.webp" className="img-focus-4" alt="" loading="lazy" />
                 </div>
                 <div className="cta-doble-text">
                   <Copy>
@@ -63,7 +63,7 @@ const CTA = ({ blocks = [1, 2] }) => {
             <Copy><h2 className="cta-title">Un año inolvidable (2021)</h2></Copy>
             <div className="cta-triple-row">
               <div className="cta-triple-card">
-                <img src="/bio/Anexo 5.jpeg" alt="" loading="lazy" />
+                <img src="/bio/Anexo 5.webp" alt="" loading="lazy" />
                 <div className="cta-triple-text">
                   <Copy>
 
@@ -82,7 +82,7 @@ const CTA = ({ blocks = [1, 2] }) => {
                 </div>
               </div>
               <div className="cta-triple-card">
-                 <img src="/bio/Anexo 7.jpg" alt="" loading="lazy" />
+                 <img src="/bio/Anexo 7.webp" alt="" loading="lazy" />
                 <div className="cta-triple-text">
                   <Copy>
                     <h5>La noche de los seis goles. </h5>
@@ -111,7 +111,7 @@ const CTA = ({ blocks = [1, 2] }) => {
               </div>
               <div className="cta-europa-item">
                 <div className="cta-europa-img">
-                  <img src="/bio/Anexo 9.jpg" alt="" loading="lazy" />
+                  <img src="/bio/Anexo 9.webp" alt="" loading="lazy" />
                 </div>
                 <div className="cta-europa-text">
                   <Copy>
