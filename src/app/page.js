@@ -35,12 +35,22 @@ export default function Index() {
   const hScrollRef = useRef(null);
   const hScrollContentRef = useRef(null);
 
-  const handlePreloaderComplete = () => {
-    setLoaderAnimating(false);
+  const animateHeroImage = () => {
+    if (!heroImgRef.current) return;
+    const img = heroImgRef.current;
+    if (gsap.getTweensOf(img).length) return;
+    gsap.set(img, { y: 1000 });
+    gsap.to(img, {
+      y: 0,
+      duration: 0.75,
+      ease: "power3.out",
+      delay: 0.15,
+    });
   };
 
-  const killTouch = (e) => { e.preventDefault(); e.stopPropagation(); };
-  const killClick = (e) => { e.preventDefault(); e.stopPropagation(); };
+  const handlePreloaderComplete = () => {
+    animateHeroImage();
+  };
 
   useGSAP(() => {
     if (!heroHeaderRef.current) return;
@@ -266,7 +276,7 @@ const updateColors = () => {
       <canvas className="hero-alvarez-canvas" ref={alvarezCanvasRef} aria-hidden="true" />
       <Preloader onAnimationComplete={handlePreloaderComplete} />
 
-      <section className="hero" ref={heroSectionRef} onClick={killClick} onTouchStart={killTouch}>
+      <section className="hero" ref={heroSectionRef}>
         <HeroAtmos />
         <DotMatrix
           color1="#51398D"
@@ -308,7 +318,7 @@ const updateColors = () => {
 
       <NextMatch />
       <div className="scroll-track" ref={scrollTrackRef}>
-      <section className="about" onClick={killClick} onTouchStart={killTouch}>
+      <section className="about">
         <div className="about-bg">
           <AboutVideo />
         </div>

@@ -45,7 +45,27 @@
 }
 
 .menu.white {
-  mix-blend-mode: difference;
+  mix-blend-mode: unset;
+}
+
+.menu.white .menu-logo {
+  filter: brightness(0) invert(1);
+}
+
+.menu.white .menu-hamburger-icon .menu-item {
+  background: #fff;
+}
+
+.menu.white.has-hero.scrolled {
+  mix-blend-mode: unset;
+}
+
+.menu.white.has-hero.scrolled .menu-logo {
+  filter: brightness(0) invert(1);
+}
+
+.menu.white.has-hero.scrolled .menu-hamburger-icon .menu-item {
+  background: #fff;
 }
 
 .menu.white .menu-logo {
