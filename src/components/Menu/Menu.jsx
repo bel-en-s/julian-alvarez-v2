@@ -181,7 +181,7 @@ const Menu = () => {
   useEffect(() => {
     const menu = menuRef.current;
     if (!menu) return;
-    const hero = document.querySelector(".hero");
+    const hero = document.querySelector(".hero, .fdc-hero, .ph");
     if (hero) {
       menu.classList.add("has-hero");
       ScrollTrigger.create({

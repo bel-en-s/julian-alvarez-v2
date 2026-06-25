@@ -25,6 +25,13 @@
   opacity: 1;
 }
 
+@media (max-width: 1000px) {
+  .about-video-controls {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 .about-video-controls button {
   width: 2.5rem;
     background: var(--violet);

@@ -720,8 +720,7 @@ html.is-h-scroll {
     --about-text: #000000;
   }
 
-  .about .slide-content,
-  .about .about-bg {
+  .about .slide-content {
     pointer-events: none;
   }
 

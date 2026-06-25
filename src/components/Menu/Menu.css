@@ -56,6 +56,18 @@
   background: #fff;
 }
 
+.menu.white.has-hero.scrolled {
+  mix-blend-mode: unset;
+}
+
+.menu.white.has-hero.scrolled .menu-logo {
+  filter: brightness(0);
+}
+
+.menu.white.has-hero.scrolled .menu-hamburger-icon .menu-item {
+  background: #000;
+}
+
 .menu .menu-header {
   display: flex;
   align-items: center;

@@ -159,13 +159,12 @@
     width: calc(100% - 5rem);
   }
 
-  .marquee-banner .banner .banner-img {
-    top: 1rem;
-  }
+
   .marquee-btn {
     z-index: 25;
     position: absolute;
     bottom: 3rem;
+    pointer-events: none;
 }
   .marquee-banner .banner {
     max-height: 20rem;

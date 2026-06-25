@@ -89,6 +89,22 @@ const MarqueeBanner = () => {
 
     banner.addEventListener("mousemove", handleMouseMove);
 
+    const handleClick = (e) => {
+      const pos = getRelativePos(e.clientX, e.clientY);
+      const isMobile = window.innerWidth < 1000;
+      const burstRadii = isMobile
+        ? [15, 22, 12, 18, 10, 20, 14, 16, 19, 11]
+        : [30, 45, 25, 35, 20, 40, 28, 32, 38, 22];
+      const offsets = isMobile
+        ? [[0, 0], [-8, -5], [8, -4], [-4, 8], [6, 6], [-10, 3], [4, -9], [-3, -10], [9, 4], [-6, -3]]
+        : [[0, 0], [-15, -10], [15, -8], [-8, 15], [12, 12], [-20, 5], [8, -18], [-5, -20], [18, 8], [-12, -5]];
+      offsets.forEach(([ox, oy], i) => {
+        stampAt(pos.x + ox, pos.y + oy, burstRadii[i]);
+      });
+    };
+
+    banner.addEventListener("click", handleClick);
+
     const matchSVGToViewport = () => {
       const rect = banner.getBoundingClientRect();
       smudgeSVG.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
@@ -149,6 +165,7 @@ const MarqueeBanner = () => {
 
     return () => {
       banner.removeEventListener("mousemove", handleMouseMove);
+      banner.removeEventListener("click", handleClick);
       window.removeEventListener("resize", matchSVGToViewport);
       if (raf) cancelAnimationFrame(raf);
     };
@@ -160,10 +177,10 @@ const MarqueeBanner = () => {
       <div className="marquee-half marquee-half--right" />
 
       <div className="marquee-btn marquee-btn--left">
-        <SpiderButton onClick={() => { window.location.href = "/dentro-de-las-canchas?t=" + Date.now(); }}>Ver Dentro</SpiderButton>
+        <SpiderButton>Ver Dentro</SpiderButton>
       </div>
       <div className="marquee-btn marquee-btn--right">
-        <SpiderButton onClick={() => { window.location.href = "/fuera-de-las-canchas?t=" + Date.now(); }}>Ver Fuera</SpiderButton>
+        <SpiderButton>Ver Fuera</SpiderButton>
       </div>
 
       <div className="banner-content">

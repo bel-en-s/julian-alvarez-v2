@@ -36,7 +36,11 @@ const Preloader = ({ onAnimationComplete }) => {
     let preventTouch = null;
 
     if (loaderAnimating) {
-      if (lenis) lenis.stop();
+      if (lenis) {
+        lenis.stop();
+        lenis.scrollTo(0, { immediate: true, lock: true });
+      }
+      window.scrollTo(0, 0);
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
       if (isMobile) {

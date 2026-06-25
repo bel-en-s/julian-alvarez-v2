@@ -16,11 +16,32 @@ export default function AboutVideo() {
   const [playing, setPlaying] = useState(true);
   const [volState, setVolState] = useState("muted");
   const activeVolume = useRef(0);
+  const touched = useRef(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    video.muted = true;
     video.play().catch(() => {});
+
+    const onTouch = (e) => {
+      e.stopPropagation();
+      touched.current = true;
+      if (video.paused) { video.play(); setPlaying(true); }
+      else { video.pause(); setPlaying(false); }
+    };
+    const onClick = (e) => {
+      e.stopPropagation();
+      if (touched.current) { touched.current = false; return; }
+      if (video.paused) { video.play(); setPlaying(true); }
+      else { video.pause(); setPlaying(false); }
+    };
+    video.addEventListener("touchstart", onTouch);
+    video.addEventListener("click", onClick);
+    return () => {
+      video.removeEventListener("touchstart", onTouch);
+      video.removeEventListener("click", onClick);
+    };
   }, []);
 
   const toggleSound = useCallback((e) => {
@@ -34,7 +55,8 @@ export default function AboutVideo() {
     setVolState(newVol === LOW_VOL ? "low" : "high");
   }, []);
 
-  const togglePlay = useCallback(() => {
+  const togglePlay = useCallback((e) => {
+    e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
@@ -84,7 +106,6 @@ export default function AboutVideo() {
         muted
         loop
         preload="auto"
-        onClick={togglePlay}
       />
       <div className="about-video-controls">
         <button onClick={togglePlay} aria-label={playing ? "Pausar" : "Reproducir"}>
