@@ -70,7 +70,7 @@ const Preloader = ({ onAnimationComplete }) => {
           gsap.set(".preloader-logo h1", { opacity: 1 });
         }
 
-        function animateProgress(duration = 4.75) {
+        function animateProgress(duration = 2) {
           const tl = gsap.timeline();
           const counterSteps = 5;
           let currentProgress = 0;
@@ -96,7 +96,7 @@ const Preloader = ({ onAnimationComplete }) => {
         const maskScale = isMobile ? 25 : 15;
 
         const tl = gsap.timeline({
-          delay: 0.5,
+          delay: 0.2,
           onComplete: () => {
             setLoaderAnimating(false);
             onAnimationComplete?.();

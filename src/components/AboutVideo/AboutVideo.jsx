@@ -1,11 +1,7 @@
 "use client";
 import { useRef, useState, useCallback, useEffect } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import "./AboutVideo.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const LOW_VOL = 0.15;
 const FULL_VOL = 1.0;
@@ -20,7 +16,8 @@ export default function AboutVideo() {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    const wrapper = wrapperRef.current;
+    if (!video || !wrapper) return;
     video.muted = true;
     video.play().catch(() => {});
 
@@ -36,20 +33,40 @@ export default function AboutVideo() {
     };
     video.addEventListener("touchstart", onTouch);
     video.addEventListener("click", onClick);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && activeVolume.current > 0) {
+          gsap.to(video, { volume: activeVolume.current, duration: 0.3, ease: "power2.out" });
+          setVolState(activeVolume.current > 0.5 ? "high" : "low");
+        } else if (!entry.isIntersecting) {
+          gsap.to(video, { volume: 0, duration: 0.3, ease: "power2.out", onComplete: () => setVolState("muted") });
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(wrapper);
+
     return () => {
       video.removeEventListener("touchstart", onTouch);
       video.removeEventListener("click", onClick);
+      observer.disconnect();
     };
   }, []);
 
   const toggleSound = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
-    const newVol = video.volume > 0.5 ? LOW_VOL : FULL_VOL;
-    activeVolume.current = newVol;
-    video.muted = false;
-    gsap.to(video, { volume: newVol, duration: 0.3, ease: "power2.out" });
-    setVolState(newVol === LOW_VOL ? "low" : "high");
+    if (video.volume > 0) {
+      activeVolume.current = video.volume;
+      gsap.to(video, { volume: 0, duration: 0.2, ease: "power2.out", onComplete: () => setVolState("muted") });
+    } else {
+      const newVol = activeVolume.current > 0 ? activeVolume.current : LOW_VOL;
+      video.muted = false;
+      activeVolume.current = newVol;
+      gsap.to(video, { volume: newVol, duration: 0.3, ease: "power2.out" });
+      setVolState(newVol === LOW_VOL ? "low" : "high");
+    }
   }, []);
 
   const togglePlay = useCallback(() => {
@@ -62,34 +79,6 @@ export default function AboutVideo() {
       video.pause();
       setPlaying(false);
     }
-  }, []);
-
-  useGSAP(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const st = ScrollTrigger.create({
-      trigger: wrapperRef.current,
-      start: "top bottom",
-      end: "bottom top",
-      onUpdate: (self) => {
-        const p = self.progress;
-        const fullyVisible = p > 0 && p < 1;
-        const target = fullyVisible ? activeVolume.current : 0;
-        gsap.to(video, {
-          volume: target,
-          duration: 0.3,
-          ease: "power2.out",
-          onUpdate: () => {
-            if (video.volume < 0.05) setVolState("muted");
-            else if (video.volume <= LOW_VOL + 0.05) setVolState("low");
-            else setVolState("high");
-          },
-        });
-      },
-    });
-
-    return () => st.kill();
   }, []);
 
   return (

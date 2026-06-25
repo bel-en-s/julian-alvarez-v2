@@ -49,7 +49,7 @@ export default function Index() {
   };
 
   const handlePreloaderComplete = () => {
-    animateHeroImage();
+    setLoaderAnimating(false);
   };
 
   useGSAP(() => {

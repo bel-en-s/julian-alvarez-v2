@@ -28,7 +28,6 @@
 @media (max-width: 1000px) {
   .about-video-controls {
     opacity: 1;
-    pointer-events: auto;
   }
 }
 

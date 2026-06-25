@@ -402,13 +402,6 @@ html.is-h-scroll {
 
   .hero .hero-header {
     padding: 0 1rem;
-    pointer-events: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero .hero-header {
-    pointer-events: auto;
   }
 }
 

@@ -1,32 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ReactLenis, useLenis } from "lenis/react";
-
-gsap.registerPlugin(ScrollTrigger);
-
-function LenisScrollTrigger() {
-  const lenis = useLenis();
-  const pathname = usePathname();
-
-  useEffect(() => {
-    if (!lenis) return;
-    lenis.scrollTo(0, { immediate: true });
-  }, [lenis, pathname]);
-
-  useEffect(() => {
-    if (!lenis) return;
-    const onScroll = () => ScrollTrigger.update();
-    lenis.on("scroll", onScroll);
-    ScrollTrigger.refresh();
-    return () => {
-      lenis.off("scroll", onScroll);
-    };
-  }, [lenis]);
-  return null;
-}
+import { ReactLenis } from "lenis/react";
 
 export default function ClientLayout({ children }) {
   const pageRef = useRef();
@@ -44,23 +19,20 @@ export default function ClientLayout({ children }) {
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
-  const scrollSettings = {
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    orientation: "vertical",
-    gestureOrientation: "vertical",
-    smoothWheel: true,
-    smoothTouch: false,
-    touchMultiplier: 1,
-    lerp: 0.1,
-    wheelMultiplier: 1,
-    infinite: false,
-    syncTouch: true,
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
-    <ReactLenis root options={scrollSettings}>
-      <LenisScrollTrigger />
+    <ReactLenis root options={{
+      smoothWheel: true,
+      smoothTouch: true,
+      touchMultiplier: 0.8,
+      lerp: 0.08,
+      wheelMultiplier: 1,
+      infinite: false,
+      syncTouch: true,
+    }}>
       <div className="page" ref={pageRef}>
         {children}
       </div>
