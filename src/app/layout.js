@@ -40,6 +40,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preload" href="/fonts/big-shoulder/big-shoulders-display-latin-800-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/big-shoulder/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body
         className={`${koulen.variable} ${hostGrotesk.variable} ${dmMono.variable} ${spaceGrotesk.variable}`}
       >

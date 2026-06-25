@@ -21,24 +21,14 @@ export default function Curtain() {
     const isMobile = window.innerWidth <= 999;
 
     const updateCurtain = (p) => {
-      gsap.set(header1Ref.current, {
-        x: -innerWidth * 3 * p,
-        y: innerHeight * 0.5 * p,
-        scale: 1 + 9 * p,
-      });
-
-      gsap.set(header2Ref.current, {
-        x: innerWidth * 3 * p,
-        y: innerHeight * 0.5 * p,
-        scale: 1 + 9 * p,
-      });
-
       const eased = gsap.parseEase("power3.out")(p);
 
-      gsap.set(imgRef.current, {
-        rotation: 30 * (1 - eased),
-        scale: 0.75 + 0.25 * eased,
-      });
+      if (!isMobile) {
+        gsap.set(imgRef.current, {
+          rotation: 30 * (1 - eased),
+          scale: 0.75 + 0.25 * eased,
+        });
+      }
     };
 
     if (!isMobile) {
@@ -137,11 +127,11 @@ export default function Curtain() {
   return (
     <section className="curtain" ref={sectionRef}>
       <div className="curtain-ball" ref={ballRef}>
-        <img src="/curtain/balon.png" alt="" />
+        <img src="/curtain/balon.webp" alt="" loading="lazy" />
       </div>
 
       <div className="curtain-img" ref={imgRef}>
-        <img src="/curtain/cuerpo.png" alt="" />
+        <img src="/curtain/cuerpo.webp" alt="" loading="lazy" />
       </div>
 
       {/*

@@ -137,35 +137,35 @@ export default function Unit() {
       <section className="product-hero" ref={heroRef}>
         <div className="product-hero-col product-snapshots">
           <div className="product-snapshot">
-            <img src="/product/product_shot_01.jpg" alt="" />
+            <img loading="lazy" src="/product/product_shot_01.webp" alt="" />
           </div>
           <div className="product-snapshot">
-            <img src="/product/product_shot_02.jpg" alt="" />
+            <img loading="lazy" src="/product/product_shot_02.webp" alt="" />
           </div>
           <div className="product-snapshot">
-            <img src="/product/product_shot_03.jpg" alt="" />
+            <img loading="lazy" src="/product/product_shot_03.webp" alt="" />
           </div>
           <div className="product-snapshot">
-            <img src="/product/product_shot_04.jpg" alt="" />
+            <img loading="lazy" src="/product/product_shot_04.webp" alt="" />
           </div>
           <div className="product-snapshot">
-            <img src="/product/product_shot_05.jpg" alt="" />
+            <img loading="lazy" src="/product/product_shot_05.webp" alt="" />
           </div>
           <div className="product-snapshot-minimap">
             <div className="product-snapshot-minimap-img">
-              <img src="/product/product_minimap_01.jpg" alt="" />
+              <img loading="lazy" src="/product/product_minimap_01.webp" alt="" />
             </div>
             <div className="product-snapshot-minimap-img">
-              <img src="/product/product_minimap_02.jpg" alt="" />
+              <img loading="lazy" src="/product/product_minimap_02.webp" alt="" />
             </div>
             <div className="product-snapshot-minimap-img">
-              <img src="/product/product_minimap_03.jpg" alt="" />
+              <img loading="lazy" src="/product/product_minimap_03.webp" alt="" />
             </div>
             <div className="product-snapshot-minimap-img">
-              <img src="/product/product_minimap_04.jpg" alt="" />
+              <img loading="lazy" src="/product/product_minimap_04.webp" alt="" />
             </div>
             <div className="product-snapshot-minimap-img">
-              <img src="/product/product_minimap_05.jpg" alt="" />
+              <img loading="lazy" src="/product/product_minimap_05.webp" alt="" />
             </div>
           </div>
         </div>
@@ -229,13 +229,13 @@ export default function Unit() {
           </div>
         </div>
         <div className="product-col product-col-img">
-          <img src="/product/product_shot_03.jpg" alt="" />
+          <img loading="lazy" src="/product/product_shot_03.webp" alt="" />
         </div>
       </section>
 
       <section className="product-details shipping-details">
         <div className="product-col product-col-img">
-          <img src="/product/product_shot_04.jpg" alt="" />
+          <img loading="lazy" src="/product/product_shot_04.webp" alt="" />
         </div>
         <div className="product-col product-col-copy">
           <div className="product-col-copy-wrapper">

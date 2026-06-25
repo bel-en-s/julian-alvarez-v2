@@ -109,7 +109,7 @@
 }
 
 .marquee-banner .banner .banner-img--reveal {
-  background-image: url("/marquee-banner/mask-bg.png");
+  background-image: url("/marquee-banner/mask-bg.webp");
   mask: url(#smudge-mask);
   -webkit-mask: url(#smudge-mask);
   pointer-events: none;

@@ -44,72 +44,115 @@ const PeelReveal = () => {
         });
         gsap.set(imageContainer, { scale: 0 });
 
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top top",
-          end: () => `+=${window.innerHeight * 4}`,
-          pin: true,
-          pinSpacing: true,
-          scrub: 1,
-          onUpdate: (self) => {
-            const progress = self.progress;
+        const isMobile = window.innerWidth < 1000;
 
-            gsap.set(imageContainer, { scale: progress });
+        if (isMobile) {
+          const moveDistance = window.innerWidth * 0.55;
+          const tl = gsap.timeline();
 
-            if (progress >= 0.25 && progress <= 0.9) {
-              const borderRadiusProgress = (progress - 0.25) / 0.65;
-              const borderRadiusValue = 3 * (1 - borderRadiusProgress);
-              gsap.set(imageContainer, {
-                borderRadius: `${borderRadiusValue}rem`,
+          tl.to(imageContainer, {
+            scale: 1,
+            duration: 2,
+            ease: "power3.out",
+          })
+          .to(imageContainer, {
+            borderRadius: "0rem",
+            duration: 1.5,
+            ease: "power3.out",
+          }, 0.5)
+          .to(maskLayers, {
+            scale: 1,
+            duration: 1.8,
+            ease: "power3.out",
+            stagger: 0.1,
+          }, 0)
+          .to(introTexts[0], {
+            x: -moveDistance,
+            duration: 2,
+            ease: "power3.out",
+          }, 0)
+          .to(introTexts[1], {
+            x: moveDistance,
+            duration: 2,
+            ease: "power3.out",
+          }, 0)
+          .to(words, {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.05,
+          }, 1.5);
+
+          tl.set(imageContainer, { borderRadius: "0rem" });
+          tl.set(words, { opacity: 1 });
+        } else {
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top top",
+            end: () => `+=${window.innerHeight * 4}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            onUpdate: (self) => {
+              const progress = self.progress;
+
+              gsap.set(imageContainer, { scale: progress });
+
+              if (progress >= 0.25 && progress <= 0.9) {
+                const borderRadiusProgress = (progress - 0.25) / 0.65;
+                const borderRadiusValue = 3 * (1 - borderRadiusProgress);
+                gsap.set(imageContainer, {
+                  borderRadius: `${borderRadiusValue}rem`,
+                });
+              } else if (progress < 0.25) {
+                gsap.set(imageContainer, { borderRadius: "3rem" });
+              } else if (progress > 0.9) {
+                gsap.set(imageContainer, { borderRadius: "0rem" });
+              }
+
+              maskLayers.forEach((layer, i) => {
+                const initialScale = 0.9 - i * 0.2;
+                const layerProgress = Math.min(progress / 0.9, 1);
+                const currentScale =
+                  initialScale + layerProgress * (1 - initialScale);
+                gsap.set(layer, { scale: currentScale });
               });
-            } else if (progress < 0.25) {
-              gsap.set(imageContainer, { borderRadius: "3rem" });
-            } else if (progress > 0.9) {
-              gsap.set(imageContainer, { borderRadius: "0rem" });
-            }
 
-            maskLayers.forEach((layer, i) => {
-              const initialScale = 0.9 - i * 0.2;
-              const layerProgress = Math.min(progress / 0.9, 1);
-              const currentScale =
-                initialScale + layerProgress * (1 - initialScale);
-              gsap.set(layer, { scale: currentScale });
-            });
+              if (progress <= 0.9) {
+                const textProgress = progress / 0.9;
+                const moveDistance = window.innerWidth * 0.55;
+                gsap.set(introTexts[0], { x: -textProgress * moveDistance });
+                gsap.set(introTexts[1], { x: textProgress * moveDistance });
+              }
 
-            if (progress <= 0.9) {
-              const textProgress = progress / 0.9;
-              const moveDistance = window.innerWidth * 0.55;
-              gsap.set(introTexts[0], { x: -textProgress * moveDistance });
-              gsap.set(introTexts[1], { x: textProgress * moveDistance });
-            }
+              if (progress >= 0.6 && progress <= 0.9) {
+                const headerProgress = (progress - 0.6) / 0.3;
+                const totalWords = words.length;
 
-            if (progress >= 0.6 && progress <= 0.9) {
-              const headerProgress = (progress - 0.6) / 0.3;
-              const totalWords = words.length;
+                words.forEach((word, i) => {
+                  const wordStartDelay = i / totalWords;
+                  const wordEndDelay = (i + 1) / totalWords;
+                  let wordOpacity = 0;
 
-              words.forEach((word, i) => {
-                const wordStartDelay = i / totalWords;
-                const wordEndDelay = (i + 1) / totalWords;
-                let wordOpacity = 0;
+                  if (headerProgress >= wordEndDelay) {
+                    wordOpacity = 1;
+                  } else if (headerProgress >= wordStartDelay) {
+                    const wordProgress =
+                      (headerProgress - wordStartDelay) /
+                      (wordEndDelay - wordStartDelay);
+                    wordOpacity = wordProgress;
+                  }
 
-                if (headerProgress >= wordEndDelay) {
-                  wordOpacity = 1;
-                } else if (headerProgress >= wordStartDelay) {
-                  const wordProgress =
-                    (headerProgress - wordStartDelay) /
-                    (wordEndDelay - wordStartDelay);
-                  wordOpacity = wordProgress;
-                }
-
-                gsap.set(word, { opacity: wordOpacity });
-              });
-            } else if (progress < 0.6) {
-              gsap.set(words, { opacity: 0 });
-            } else if (progress > 0.9) {
-              gsap.set(words, { opacity: 1 });
-            }
-          },
-        });
+                  gsap.set(word, { opacity: wordOpacity });
+                });
+              } else if (progress < 0.6) {
+                gsap.set(words, { opacity: 0 });
+              } else if (progress > 0.9) {
+                gsap.set(words, { opacity: 1 });
+              }
+            },
+          });
+        }
       }, 500);
     }, container);
 
@@ -139,25 +182,25 @@ const PeelReveal = () => {
         </div>
         <div className="peel-reveal-img-container">
           <div className="pr-img">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="Peel reveal" />
+            <img src="/peel-reveal/peel-reveal-img.webp" alt="Peel reveal" loading="lazy" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src="/peel-reveal/peel-reveal-img.webp" alt="" loading="lazy" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src="/peel-reveal/peel-reveal-img.webp" alt="" loading="lazy" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src="/peel-reveal/peel-reveal-img.webp" alt="" loading="lazy" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src="/peel-reveal/peel-reveal-img.webp" alt="" loading="lazy" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src="/peel-reveal/peel-reveal-img.webp" alt="" loading="lazy" />
           </div>
           <div className="pr-img mask">
-            <img src="/peel-reveal/peel-reveal-img.jpg" alt="" />
+            <img src="/peel-reveal/peel-reveal-img.webp" alt="" loading="lazy" />
           </div>
           <div className="peel-reveal-header">
             <h1>The uniform holds no allegiance</h1>

@@ -155,15 +155,19 @@ const NextMatch = ({
       }, 30);
     };
 
-    card.addEventListener("pointerenter", onEnter);
-    card.addEventListener("pointermove", onMove);
-    card.addEventListener("pointerleave", onLeave);
+    if (window.innerWidth >= 1000) {
+      card.addEventListener("pointerenter", onEnter);
+      card.addEventListener("pointermove", onMove);
+      card.addEventListener("pointerleave", onLeave);
+    }
 
     return () => {
       ro.disconnect();
-      card.removeEventListener("pointerenter", onEnter);
-      card.removeEventListener("pointermove", onMove);
-      card.removeEventListener("pointerleave", onLeave);
+      if (window.innerWidth >= 1000) {
+        card.removeEventListener("pointerenter", onEnter);
+        card.removeEventListener("pointermove", onMove);
+        card.removeEventListener("pointerleave", onLeave);
+      }
     };
   }, []);
 

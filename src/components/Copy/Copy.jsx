@@ -5,7 +5,6 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -16,162 +15,147 @@ export default function Copy({
   type = "slide",
 }) {
   const containerRef = useRef(null);
-  const elementRefs = useRef([]);
+  const mountedRef = useRef(true);
   const splitRefs = useRef([]);
   const triggerRefs = useRef([]);
-  const mountedRef = useRef(true);
+  const animRef = useRef(null);
 
-  const waitForFonts = async () => {
-    try {
-      await document.fonts.ready;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    mountedRef.current = true;
 
-      const customFonts = ["Koulen", "Host Grotesk", "DM Mono"];
-      const fontCheckPromises = customFonts.map((fontFamily) => {
-        return document.fonts.check(`16px ${fontFamily}`);
-      });
+    const isMobile = window.innerWidth < 1000;
+    let cancelled = false;
 
-      await Promise.all(fontCheckPromises);
-      await new Promise((resolve) => setTimeout(resolve, 100));
+    const setup = async () => {
+      try {
+        await document.fonts.ready;
+        await new Promise((r) => setTimeout(r, 100));
+      } catch {
+        await new Promise((r) => setTimeout(r, 200));
+      }
 
-      return true;
-    } catch (error) {
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      return true;
-    }
-  };
+      if (!mountedRef.current || cancelled) return;
 
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
-      mountedRef.current = true;
+      const elements = container.hasAttribute("data-copy-wrapper")
+        ? Array.from(container.children)
+        : [container];
 
-      const initializeSplitText = async () => {
-        await waitForFonts();
-        if (!mountedRef.current || !containerRef.current) return;
+      if (type === "slide") {
+        const allLines = [];
 
-        splitRefs.current = [];
-        elementRefs.current = [];
-        triggerRefs.current = [];
+        elements.forEach((el) => {
+          const split = SplitText.create(el, {
+            type: "lines",
+            mask: "lines",
+            linesClass: "line",
+            lineThreshold: 0.1,
+          });
 
-        let elements = [];
-        if (containerRef.current.hasAttribute("data-copy-wrapper")) {
-          elements = Array.from(containerRef.current.children);
-        } else {
-          elements = [containerRef.current];
-        }
+          splitRefs.current.push(split);
 
-        if (type === "slide") {
-          const allLines = [];
-
-          elements.forEach((element) => {
-            elementRefs.current.push(element);
-
-            const split = SplitText.create(element, {
-              type: "lines",
-              mask: "lines",
-              linesClass: "line",
-              lineThreshold: 0.1,
-            });
-
-            splitRefs.current.push(split);
-
-            const computedStyle = window.getComputedStyle(element);
-            const textIndent = computedStyle.textIndent;
-
-            if (textIndent && textIndent !== "0px") {
-              if (split.lines.length > 0) {
-                split.lines[0].style.paddingLeft = textIndent;
-              }
-              element.style.textIndent = "0";
+          const textIndent = getComputedStyle(el).textIndent;
+          if (textIndent && textIndent !== "0px") {
+            if (split.lines.length > 0) {
+              split.lines[0].style.paddingLeft = textIndent;
             }
-
-            allLines.push(...split.lines);
-          });
-
-          gsap.set(allLines, { y: "100%" });
-
-          const animation = gsap.to(allLines, {
-            y: "0%",
-            duration: 1,
-            stagger: 0.1,
-            ease: "power4.out",
-            delay: delay,
-            paused: animateOnScroll,
-            onComplete: () => {
-              allLines.forEach(line => {
-                const mask = line.parentElement?.closest?.(".line-mask");
-                if (mask) mask.style.overflow = "visible";
-                line.style.overflow = "visible";
-              });
-            },
-          });
-
-          if (animateOnScroll) {
-            const st = ScrollTrigger.create({
-              trigger: containerRef.current,
-              start: "top 80%",
-              animation: animation,
-              once: true,
-              refreshPriority: -1,
-            });
-            triggerRefs.current.push(st);
+            el.style.textIndent = "0";
           }
-        } else if (type === "flicker") {
-          const allChars = [];
 
-          elements.forEach((element) => {
-            elementRefs.current.push(element);
-
-            const split = SplitText.create(element, {
-              type: "words,chars",
-            });
-
-            splitRefs.current.push(split);
-            allChars.push(...split.chars);
-          });
-
-          gsap.set(allChars, { opacity: 0 });
-
-          const animation = gsap.to(allChars, {
-            duration: 0.05,
-            opacity: 1,
-            ease: "power2.inOut",
-            delay: delay,
-            stagger: {
-              amount: 0.5,
-              each: 0.1,
-              from: "random",
-            },
-            paused: animateOnScroll,
-          });
-
-          if (animateOnScroll) {
-            const st = ScrollTrigger.create({
-              trigger: containerRef.current,
-              start: "top 85%",
-              animation: animation,
-              once: true,
-            });
-            triggerRefs.current.push(st);
-          }
-        }
-      };
-
-      initializeSplitText();
-
-      return () => {
-        mountedRef.current = false;
-        triggerRefs.current.forEach(st => st.kill());
-        triggerRefs.current = [];
-        splitRefs.current.forEach(s => {
-          try { s.revert(); } catch (_) {}
+          allLines.push(...split.lines);
         });
-        splitRefs.current = [];
-        elementRefs.current = [];
-      };
-    },
-    { scope: containerRef, dependencies: [animateOnScroll, delay, type] }
-  );
+
+        gsap.set(allLines, { y: "100%" });
+
+        const anim = gsap.to(allLines, {
+          y: "0%",
+          duration: isMobile ? 0.5 : 1,
+          stagger: isMobile ? 0.05 : 0.1,
+          ease: "power4.out",
+          delay,
+          paused: animateOnScroll,
+          onComplete: () => {
+            allLines.forEach((line) => {
+              const mask = line.parentElement?.closest?.(".line-mask");
+              if (mask) mask.style.overflow = "visible";
+              line.style.overflow = "visible";
+            });
+          },
+        });
+
+        animRef.current = anim;
+
+        if (animateOnScroll) {
+          const st = ScrollTrigger.create({
+            trigger: container,
+            start: "top 80%",
+            animation: anim,
+            once: true,
+            refreshPriority: -1,
+          });
+          triggerRefs.current.push(st);
+        }
+      } else if (type === "flicker") {
+        const allChars = [];
+
+        elements.forEach((el) => {
+          const split = SplitText.create(el, {
+            type: "words,chars",
+          });
+
+          splitRefs.current.push(split);
+          allChars.push(...split.chars);
+        });
+
+        gsap.set(allChars, { opacity: 0 });
+
+        const anim = gsap.to(allChars, {
+          duration: 0.05,
+          opacity: 1,
+          ease: "power2.inOut",
+          delay,
+          stagger: {
+            amount: isMobile ? 0.3 : 0.5,
+            each: 0.1,
+            from: "random",
+          },
+          paused: animateOnScroll,
+        });
+
+        animRef.current = anim;
+
+        if (animateOnScroll) {
+          const st = ScrollTrigger.create({
+            trigger: container,
+            start: "top 85%",
+            animation: anim,
+            once: true,
+          });
+          triggerRefs.current.push(st);
+        }
+      }
+    };
+
+    setup();
+
+    return () => {
+      cancelled = true;
+      mountedRef.current = false;
+      triggerRefs.current.forEach((st) => st.kill());
+      triggerRefs.current = [];
+      splitRefs.current.forEach((s) => {
+        try {
+          s.revert();
+        } catch (_) {}
+      });
+      splitRefs.current = [];
+      if (animRef.current) {
+        animRef.current.kill();
+        animRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <div ref={containerRef} data-copy-wrapper="true">

@@ -477,6 +477,7 @@ html.is-h-scroll {
     transform: none;
     font-size: 1.75rem;
     padding-top: 0;
+    padding-bottom: 2rem;
   }
 
   .cta-block--default .cta-gallery {
@@ -507,7 +508,13 @@ html.is-h-scroll {
     height: auto;
   }
 
-  .cta .cta-block--doble,
+  .cta .cta-block--doble {
+    gap: 2rem;
+    padding: 0;
+    height: auto;
+    margin-top: 20vh;
+  }
+
   .cta .cta-block--europa {
     gap: 2rem;
     padding: 0;
@@ -525,7 +532,7 @@ html.is-h-scroll {
     flex-direction: column;
     max-width: 100%;
     gap: 0.75rem;
-    margin-top: 20vh;
+    margin-top: 25vh;
   }
 
   .cta-block--doble .cta-doble-item:first-child,
@@ -568,7 +575,7 @@ html.is-h-scroll {
   .cta-block--triple .cta-triple-row {
     flex-direction: column;
     gap: 2rem;
-    margin-top: 20vh;
+    margin-top: 25vh;
   }
 
   .cta-block--triple .cta-triple-card {

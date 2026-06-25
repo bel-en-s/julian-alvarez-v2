@@ -85,15 +85,19 @@ const SpiderButton = ({ children, className = "", ...props }) => {
       }, 30);
     };
 
-    btn.addEventListener("pointerenter", onEnter);
-    btn.addEventListener("pointermove", onMove);
-    btn.addEventListener("pointerleave", onLeave);
+    if (window.innerWidth >= 1000) {
+      btn.addEventListener("pointerenter", onEnter);
+      btn.addEventListener("pointermove", onMove);
+      btn.addEventListener("pointerleave", onLeave);
+    }
 
     return () => {
       ro.disconnect();
-      btn.removeEventListener("pointerenter", onEnter);
-      btn.removeEventListener("pointermove", onMove);
-      btn.removeEventListener("pointerleave", onLeave);
+      if (window.innerWidth >= 1000) {
+        btn.removeEventListener("pointerenter", onEnter);
+        btn.removeEventListener("pointermove", onMove);
+        btn.removeEventListener("pointerleave", onLeave);
+      }
     };
   }, []);
 

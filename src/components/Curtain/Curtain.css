@@ -94,6 +94,10 @@
     translate: -50% -50%;
   }
 
+  .curtain-img {
+    transform: scale(0.75) rotate(0deg);
+  }
+
   .curtain-img img {
     margin-top: -10vh;
   }

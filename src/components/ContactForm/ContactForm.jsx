@@ -47,7 +47,7 @@ const ContactForm = () => {
     return (
       <section className="contact-form">
         <div className="contact-parallax-image-wrapper">
-          <img src="/contact-form/gol.jpg" alt="" />
+          <img src="/contact-form/gol.webp" alt="" loading="lazy" />
         </div>
         <div className="cf-nav">
           <div className="cf-nav-row">
@@ -118,7 +118,7 @@ const ContactForm = () => {
   return (
     <section className="contact-form">
       <div className="contact-parallax-image-wrapper">
-        <img src="/contact-form/gol.jpg" alt="" />
+        <img src="/contact-form/gol.webp" alt="" loading="lazy" />
       </div>
       <div className="cf-nav">
         <div className="cf-nav-row">

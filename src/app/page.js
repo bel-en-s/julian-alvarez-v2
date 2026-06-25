@@ -51,25 +51,21 @@ export default function Index() {
     });
 
    const track = scrollTrackRef.current;
-if (track) {
-  if (window.innerWidth >= 1000) {
-    ScrollTrigger.create({
-      trigger: track,
-      start: "top top",
-      end: "+=800",
-      pin: true,
-      scrub: true,
+if (track && window.innerWidth >= 1000) {
+  ScrollTrigger.create({
+    trigger: track,
+    start: "top top",
+    end: "+=800",
+    pin: true,
+    scrub: true,
 
-      onUpdate: (self) => {
-        document.documentElement.style.setProperty(
-          "--video-scale",
-          1 + self.progress * 0.2
-        );
-      },
-    });
-  } else {
-    document.documentElement.style.setProperty("--video-scale", 1);
-  }
+    onUpdate: (self) => {
+      document.documentElement.style.setProperty(
+        "--video-scale",
+        1 + self.progress * 0.2
+      );
+    },
+  });
 }
 
     const aboutSection = document.querySelector(".about");
@@ -290,7 +286,7 @@ const updateColors = () => {
             <Copy animateOnScroll={false} delay={isInitialLoad ? 5.5 : 0.65}>
               <span className="hero-name hero-name--julian">Julián</span>
               <span className="hero-header-img" ref={heroImgRef}>
-                <img src="/home/hero.png" alt="" />
+                <img src="/home/hero.webp" alt="" />
               </span>
               <span className="hero-name hero-name--alvarez" ref={alvarezContainerRef}>Alvarez</span>
             </Copy>

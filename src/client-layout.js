@@ -38,18 +38,8 @@ export default function ClientLayout({ children }) {
 
   const scrollSettings = isMobile
     ? {
-        duration: 0.6,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: "vertical",
-        gestureDirection: "vertical",
-        smooth: true,
-        smoothTouch: true,
-        touchMultiplier: 1,
-        infinite: false,
-        lerp: 0.15,
-        wheelMultiplier: 0,
-        orientation: "vertical",
-        syncTouch: false,
+        smooth: false,
+        smoothTouch: false,
       }
     : {
         duration: 1.2,

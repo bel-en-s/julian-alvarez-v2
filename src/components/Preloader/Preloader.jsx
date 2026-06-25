@@ -14,36 +14,7 @@ const Preloader = () => {
   const [showPreloader, setShowPreloader] = useState(isInitialLoad);
   const [loaderAnimating, setLoaderAnimating] = useState(isInitialLoad);
   const wrapperRef = useRef(null);
-  const videoRef = useRef(null);
   const lenis = useLenis();
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const attemptPlay = () => {
-      video.play().catch(() => {
-        const onInteraction = () => {
-          video.play().catch(() => {});
-          document.removeEventListener("touchstart", onInteraction);
-          document.removeEventListener("click", onInteraction);
-        };
-        document.addEventListener("touchstart", onInteraction, { once: true });
-        document.addEventListener("click", onInteraction, { once: true });
-      });
-    };
-
-    if (video.readyState >= 2) {
-      attemptPlay();
-    } else {
-      video.addEventListener("canplaythrough", attemptPlay, { once: true });
-      video.load();
-    }
-
-    return () => {
-      video.removeEventListener("canplaythrough", attemptPlay);
-    };
-  }, []);
 
   useEffect(() => {
     return () => {
@@ -52,13 +23,28 @@ const Preloader = () => {
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 1000;
+    let preventTouch = null;
+
     if (loaderAnimating) {
       if (lenis) lenis.stop();
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      if (isMobile) {
+        preventTouch = (e) => e.preventDefault();
+        document.addEventListener("touchmove", preventTouch, { passive: false });
+      }
     } else {
       if (lenis) lenis.start();
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
+
+    return () => {
+      if (preventTouch) {
+        document.removeEventListener("touchmove", preventTouch);
+      }
+    };
   }, [lenis, loaderAnimating]);
 
   useGSAP(
@@ -175,7 +161,7 @@ const Preloader = () => {
   return (
     <div className="preloader-wrapper" ref={wrapperRef}>
       <div className="preloader-bg"></div>
-      <video ref={videoRef} className="preloader-video" src="/loader/loader-opt.mp4" autoPlay muted loop playsInline webkit-playsinline="true" disablePictureInPicture controlsList="nodownload noremoteplayback" preload="auto" />
+      <img className="preloader-video" src="/loader/loader.gif" alt="" />
       <div className="preloader-progress">
         <div className="preloader-progress-bar"></div>
       </div>
