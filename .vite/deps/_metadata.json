@@ -1,0 +1,39 @@
+{
+  "hash": "9b4a136e",
+  "configHash": "38d27f9a",
+  "lockfileHash": "d580f9e1",
+  "browserHash": "edb7cdb5",
+  "optimized": {
+    "gsap": {
+      "src": "../../node_modules/gsap/index.js",
+      "file": "gsap.js",
+      "fileHash": "e5e860c2",
+      "needsInterop": false
+    },
+    "gsap/ScrollTrigger": {
+      "src": "../../node_modules/gsap/ScrollTrigger.js",
+      "file": "gsap_ScrollTrigger.js",
+      "fileHash": "46aa3084",
+      "needsInterop": false
+    },
+    "lenis": {
+      "src": "../../node_modules/lenis/dist/lenis.mjs",
+      "file": "lenis.js",
+      "fileHash": "66a23cac",
+      "needsInterop": false
+    },
+    "gsap/SplitText": {
+      "src": "../../node_modules/gsap/SplitText.js",
+      "file": "gsap_SplitText.js",
+      "fileHash": "b27e8f52",
+      "needsInterop": false
+    },
+    "three": {
+      "src": "../../node_modules/three/build/three.module.js",
+      "file": "three.js",
+      "fileHash": "e9f63c02",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}
