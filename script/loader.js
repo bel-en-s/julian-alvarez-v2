@@ -4,22 +4,41 @@ import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(SplitText);
 
 const LOADER_KEY = "ja_preloader_shown";
+const MAX_LOADER_DURATION = 4000;
 
-function preloaderDone() {
-  sessionStorage.setItem(LOADER_KEY, "1");
+function hideWrapper(wrapper) {
+  gsap.set(wrapper, { display: "none" });
+  document.body.style.overflow = "";
+  document.documentElement.style.overflow = "";
 }
 
-function hasPreloaderRun() {
-  return sessionStorage.getItem(LOADER_KEY) === "1";
-}
+const wrapper = document.querySelector(".preloader-wrapper");
+if (!wrapper) throw new Error("Preloader wrapper not found");
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (hasPreloaderRun()) return;
+if (sessionStorage.getItem(LOADER_KEY) === "1") {
+  hideWrapper(wrapper);
+} else {
+  let finished = false;
 
-  const wrapper = document.querySelector(".preloader-wrapper");
-  if (!wrapper) return;
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    sessionStorage.setItem(LOADER_KEY, "1");
+    hideWrapper(wrapper);
+    document.dispatchEvent(new CustomEvent("preloader:complete"));
+  };
 
-  document.fonts.ready.then(() => {
+  setTimeout(finish, MAX_LOADER_DURATION);
+
+  document.body.style.overflow = "hidden";
+  document.documentElement.style.overflow = "hidden";
+
+  Promise.race([
+    document.fonts.ready,
+    new Promise((resolve) => window.addEventListener("load", resolve)),
+  ]).then(() => {
+    if (finished) return;
+
     const logoEl = document.querySelector(".preloader-logo h1");
     const logoSplit = logoEl
       ? SplitText.create(".preloader-logo h1", {
@@ -61,12 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tl = gsap.timeline({
       delay: 0.2,
-      onComplete: () => {
-        preloaderDone();
-        setTimeout(() => {
-          gsap.set(wrapper, { display: "none" });
-        }, 100);
-      },
+      onComplete: finish,
     });
 
     if (logoSplit) {
@@ -128,7 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
           ease: "power3.out",
         },
         "-=0.2"
-      )
-      .to({}, { duration: 1 });
+      );
   });
-});
+}

@@ -79,6 +79,7 @@
   height: 100svh;
   max-height: 100svh;
   z-index: 6;
+  position: relative;
 }
 
 .hero .hero-header .hero-header-img img {
@@ -89,6 +90,18 @@
   transform: translate3d(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 8px), 0);
   transition: transform 0.15s ease-out;
   will-change: transform;
+}
+
+.hero .hero-header .hero-header-img canvas.hero-dissolve-canvas {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%) translate3d(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 8px), 0);
+  will-change: transform;
+  z-index: 2;
 }
 
 .hero .hero-gradient {
@@ -309,6 +322,10 @@
 
   .hero .hero-header .hero-header-img img {
     max-height: 50svh;
+  }
+
+  .hero .hero-header .hero-header-img canvas.hero-dissolve-canvas {
+    /* Inherit sizing from parent, handled by JS matching img rect */
   }
 }
 

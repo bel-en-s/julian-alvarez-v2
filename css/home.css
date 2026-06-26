@@ -899,15 +899,11 @@
 }
 
 .behind-the-lock .work-profile-icon {
-  position: absolute;
-  top: 95%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
   width: 100px;
   height: 100px;
   border-radius: 1em;
   overflow: hidden;
+  margin: -50px auto 2em;
 }
 
 .curtain {

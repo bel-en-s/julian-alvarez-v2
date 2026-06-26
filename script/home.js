@@ -3,7 +3,49 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { initAnimations } from "./anime";
 
-  document.addEventListener("DOMContentLoaded", () => {
+function startEntryAnimations() {
+  if (window.innerWidth >= 1000) {
+    const heroNames = document.querySelectorAll(".hero-name");
+    if (heroNames.length) {
+      const heroChars = [];
+      heroNames.forEach((el) => {
+        const split = new SplitText(el, { type: "chars", charsClass: "hero-char" });
+        heroChars.push(...split.chars);
+      });
+      gsap.set(heroChars, {
+        y: -200,
+        opacity: 0,
+      });
+      gsap.to(heroChars, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.04,
+        ease: "power3.out",
+      });
+    }
+  }
+
+  gsap.set(".hero .hero-cards .card", { transformOrigin: "center center" });
+
+  gsap.to(".hero .hero-cards .card", {
+    scale: 1,
+    duration: 0.75,
+    delay: 0.25,
+    stagger: 0.1,
+    ease: "power4.out",
+    onComplete: () => {
+      gsap.set("#hero-card-1", { transformOrigin: "top right" });
+      gsap.set("#hero-card-3", { transformOrigin: "top left" });
+    },
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("preloader:complete", startEntryAnimations, { once: true });
+  if (sessionStorage.getItem("ja_preloader_shown") === "1") {
+    startEntryAnimations();
+  }
   initAnimations();
 
   const aboutSection = document.querySelector(".about");
@@ -46,42 +88,6 @@ import { initAnimations } from "./anime";
   }
 
   gsap.registerPlugin(ScrollTrigger, SplitText);
-
-  if (window.innerWidth >= 1000) {
-    const heroNames = document.querySelectorAll(".hero-name");
-    if (heroNames.length) {
-      const heroChars = [];
-      heroNames.forEach((el) => {
-        const split = new SplitText(el, { type: "chars", charsClass: "hero-char" });
-        heroChars.push(...split.chars);
-      });
-      gsap.set(heroChars, {
-        y: -200,
-        opacity: 0,
-      });
-      gsap.to(heroChars, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.04,
-        ease: "power3.out",
-      });
-    }
-  }
-
-  gsap.set(".hero .hero-cards .card", { transformOrigin: "center center" });
-
-  gsap.to(".hero .hero-cards .card", {
-    scale: 1,
-    duration: 0.75,
-    delay: 0.25,
-    stagger: 0.1,
-    ease: "power4.out",
-    onComplete: () => {
-      gsap.set("#hero-card-1", { transformOrigin: "top right" });
-      gsap.set("#hero-card-3", { transformOrigin: "top left" });
-    },
-  });
 
   const smoothStep = (p) => p * p * (3 - 2 * p);
 
@@ -463,7 +469,7 @@ import { initAnimations } from "./anime";
           start: "top 75%",
           onEnter: () => {
             gsap.timeline().to(workItems, {
-              duration: 1,
+              duration: 1.5,
               x: 0,
               rotation: 0,
               opacity: 1,
