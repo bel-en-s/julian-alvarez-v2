@@ -517,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (workProfileIcon) {
     gsap.to(workProfileIcon, {
       rotation: 360,
+      force3D: true,
       ease: "none",
       scrollTrigger: {
         trigger: ".behind-the-lock",

@@ -19,6 +19,7 @@
   --font-display: "Big Shoulders Display", "Impact", sans-serif;
   --font-support: "Space Grotesk", system-ui, sans-serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heroica: "Boldonse", "Big Shoulders Display", sans-serif;
   --fg-1: var(--neutral-light);
   --fg-2: rgba(244, 244, 244, .72);
   --fg-3: rgba(244, 244, 244, .48);
@@ -37,7 +38,7 @@
 
 body {
   font-family: var(--f-nm);
-  background-color: var(--base-100);
+  background: linear-gradient(to bottom, var(--base-100) 0%, #E8E0F0 15%, #C4B5D6 50%, #9B84B8 100%);
   color: var(--base-300);
 }
 

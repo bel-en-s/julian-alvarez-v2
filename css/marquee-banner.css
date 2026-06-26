@@ -12,14 +12,18 @@
   margin-top: -1px;
 }
 
-.mb-top-edge {
+.work-items .mb-top-edge {
+  position: absolute;
+  bottom: -1px;
+  left: calc((100% - 100vw) / 2);
+  width: 100vw;
+  z-index: 15;
+  pointer-events: none;
   line-height: 0;
   font-size: 0;
-  display: block;
-  margin: 0;
 }
 
-.mb-top-edge img {
+.work-items .mb-top-edge img {
   width: 100%;
   height: auto;
   display: block;

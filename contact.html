@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/nav.css" />
     <link rel="stylesheet" href="/css/contact.css" />
   </head>
-  <body>
+  <body style="overflow: hidden;">
     <div class="transition">
       <div class="transition-overlay overlay"></div>
       <div class="transition-logo">
@@ -75,75 +75,43 @@
       </div>
     </div>
 
-    <section class="contact">
-      <div class="home-spotlight-top-bar">
-        <div class="container">
-          <div class="symbols-container">
-            <div class="symbol">
-              <img src="/symbols/s1-light.png" alt="Symbol" />
+    <div class="contact-page" id="contactPage">
+      <div class="contact-page-bg"></div>
+      <div class="contact-stage is-open" id="stage">
+        <div class="contact-rig" id="rig">
+          <div class="contact-web" aria-hidden="true"></div>
+          <form class="contact-panel" id="form" novalidate>
+            <div class="contact-knot" aria-hidden="true"></div>
+            <div class="contact-eyebrow is-title">HOLA</div>
+            <p class="contact-sub">Toda historia empieza con un mensaje. Contanos la tuya.</p>
+            <div class="contact-field">
+              <label class="contact-label" for="name">Nombre</label>
+              <input class="contact-input" id="name" name="name" type="text" placeholder="Tu nombre" autocomplete="name"/>
             </div>
-          </div>
-          <div class="symbols-container">
-            <div class="symbol">
-              <img src="/symbols/s1-light.png" alt="Symbol" />
+            <div class="contact-field">
+              <label class="contact-label" for="email">Email</label>
+              <input class="contact-input" id="email" name="email" type="email" placeholder="tu@correo.com" autocomplete="email"/>
             </div>
-          </div>
+            <div class="contact-field">
+              <label class="contact-label" for="msg">Mensaje</label>
+              <textarea class="contact-textarea" id="msg" name="msg" placeholder="Cuéntame…"></textarea>
+            </div>
+            <button class="contact-submit" id="submitBtn" type="submit">Enviar</button>
+            <div class="contact-social">
+              <a href="https://www.instagram.com/juliaanalvarez/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.tiktok.com/@9julianalvarez" target="_blank" rel="noopener noreferrer">TikTok</a>
+              <a href="https://x.com/9julianalvarez" target="_blank" rel="noopener noreferrer">X</a>
+              <a href="https://www.facebook.com/9juliaanalvarez" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="container">
-        <div class="contact-header">
-          <div class="contact-callout">
-            <p
-              class="mono"
-              data-animate-type="scramble"
-              data-animate-delay="0.25"
-            >
-              <span>&#9654;</span> Email: contacto@julianalvarez.com
-            </p>
-          </div>
-          <div class="contact-header-title">
-            <h2 data-animate-type="line-reveal" data-animate-delay="0.25">
-              Conectemos
-            </h2>
-          </div>
-        </div>
-        <div class="contact-gif">
-          <img src="/contact/contact.gif" alt="" />
-        </div>
+      <div class="contact-thanks" id="thanks" aria-live="polite">
+        <div class="contact-thanks-eb">Mensaje enviado</div>
+        <h3>Gracias</h3>
+        <p>Tu historia ya está acá, la leemos con atención.</p>
       </div>
-      <div class="home-spotlight-bottom-bar">
-        <div class="container">
-          <p
-            class="mono"
-            data-animate-type="scramble"
-            data-animate-delay="0.25"
-          >
-            <span>&#9654;</span> Instagram
-          </p>
-          <p
-            class="mono"
-            data-animate-type="scramble"
-            data-animate-delay="0.25"
-          >
-            <span>&#9654;</span> Twitter / X
-          </p>
-          <p
-            class="mono"
-            data-animate-type="scramble"
-            data-animate-delay="0.25"
-          >
-            <span>&#9654;</span> YouTube
-          </p>
-          <p
-            class="mono"
-            data-animate-type="scramble"
-            data-animate-delay="0.25"
-          >
-            <span>&#9654;</span> LinkedIn
-          </p>
-        </div>
-      </div>
-    </section>
+    </div>
 
     <script type="module" src="/script/lenis-scroll.js"></script>
     <script type="module" src="/script/transition.js"></script>

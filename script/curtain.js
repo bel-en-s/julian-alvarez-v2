@@ -75,7 +75,7 @@ if (section && img && ball) {
         ballTl.progress(p);
       }
       if (profileIcon) {
-        gsap.set(profileIcon, { rotation: 360 * p });
+        profileIcon.style.willChange = 'transform';
       }
     },
   });

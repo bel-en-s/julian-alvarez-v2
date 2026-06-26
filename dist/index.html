@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Julián Alvarez | El 9</title>
     <link rel="icon" href="/global/site-icon.png" />
-    <script type="module" crossorigin src="/assets/main-ve-Xvr0S.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/SplitText-B83jpMEB.js">
-    <link rel="modulepreload" crossorigin href="/assets/anime-Oeim1KRc.js">
-    <link rel="stylesheet" crossorigin href="/assets/SplitText-CiH1V0SL.css">
-    <link rel="stylesheet" crossorigin href="/assets/main-CwTIKNKD.css">
-    <link rel="stylesheet" crossorigin href="/assets/home-CeAxqlHD.css">
-    <link rel="stylesheet" crossorigin href="/assets/work-D55swk45.css">
+    <script type="module" crossorigin src="/assets/main-q1sGyuUS.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/menu-p5GDwlG3.js">
+    <link rel="modulepreload" crossorigin href="/assets/SplitText-Cpc1cBKW.js">
+    <link rel="modulepreload" crossorigin href="/assets/anime-B3k7OnrD.js">
+    <link rel="stylesheet" crossorigin href="/assets/menu-BO_aJav-.css">
+    <link rel="stylesheet" crossorigin href="/assets/main-C2QygThL.css">
+    <link rel="stylesheet" crossorigin href="/assets/home-DofqcgFE.css">
+    <link rel="stylesheet" crossorigin href="/assets/work-NSS7J4LR.css">
   </head>
   <body>
     <div class="preloader-wrapper">
@@ -302,11 +303,10 @@
           </div>
         </div>
       </div>
+      <div class="mb-top-edge">
+        <img src="/global/bottom-texture.webp" alt="" />
+      </div>
     </section>
-
-    <div class="mb-top-edge">
-      <img src="/global/bottom-texture.webp" alt="" />
-    </div>
 
     <section class="marquee-banner">
       <div class="marquee-half marquee-half--left"></div>
@@ -376,44 +376,12 @@
           <div class="cf-nav-col">
             <p class="mono cf-nav-header">Conectar</p>
             <div class="cf-nav-links">
-              <p><a href="https://www.instagram.com/julianalvarez/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
-              <p><a href="https://www.youtube.com/@julianalvarez" target="_blank" rel="noopener noreferrer">YouTube</a></p>
+              <p><a href="https://www.instagram.com/juliaanalvarez/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+              <p><a href="https://www.tiktok.com/@9julianalvarez" target="_blank" rel="noopener noreferrer">TikTok</a></p>
+              <p><a href="https://x.com/9julianalvarez" target="_blank" rel="noopener noreferrer">X</a></p>
+              <p><a href="https://www.facebook.com/9juliaanalvarez" target="_blank" rel="noopener noreferrer">Facebook</a></p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="contact-form-container">
-        <div class="cf-header">
-          <h2>Entremos en contacto</h2>
-        </div>
-        <p class="mono cf-copy">BUSINESS INQUIRIES</p>
-        <form class="cf-fields">
-          <div class="cf-field">
-            <input type="text" placeholder="Nombre completo" required />
-          </div>
-          <div class="cf-field">
-            <input type="email" placeholder="Email" required />
-          </div>
-          <div class="cf-field">
-            <select required>
-              <option value="" disabled selected>Tipo de consulta</option>
-              <option value="partnership">Partnership / Sponsorship</option>
-              <option value="press">Press / Media</option>
-              <option value="management">Management</option>
-              <option value="booking">Booking / Events</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="cf-field">
-            <textarea placeholder="Mensaje" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="cf-submit">
-            <svg stroke="currentColor" fill="currentColor" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"/></svg>
-          </button>
-        </form>
-        <div class="cf-footer">
-          <div class="cf-divider"></div>
-          <p class="mono">Diseñado por Ulah Marketing &middot; 2026</p>
         </div>
       </div>
     </section>
@@ -432,5 +400,26 @@
     </script>
     <script src="/script/hero-atmos.js"></script>
     <script src="/script/hero-dissolve.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var logo = document.querySelector('.menu-logo');
+        var lines = document.querySelectorAll('.ja-menu-arana__ham-line');
+        var darkSections = document.querySelectorAll('.behind-the-lock, .work-items');
+
+        function updateLogo() {
+          var showDark = false;
+          darkSections.forEach(function (section) {
+            var rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.3 && rect.bottom > 0) {
+              showDark = true;
+            }
+          });
+          logo.classList.toggle('menu-logo--dark', showDark);
+        }
+
+        window.addEventListener('scroll', updateLogo, { passive: true });
+        updateLogo();
+      });
+    </script>
   </body>
 </html>

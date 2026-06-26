@@ -1,41 +1,71 @@
 import gsap from "gsap";
-import { initAnimations } from "./anime.js";
-
-function flickerReveal(element, delay = 0) {
-  gsap.set(element, {
-    opacity: 0,
-    scale: 0.98,
-    filter: "brightness(0.7) contrast(1.2)",
-  });
-
-  const tl = gsap.timeline({ delay: delay });
-
-  tl.to(element, { duration: 0.05, opacity: 0.3 })
-    .to(element, { duration: 0.08, opacity: 0 })
-    .to(element, { duration: 0.03, opacity: 0.6 })
-    .to(element, { duration: 0.06, opacity: 0.1 })
-    .to(element, { duration: 0.04, opacity: 0.8 })
-    .to(element, { duration: 0.07, opacity: 0 })
-    .to(element, { duration: 0.02, opacity: 0.4 })
-    .to(element, { duration: 0.05, opacity: 0 })
-    .to(element, { duration: 0.03, opacity: 0.9 })
-    .to(element, { duration: 0.04, opacity: 0.2 })
-    .to(element, {
-      duration: 0.3,
-      opacity: 1,
-      scale: 1,
-      filter: "brightness(1) contrast(1)",
-      ease: "power2.out",
-    });
-
-  return tl;
-}
 
 document.addEventListener("DOMContentLoaded", () => {
-  initAnimations();
+  const stage = document.getElementById("stage");
+  const rig = document.getElementById("rig");
+  const form = document.getElementById("form");
+  const thanks = document.getElementById("thanks");
 
-  const contactGif = document.querySelector(".contact-gif");
-  if (contactGif) {
-    flickerReveal(contactGif, 1);
+  function dropAway() {
+    if (!stage.classList.contains("is-open") || stage.classList.contains("is-closing")) return;
+    stage.classList.add("is-closing");
+    stage.setAttribute("aria-hidden", "true");
+    thanks.classList.add("is-visible");
+    setTimeout(() => stage.classList.remove("is-open", "is-closing"), 700);
+  }
+
+  form.addEventListener("submit", (e) => { e.preventDefault(); dropAway(); });
+
+  gsap.from(".contact-eyebrow", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    delay: 0.4,
+    ease: "power2.out",
+  });
+
+  gsap.from(".contact-sub", {
+    opacity: 0,
+    y: 15,
+    duration: 0.5,
+    delay: 0.55,
+    ease: "power2.out",
+  });
+
+  gsap.from(".contact-field", {
+    opacity: 0,
+    y: 10,
+    duration: 0.4,
+    stagger: 0.08,
+    delay: 0.7,
+    ease: "power2.out",
+  });
+
+  gsap.from(".contact-submit", {
+    opacity: 0,
+    y: 10,
+    duration: 0.4,
+    delay: 1.1,
+    ease: "power2.out",
+  });
+
+  if (window.innerWidth >= 1000 && rig) {
+    rig.addEventListener("animationend", () => {
+      gsap.set(rig, { opacity: 1, x: 0, y: 0, rotation: 0 });
+      rig.style.animation = "none";
+      document.addEventListener("mousemove", (e) => {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const dx = (e.clientX - cx) / cx;
+        const dy = (e.clientY - cy) / cy;
+        gsap.to(rig, {
+          rotationX: -dy * 8,
+          rotationY: dx * 8,
+          duration: 1.4,
+          ease: "power3.out",
+          overwrite: "auto",
+        });
+      });
+    }, { once: true });
   }
 });

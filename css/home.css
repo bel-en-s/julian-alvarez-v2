@@ -846,7 +846,6 @@
   width: 100%;
   min-height: 100svh;
   margin-top: -5px;
-  /* background: #1F1635; */
 }
 
 .behind-the-lock .btl-top-edge {
@@ -903,6 +902,7 @@
   border-radius: 1em;
   overflow: hidden;
   margin: 2rem auto 0;
+  will-change: transform;
 }
 
 .curtain {

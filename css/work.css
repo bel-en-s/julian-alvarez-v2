@@ -231,7 +231,6 @@
   margin-right: auto;
   min-height: 100%;
   padding: 2em;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 4em;
