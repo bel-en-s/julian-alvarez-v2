@@ -844,10 +844,9 @@
   position: relative;
   isolation: isolate;
   width: 100%;
-  height: 100svh;
+  min-height: 100svh;
   margin-top: -5px;
   /* background: #1F1635; */
-  overflow: hidden;
 }
 
 .behind-the-lock .btl-top-edge {
@@ -898,12 +897,12 @@
   /* color: #fff; */
 }
 
-.behind-the-lock .work-profile-icon {
-  width: 100px;
-  height: 100px;
+.behind-the-lock .btl-header .work-profile-icon {
+  width: 80px;
+  height: 80px;
   border-radius: 1em;
   overflow: hidden;
-  margin: -50px auto 2em;
+  margin: 2rem auto 0;
 }
 
 .curtain {
@@ -911,7 +910,7 @@
   width: 100%;
   height: 100svh;
   overflow: hidden;
-  margin-top: 80px;
+  /* margin-top: 80px; */
   height: calc(100svh - 80px);
 }
 

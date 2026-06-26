@@ -9,11 +9,14 @@
   align-items: center;
   overflow: hidden;
   background-color: #1E2024;
+  margin-top: -1px;
 }
 
 .mb-top-edge {
   line-height: 0;
   font-size: 0;
+  display: block;
+  margin: 0;
 }
 
 .mb-top-edge img {
@@ -80,9 +83,9 @@
   height: 70%;
   max-width: 600px;
   max-height: 40rem;
-  border-radius: 0.75rem;
   background-color: #1D1333;
   overflow: hidden;
+  z-index: 3;
 }
 
 .marquee-banner .banner .banner-img {
@@ -222,6 +225,7 @@
     max-height: 20rem;
     margin-top: 1vh;
   }
+
 }
 
 @media (max-width: 768px) {
@@ -237,6 +241,7 @@
   .marquee-banner > .banner-content {
     top: 2rem;
   }
+
 }
 
 @media (min-width: 2000px) {

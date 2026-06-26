@@ -42,7 +42,12 @@ function startEntryAnimations() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("preloader:complete", startEntryAnimations, { once: true });
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  document.addEventListener("preloader:complete", () => {
+    startEntryAnimations();
+    ScrollTrigger.refresh();
+  }, { once: true });
   if (sessionStorage.getItem("ja_preloader_shown") === "1") {
     startEntryAnimations();
   }
@@ -86,8 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
-
-  gsap.registerPlugin(ScrollTrigger, SplitText);
 
   const smoothStep = (p) => p * p * (3 - 2 * p);
 
@@ -217,11 +220,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const spotlightImages = document.querySelector(".home-spotlight-images");
-  const containerHeight = spotlightImages.offsetHeight;
-  const viewportHeight = window.innerHeight;
+  if (spotlightImages) {
+    const containerHeight = spotlightImages.offsetHeight;
+    const viewportHeight = window.innerHeight;
 
-  const initialOffset = containerHeight * 0.05;
-  const totalMovement = containerHeight + initialOffset + viewportHeight;
+    const initialOffset = containerHeight * 0.05;
+    const totalMovement = containerHeight + initialOffset + viewportHeight;
 
   const spotlightHeader = document.querySelector(".spotlight-mask-header h3");
   let headerSplit = null;
@@ -315,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     },
   });
+  }
 
   const outroHeader = document.querySelector(".outro h3");
   let outroSplit = null;
@@ -385,9 +390,71 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   });
 
+  if (document.querySelector(".work-items")) {
+    document.querySelectorAll(".work-items .row").forEach((row) => {
+      const workItems = row.querySelectorAll(".work-item");
+      const content = row.querySelector(".row-content");
+
+      workItems.forEach((item, i) => {
+        const fromLeft = i % 2 === 0;
+        gsap.set(item, { x: fromLeft ? "-120%" : "120%", opacity: 0 });
+      });
+
+      const tl = gsap.timeline({ paused: true });
+      tl.to(workItems, {
+        x: "0%",
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.15,
+      });
+      if (content) {
+        const split = new SplitText(content, { type: "words", wordsClass: "highlight-word" });
+        tl.to(split.words, {
+          "--highlight-offset": "100%",
+          duration: 0.8,
+          stagger: 0.04,
+          ease: "power3.out",
+        }, "-=0.6");
+      }
+
+      const contentTitle = row.querySelector(".row-content-title");
+      if (contentTitle) {
+        const titleSplit = new SplitText(contentTitle, { type: "words", wordsClass: "highlight-word" });
+        tl.to(titleSplit.words, {
+          "--highlight-offset": "100%",
+          duration: 0.8,
+          stagger: 0.04,
+          ease: "power3.out",
+        }, "-=0.6");
+      }
+
+      workItems.forEach((item) => {
+        const itemContent = item.querySelector(".work-item-content");
+        if (itemContent) {
+          const itemSplit = new SplitText(itemContent, { type: "words", wordsClass: "highlight-word" });
+          tl.to(itemSplit.words, {
+            "--highlight-offset": "100%",
+            duration: 0.6,
+            stagger: 0.03,
+            ease: "power3.out",
+          }, "-=0.8");
+        }
+      });
+
+      ScrollTrigger.create({
+        trigger: row,
+        start: "top 80%",
+        once: true,
+        onEnter: () => tl.play(),
+      });
+    });
+
+    ScrollTrigger.refresh();
+  }
+
   if (window.innerWidth >= 1000) {
-    const hasWorkSection = document.querySelector(".work-items");
-    if (hasWorkSection) {
+    if (document.querySelector(".work-header")) {
       gsap.set(".work-profile-icon", { scale: 0 });
       gsap.set(".work-header-arrow-icon", { scale: 0 });
 
@@ -443,58 +510,36 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         "-=0.9"
       );
-
-      gsap.set(".work-item", {
-        opacity: 0,
-        scale: 0.75,
-      });
-
-      const scrollTriggerInstances = [];
-
-      document.querySelectorAll(".work-items .row").forEach((row) => {
-        const workItems = row.querySelectorAll(".work-item");
-
-        workItems.forEach((item, itemIndex) => {
-          const fromLeft = itemIndex % 2 === 0;
-
-          gsap.set(item, {
-            x: fromLeft ? -1000 : 1000,
-            rotation: fromLeft ? -50 : 50,
-            transformOrigin: "center center",
-          });
-        });
-
-        const trigger = ScrollTrigger.create({
-          trigger: row,
-          start: "top 75%",
-          onEnter: () => {
-            gsap.timeline().to(workItems, {
-              duration: 1.5,
-              x: 0,
-              rotation: 0,
-              opacity: 1,
-              scale: 1,
-              ease: "power4.out",
-            });
-          },
-        });
-        scrollTriggerInstances.push(trigger);
-      });
-
-      ScrollTrigger.refresh();
     }
   }
 
-  const workProfileIcon = document.querySelector(".work-profile-icon");
+  const workProfileIcon = document.querySelector(".behind-the-lock .work-profile-icon");
   if (workProfileIcon) {
-    ScrollTrigger.create({
-      trigger: ".work-header",
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1,
-      onUpdate: (self) => {
-        workProfileIcon.style.rotate = `${self.progress * 360}deg`;
+    gsap.to(workProfileIcon, {
+      rotation: 360,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".behind-the-lock",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
       }
+    });
+  }
+
+  if (window.innerWidth >= 1000) {
+    const amounts = [-50, -80, -35, -100, -65, -55, -90, -40, -75, -110];
+    gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
+      gsap.to(wrapper, {
+        y: amounts[i % amounts.length],
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
     });
   }
 });
