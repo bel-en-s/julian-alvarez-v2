@@ -529,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (window.innerWidth >= 1000) {
-    const amounts = [-50, -80, -35, -100, -65, -55, -90, -40, -75, -110];
+    const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350];
     gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
       gsap.to(wrapper, {
         y: amounts[i % amounts.length],

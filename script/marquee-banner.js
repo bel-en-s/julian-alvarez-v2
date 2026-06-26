@@ -143,22 +143,33 @@ gsap.registerPlugin(ScrollTrigger);
     });
   }
 
+  const bannerContent = section?.querySelector(".banner-content");
+  const bannerEl = section?.querySelector(".banner");
   const btnLeft = section?.querySelector(".marquee-btn--left");
   const btnRight = section?.querySelector(".marquee-btn--right");
-  if (btnLeft && btnRight) {
-    btnLeft.style.left = "0%";
-    btnRight.style.right = "0%";
-    const tl = gsap.timeline({ paused: true })
-      .to(btnLeft, { left: "25%", duration: 0.8, ease: "power3.out" }, 0)
-      .to(btnRight, { right: "25%", duration: 0.8, ease: "power3.out" }, 0);
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top bottom",
-      end: "top 30%",
-      onEnter: () => tl.play(),
-      onLeaveBack: () => tl.reverse(),
-    });
+
+  if (bannerEl) {
+    gsap.set(bannerEl, { opacity: 0, scale: 0.85 });
   }
+  if (btnLeft) btnLeft.style.left = "0%";
+  if (btnRight) btnRight.style.right = "0%";
+
+  const entryTl = gsap.timeline({ paused: true });
+  if (bannerEl) {
+    entryTl.to(bannerEl, { opacity: 1, scale: 1, duration: 1, ease: "power3.out" });
+  }
+  if (btnLeft && btnRight) {
+    entryTl.to(btnLeft, { left: "25%", duration: 0.8, ease: "power3.out" }, "-=0.6")
+           .to(btnRight, { right: "25%", duration: 0.8, ease: "power3.out" }, "-=0.6");
+  }
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top bottom",
+    end: "top 30%",
+    onEnter: () => entryTl.play(),
+    onLeaveBack: () => entryTl.reverse(),
+  });
 
   const initSpiderWeb = (btn) => {
     const canvas = btn.querySelector(".spider-btn-web");

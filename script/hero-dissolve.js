@@ -15,7 +15,7 @@
 
   var ctx = canvas.getContext('2d');
   var IMG_W = 1080, IMG_H = 1440;
-  var DISSOLVE = { start: 0.04, end: 0.55, spread: 0.42, rise: 300 };
+  var DISSOLVE = { start: 0.04, end: 0.90, spread: 0.42, rise: 300 };
   var particles = null, cell = 7;
   var dispW = 0, dispH = 0;
   var target = 0, current = 0;

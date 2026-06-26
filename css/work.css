@@ -239,7 +239,7 @@
 
 .work-items .row {
   display: flex;
-  gap: 2em;
+  gap: 3em;
   flex-wrap: wrap;
 }
 
@@ -251,7 +251,7 @@
 .work-items .row .work-item .work-item-img {
   aspect-ratio: 3/3;
   overflow: hidden;
-  margin-bottom: 1em;
+  margin-bottom: 2.5em;
 }
 
 .work-items .row .work-item .work-item-img video {
@@ -338,7 +338,7 @@
   .work-items {
     gap: 2em;
     padding: 1em;
-    margin-bottom: 4em;
+    /* margin-bottom: 4em; */
   }
 
   .work-items .row {

@@ -200,6 +200,10 @@
 }
 
 @media (max-width: 1000px) {
+  .work-items .mb-top-edge {
+    bottom: calc(-4em - 1px);
+  }
+
   .marquee-btn {
     bottom: 3rem;
     pointer-events: none;
