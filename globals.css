@@ -36,11 +36,15 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, var(--base-100) 0%, #E8E0F0 15%, #C4B5D6 50%, #9B84B8 100%);
+}
+
 body {
   font-family: var(--f-nm);
-  background: linear-gradient(to bottom, var(--base-100) 0%, #E8E0F0 15%, #C4B5D6 50%, #9B84B8 100%);
   color: var(--base-300);
-  overflow-x: hidden;
+  min-height: 100vh;
 }
 
 img {

@@ -33,10 +33,7 @@ if (sessionStorage.getItem(LOADER_KEY) === "1") {
   document.body.style.overflow = "hidden";
   document.documentElement.style.overflow = "hidden";
 
-  Promise.race([
-    document.fonts.ready,
-    new Promise((resolve) => window.addEventListener("load", resolve)),
-  ]).then(() => {
+  function ready() {
     if (finished) return;
 
     const logoEl = document.querySelector(".preloader-logo h1");
@@ -143,5 +140,11 @@ if (sessionStorage.getItem(LOADER_KEY) === "1") {
         },
         "-=0.2"
       );
-  });
+  }
+
+  if (document.readyState === "complete") {
+    ready();
+  } else {
+    window.addEventListener("load", ready);
+  }
 }

@@ -87,7 +87,7 @@
   height: 70%;
   max-width: 600px;
   max-height: 40rem;
-  background-color: #2d2e2e;
+  /* background-color: #2d2e2e; */
 
   overflow: hidden;
   z-index: 3;
@@ -109,7 +109,7 @@
 }
 
 .marquee-banner .banner .banner-img--reveal {
-  background-image: url("/marquee-banner/mask-bg.webp");
+  background-image: url("/marquee-banner/mask-bg.jpg");
   mask: url(#smudge-mask);
   -webkit-mask: url(#smudge-mask);
   pointer-events: none;
