@@ -74,6 +74,9 @@ const pushLine = (x1, y1, x2, y2, opacity) => {
   if (lines.length > MAX_LINES) lines.splice(0, lines.length - MAX_LINES);
 };
 
+const hero = document.querySelector(".hero");
+if (!hero) { canvas.style.display = "none"; }
+
 const onMove = (e) => {
   const sorted = anchors.slice().sort((a, b) =>
     (a.x - e.clientX) * (a.x - e.clientX) + (a.y - e.clientY) * (a.y - e.clientY)
@@ -85,4 +88,9 @@ const onMove = (e) => {
   lastPt = { x: e.clientX, y: e.clientY };
 };
 
-document.addEventListener("pointermove", onMove);
+const onLeave = () => { lastPt = null; lines = []; };
+
+if (hero) {
+  hero.addEventListener("pointermove", onMove);
+  hero.addEventListener("pointerleave", onLeave);
+}

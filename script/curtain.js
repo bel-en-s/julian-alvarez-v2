@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 const section = document.querySelector(".curtain");
 const img = section?.querySelector(".curtain-img");
 const ball = section?.querySelector(".curtain-ball");
-const profileIcon = document.querySelector(".behind-the-lock .work-profile-icon");
+const profileIcon = document.querySelector(".row--first .work-profile-icon");
 
 if (section && img && ball) {
   const isMobile = window.innerWidth <= 999;

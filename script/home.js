@@ -3,27 +3,83 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { initAnimations } from "./anime";
 
-function startEntryAnimations() {
-  if (window.innerWidth >= 1000) {
-    const heroNames = document.querySelectorAll(".hero-name");
-    if (heroNames.length) {
-      const heroChars = [];
-      heroNames.forEach((el) => {
-        const split = new SplitText(el, { type: "chars", charsClass: "hero-char" });
-        heroChars.push(...split.chars);
-      });
-      gsap.set(heroChars, {
-        y: -200,
-        opacity: 0,
-      });
-      gsap.to(heroChars, {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.04,
-        ease: "power3.out",
-      });
-    }
+function initBlockReveal() {
+  const titles = document.querySelectorAll(
+    ".work-header .work-header-title h2, .row-content-title h2"
+  );
+  if (!titles.length) return;
+
+  titles.forEach((el) => {
+    const split = SplitText.create(el, {
+      type: "lines",
+      linesClass: "block-line",
+    });
+    if (!split.lines || !split.lines.length) return;
+
+    const lines = [];
+    const blocks = [];
+
+    split.lines.forEach((line) => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "block-line-wrapper";
+      line.parentNode.insertBefore(wrapper, line);
+      wrapper.appendChild(line);
+
+      const block = document.createElement("div");
+      block.className = "block-revealer";
+      block.style.backgroundColor = "#8A75B8";
+      wrapper.appendChild(block);
+
+      lines.push(line);
+      blocks.push(block);
+    });
+
+    gsap.set(lines, { opacity: 0 });
+    gsap.set(blocks, { scaleX: 0, transformOrigin: "left center" });
+
+    const trigger = el.closest(".row") || el.closest("section");
+    const tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger,
+        start: "top 88%",
+        once: true,
+        onEnter: () => tl.play(),
+      },
+    });
+
+    lines.forEach((line, i) => {
+      const block = blocks[i];
+      const pos = i * 0.15;
+      tl.to(block, { scaleX: 1, duration: 0.7, ease: "power4.inOut" }, pos);
+      tl.set(line, { opacity: 1 }, pos + 0.7);
+      tl.set(block, { transformOrigin: "right center" }, pos + 0.7);
+      tl.to(block, { scaleX: 0, duration: 0.7, ease: "power4.inOut" }, pos + 0.7);
+    });
+  });
+}
+
+function startEntryAnimations(hasDelay = false) {
+  const heroNames = document.querySelectorAll(".hero-name");
+  if (heroNames.length && window.innerWidth >= 1000) {
+    const heroChars = [];
+    heroNames.forEach((el) => {
+      const split = new SplitText(el, { type: "chars", charsClass: "hero-char" });
+      heroChars.push(...split.chars);
+    });
+    gsap.set(heroChars, {
+      y: () => -(window.innerHeight + 200),
+    });
+    gsap.to(heroChars, {
+      y: 0,
+      duration: 0.7,
+      stagger: 0.04,
+      delay: hasDelay ? 1.5 : 0,
+      ease: "power4.out",
+      onComplete: () => {
+        gsap.set(heroChars, { clearProps: "transform" });
+      },
+    });
   }
 
   gsap.set(".hero .hero-cards .card", { transformOrigin: "center center" });
@@ -45,11 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger, SplitText);
 
   document.addEventListener("preloader:complete", () => {
-    startEntryAnimations();
+    startEntryAnimations(false);
     ScrollTrigger.refresh();
   }, { once: true });
   if (sessionStorage.getItem("ja_preloader_shown") === "1") {
-    startEntryAnimations();
+    startEntryAnimations(true);
   }
   initAnimations();
 
@@ -70,24 +126,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const aboutDesc = document.querySelector(".slide-description h1");
-    if (aboutDesc) {
-      SplitText.create(aboutDesc, {
-        type: "words",
-        wordsClass: "about-word"
-      });
+    const aboutTitle = document.querySelector(".slide-title h1");
+    [aboutDesc, aboutTitle].forEach((el) => {
+      if (el) {
+        SplitText.create(el, {
+          type: "words",
+          wordsClass: "about-word"
+        });
+      }
+    });
 
-      const tl = gsap.timeline({
+    if (aboutDesc || aboutTitle) {
+      gsap.to(".about-word", {
+        "--highlight-offset": "100%",
+        stagger: 0.4,
         scrollTrigger: {
           trigger: ".about",
           scrub: 1,
-          start: "top 60%",
-          end: "bottom 60%",
+          start: "top top",
+          end: "+=800",
         }
-      });
-
-      tl.to(".about-word", {
-        "--highlight-offset": "100%",
-        stagger: 0.5
       });
     }
   }
@@ -404,9 +462,9 @@ document.addEventListener("DOMContentLoaded", () => {
       tl.to(workItems, {
         x: "0%",
         opacity: 1,
-        duration: 1,
+        duration: 0.5,
         ease: "power3.out",
-        stagger: 0.15,
+        stagger: 0.08,
       });
       if (content) {
         const split = new SplitText(content, { type: "words", wordsClass: "highlight-word" });
@@ -513,20 +571,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const workProfileIcon = document.querySelector(".behind-the-lock .work-profile-icon");
+  const workProfileIcon = document.querySelector(".row--first .work-profile-icon");
   if (workProfileIcon) {
     gsap.to(workProfileIcon, {
       rotation: 360,
       force3D: true,
       ease: "none",
       scrollTrigger: {
-        trigger: ".behind-the-lock",
+        trigger: `.row--first`,
         start: "top bottom",
         end: "bottom top",
         scrub: 1,
       }
     });
   }
+
+  document.querySelectorAll(".work-items .row .work-profile-icon").forEach((icon) => {
+    if (icon === workProfileIcon) return;
+    gsap.to(icon, {
+      rotation: 360,
+      force3D: true,
+      ease: "none",
+      scrollTrigger: {
+        trigger: icon.closest(".row"),
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      }
+    });
+  });
 
   if (window.innerWidth >= 1000) {
     const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350];
@@ -541,6 +614,33 @@ document.addEventListener("DOMContentLoaded", () => {
           scrub: 1,
         },
       });
+      const item = wrapper.closest(".work-item");
+      const content = item.querySelector(".work-item-content");
+      if (content) {
+        gsap.to(content, {
+          y: amounts[i % amounts.length] * 0.7,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      }
+    });
+    gsap.utils.toArray(".work-items .row-content, .work-items .row-content-title").forEach((el) => {
+      gsap.to(el, {
+        y: -30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el.closest(".row"),
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
     });
   }
+  initBlockReveal();
 });
