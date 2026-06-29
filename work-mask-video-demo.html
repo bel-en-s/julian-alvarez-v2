@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>work-mask-video — Componente reutilizable</title>
+  <link rel="stylesheet" href="/globals.css" />
+  <link rel="stylesheet" href="/css/work-mask-video.css" />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100svh;
+      background: #1a1a1a;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .demo-label {
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2 class="demo-label">work-mask-video — Componente reutilizable</h2>
+
+  <!-- Ejemplo básico -->
+  <div class="work-mask-video-wrapper" style="width: 120px; height: 120px;">
+    <div class="work-mask-video">
+      <video src="/home/julian-chiquito.mp4" autoplay muted loop playsinline></video>
+    </div>
+  </div>
+
+  <!-- Ejemplo con work-profile-icon (rotación scroll) -->
+  <div class="work-profile-icon" style="position: relative; margin-top: 100vh;">
+    <div class="work-mask-video">
+      <video src="/home/julian-chiquito.mp4" autoplay muted loop playsinline></video>
+    </div>
+  </div>
+
+  <div style="height: 100vh;"></div>
+
+  <script type="module">
+    import { initWorkMaskVideoRotation } from "/script/work-mask-video.js";
+    initWorkMaskVideoRotation();
+  </script>
+</body>
+</html>

@@ -327,8 +327,8 @@
 
 @media (max-width: 760px) {
   .next-match {
-    left: var(--page-pad);
-    right: var(--page-pad);
+    left: auto;
+    right: 1rem;
     width: auto;
     bottom: 16px;
     padding: 14px 16px 12px;
@@ -348,8 +348,8 @@
 
   .next-match.is-min {
     width: 160px;
-    left: var(--page-pad);
-    right: var(--page-pad);
+    left: auto;
+    right: 1rem;
     padding: 8px 12px 8px 16px;
   }
 

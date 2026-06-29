@@ -45,6 +45,8 @@ body {
   font-family: var(--f-nm);
   color: var(--base-300);
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 img {
@@ -61,7 +63,7 @@ h4 {
   text-transform: uppercase;
   font-family: var(--f-h);
   font-weight: 900;
-  line-height: 0.85;
+  line-height: 1.15;
   letter-spacing: -0.02rem;
 }
 

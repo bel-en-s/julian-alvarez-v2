@@ -10,6 +10,7 @@ function initBlockReveal() {
   if (!titles.length) return;
 
   titles.forEach((el) => {
+    if (el.classList.contains("hero-gradient-text")) return;
     const split = SplitText.create(el, {
       type: "lines",
       linesClass: "block-line",
@@ -61,25 +62,64 @@ function initBlockReveal() {
 
 function startEntryAnimations(hasDelay = false) {
   const heroNames = document.querySelectorAll(".hero-name");
-  if (heroNames.length && window.innerWidth >= 1000) {
-    const heroChars = [];
-    heroNames.forEach((el) => {
-      const split = new SplitText(el, { type: "chars", charsClass: "hero-char" });
-      heroChars.push(...split.chars);
-    });
-    gsap.set(heroChars, {
-      y: () => -(window.innerHeight + 200),
-    });
-    gsap.to(heroChars, {
-      y: 0,
-      duration: 0.7,
-      stagger: 0.04,
-      delay: hasDelay ? 1.5 : 0,
-      ease: "power4.out",
-      onComplete: () => {
-        gsap.set(heroChars, { clearProps: "transform" });
-      },
-    });
+  if (heroNames.length) {
+    if (window.innerWidth >= 1000) {
+      const heroChars = [];
+      heroNames.forEach((el) => {
+        const split = new SplitText(el, { type: "chars", charsClass: "hero-char" });
+        heroChars.push(...split.chars);
+      });
+      gsap.set(heroChars, {
+        y: () => -(window.innerHeight + 200),
+      });
+      gsap.to(heroChars, {
+        y: 0,
+        duration: 0.7,
+        stagger: 0.04,
+        delay: hasDelay ? 1.5 : 0,
+        ease: "power4.out",
+        onComplete: () => {
+          gsap.set(heroChars, { clearProps: "transform" });
+        },
+      });
+    } else {
+      gsap.fromTo(heroNames,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          delay: hasDelay ? 1.5 : 0,
+          ease: "power3.out",
+        }
+      );
+    }
+  }
+
+  const heroImgWrapper = document.querySelector(".hero-header-img");
+  if (heroImgWrapper && window.innerWidth >= 1000) {
+    if (hasDelay) heroImgWrapper.style.animationDelay = "1.5s";
+    heroImgWrapper.classList.add("hero-header-img--enter");
+    heroImgWrapper.addEventListener("animationend", () => {
+      heroImgWrapper.classList.remove("hero-header-img--enter");
+      heroImgWrapper.style.animationDelay = "";
+      heroImgWrapper.style.transform = "translateY(0)";
+    }, { once: true });
+  } else if (heroImgWrapper) {
+    gsap.fromTo(heroImgWrapper,
+      { y: "100%", opacity: 0 },
+      {
+        y: "0%",
+        opacity: 1,
+        duration: 0.6,
+        delay: hasDelay ? 1.8 : 0.3,
+        ease: "power2.out",
+        onComplete: () => {
+          heroImgWrapper.style.transform = "translateY(0)";
+        },
+      }
+    );
   }
 
   gsap.set(".hero .hero-cards .card", { transformOrigin: "center center" });
@@ -110,23 +150,26 @@ document.addEventListener("DOMContentLoaded", () => {
   initAnimations();
 
   const aboutSection = document.querySelector(".about");
-  if (aboutSection && window.innerWidth >= 1000) {
-    ScrollTrigger.create({
-      trigger: aboutSection,
-      start: "top top",
-      end: "+=800",
-      pin: true,
-      scrub: true,
-      onUpdate: (self) => {
-        document.documentElement.style.setProperty(
-          "--video-scale",
-          1 + self.progress * 0.2
-        );
-      },
-    });
+  const aboutDesc = document.querySelector(".slide-description h1");
+  const aboutTitle = document.querySelector(".slide-title h1");
 
-    const aboutDesc = document.querySelector(".slide-description h1");
-    const aboutTitle = document.querySelector(".slide-title h1");
+  if (aboutSection) {
+    if (window.innerWidth >= 1000) {
+      ScrollTrigger.create({
+        trigger: aboutSection,
+        start: "top top",
+        end: "+=800",
+        pin: true,
+        scrub: true,
+        onUpdate: (self) => {
+          document.documentElement.style.setProperty(
+            "--video-scale",
+            1 + self.progress * 0.2
+          );
+        },
+      });
+    }
+
     [aboutDesc, aboutTitle].forEach((el) => {
       if (el) {
         SplitText.create(el, {
@@ -136,17 +179,57 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    const titleWords = document.querySelectorAll(".slide-title .about-word");
+    titleWords.forEach((word) => {
+      if (word.textContent.trim().toLowerCase().includes("soñando")) {
+        word.classList.add("about-word--textured");
+      }
+    });
+
     if (aboutDesc || aboutTitle) {
-      gsap.to(".about-word", {
-        "--highlight-offset": "100%",
-        stagger: 0.4,
-        scrollTrigger: {
-          trigger: ".about",
-          scrub: 1,
-          start: "top top",
-          end: "+=800",
+      if (window.innerWidth >= 1000) {
+        gsap.to(".about-word", {
+          "--highlight-offset": "100%",
+          stagger: 0.4,
+          scrollTrigger: {
+            trigger: ".about",
+            scrub: 1,
+            start: "top top",
+            end: "+=800",
+          }
+        });
+      } else {
+        const aboutVideoWrapper = document.querySelector(".about-video-wrapper");
+        if (aboutVideoWrapper) {
+          gsap.fromTo(aboutVideoWrapper,
+            { scale: 0.8, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: ".about",
+                start: "top 90%",
+                once: true,
+              }
+            }
+          );
         }
-      });
+        gsap.fromTo(".about-word",
+          { "--highlight-offset": "0%" },
+          {
+            "--highlight-offset": "100%",
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".about",
+              start: "top 80%",
+              once: true,
+            }
+          }
+        );
+      }
     }
   }
 
@@ -513,7 +596,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (window.innerWidth >= 1000) {
     if (document.querySelector(".work-header")) {
-      gsap.set(".work-profile-icon", { scale: 0 });
       gsap.set(".work-header-arrow-icon", { scale: 0 });
 
       const feastText = SplitText.create(".work-header-content p", {
@@ -531,12 +613,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const headerTl = gsap.timeline({ delay: 0.75 });
-
-      headerTl.to(".work-profile-icon", {
-        scale: 1,
-        duration: 1,
-        ease: "power4.out",
-      });
 
       headerTl.to(
         feastText.lines,
@@ -570,36 +646,6 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
   }
-
-  const workProfileIcon = document.querySelector(".row--first .work-profile-icon");
-  if (workProfileIcon) {
-    gsap.to(workProfileIcon, {
-      rotation: 360,
-      force3D: true,
-      ease: "none",
-      scrollTrigger: {
-        trigger: `.row--first`,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
-      }
-    });
-  }
-
-  document.querySelectorAll(".work-items .row .work-profile-icon").forEach((icon) => {
-    if (icon === workProfileIcon) return;
-    gsap.to(icon, {
-      rotation: 360,
-      force3D: true,
-      ease: "none",
-      scrollTrigger: {
-        trigger: icon.closest(".row"),
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
-      }
-    });
-  });
 
   if (window.innerWidth >= 1000) {
     const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350];
@@ -642,5 +688,55 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  // MI HISTORIA char-by-char entrance (typewriter)
+  const miHistoria = document.getElementById("mi-historia-text");
+  if (miHistoria && window.innerWidth >= 1000) {
+    const fullText = miHistoria.textContent;
+    miHistoria.textContent = "";
+
+    const section = miHistoria.closest(".behind-the-lock");
+    if (section) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+              const tl = gsap.timeline();
+              fullText.split("").forEach((char, i) => {
+                tl.call(() => {
+                  miHistoria.textContent += char;
+                }, [], i * 0.05);
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: [0, 0.1, 0.3, 0.5] }
+      );
+      observer.observe(section);
+    }
+  }
+
+  initWorkTimeline();
   initBlockReveal();
 });
+
+function initWorkTimeline() {
+  const timeline = document.querySelector(".work-timeline");
+  const progress = timeline?.querySelector(".work-timeline-progress");
+  const indicator = timeline?.querySelector(".work-timeline-indicator");
+  const workSection = document.querySelector(".work-items");
+  if (!timeline || !progress || !indicator || !workSection) return;
+
+  ScrollTrigger.create({
+    trigger: workSection,
+    start: "top bottom",
+    end: "bottom top",
+    scrub: 1,
+    onUpdate: (self) => {
+      const p = self.progress;
+      progress.style.height = p * 100 + "%";
+      indicator.style.top = p * 100 + "%";
+    },
+  });
+}

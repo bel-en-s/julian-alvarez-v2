@@ -56,7 +56,7 @@
   overlay.style.height = '100%';
   overlay.style.zIndex = '0';
   overlay.style.pointerEvents = 'none';
-  overlay.style.background = 'radial-gradient(circle at 50% 50%, rgba(81,57,141,0.35), rgba(30,32,36,0.95))';
+  overlay.style.background = '#615681';
   overlay.style.mask = 'url(#bg-smudge-mask)';
   overlay.style.webkitMask = 'url(#bg-smudge-mask)';
   section.appendChild(overlay);

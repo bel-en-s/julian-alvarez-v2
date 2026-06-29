@@ -130,16 +130,31 @@ footer a {
     padding-top: 8rem;
   }
 
+  footer .container {
+    align-items: center;
+  }
+
   footer .container .footer-top .footer-col:nth-child(2) {
     display: none;
   }
 
+  footer .footer-top {
+    align-items: center;
+    text-align: center;
+  }
+
+  footer .footer-top .footer-col:nth-child(1) {
+    align-items: center;
+  }
+
   footer .footer-email-row {
     width: 100%;
+    justify-content: center;
   }
 
   footer .footer-email-row input {
     font-size: 2rem;
+    text-align: center;
   }
 
   footer .footer-email-row button {
@@ -156,9 +171,14 @@ footer a {
     gap: 4rem;
   }
 
+  footer .footer-bottom {
+    text-align: center;
+  }
+
   footer .footer-bottom .footer-col:nth-child(2) {
     flex-direction: column;
     gap: 4rem;
+    align-items: center;
   }
 
   footer .footer-copyright .footer-col:nth-child(1) {
@@ -169,5 +189,7 @@ footer a {
     width: 100%;
     flex-direction: column-reverse;
     gap: 0.25rem;
+    align-items: center;
+    text-align: center;
   }
 }

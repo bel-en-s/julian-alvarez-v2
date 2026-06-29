@@ -6,6 +6,7 @@
   height: 100svh;
   z-index: 100010;
   pointer-events: none;
+  will-change: transform;
 }
 
 .preloader-wrapper > * {
@@ -45,26 +46,6 @@
   transform-origin: left;
 }
 
-.preloader-logo {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  text-align: center;
-  mix-blend-mode: difference;
-  z-index: 2;
-}
-
-.preloader-logo h1 {
-  position: relative;
-  color: var(--base-200);
-  font-size: 2rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  opacity: 0;
-}
-
 .preloader-mask {
   background-color: #000;
   -webkit-mask: linear-gradient(var(--base-300), var(--base-300)),
@@ -91,13 +72,6 @@
   pointer-events: none;
 }
 
-.preloader-wrapper .char {
-  position: relative;
-  padding-bottom: 0.2em;
-  margin-bottom: -0.2em;
-  will-change: transform;
-}
-
 @media (max-width: 800px) {
   .preloader-video {
     max-width: 80%;
@@ -108,10 +82,6 @@
     left: 0%;
     width: 100%;
     transform: translateX(0%) scaleX(0);
-  }
-
-  .preloader-logo h1 {
-    font-size: 2rem;
   }
 
   .preloader-mask {

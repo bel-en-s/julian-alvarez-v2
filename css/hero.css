@@ -88,6 +88,15 @@
   margin-left: 5vw;
 }
 
+@keyframes hero-img-rise {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
 .hero .hero-header .hero-header-img {
   display: flex;
   align-items: flex-end;
@@ -96,6 +105,12 @@
   max-height: 100svh;
   z-index: 6;
   position: relative;
+  will-change: transform;
+  transform: translateY(100%);
+}
+
+.hero .hero-header .hero-header-img--enter {
+  animation: hero-img-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero .hero-header .hero-header-img img {
@@ -252,6 +267,7 @@
   pointer-events: none;
   overflow: hidden;
   contain: paint layout;
+  display: none;
 }
 
 #hero-webs .ha-corner {
@@ -349,14 +365,20 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  .hero .hero-header {
+    padding: 0 0.5rem;
+  }
+
   .hero .hero-header .hero-name--julian {
-    font-size: clamp(50px, 14vw, 80px);
+    font-size: clamp(36px, 25vw, 90px);
     line-height: .84;
+    white-space: normal;
   }
 
   .hero .hero-header .hero-name--alvarez {
-    font-size: clamp(80px, 24vw, 140px);
+    font-size: clamp(56px, 28vw, 120px);
     line-height: .84;
+    white-space: normal;
   }
 }

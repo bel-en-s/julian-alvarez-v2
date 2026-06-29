@@ -463,6 +463,33 @@
 
 .ja-glow-button:active { transform: scale(.98); }
 
+@media (max-width: 600px) {
+  .menu .menu-logo { height: 1.75rem; }
+  .ja-menu-arana__fab { width: 40px; height: 40px; }
+  .ja-menu-arana__hamburger { width: 20px; height: 20px; }
+  .ja-menu-arana__ham-line { width: 16px; height: 2px; left: calc(50% - 8px); }
+  .ja-menu-arana__ham-line:nth-child(1) { top: 4px; }
+  .ja-menu-arana__ham-line:nth-child(2) { top: 9px; }
+  .ja-menu-arana__ham-line:nth-child(3) { top: 14px; }
+  .ja-menu-arana__fab.is-open .ja-menu-arana__ham-line:nth-child(1),
+  .ja-menu-arana__fab.is-open .ja-menu-arana__ham-line:nth-child(3) { top: 9px; }
+
+  .ja-menu-arana__item.i0 { top: 14% !important; }
+  .ja-menu-arana__item.i1 { top: 26% !important; }
+  .ja-menu-arana__item.i2 { top: 38% !important; }
+  .ja-menu-arana__item.i4 { top: 50% !important; }
+
+  .ja-menu-arana__item.i0,
+  .ja-menu-arana__item.i1,
+  .ja-menu-arana__item.i2,
+  .ja-menu-arana__item.i4 {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 85%;
+    max-width: 260px;
+  }
+}
+
 @media (max-width: 1024px) {
   .menu { top: .75rem; padding: 0 .75rem; }
 
