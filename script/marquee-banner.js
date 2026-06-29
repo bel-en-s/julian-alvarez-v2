@@ -1,269 +1,220 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 (function () {
-  const section = document.querySelector(".marquee-banner");
-  const marquee1 = section?.querySelector(".marquee-header-1");
-  const marquee2 = section?.querySelector(".marquee-header-2");
-  const banner = section?.querySelector(".banner");
-  const smudgeContainer = section?.querySelector(".smudge-blobs");
-  const smudgeSVG = section?.querySelector(".smudge-revealer");
-
-  if (!section || !banner || !smudgeContainer || !smudgeSVG) return;
+  const stage = document.getElementById("df-stage");
+  if (!stage) return;
 
   const NS = "http://www.w3.org/2000/svg";
-  const pointer = { x: 0, y: 0 };
-  const smooth = { x: 0, y: 0 };
-  let started = false;
-  let raf = null;
 
-  const easeOutQuad = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-  const easeInCubic = (t) => t * t * t;
+  /* ---- grain noise filter ---- */
+  const svgGrain = stage.querySelector(".df-grain");
+  if (svgGrain) {
+    const defs = document.createElementNS(NS, "defs");
+    const filter = document.createElementNS(NS, "filter");
+    filter.id = "df-noise";
+    const ft = document.createElementNS(NS, "feTurbulence");
+    ft.setAttribute("type", "fractalNoise");
+    ft.setAttribute("baseFrequency", "0.85");
+    ft.setAttribute("numOctaves", "2");
+    ft.setAttribute("stitchTiles", "stitch");
+    filter.appendChild(ft);
+    const cm = document.createElementNS(NS, "feColorMatrix");
+    cm.setAttribute("type", "saturate");
+    cm.setAttribute("values", "0");
+    filter.appendChild(cm);
+    defs.appendChild(filter);
+    svgGrain.prepend(defs);
+  }
 
-  const config = {
-    smoothing: 0.12,
-    threshold: 0.01,
-    sizeFromSpeed: 0.2,
-    expandMultiplier: 2,
-    expandTime: 2000,
-    dissolveStart: 2000,
-    dissolveTime: 3000,
-  };
+  /* ---- corner orb webs ---- */
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
 
-  const onPointerMove = (x, y) => {
-    if (!started) {
-      pointer.x = smooth.x = x;
-      pointer.y = smooth.y = y;
-      started = true;
-      return;
+  function buildRealWeb(svg, o) {
+    var hx = o.hx, hy = o.hy, sx = o.sx, sy = o.sy, N = o.N, maxR = o.maxR, factor = o.factor, start = o.start;
+    var rnd = mulberry32(o.seed);
+    var jit = function (m) { return (rnd() * 2 - 1) * m; };
+    var angJit = 2.6 + (o.irreg || 0) * 7;
+    var dirs = [], rScale = [];
+    for (var i = 0; i < N; i++) {
+      var even = 4 + (86 - 4) * (i / (N - 1));
+      var a = (even + jit(angJit)) * Math.PI / 180;
+      dirs.push([Math.cos(a), Math.sin(a)]);
+      rScale.push(1 + jit(0.13 * (o.irreg || 0)));
     }
-    pointer.x = x;
-    pointer.y = y;
-  };
-
-  const getRelativePos = (clientX, clientY) => {
-    const rect = banner.getBoundingClientRect();
-    return { x: clientX - rect.left, y: clientY - rect.top };
-  };
-
-  const handleMouseMove = (e) => {
-    const pos = getRelativePos(e.clientX, e.clientY);
-    onPointerMove(pos.x, pos.y);
-  };
-
-  banner.addEventListener("mousemove", handleMouseMove);
-
-  const handleClick = (e) => {
-    const pos = getRelativePos(e.clientX, e.clientY);
-    const isMobile = window.innerWidth < 1000;
-    const burstRadii = isMobile
-      ? [15, 22, 12, 18, 10, 20, 14, 16, 19, 11]
-      : [30, 45, 25, 35, 20, 40, 28, 32, 38, 22];
-    const offsets = isMobile
-      ? [[0, 0], [-8, -5], [8, -4], [-4, 8], [6, 6], [-10, 3], [4, -9], [-3, -10], [9, 4], [-6, -3]]
-      : [[0, 0], [-15, -10], [15, -8], [-8, 15], [12, 12], [-20, 5], [8, -18], [-5, -20], [18, 8], [-12, -5]];
-    offsets.forEach(([ox, oy], i) => {
-      stampAt(pos.x + ox, pos.y + oy, burstRadii[i]);
+    var P = function (i, r) {
+      return [(hx + sx * r * dirs[i][0]).toFixed(1), (hy + sy * r * dirs[i][1]).toFixed(1)];
+    };
+    dirs.forEach(function (d, i) {
+      var r = maxR * rScale[i] * (0.86 + rnd() * 0.2);
+      var l = document.createElementNS(NS, "line");
+      l.setAttribute("x1", hx); l.setAttribute("y1", hy);
+      var p = P(i, r);
+      l.setAttribute("x2", p[0]); l.setAttribute("y2", p[1]);
+      l.setAttribute("class", "spoke");
+      l.setAttribute("stroke-width", (0.7 + rnd() * 0.35).toFixed(2));
+      svg.appendChild(l);
     });
-  };
-
-  banner.addEventListener("click", handleClick);
-
-  const matchSVGToViewport = () => {
-    const rect = banner.getBoundingClientRect();
-    smudgeSVG.setAttribute("viewBox", `0 0 ${rect.width} ${rect.height}`);
-    smudgeSVG.style.width = rect.width + "px";
-    smudgeSVG.style.height = rect.height + "px";
-  };
-
-  matchSVGToViewport();
-  window.addEventListener("resize", matchSVGToViewport);
-
-  const stampAt = (x, y, radius) => {
-    const c = document.createElementNS(NS, "circle");
-    c.setAttribute("cx", x);
-    c.setAttribute("cy", y);
-    c.setAttribute("r", radius);
-    c.setAttribute("fill", "#fff");
-    smudgeContainer.prepend(c);
-
-    const start = performance.now();
-    const expandEnd = start + config.expandTime;
-    const fadeStart = start + config.dissolveStart;
-    const fadeEnd = fadeStart + config.dissolveTime;
-
-    const tick = () => {
-      const now = performance.now();
-      if (now >= fadeEnd) {
-        if (c.parentNode) c.parentNode.removeChild(c);
-        return;
+    var ringR = [];
+    var r = start;
+    while (r < maxR * 0.96) { ringR.push(r); r *= (factor + rnd() * 0.08); }
+    ringR.forEach(function (rr) {
+      for (var i = 0; i < N - 1; i++) {
+        if (rnd() < (0.06 + (o.irreg || 0) * 0.10)) continue;
+        var jr = 0.05 + (o.irreg || 0) * 0.13;
+        var rA = rr * rScale[i] * (1 + jit(jr)), rB = rr * rScale[i + 1] * (1 + jit(jr));
+        var p1 = P(i, rA), p2 = P(i + 1, rB);
+        var mx = (+p1[0] + +p2[0]) / 2, my = (+p1[1] + +p2[1]) / 2;
+        var sag = 0.06 + rnd() * 0.06 + jit(0.06 * (o.irreg || 0));
+        var cx = (mx + (hx - mx) * sag).toFixed(1), cy = (my + (hy - my) * sag).toFixed(1);
+        var p = document.createElementNS(NS, "path");
+        p.setAttribute("d", "M" + p1[0] + " " + p1[1] + " Q" + cx + " " + cy + " " + p2[0] + " " + p2[1]);
+        p.setAttribute("class", rnd() < 0.10 ? "glint" : "capture");
+        p.setAttribute("stroke-width", (0.55 + rnd() * 0.3).toFixed(2));
+        svg.appendChild(p);
       }
-      let r = radius;
-      if (now < expandEnd) {
-        const t = (now - start) / config.expandTime;
-        r = radius + (radius * config.expandMultiplier - radius) * easeOutQuad(t);
-      }
-      if (now >= fadeStart) {
-        const t = (now - fadeStart) / config.dissolveTime;
-        r *= 1 - easeInCubic(Math.min(t, 1));
-      }
-      c.setAttribute("r", Math.max(0, r));
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-
-  const update = () => {
-    if (started) {
-      smooth.x += (pointer.x - smooth.x) * config.smoothing;
-      smooth.y += (pointer.y - smooth.y) * config.smoothing;
-      const speed = Math.hypot(pointer.x - smooth.x, pointer.y - smooth.y);
-      if (speed > config.threshold) {
-        stampAt(smooth.x, smooth.y, speed * config.sizeFromSpeed);
-      }
-    }
-    raf = requestAnimationFrame(update);
-  };
-
-  raf = requestAnimationFrame(update);
-
-  if (marquee1 && marquee2) {
-    const st = ScrollTrigger.create({
-      trigger: section,
-      start: "top bottom",
-      end: "150% top",
-      scrub: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        gsap.set(marquee1, { x: `${25 - progress * 50}%` });
-        gsap.set(marquee2, { x: `${-25 + progress * 50}%` });
-      },
     });
-  }
-
-  const bannerContent = section?.querySelector(".banner-content");
-  const bannerEl = section?.querySelector(".banner");
-  const btnLeft = section?.querySelector(".marquee-btn--left");
-  const btnRight = section?.querySelector(".marquee-btn--right");
-
-  if (bannerEl) {
-    gsap.set(bannerEl, { opacity: 0, scale: 0.85 });
-  }
-  if (btnLeft) btnLeft.style.left = "0%";
-  if (btnRight) btnRight.style.right = "0%";
-
-  const entryTl = gsap.timeline({ paused: true });
-  if (bannerEl) {
-    entryTl.to(bannerEl, { opacity: 1, scale: 1, duration: 1, ease: "power3.out" });
-  }
-  if (btnLeft && btnRight) {
-    entryTl.to(btnLeft, { left: "25%", duration: 0.8, ease: "power3.out" }, "-=0.6")
-           .to(btnRight, { right: "25%", duration: 0.8, ease: "power3.out" }, "-=0.6");
-  }
-
-  ScrollTrigger.create({
-    trigger: section,
-    start: "top bottom",
-    end: "top 30%",
-    onEnter: () => entryTl.play(),
-    onLeaveBack: () => entryTl.reverse(),
-  });
-
-  const initSpiderWeb = (btn) => {
-    const canvas = btn.querySelector(".spider-btn-web");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    let w = 0, h = 0;
-    const dpr = window.devicePixelRatio || 1;
-    let anchors = [];
-    let lastPt = null;
-    let inside = false;
-
-    const resize = () => {
-      const r = btn.getBoundingClientRect();
-      w = r.width; h = r.height;
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      canvas.style.width = w + "px";
-      canvas.style.height = h + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const cx = w / 2, cy = h / 2;
-      const rx = w * 0.55, ry = h * 0.6;
-      anchors = [];
-      for (let i = 0; i < 8; i++) {
-        const a = (i / 8) * Math.PI * 2 - Math.PI / 2;
-        anchors.push({ x: cx + Math.cos(a) * rx, y: cy + Math.sin(a) * ry });
-      }
-      ctx.clearRect(0, 0, w, h);
-    };
-    resize();
-
-    const ro = new ResizeObserver(resize);
-    ro.observe(btn);
-
-    const strand = (x1, y1, x2, y2, alpha) => {
-      ctx.strokeStyle = "rgba(216, 200, 245, " + alpha + ")";
-      ctx.lineWidth = 0.6;
-      ctx.lineCap = "round";
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-    };
-
-    const onMove = (e) => {
-      const r = btn.getBoundingClientRect();
-      const x = e.clientX - r.left;
-      const y = e.clientY - r.top;
-
-      ctx.save();
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.fillStyle = "rgba(0,0,0,0.04)";
-      ctx.fillRect(0, 0, w, h);
-      ctx.restore();
-
-      const sorted = anchors.slice().sort((a, b) =>
-        (a.x - x) * (a.x - x) + (a.y - y) * (a.y - y)
-        - ((b.x - x) * (b.x - x) + (b.y - y) * (b.y - y))
-      );
-      strand(sorted[0].x, sorted[0].y, x, y, 0.55);
-      strand(sorted[1].x, sorted[1].y, x, y, 0.32);
-      if (lastPt && inside) strand(lastPt.x, lastPt.y, x, y, 0.7);
-      lastPt = { x, y };
-    };
-
-    const onEnter = () => { inside = true; lastPt = null; };
-    const onLeave = () => {
-      inside = false;
-      let t = 0;
-      const fade = setInterval(() => {
-        t++;
-        ctx.save();
-        ctx.globalCompositeOperation = "destination-out";
-        ctx.fillStyle = "rgba(0,0,0,0.18)";
-        ctx.fillRect(0, 0, w, h);
-        ctx.restore();
-        if (t > 14) { clearInterval(fade); ctx.clearRect(0, 0, w, h); }
-      }, 30);
-    };
-
-    if (window.innerWidth >= 1000) {
-      btn.addEventListener("pointerenter", onEnter);
-      btn.addEventListener("pointermove", onMove);
-      btn.addEventListener("pointerleave", onLeave);
+    for (var k = 0; k < 2; k++) {
+      var i0 = 1 + k * 3;
+      var rr2 = maxR * (0.74 + k * 0.12);
+      var p1 = P(i0, rr2), p2 = P(Math.min(i0 + 3, N - 1), rr2 * 1.02);
+      var mx = (+p1[0] + +p2[0]) / 2, my = (+p1[1] + +p2[1]) / 2;
+      var cx = (mx + (hx - mx) * 0.04).toFixed(1), cy = (my + (hy - my) * 0.04).toFixed(1);
+      var p = document.createElementNS(NS, "path");
+      p.setAttribute("d", "M" + p1[0] + " " + p1[1] + " Q" + cx + " " + cy + " " + p2[0] + " " + p2[1]);
+      p.setAttribute("class", "frame-thread");
+      p.setAttribute("stroke-width", "0.9");
+      svg.appendChild(p);
     }
-  };
+  }
 
-  document.querySelectorAll(".marquee-banner .spider-btn").forEach(initSpiderWeb);
+  var webTl = stage.querySelector(".df-web-tl");
+  var webBr = stage.querySelector(".df-web-br");
+  if (webTl) buildRealWeb(webTl, { hx: 0, hy: 0, sx: 1, sy: 1, seed: 7, N: 9, maxR: 900, factor: 1.30, start: 52, irreg: 0.22 });
+  if (webBr) buildRealWeb(webBr, { hx: 1366, hy: 768, sx: -1, sy: -1, seed: 41, N: 12, maxR: 660, factor: 1.24, start: 40, irreg: 0.92 });
 
-  ScrollTrigger.refresh();
+  /* ---- constellation dots ---- */
+  (function () {
+    var svg = stage.querySelector(".df-dots");
+    if (!svg) return;
+    var rnd = mulberry32(91), W = 1366, H = 768, pts = [];
+    for (var i = 0; i < 14; i++) {
+      var x = rnd() * W, y = rnd() * H * 0.92;
+      pts.push([x, y]);
+      var c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", x.toFixed(1)); c.setAttribute("cy", y.toFixed(1));
+      c.setAttribute("r", (rnd() * 1.1 + 0.6).toFixed(2));
+      c.setAttribute("class", "dot");
+      svg.appendChild(c);
+    }
+    for (var i = 0; i < pts.length; i++) {
+      for (var j = i + 1; j < pts.length; j++) {
+        var dx = pts[i][0] - pts[j][0], dy = pts[i][1] - pts[j][1];
+        if (Math.hypot(dx, dy) < 150 && rnd() < 0.25) {
+          var l = document.createElementNS(NS, "line");
+          l.setAttribute("x1", pts[i][0].toFixed(1)); l.setAttribute("y1", pts[i][1].toFixed(1));
+          l.setAttribute("x2", pts[j][0].toFixed(1)); l.setAttribute("y2", pts[j][1].toFixed(1));
+          l.setAttribute("class", "dot-link");
+          svg.appendChild(l);
+        }
+      }
+    }
+  })();
 
-  window.addEventListener("beforeunload", () => {
-    banner.removeEventListener("mousemove", handleMouseMove);
-    banner.removeEventListener("click", handleClick);
-    window.removeEventListener("resize", matchSVGToViewport);
-    if (raf) cancelAnimationFrame(raf);
-  });
+  /* ---- concentric pulse rings ---- */
+  (function () {
+    var svg = stage.querySelector(".df-rings");
+    if (!svg) return;
+    var r = 70;
+    while (r < 440) {
+      var c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", 450); c.setAttribute("cy", 450);
+      c.setAttribute("r", r);
+      c.setAttribute("stroke-width", (0.6 + Math.random() * 0.4).toFixed(2));
+      svg.appendChild(c);
+      r *= 1.34;
+    }
+  })();
+
+  /* ---- web veil over the figure ---- */
+  (function () {
+    var svg = stage.querySelector(".df-figure-web");
+    if (!svg) return;
+    var rnd = mulberry32(2026);
+    var cx = 260, cy = 235, N = 18, maxR = 240;
+    var dirs = [];
+    for (var i = 0; i < N; i++) {
+      var a = (i / N) * Math.PI * 2 + (rnd() - 0.5) * 0.08;
+      dirs.push([Math.cos(a), Math.sin(a)]);
+    }
+    var rS = dirs.map(function () { return 0.8 + rnd() * 0.4; });
+    var Pt = function (i, t) {
+      return [cx + t * maxR * dirs[i][0] * rS[i], cy + t * maxR * dirs[i][1] * rS[i] * 1.18];
+    };
+    dirs.forEach(function (d, i) {
+      var p = Pt(i, 0.85 + rnd() * 0.2);
+      var path = document.createElementNS(NS, "path");
+      path.setAttribute("d", "M" + cx + " " + cy + " L" + p[0].toFixed(1) + " " + p[1].toFixed(1));
+      svg.appendChild(path);
+    });
+    var rings = [];
+    var tr = 0.2;
+    while (tr < 0.98) { rings.push(tr); tr *= 1.3 + rnd() * 0.05; }
+    rings.forEach(function (rr) {
+      for (var i = 0; i < N; i++) {
+        var a = i, b = (i + 1) % N;
+        var p1 = Pt(a, rr * (1 + (rnd() - 0.5) * 0.06));
+        var p2 = Pt(b, rr * (1 + (rnd() - 0.5) * 0.06));
+        var mx = (p1[0] + p2[0]) / 2, my = (p1[1] + p2[1]) / 2;
+        var sag = 0.09 + rnd() * 0.04;
+        var qx = mx + (cx - mx) * sag, qy = my + (cy - my) * sag;
+        var p = document.createElementNS(NS, "path");
+        p.setAttribute("d", "M" + p1[0].toFixed(1) + " " + p1[1].toFixed(1) + " Q" + qx.toFixed(1) + " " + qy.toFixed(1) + " " + p2[0].toFixed(1) + " " + p2[1].toFixed(1));
+        svg.appendChild(p);
+      }
+    });
+    for (var k = 0; k < 10; k++) {
+      var i2 = Math.floor(rnd() * N), rr2 = rings[Math.floor(rnd() * rings.length)] || 0.5;
+      var p3 = Pt(i2, rr2);
+      var c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", p3[0].toFixed(1)); c.setAttribute("cy", p3[1].toFixed(1));
+      c.setAttribute("r", (0.7 + rnd() * 1.1).toFixed(2));
+      svg.appendChild(c);
+    }
+  })();
+
+  /* ---- scale stage to fit ---- */
+  function fit() {
+    var s = Math.min(innerWidth / 1366, innerHeight / 768);
+    if (!s || !isFinite(s) || s <= 0) { requestAnimationFrame(fit); return; }
+    stage.style.transform = "scale(" + s + ")";
+  }
+  addEventListener("resize", fit);
+  fit();
+
+  /* ---- face === mask interaction ---- */
+  var dentro = document.getElementById("df-dentro");
+  var fuera = document.getElementById("df-fuera");
+
+  function setSide(v) {
+    if (v) stage.setAttribute("data-side", v);
+    else stage.removeAttribute("data-side");
+  }
+
+  if (dentro) {
+    dentro.addEventListener("mouseenter", function () { setSide("dentro"); });
+    dentro.addEventListener("mouseleave", function () { setSide(null); });
+    dentro.addEventListener("focus", function () { setSide("dentro"); });
+    dentro.addEventListener("blur", function () { setSide(null); });
+  }
+  if (fuera) {
+    fuera.addEventListener("mouseenter", function () { setSide("fuera"); });
+    fuera.addEventListener("mouseleave", function () { setSide(null); });
+    fuera.addEventListener("focus", function () { setSide("fuera"); });
+    fuera.addEventListener("blur", function () { setSide(null); });
+  }
 })();

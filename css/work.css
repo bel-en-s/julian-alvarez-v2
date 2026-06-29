@@ -184,6 +184,10 @@
   font-size: clamp(2rem, 5vw, 5rem);
 }
 
+.row--first .work-header-title h2:first-child {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+}
+
 .hero-gradient-text,
 .hero-gradient-text .highlight-word {
   background: linear-gradient(to bottom, #FFFFFF, var(--ja-amethyst-300));
@@ -263,10 +267,53 @@
   margin-bottom: 0;
 }
 
+.row--video-gray {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  background: #1E2024;
+  padding: 0.2em 0;
+}
+
+.row-edge {
+  position: absolute;
+  left: calc((100% - 100vw) / 2 - 1px);
+  width: calc(100vw + 2px);
+  z-index: 2;
+  pointer-events: none;
+  line-height: 0;
+  font-size: 0;
+}
+
+.row-edge--top {
+  bottom: -10vh;
+}
+
+.row-edge--bottom {
+  left: calc((100% - 100vw) / 2 - 1.5em - 1px);
+  bottom: -15vh;
+}
+
+.row-edge img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.row-edge--bottom img {
+  transform: rotate(180deg);
+}
+
 .work-items .row {
   display: flex;
   gap: 1em;
   flex-wrap: wrap;
+  /* height: 90vh; */
+}
+
+.row--video-gray + .row {
+  margin-top: 8em;
 }
 
 .work-items .row .work-item {
@@ -291,16 +338,48 @@
   display: block;
 }
 
-.work-items .row .work-item--video .work-item-img {
+/* .work-items .row .work-item--video .work-item-img {
   aspect-ratio: 3/1;
+} */
+
+.row--video-gray .work-item--video {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.row--video-gray .work-item--video .work-item-img {
+  aspect-ratio: auto;
+}
+
+.row--video-gray .work-item--video .work-item-img video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.work-item--anexo9 {
+  margin-top: 12em;
+}
+
+.work-item-img--bio3 .row-content:first-of-type {
+  margin-bottom: 2em;
+}
+
+.work-item-img--bio3 .row-content:nth-of-type(2) {
+  margin-top: 3em;
+  text-align: right;
 }
 
 .work-items > div.row--first > .work-item:nth-child(2) .work-item-img {
-  aspect-ratio: 9/16;
-  margin-top: 2rem;
+  aspect-ratio: 4/3;
+  margin-top: 3rem;
 }
 
-.work-items > div.row:nth-of-type(odd) > .work-item:nth-child(1) .work-item-img { aspect-ratio: 3/4; }
+.work-items > div.row--first > .work-item:nth-child(3) {
+  margin-top: -18vh;
+}
+
+/* .work-items > div.row:nth-of-type(odd) > .work-item:nth-child(1) .work-item-img { aspect-ratio: 3/4; } */
 /* .work-items > div.row:nth-of-type(odd) > .work-item:nth-child(2) .work-item-img { aspect-ratio: 1/1; } */
 
 /* .work-items > div.row:nth-of-type(even) > .work-item:nth-child(1) .work-item-img { aspect-ratio: 1/1; } */
@@ -322,6 +401,14 @@
 
 .work-items .row .work-item .work-item-content h3 {
   font-size: 1.2rem;
+}
+
+.work-items > div:nth-of-type(5) {
+  margin-bottom: 8em;
+}
+
+.work-items > div:nth-of-type(5) .work-item:nth-child(3) .work-item-img img {
+  clip-path: inset(0 10% 0 10%);
 }
 
 .work-items .row .row-content {
@@ -347,11 +434,72 @@
   /* margin-bottom: 20vh; */
 }
 
+.work-items .row.row--title-right {
+  position: relative;
+  margin-top: -16em;
+}
+
+.work-items .row.row--2021 .row-content-title {
+  text-align: center;
+  margin-bottom: 6em;
+}
+
+.work-items .row.row--2021 .work-header-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.work-items .row.row--2021 {
+  gap: 0.35em;
+}
+
+.work-items .row.row--2021 .work-item-img img {
+  width: 100%;
+  height: auto;
+}
+
+.work-items .row.row--2021 .work-item-img {
+  margin-bottom: 0;
+}
+
+.work-items .row.row--2021 .work-item--wide {
+  flex: 2.5;
+}
+
+.work-items .row.row--title-right .row-content-title {
+  text-align: right;
+}
+
 .work-items .row .row-content-title h2 {
   font-family: var(--f-h);
   font-weight: 900;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2rem, 2vw, 4rem);
   margin: 0;
+}
+
+.work-items .mb-top-edge {
+  position: absolute;
+  bottom: -1px;
+  left: calc((100% - 100vw) / 2);
+  width: 100vw;
+  z-index: 15;
+  pointer-events: none;
+  line-height: 0;
+  font-size: 0;
+}
+
+.work-items .mb-top-edge img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.work-items .row .row-content-title h2:not(.hero-gradient-text) {
+  border-bottom: 4px solid #1E1332;
+  padding-bottom: 4px;
+  display: inline-block;
 }
 
 #calchin-text {
@@ -403,7 +551,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 0;
+  right: calc((100% - 100vw) / 2 + 0.75rem);
   width: 2px;
   z-index: 5;
   pointer-events: none;
@@ -413,7 +561,7 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  background: rgba(138, 117, 184, 0.15);
+  background: var(--ja-amethyst-900);
   border-radius: 2px;
 }
 
@@ -423,34 +571,27 @@
   left: 0;
   width: 100%;
   height: 0%;
-  background: linear-gradient(to bottom, var(--ja-amethyst-300), #C084FC);
+  background: linear-gradient(to bottom, var(--ja-amethyst-900), var(--ja-amethyst-300));
   border-radius: 2px;
   transition: height 0.1s linear;
 }
 
 .work-timeline-indicator {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--ja-amethyst-300);
-  border: 2px solid #C084FC;
-  box-shadow: 0 0 12px rgba(192, 132, 252, 0.6);
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  pointer-events: none;
+  display: none;
 }
 
 @media (max-width: 1000px) {
   .work-timeline {
-    right: 0.5rem;
+    right: calc((100% - 100vw) / 2 + 0.75rem);
   }
 
   .work-timeline-indicator {
-    width: 10px;
-    height: 10px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .work-items .mb-top-edge {
+    bottom: calc(-4em - 1px);
   }
 
   .work-header .work-footer .work-footer-symbols {
@@ -510,6 +651,30 @@
 
   .work-header .work-header-title h1 {
     font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+
+  .work-items .row.row--title-right {
+    margin-top: 0;
+  }
+
+  .row--video-gray + .row {
+    margin-top: 3em;
+  }
+
+  .work-item-img--bio3 .row-content:nth-of-type(2) {
+    text-align: left;
+  }
+
+  .work-items > div.row--first > .work-item:nth-child(3) {
+    margin-top: 0;
+  }
+
+  .row-edge {
+    display: none;
+  }
+
+  .work-items > div:nth-of-type(5) {
+    margin-bottom: 3em;
   }
 
   /* .work-items > div.row:nth-of-type(odd) > .work-item:nth-child(1) .work-item-img,

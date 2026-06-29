@@ -896,6 +896,7 @@
   width: 100%;
   min-height: 100svh;
   margin-top: -5px;
+  /* border: 1px solid rgba(138, 117, 184, 0.4); */
 }
 
 .behind-the-lock .btl-top-edge {
@@ -930,9 +931,10 @@
 }
 
 .behind-the-lock .btl-header h2 {
-  font-family: var(--f-h);
+  font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(4rem, 12vw, 8rem);
+  letter-spacing: 0.08em;
   /* color: #fff; */
   margin-bottom: 1rem;
 }
@@ -941,9 +943,12 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  background-image: linear-gradient(180deg, rgba(138, 117, 184, 0.25), rgba(138, 117, 184, 0.25)), url('/spotlight-images/spotlight-banner.jpg');
+  background-image: linear-gradient(180deg, rgba(107, 84, 159, 0.45), rgba(81, 57, 141, 0.6)), url('/spotlight-images/spotlight-banner.jpg');
   background-size: cover;
   background-position: center bottom;
+  -webkit-text-stroke: 1px var(--ja-amethyst-400);
+  text-stroke: 1px var(--ja-amethyst-400);
+  paint-order: stroke fill;
 }
 
 .behind-the-lock .btl-header-text {
@@ -990,6 +995,8 @@
   backface-visibility: hidden;
   will-change: transform;
 }
+
+
 
 .curtain-img img {
   position: absolute;

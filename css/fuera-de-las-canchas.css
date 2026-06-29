@@ -378,10 +378,11 @@
 .contact-form .cf-nav-row {
   display: flex;
   gap: 1rem;
+  justify-content: flex-end;
 }
 
 .contact-form .cf-nav-col {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;

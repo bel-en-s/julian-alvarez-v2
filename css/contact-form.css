@@ -38,10 +38,11 @@
 .cf-nav-row {
   display: flex;
   gap: 4rem;
+  justify-content: flex-end;
 }
 
 .cf-nav-col {
-  flex: 1;
+  flex: 0 0 auto;
 }
 
 .cf-nav-header {
