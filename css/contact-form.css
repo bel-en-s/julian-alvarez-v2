@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background-color: var(--base-300, #0a0a0a);
+  background-color: #161120;
   color: var(--base-100, #f9f4eb);
   padding: 6rem 2rem 3rem;
   display: flex;
@@ -25,6 +25,23 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.cf-decorativa {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 0;
+  pointer-events: none;
+  filter: invert(1);
+  opacity: 0.5;
+  max-width: 300px;
+}
+
+.cf-decorativa img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .cf-nav {

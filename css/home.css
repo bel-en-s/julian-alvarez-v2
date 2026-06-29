@@ -951,6 +951,40 @@
   paint-order: stroke fill;
 }
 
+.df-deco {
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+  object-fit: contain;
+  width: auto;
+  mix-blend-mode: multiply;
+  opacity: .45;
+}
+
+.df-deco-1 {
+  position: absolute;
+  right: -6vw;
+  top: -8vh;
+  height: 24vh;
+  transform: rotate(14deg);
+}
+
+.df-deco-2 {
+  align-self: flex-start;
+  height: 22vh;
+  transform: rotate(-12deg);
+  margin-left: -6vw;
+  margin-top: -3vh;
+}
+
+.df-deco-3 {
+  position: absolute;
+  left: -5vw;
+  bottom: -6vh;
+  height: 20vh;
+  transform: rotate(10deg);
+}
+
 .behind-the-lock .btl-header-text {
   font-family: var(--font-support);
   font-weight: 400;

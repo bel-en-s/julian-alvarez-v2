@@ -1,6 +1,16 @@
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 (function () {
   const stage = document.getElementById("df-stage");
   if (!stage) return;
+
+  const section = stage.closest(".dentro-fuera");
+  const banner = document.getElementById("df-banner");
+  const blobContainer = stage.querySelector(".df-blobs");
+  const smudgeSVG = stage.querySelector(".df-smudge");
 
   const NS = "http://www.w3.org/2000/svg";
 
@@ -140,53 +150,6 @@
     }
   })();
 
-  /* ---- web veil over the figure ---- */
-  (function () {
-    var svg = stage.querySelector(".df-figure-web");
-    if (!svg) return;
-    var rnd = mulberry32(2026);
-    var cx = 260, cy = 235, N = 18, maxR = 240;
-    var dirs = [];
-    for (var i = 0; i < N; i++) {
-      var a = (i / N) * Math.PI * 2 + (rnd() - 0.5) * 0.08;
-      dirs.push([Math.cos(a), Math.sin(a)]);
-    }
-    var rS = dirs.map(function () { return 0.8 + rnd() * 0.4; });
-    var Pt = function (i, t) {
-      return [cx + t * maxR * dirs[i][0] * rS[i], cy + t * maxR * dirs[i][1] * rS[i] * 1.18];
-    };
-    dirs.forEach(function (d, i) {
-      var p = Pt(i, 0.85 + rnd() * 0.2);
-      var path = document.createElementNS(NS, "path");
-      path.setAttribute("d", "M" + cx + " " + cy + " L" + p[0].toFixed(1) + " " + p[1].toFixed(1));
-      svg.appendChild(path);
-    });
-    var rings = [];
-    var tr = 0.2;
-    while (tr < 0.98) { rings.push(tr); tr *= 1.3 + rnd() * 0.05; }
-    rings.forEach(function (rr) {
-      for (var i = 0; i < N; i++) {
-        var a = i, b = (i + 1) % N;
-        var p1 = Pt(a, rr * (1 + (rnd() - 0.5) * 0.06));
-        var p2 = Pt(b, rr * (1 + (rnd() - 0.5) * 0.06));
-        var mx = (p1[0] + p2[0]) / 2, my = (p1[1] + p2[1]) / 2;
-        var sag = 0.09 + rnd() * 0.04;
-        var qx = mx + (cx - mx) * sag, qy = my + (cy - my) * sag;
-        var p = document.createElementNS(NS, "path");
-        p.setAttribute("d", "M" + p1[0].toFixed(1) + " " + p1[1].toFixed(1) + " Q" + qx.toFixed(1) + " " + qy.toFixed(1) + " " + p2[0].toFixed(1) + " " + p2[1].toFixed(1));
-        svg.appendChild(p);
-      }
-    });
-    for (var k = 0; k < 10; k++) {
-      var i2 = Math.floor(rnd() * N), rr2 = rings[Math.floor(rnd() * rings.length)] || 0.5;
-      var p3 = Pt(i2, rr2);
-      var c = document.createElementNS(NS, "circle");
-      c.setAttribute("cx", p3[0].toFixed(1)); c.setAttribute("cy", p3[1].toFixed(1));
-      c.setAttribute("r", (0.7 + rnd() * 1.1).toFixed(2));
-      svg.appendChild(c);
-    }
-  })();
-
   /* ---- scale stage to fit ---- */
   function fit() {
     var s = Math.min(innerWidth / 1366, innerHeight / 768);
@@ -195,6 +158,149 @@
   }
   addEventListener("resize", fit);
   fit();
+
+  /* ---- blob system ---- */
+  if (!banner || !blobContainer || !smudgeSVG) return;
+  const pointer = { x: 0, y: 0 };
+  const smooth = { x: 0, y: 0 };
+  let started = false;
+  let raf = null;
+
+  const config = {
+    smoothing: 0.12,
+    threshold: 0.01,
+    sizeFromSpeed: 0.2,
+    expandMultiplier: 1.8,
+    expandTime: 1800,
+    dissolveStart: 1600,
+    dissolveTime: 2500,
+    burstRadius: 28,
+  };
+
+  function stampAt(x, y, radius) {
+    if (!radius) radius = config.burstRadius;
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x);
+    c.setAttribute("cy", y);
+    c.setAttribute("r", radius);
+    c.setAttribute("fill", "#fff");
+    blobContainer.prepend(c);
+
+    const start = performance.now();
+    const expandEnd = start + config.expandTime;
+    const fadeStart = start + config.dissolveStart;
+    const fadeEnd = fadeStart + config.dissolveTime;
+
+    function tick() {
+      const now = performance.now();
+      if (now >= fadeEnd) {
+        if (c.parentNode) c.parentNode.removeChild(c);
+        return;
+      }
+      let r = radius;
+      if (now < expandEnd) {
+        var t = (now - start) / config.expandTime;
+        t = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        r = radius + (radius * config.expandMultiplier - radius) * t;
+      }
+      if (now >= fadeStart) {
+        var t2 = (now - fadeStart) / config.dissolveTime;
+        t2 = t2 * t2 * t2;
+        r *= 1 - Math.min(t2, 1);
+      }
+      c.setAttribute("r", Math.max(0, r));
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function burstAt(x, y) {
+    var isMobile = window.innerWidth < 1000;
+    var radii = isMobile
+      ? [15, 22, 12, 18, 10, 20, 14, 16, 19, 11]
+      : [30, 45, 25, 35, 20, 40, 28, 32, 38, 22];
+    var offsets = isMobile
+      ? [[0, 0], [-8, -5], [8, -4], [-4, 8], [6, 6], [-10, 3], [4, -9], [-3, -10], [9, 4], [-6, -3]]
+      : [[0, 0], [-15, -10], [15, -8], [-8, 15], [12, 12], [-20, 5], [8, -18], [-5, -20], [18, 8], [-12, -5]];
+    offsets.forEach(function (o, i) {
+      stampAt(x + o[0], y + o[1], radii[i]);
+    });
+  }
+
+  function clearBlobs() {
+    while (blobContainer.firstChild) {
+      blobContainer.removeChild(blobContainer.firstChild);
+    }
+  }
+
+  function getRelativePos(clientX, clientY) {
+    var rect = banner.getBoundingClientRect();
+    return { x: clientX - rect.left, y: clientY - rect.top };
+  }
+
+  function onPointerMove(e) {
+    var pos = getRelativePos(e.clientX, e.clientY);
+    if (!started) {
+      pointer.x = smooth.x = pos.x;
+      pointer.y = smooth.y = pos.y;
+      started = true;
+      return;
+    }
+    pointer.x = pos.x;
+    pointer.y = pos.y;
+  }
+
+  function handleMove(e) {
+    onPointerMove(e);
+  }
+
+  function handleClick(e) {
+    var pos = getRelativePos(e.clientX, e.clientY);
+    burstAt(pos.x, pos.y);
+  }
+
+  banner.addEventListener("mousemove", handleMove);
+  banner.addEventListener("click", handleClick);
+
+  function handleTouch(e) {
+    var touch = e.touches ? e.touches[0] : e.changedTouches[0];
+    if (!touch) return;
+    var pos = getRelativePos(touch.clientX, touch.clientY);
+    if (!started) {
+      pointer.x = smooth.x = pos.x;
+      pointer.y = smooth.y = pos.y;
+      started = true;
+      return;
+    }
+    pointer.x = pos.x;
+    pointer.y = pos.y;
+  }
+
+  banner.addEventListener("touchmove", handleTouch, { passive: true });
+  banner.addEventListener("touchstart", handleTouch, { passive: true });
+
+  function update() {
+    if (started) {
+      smooth.x += (pointer.x - smooth.x) * config.smoothing;
+      smooth.y += (pointer.y - smooth.y) * config.smoothing;
+      var speed = Math.hypot(pointer.x - smooth.x, pointer.y - smooth.y);
+      if (speed > config.threshold) {
+        stampAt(smooth.x, smooth.y, speed * config.sizeFromSpeed);
+      }
+    }
+    raf = requestAnimationFrame(update);
+  }
+  raf = requestAnimationFrame(update);
+
+  /* ---- match SVG to banner size ---- */
+  function matchSVG() {
+    var rect = banner.getBoundingClientRect();
+    smudgeSVG.setAttribute("viewBox", "0 0 " + rect.width + " " + rect.height);
+    smudgeSVG.style.width = rect.width + "px";
+    smudgeSVG.style.height = rect.height + "px";
+  }
+  matchSVG();
+  window.addEventListener("resize", matchSVG);
 
   /* ---- face === mask interaction ---- */
   var dentro = document.getElementById("df-dentro");
@@ -206,15 +312,53 @@
   }
 
   if (dentro) {
-    dentro.addEventListener("mouseenter", function () { setSide("dentro"); });
+    dentro.addEventListener("mouseenter", function () {
+      setSide("dentro");
+      clearBlobs();
+    });
     dentro.addEventListener("mouseleave", function () { setSide(null); });
     dentro.addEventListener("focus", function () { setSide("dentro"); });
     dentro.addEventListener("blur", function () { setSide(null); });
   }
   if (fuera) {
-    fuera.addEventListener("mouseenter", function () { setSide("fuera"); });
+    fuera.addEventListener("mouseenter", function () {
+      setSide("fuera");
+    });
     fuera.addEventListener("mouseleave", function () { setSide(null); });
     fuera.addEventListener("focus", function () { setSide("fuera"); });
     fuera.addEventListener("blur", function () { setSide(null); });
   }
+
+  /* ---- entrance animation ---- */
+  var lockups = stage.querySelectorAll(".df-lockup");
+  var hint = stage.querySelector(".df-hint");
+  var decor = stage.querySelectorAll(".df-web, .df-rings, .df-dots");
+
+  gsap.set(banner, { opacity: 0, scale: 0.92 });
+  gsap.set(lockups, { opacity: 0, y: 30 });
+  gsap.set(decor, { opacity: 0 });
+  gsap.set(hint, { opacity: 0 });
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top 85%",
+    once: true,
+    onEnter: function () {
+      var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.to(decor, { opacity: 1, duration: 0.6 }, 0);
+      tl.to(banner, { opacity: 1, scale: 1, duration: 0.9 }, 0);
+      tl.to(lockups, { opacity: 1, y: 0, duration: 0.7, stagger: 0.15 }, 0.15);
+      tl.to(hint, { opacity: 1, duration: 0.5 }, 0.5);
+    },
+  });
+
+  /* ---- cleanup ---- */
+  window.addEventListener("beforeunload", function () {
+    banner.removeEventListener("mousemove", handleMove);
+    banner.removeEventListener("click", handleClick);
+    banner.removeEventListener("touchmove", handleTouch);
+    banner.removeEventListener("touchstart", handleTouch);
+    window.removeEventListener("resize", matchSVG);
+    if (raf) cancelAnimationFrame(raf);
+  });
 })();

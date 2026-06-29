@@ -1,17 +1,13 @@
 (function () {
-  const section = document.querySelector('.marquee-banner');
+  const section = document.querySelector('.dentro-fuera');
   if (!section) return;
+  const stage = section.querySelector('.df-stage') || section;
 
   const NS = 'http://www.w3.org/2000/svg';
 
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('width', '100%');
   svg.setAttribute('height', '100%');
-  svg.style.position = 'absolute';
-  svg.style.top = '0';
-  svg.style.left = '0';
-  svg.style.pointerEvents = 'none';
-  svg.style.zIndex = '-1';
   svg.style.position = 'absolute';
   svg.style.top = '0';
   svg.style.left = '0';
@@ -33,16 +29,24 @@
 
   const mask = document.createElementNS(NS, 'mask');
   mask.setAttribute('id', 'bg-smudge-mask');
+  mask.setAttribute('mask-type', 'alpha');
+  // full white background → overlay visible everywhere by default
+  const bgRect = document.createElementNS(NS, 'rect');
+  bgRect.setAttribute('width', '100%');
+  bgRect.setAttribute('height', '100%');
+  bgRect.setAttribute('fill', '#fff');
+  mask.appendChild(bgRect);
+  // gooey black circles → erase overlay where stamped
   const blobs = document.createElementNS(NS, 'g');
   blobs.setAttribute('filter', 'url(#bg-smudge-goo)');
-  blobs.setAttribute('fill', '#fff');
+  blobs.setAttribute('fill', '#000');
   mask.appendChild(blobs);
   defs.appendChild(mask);
   svg.appendChild(defs);
-  section.appendChild(svg);
+  stage.appendChild(svg);
 
   function syncViewBox() {
-    const rect = section.getBoundingClientRect();
+    const rect = stage.getBoundingClientRect();
     svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
   }
   syncViewBox();
@@ -54,15 +58,15 @@
   overlay.style.left = '0';
   overlay.style.width = '100%';
   overlay.style.height = '100%';
-  overlay.style.zIndex = '0';
+  overlay.style.zIndex = '6';
   overlay.style.pointerEvents = 'none';
-  overlay.style.background = '#615681';
+  overlay.style.background = '#1E2024';
   overlay.style.mask = 'url(#bg-smudge-mask)';
   overlay.style.webkitMask = 'url(#bg-smudge-mask)';
-  section.appendChild(overlay);
+  stage.appendChild(overlay);
 
   function getRelativePos(clientX, clientY) {
-    const rect = section.getBoundingClientRect();
+    const rect = stage.getBoundingClientRect();
     return { x: clientX - rect.left, y: clientY - rect.top };
   }
 
@@ -71,7 +75,7 @@
     c.setAttribute('cx', x);
     c.setAttribute('cy', y);
     c.setAttribute('r', radius);
-    c.setAttribute('fill', '#fff');
+    c.setAttribute('fill', '#000');
     blobs.prepend(c);
 
     const start = performance.now();

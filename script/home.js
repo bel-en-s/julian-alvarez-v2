@@ -536,19 +536,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const workItems = row.querySelectorAll(".work-item");
       const content = row.querySelector(".row-content");
 
-      workItems.forEach((item, i) => {
-        const fromLeft = i % 2 === 0;
-        gsap.set(item, { x: fromLeft ? "-120%" : "120%", opacity: 0 });
-      });
-
       const tl = gsap.timeline({ paused: true });
-      tl.to(workItems, {
-        x: "0%",
-        opacity: 1,
-        duration: 0.5,
-        ease: "power3.out",
-        stagger: 0.08,
-      });
       if (content) {
         const split = new SplitText(content, { type: "words", wordsClass: "highlight-word" });
         tl.to(split.words, {
@@ -648,7 +636,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (window.innerWidth >= 1000) {
-    const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350];
+    const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350].map(function(a) { return a * 0.5; });
     const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4];
     gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
       const img = wrapper.querySelector("img");
@@ -657,7 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // skip video wrappers and specific images
       if (video) return;
-      if (src.includes("/bio/3.webp")) return;
+      if (src.includes("/bio/1.webp")) return;
       if (src.includes("Anexo 11")) return;
       if (src.includes("Anexo 6")) return;
       if (src.includes("Anexo 8")) return;
@@ -665,8 +653,8 @@ document.addEventListener("DOMContentLoaded", () => {
       let amount = amounts[i % amounts.length];
       // softer parallax for bio/4.webp
       if (src.includes("/bio/4.webp")) amount *= 0.35;
-      // softer parallax for bio/1.webp
-      if (src.includes("/bio/1.webp")) amount *= 0.35;
+      if (src.includes("/bio/2.webp")) amount = Math.abs(amount);
+      if (wrapper.classList.contains("work-item-img--bio3")) amount = Math.abs(amount);
 
       const scrubVal = scrubs[i % scrubs.length];
 
@@ -738,6 +726,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  const decos = gsap.utils.toArray(".df-deco");
+  decos.forEach((el, i) => {
+    const speeds = [0.25, 0.35, 0.5];
+    const speed = speeds[i % speeds.length];
+    const dir = i % 2 === 0 ? 1 : -1;
+    gsap.to(el, {
+      y: () => dir * 80 + (i * 20),
+      ease: "none",
+      scrollTrigger: {
+        trigger: el.closest("section") || el.parentElement,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: speed,
+      },
+    });
+  });
+
   initWorkTimeline();
   initBlockReveal();
 });
@@ -758,7 +763,7 @@ function initWorkTimeline() {
   spEl.style.transform = "translate(-50%, -50%)";
   spEl.style.pointerEvents = "none";
   spEl.style.zIndex = "3";
-  spEl.style.mixBlendMode = "difference";
+  spEl.style.filter = "drop-shadow(0 0 4px rgba(216,200,245,.4))";
   timeline.appendChild(spEl);
 
   const NS = "http://www.w3.org/2000/svg";
@@ -767,7 +772,7 @@ function initWorkTimeline() {
   svg.setAttribute("width", "100%");
   svg.setAttribute("height", "100%");
   svg.style.display = "block";
-  svg.style.opacity = "0.72";
+  svg.style.opacity = "1";
   spEl.appendChild(svg);
 
   // style defs
