@@ -179,12 +179,12 @@ gsap.registerPlugin(ScrollTrigger);
   var config = {
     smoothing: isMobile ? 0.2 : 0.1,
     threshold: isMobile ? 0.3 : 0.01,
-    sizeFromSpeed: isMobile ? 0.25 : 0.35,
+    sizeFromSpeed: isMobile ? 0.15 : 0.2,
     expandMultiplier: 2.5,
     expandTime: 900,
     dissolveStart: 700,
     dissolveTime: 1200,
-    burstRadius: isMobile ? 18 : 28,
+    burstRadius: isMobile ? 10 : 16,
   };
 
   function stampAt(x, y, radius) {
@@ -210,8 +210,8 @@ gsap.registerPlugin(ScrollTrigger);
 
   function burstAt(x, y) {
     var radii = isMobile
-      ? [14, 20, 10, 16, 8, 14, 12, 18, 15, 11]
-      : [22, 30, 16, 26, 14, 24, 20, 28, 25, 18];
+      ? [8, 12, 6, 10, 5, 8, 7, 10, 9, 7]
+      : [13, 18, 10, 16, 8, 14, 12, 17, 15, 11];
     var offsets = isMobile
       ? [[0,0],[-8,-5],[8,-4],[-5,8],[5,5],[-10,3],[4,-8],[-4,-9],[9,4],[-6,-3]]
       : [[0,0],[-12,-8],[12,-6],[-8,10],[8,8],[-14,4],[6,-12],[-5,-14],[14,6],[-9,-4]];

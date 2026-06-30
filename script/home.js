@@ -651,8 +651,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (src.includes("Anexo 8")) return;
 
       let amount = amounts[i % amounts.length];
-      // softer parallax for bio/4.webp
-      if (src.includes("/bio/4.webp")) amount *= 0.35;
+      // skip parallax for bio/4.webp
+      if (src.includes("/bio/4.webp")) return;
+      // parallax hacia abajo para bio/3.webp
+      if (src.includes("/bio/3.webp")) amount = Math.abs(amount) * 1.5;
       if (src.includes("/bio/2.webp")) amount = Math.abs(amount);
       if (wrapper.classList.contains("work-item-img--bio3")) amount = Math.abs(amount);
 
