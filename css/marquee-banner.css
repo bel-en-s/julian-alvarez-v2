@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   --easing: cubic-bezier(.2, .7, .15, 1);
+  touch-action: none;
 }
 
 .df-stage {
@@ -107,7 +108,7 @@
 .df-banner-bg {
   position: absolute;
   inset: 0;
-  background-image: url("/marquee-banner/fig-cara.png");
+  background-image: url("/marquee-banner/mask-face.webp");
   background-size: cover;
   background-position: center 20%;
   background-repeat: no-repeat;
@@ -172,10 +173,16 @@
 }
 
 .df-dentro .df-big {
-  color: transparent;
-  background: linear-gradient(178deg, #ffffff 0%, #F4F4F4 44%, #e3def0 70%, #b9addb 100%);
+  background-image: url('/spotlight-images/spotlight-img-1.jpg');
+  background-position: center 20%;
+  background-size: cover;
   -webkit-background-clip: text;
   background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,.5);
+  text-stroke: 1px rgba(255,255,255,.5);
+  paint-order: stroke fill;
 }
 
 .df-dentro .df-small { color: #cfc6e6; }
@@ -188,9 +195,16 @@
 }
 
 .df-fuera .df-big {
+  background-image: url('/bio/Anexo 11.webp');
+  background-position: center 20%;
+  background-size: cover;
+  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 1.6px rgba(228,222,246,.62);
-  text-stroke: 1.6px rgba(228,222,246,.62);
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,.5);
+  text-stroke: 1px rgba(255,255,255,.5);
+  paint-order: stroke fill;
 }
 
 .df-fuera .df-small { color: #a99ccb; }

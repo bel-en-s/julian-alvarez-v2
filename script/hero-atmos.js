@@ -106,6 +106,7 @@ function buildWebSVG() {
 function startParallax() {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   let mx = 0, my = 0, cx = 0, cy = 0, raf = null;
+  var heroEl = document.querySelector('.hero');
 
   const onMove = (e) => {
     mx = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -121,7 +122,19 @@ function startParallax() {
   };
 
   window.addEventListener("mousemove", onMove, { passive: true });
-  raf = requestAnimationFrame(loop);
+
+  if (heroEl) {
+    var obs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        if (!raf) raf = requestAnimationFrame(loop);
+      } else {
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+      }
+    }, { threshold: 0 });
+    obs.observe(heroEl);
+  } else {
+    raf = requestAnimationFrame(loop);
+  }
 }
 
 if (document.readyState === 'loading') {

@@ -151,83 +151,77 @@ gsap.registerPlugin(ScrollTrigger);
   })();
 
   /* ---- scale stage to fit ---- */
+  var resizeTimer = null;
   function fit() {
     var s = Math.min(innerWidth / 1366, innerHeight / 768);
-    if (!s || !isFinite(s) || s <= 0) { requestAnimationFrame(fit); return; }
+    if (!s || !isFinite(s) || s <= 0) return;
     stage.style.transform = "scale(" + s + ")";
   }
-  addEventListener("resize", fit);
+  window.addEventListener("resize", function () {
+    if (resizeTimer) cancelAnimationFrame(resizeTimer);
+    resizeTimer = requestAnimationFrame(fit);
+  });
   fit();
 
-  /* ---- blob system ---- */
+  /* ---- blob system (batched RAF) ---- */
   if (!banner || !blobContainer || !smudgeSVG) return;
-  const pointer = { x: 0, y: 0 };
-  const smooth = { x: 0, y: 0 };
-  let started = false;
-  let raf = null;
 
-  const config = {
-    smoothing: 0.12,
-    threshold: 0.01,
-    sizeFromSpeed: 0.2,
-    expandMultiplier: 1.8,
-    expandTime: 1800,
-    dissolveStart: 1600,
-    dissolveTime: 2500,
-    burstRadius: 28,
+  var isMobile = window.innerWidth < 1000;
+  var pointer = { x: 0, y: 0 };
+  var smooth = { x: 0, y: 0 };
+  var started = false;
+  var raf = null;
+  var circles = [];
+  var maxCircles = isMobile ? 60 : 120;
+  var lastStampTime = 0;
+  var stampInterval = isMobile ? 40 : 12;
+
+  var config = {
+    smoothing: isMobile ? 0.2 : 0.1,
+    threshold: isMobile ? 0.3 : 0.01,
+    sizeFromSpeed: isMobile ? 0.25 : 0.35,
+    expandMultiplier: 2.5,
+    expandTime: 900,
+    dissolveStart: 700,
+    dissolveTime: 1200,
+    burstRadius: isMobile ? 18 : 28,
   };
 
   function stampAt(x, y, radius) {
     if (!radius) radius = config.burstRadius;
-    const c = document.createElementNS(NS, "circle");
+    if (circles.length >= maxCircles) return;
+    var now = performance.now();
+    if (stampInterval && now - lastStampTime < stampInterval) return;
+    lastStampTime = now;
+
+    var c = document.createElementNS(NS, "circle");
     c.setAttribute("cx", x);
     c.setAttribute("cy", y);
     c.setAttribute("r", radius);
     c.setAttribute("fill", "#fff");
     blobContainer.prepend(c);
 
-    const start = performance.now();
-    const expandEnd = start + config.expandTime;
-    const fadeStart = start + config.dissolveStart;
-    const fadeEnd = fadeStart + config.dissolveTime;
-
-    function tick() {
-      const now = performance.now();
-      if (now >= fadeEnd) {
-        if (c.parentNode) c.parentNode.removeChild(c);
-        return;
-      }
-      let r = radius;
-      if (now < expandEnd) {
-        var t = (now - start) / config.expandTime;
-        t = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        r = radius + (radius * config.expandMultiplier - radius) * t;
-      }
-      if (now >= fadeStart) {
-        var t2 = (now - fadeStart) / config.dissolveTime;
-        t2 = t2 * t2 * t2;
-        r *= 1 - Math.min(t2, 1);
-      }
-      c.setAttribute("r", Math.max(0, r));
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  function burstAt(x, y) {
-    var isMobile = window.innerWidth < 1000;
-    var radii = isMobile
-      ? [15, 22, 12, 18, 10, 20, 14, 16, 19, 11]
-      : [30, 45, 25, 35, 20, 40, 28, 32, 38, 22];
-    var offsets = isMobile
-      ? [[0, 0], [-8, -5], [8, -4], [-4, 8], [6, 6], [-10, 3], [4, -9], [-3, -10], [9, 4], [-6, -3]]
-      : [[0, 0], [-15, -10], [15, -8], [-8, 15], [12, 12], [-20, 5], [8, -18], [-5, -20], [18, 8], [-12, -5]];
-    offsets.forEach(function (o, i) {
-      stampAt(x + o[0], y + o[1], radii[i]);
+    circles.push({
+      el: c,
+      start: now,
+      radius: radius,
     });
   }
 
+  function burstAt(x, y) {
+    var radii = isMobile
+      ? [14, 20, 10, 16, 8, 14, 12, 18, 15, 11]
+      : [22, 30, 16, 26, 14, 24, 20, 28, 25, 18];
+    var offsets = isMobile
+      ? [[0,0],[-8,-5],[8,-4],[-5,8],[5,5],[-10,3],[4,-8],[-4,-9],[9,4],[-6,-3]]
+      : [[0,0],[-12,-8],[12,-6],[-8,10],[8,8],[-14,4],[6,-12],[-5,-14],[14,6],[-9,-4]];
+    for (var i = 0; i < radii.length; i++) {
+      stampAt(x + offsets[i][0], y + offsets[i][1], radii[i]);
+    }
+  }
+
   function clearBlobs() {
+    circles.length = 0;
     while (blobContainer.firstChild) {
       blobContainer.removeChild(blobContainer.firstChild);
     }
@@ -250,9 +244,7 @@ gsap.registerPlugin(ScrollTrigger);
     pointer.y = pos.y;
   }
 
-  function handleMove(e) {
-    onPointerMove(e);
-  }
+  function handleMove(e) { onPointerMove(e); }
 
   function handleClick(e) {
     var pos = getRelativePos(e.clientX, e.clientY);
@@ -279,7 +271,7 @@ gsap.registerPlugin(ScrollTrigger);
   banner.addEventListener("touchmove", handleTouch, { passive: true });
   banner.addEventListener("touchstart", handleTouch, { passive: true });
 
-  function update() {
+  function tickAll(now) {
     if (started) {
       smooth.x += (pointer.x - smooth.x) * config.smoothing;
       smooth.y += (pointer.y - smooth.y) * config.smoothing;
@@ -288,9 +280,39 @@ gsap.registerPlugin(ScrollTrigger);
         stampAt(smooth.x, smooth.y, speed * config.sizeFromSpeed);
       }
     }
-    raf = requestAnimationFrame(update);
+
+    var dt = config.expandTime;
+    var fadeStart = config.dissolveStart;
+    var fadeEnd = fadeStart + config.dissolveTime;
+    var expandMult = config.expandMultiplier;
+
+    for (var i = circles.length - 1; i >= 0; i--) {
+      var ci = circles[i];
+      var age = now - ci.start;
+
+      if (age >= fadeEnd) {
+        if (ci.el.parentNode) ci.el.parentNode.removeChild(ci.el);
+        circles.splice(i, 1);
+        continue;
+      }
+
+      var r = ci.radius;
+      if (age < dt) {
+        var t = age / dt;
+        t = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        r = ci.radius + (ci.radius * expandMult - ci.radius) * t;
+      }
+      if (age >= fadeStart) {
+        var t2 = (age - fadeStart) / config.dissolveTime;
+        t2 = t2 * t2 * t2;
+        r *= 1 - Math.min(t2, 1);
+      }
+      ci.el.setAttribute("r", Math.max(0, r));
+    }
+
+    raf = requestAnimationFrame(tickAll);
   }
-  raf = requestAnimationFrame(update);
+  raf = requestAnimationFrame(tickAll);
 
   /* ---- match SVG to banner size ---- */
   function matchSVG() {
@@ -360,5 +382,6 @@ gsap.registerPlugin(ScrollTrigger);
     banner.removeEventListener("touchstart", handleTouch);
     window.removeEventListener("resize", matchSVG);
     if (raf) cancelAnimationFrame(raf);
+    circles.length = 0;
   });
 })();

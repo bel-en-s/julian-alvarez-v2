@@ -201,7 +201,7 @@
 }
 
 .work-items .row .row-content-title .hero-gradient-text {
-  font-size: clamp(4rem, 12vw, 8rem) !important;
+  font-size: clamp(2.5rem, 6vw, 4rem) !important;
 }
 
 .work-header .work-footer {
@@ -595,11 +595,22 @@
   background-image: linear-gradient(90deg, #1E2024 var(--highlight-offset), rgba(30,32,36,0.25) var(--highlight-offset));
 }
 
+.work-story {
+  position: relative;
+  background-color: #141414;
+  background-image:
+    radial-gradient(ellipse 60% 70% at 10% 15%, rgba(200,170,255,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 85% 20%, rgba(160,130,220,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 90% 80%, rgba(180,150,240,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 60% at 15% 75%, rgba(220,190,255,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 40% at 50% 50%, rgba(200,180,235,0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 30% at 50% 3%, rgba(255,255,255,0.15) 0%, transparent 50%);
+}
+
 .work-timeline {
   position: absolute;
-  top: 50%;
-  height: 80vh;
-  transform: translateY(-50%);
+  top: 0;
+  bottom: 0;
   right: calc((100% - 100vw) / 2 + 1.5rem);
   width: 2px;
   z-index: 5;
@@ -610,7 +621,7 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  background: var(--ja-amethyst-300);
+  background: rgba(200,180,235,0.3);
   border-radius: 2px;
 }
 
@@ -620,9 +631,8 @@
   left: 0;
   width: 100%;
   height: 0%;
-  background: linear-gradient(to bottom, #b8a4d0, var(--ja-amethyst-300));
+  background: linear-gradient(to bottom, rgba(220,210,245,0.4), rgba(220,210,245,0.7));
   border-radius: 2px;
-  transition: height 0.1s linear;
 }
 
 .work-timeline-indicator {

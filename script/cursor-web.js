@@ -64,10 +64,8 @@ const render = (now) => {
     ctx.stroke();
   }
   lines.length = write;
-  raf = requestAnimationFrame(render);
+  if (rafActive) raf = requestAnimationFrame(render);
 };
-
-raf = requestAnimationFrame(render);
 
 const pushLine = (x1, y1, x2, y2, opacity) => {
   lines.push({ x1, y1, x2, y2, t: performance.now(), opacity });
@@ -76,6 +74,20 @@ const pushLine = (x1, y1, x2, y2, opacity) => {
 
 const hero = document.querySelector(".hero");
 if (!hero) { canvas.style.display = "none"; }
+
+var rafActive = false;
+function startRAF() { if (!rafActive) { rafActive = true; raf = requestAnimationFrame(render); } }
+function stopRAF() { rafActive = false; if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+if (hero) {
+  var obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) startRAF();
+    else stopRAF();
+  }, { threshold: 0 });
+  obs.observe(hero);
+} else {
+  startRAF();
+}
 
 const onMove = (e) => {
   const sorted = anchors.slice().sort((a, b) =>

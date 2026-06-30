@@ -779,8 +779,8 @@ function initWorkTimeline() {
   const defs = document.createElementNS(NS, "defs");
   defs.innerHTML =
     `<style>
-      .s-leg{stroke:rgba(22,16,42,.85);stroke-width:1.05;stroke-linecap:round;stroke-linejoin:round;fill:none;}
-      .s-body{fill:rgba(22,16,38,.92);stroke:none;}
+      .s-leg{stroke:rgba(200,180,235,.75);stroke-width:1.05;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+      .s-body{fill:rgba(180,160,230,.85);stroke:none;}
     </style>`;
   svg.appendChild(defs);
 

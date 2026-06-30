@@ -282,6 +282,7 @@ if (hero && window.innerWidth >= 1000 && !matchMedia("(prefers-reduced-motion: r
   window.addEventListener("resize", resize);
 
   const animate = () => {
+    if (!rafActive) return;
     requestAnimationFrame(animate);
 
     const time = performance.now() * 0.001;
@@ -307,6 +308,16 @@ if (hero && window.innerWidth >= 1000 && !matchMedia("(prefers-reduced-motion: r
 
     frameCount++;
   };
+
+  var rafActive = true;
+  var observer = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      if (!rafActive) { rafActive = true; requestAnimationFrame(animate); }
+    } else {
+      rafActive = false;
+    }
+  }, { threshold: 0 });
+  observer.observe(hero);
 
   animate();
 }
