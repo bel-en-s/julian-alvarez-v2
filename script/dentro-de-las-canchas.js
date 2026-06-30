@@ -48,7 +48,7 @@ if (window.innerWidth >= 1000) {
         ease: "none",
         scrollTrigger: {
           trigger: wrapper,
-          start: "top bottom",
+    start: "top 85%",
           end: "bottom top",
           scrub: Math.min(scrubVal * 2, 1.5),
         },
@@ -65,7 +65,7 @@ if (window.innerWidth >= 1000) {
         trigger: el.closest(".row"),
         start: "top bottom",
         end: "bottom top",
-        scrub: 1,
+    scrub: true,
       },
     })
   })
@@ -142,10 +142,7 @@ function initWorkTimeline() {
   function updateSpider(p) {
     const delta = p - lastProgress
     lastProgress = p
-    const speed = Math.abs(delta)
-    if (speed > 0.0001) {
-      walkDist += delta * 160
-    }
+    walkDist += delta * 160
 
     const yPos = p * 100
 
@@ -210,23 +207,20 @@ function initWorkTimeline() {
   timeline.style.bottom = "auto"
 
   const spiderEndEl = workSection.querySelector(".row--2021")
-  const spiderEndOffset = spiderEndEl ? spiderEndEl.offsetTop + spiderEndEl.offsetHeight : endOffset
+  const spiderEndOffset = endOffset
 
   ScrollTrigger.create({
     trigger: workSection,
-    start: "top 85%",
+    start: "top bottom",
     end: "bottom bottom",
     scrub: 1,
     onUpdate: (self) => {
       const p = self.progress
       const scrollPos = p * endOffset
-      progress.style.height = Math.min(scrollPos / spiderEndOffset, 1) * 100 + "%"
-      if (scrollPos < spiderEndOffset) {
-        updateSpider(scrollPos / spiderEndOffset)
-        spEl.style.display = "block"
-      } else {
-        spEl.style.display = "none"
-      }
+      const spiderP = Math.min(scrollPos / spiderEndOffset, 1)
+      progress.style.height = spiderP * 100 + "%"
+      updateSpider(spiderP)
+      spEl.style.display = "block"
     },
   })
 }

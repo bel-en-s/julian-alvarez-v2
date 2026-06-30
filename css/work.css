@@ -292,7 +292,7 @@
 
 .row--video-gray .video-quote {
   position: absolute;
-  left: 5vw;
+  right: 8vw;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
@@ -541,6 +541,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .work-items .row .work-item .work-item-content {
