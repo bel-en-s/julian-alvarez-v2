@@ -673,8 +673,8 @@ document.addEventListener("DOMContentLoaded", () => {
       let amount = amounts[i % amounts.length];
       if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12;
       if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12;
-      // skip parallax for bio/4.webp
-      if (src.includes("/bio/4.webp")) return;
+      // parallax hacia arriba para bio/4.webp (contraste con bio/3)
+      if (src.includes("/bio/4.webp")) amount = -Math.abs(amount);
       // parallax hacia abajo para bio/3.webp
       if (src.includes("/bio/3.webp")) amount = Math.abs(amount) * 1.5;
       if (src.includes("/bio/2.webp")) amount = Math.abs(amount);
@@ -841,7 +841,7 @@ function initWorkTimeline() {
   function updateSpider(p) {
     const delta = p - lastProgress;
     lastProgress = p;
-    walkDist += delta * 160;
+    walkDist += delta * 220;
 
     const yPos = p * 100;
 
@@ -901,12 +901,12 @@ function initWorkTimeline() {
     spEl.style.top = yPos + "%";
   }
 
-  const endOffset = workSection.scrollHeight;
+  const endOffset = 2809;
   timeline.style.height = endOffset + "px";
   timeline.style.bottom = "auto";
 
-  const spiderEndEl = workSection.querySelector(".row--2021 + .row--first");
-  const spiderEndOffset = endOffset;
+  const spiderEndEl = workSection.querySelectorAll(".row--first")[1];
+  const spiderEndOffset = spiderEndEl ? spiderEndEl.offsetTop + spiderEndEl.offsetHeight : endOffset;
 
   ScrollTrigger.create({
     trigger: workSection,
