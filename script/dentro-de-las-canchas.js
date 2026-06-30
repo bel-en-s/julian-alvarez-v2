@@ -20,8 +20,8 @@ if (window.innerWidth >= 1000) {
     if (src.includes("Anexo 8")) return
 
     let amount = amounts[i % amounts.length]
-    if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 8
-    if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 8
+    if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12
+    if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12
     if (src.includes("/bio/4.webp")) return
     if (src.includes("/bio/3.webp")) amount = Math.abs(amount) * 2
     if (src.includes("/bio/2.webp")) amount = Math.abs(amount)

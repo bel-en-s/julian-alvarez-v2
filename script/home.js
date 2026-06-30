@@ -671,8 +671,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (src.includes("Anexo 8")) return;
 
       let amount = amounts[i % amounts.length];
-      if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 8;
-      if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 8;
+      if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12;
+      if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12;
       // skip parallax for bio/4.webp
       if (src.includes("/bio/4.webp")) return;
       // parallax hacia abajo para bio/3.webp
@@ -843,7 +843,7 @@ function initWorkTimeline() {
     lastProgress = p;
     const speed = Math.abs(delta);
     if (speed > 0.0001) {
-      walkDist += delta * 160;
+      walkDist += delta * 120;
     }
 
     const yPos = p * 100;
@@ -908,14 +908,14 @@ function initWorkTimeline() {
   timeline.style.height = endOffset + "px";
   timeline.style.bottom = "auto";
 
-  const spiderEndEl = workSection.querySelector(".row--2021");
+  const spiderEndEl = workSection.querySelector(".row--2021 + .row--first");
   const spiderEndOffset = spiderEndEl ? spiderEndEl.offsetTop + spiderEndEl.offsetHeight : endOffset;
 
   ScrollTrigger.create({
     trigger: workSection,
     start: "top 85%",
     end: "bottom bottom",
-    scrub: 1,
+    scrub: 0.3,
     onUpdate: (self) => {
       const p = self.progress;
       const scrollPos = p * endOffset;

@@ -292,7 +292,7 @@
 
 .row--video-gray .video-quote {
   position: absolute;
-  right: 1.5vw;
+  left: 5vw;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
@@ -357,7 +357,7 @@
 
 .row-edge--bottom {
   left: calc((100% - 100vw) / 2 - 1.5em - 1px);
-  bottom: -10vh;
+  bottom: -12vh;
 }
 
 .row-edge img {
