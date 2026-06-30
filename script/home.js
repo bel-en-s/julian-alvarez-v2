@@ -904,21 +904,28 @@ function initWorkTimeline() {
     spEl.style.top = yPos + "%";
   }
 
-  const endEl = workSection.querySelector(".row--2021");
-  const endOffset = endEl ? endEl.offsetTop : workSection.offsetHeight;
+  const endOffset = workSection.scrollHeight;
   timeline.style.height = endOffset + "px";
   timeline.style.bottom = "auto";
+
+  const spiderEndEl = workSection.querySelector(".row--2021");
+  const spiderEndOffset = spiderEndEl ? spiderEndEl.offsetTop + spiderEndEl.offsetHeight : endOffset;
 
   ScrollTrigger.create({
     trigger: workSection,
     start: "top 85%",
-    endTrigger: ".row--2021",
-    end: "top top",
+    end: "bottom bottom",
     scrub: 1,
     onUpdate: (self) => {
       const p = self.progress;
-      progress.style.height = p * 100 + "%";
-      updateSpider(p);
+      const scrollPos = p * endOffset;
+      progress.style.height = Math.min(scrollPos / spiderEndOffset, 1) * 100 + "%";
+      if (scrollPos < spiderEndOffset) {
+        updateSpider(scrollPos / spiderEndOffset);
+        spEl.style.display = "block";
+      } else {
+        spEl.style.display = "none";
+      }
     },
   });
 }
