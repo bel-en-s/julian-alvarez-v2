@@ -33,7 +33,7 @@
 }
 
 .menu .menu-logo--dark {
-  filter: brightness(0);
+  filter: brightness(0) invert(1);
 }
 
 .ja-menu-arana__fab-wrap {

@@ -655,7 +655,7 @@
   background-clip: text;
   color: transparent;
   --highlight-offset: 100%;
-  background-image: linear-gradient(90deg, #1E2024 var(--highlight-offset), rgba(30,32,36,0.25) var(--highlight-offset));
+  background-image: linear-gradient(90deg, #ffffff var(--highlight-offset), rgba(255,255,255,0.2) var(--highlight-offset));
 }
 
 .work-story {
@@ -674,7 +674,8 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  right: calc((100% - 100vw) / 2 + 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
   width: 2px;
   z-index: 5;
   pointer-events: none;

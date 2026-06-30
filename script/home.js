@@ -728,6 +728,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // btl-header-text scroll reveal
+  const headerText = document.querySelector(".btl-header-text");
+  if (headerText) {
+    gsap.set(headerText, { opacity: 0, y: 30 });
+    ScrollTrigger.create({
+      trigger: headerText,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.to(headerText, { opacity: 1, y: 0, duration: 1, ease: "power3.out" });
+      },
+    });
+  }
+
   const decos = gsap.utils.toArray(".df-deco");
   decos.forEach((el, i) => {
     const speeds = [0.25, 0.35, 0.5];
