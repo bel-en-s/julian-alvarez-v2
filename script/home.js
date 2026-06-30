@@ -233,6 +233,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  const videoQuote = document.querySelector(".row--video-gray .video-quote");
+  if (videoQuote && window.innerWidth >= 1000) {
+    const vqTargets = videoQuote.querySelectorAll("h2, p");
+    gsap.fromTo(vqTargets,
+      { "--highlight-offset": "0%" },
+      {
+        "--highlight-offset": "100%",
+        stagger: 0.3,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".row--video-gray",
+          scrub: 1,
+          start: "top 80%",
+          end: "top 30%",
+        }
+      }
+    );
+  }
+
   const smoothStep = (p) => p * p * (3 - 2 * p);
 
   if (window.innerWidth > 1000) {
@@ -636,7 +655,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (window.innerWidth >= 1000) {
-    const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350].map(function(a) { return a * 0.5; });
+    const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350].map(function(a) { return a * 0.15; });
     const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4];
     gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
       const img = wrapper.querySelector("img");
