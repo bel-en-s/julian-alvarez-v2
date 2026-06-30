@@ -37,14 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function isSamePage(href) {
     if (!href || href === "#" || href === "") return true;
+    const hashIndex = href.indexOf("#");
+    const pathOnly = hashIndex !== -1 ? href.slice(0, hashIndex) : href;
     const currentPath = window.location.pathname;
-    if (href === currentPath) return true;
+    if (pathOnly === currentPath) return true;
     if (
       (currentPath === "/" || currentPath === "/index.html") &&
-      (href === "/" || href === "/index.html" || href === "index.html" || href === "./index.html")
+      (pathOnly === "" || pathOnly === "/" || pathOnly === "/index.html" || pathOnly === "index.html" || pathOnly === "./index.html")
     ) return true;
     const currentFileName = currentPath.split("/").pop() || "index.html";
-    const hrefFileName = href.split("/").pop();
+    const hrefFileName = pathOnly.split("/").pop();
     if (currentFileName === hrefFileName) return true;
     return false;
   }

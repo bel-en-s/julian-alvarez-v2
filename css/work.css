@@ -75,6 +75,17 @@
   margin-bottom: 3rem;
 }
 
+.slide-description p {
+  max-width: 46ch;
+  margin: 28px auto 0;
+  font-weight: 500;
+  color: var(--fg-2);
+  font-size: clamp(16px, 1.5vw, 21px);
+  line-height: 1.45;
+  text-transform: none;
+  font-family: var(--f-nm);
+}
+
 .slide-link a {
   text-decoration: none;
 }
@@ -281,7 +292,7 @@
 
 .row--video-gray .video-quote {
   position: absolute;
-  right: 4vw;
+  right: 1.5vw;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
@@ -291,7 +302,8 @@
 
 .row--video-gray .video-quote h2 {
   font-size: clamp(2rem, 4vw, 3.5rem);
-  margin-bottom: 0.2em;
+  margin-bottom: 0;
+  line-height: 1;
   text-align: left;
   font-family: var(--font-display);
   font-weight: 900;
@@ -846,6 +858,21 @@
 
   .row-edge {
     display: none;
+  }
+
+  .row--video-gray .video-quote {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    text-align: center;
+    padding: 1em 0;
+  }
+
+  .row--video-gray .video-quote h2 {
+    text-align: center;
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    line-height: 1;
   }
 
   .work-items > div:nth-of-type(5) {

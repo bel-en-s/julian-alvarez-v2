@@ -71,6 +71,7 @@ function startEntryAnimations(hasDelay = false) {
       });
       gsap.set(heroChars, {
         y: () => -(window.innerHeight + 200),
+        visibility: "visible",
       });
       gsap.to(heroChars, {
         y: 0,
@@ -84,7 +85,7 @@ function startEntryAnimations(hasDelay = false) {
       });
     } else {
       gsap.fromTo(heroNames,
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 40, visibility: "visible" },
         {
           opacity: 1,
           y: 0,
@@ -560,10 +561,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const split = new SplitText(content, { type: "words", wordsClass: "highlight-word" });
         tl.to(split.words, {
           "--highlight-offset": "100%",
-          duration: 0.8,
-          stagger: 0.04,
+          duration: 0.4,
+          stagger: 0.02,
           ease: "power3.out",
-        }, "-=0.6");
+        }, "-=0.3");
       }
 
       const contentTitle = row.querySelector(".row-content-title");
@@ -571,10 +572,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const titleSplit = new SplitText(contentTitle, { type: "words", wordsClass: "highlight-word" });
         tl.to(titleSplit.words, {
           "--highlight-offset": "100%",
-          duration: 0.8,
-          stagger: 0.04,
+          duration: 0.4,
+          stagger: 0.02,
           ease: "power3.out",
-        }, "-=0.6");
+        }, "-=0.3");
       }
 
       workItems.forEach((item) => {
@@ -583,10 +584,10 @@ document.addEventListener("DOMContentLoaded", () => {
           const itemSplit = new SplitText(itemContent, { type: "words", wordsClass: "highlight-word" });
           tl.to(itemSplit.words, {
             "--highlight-offset": "100%",
-            duration: 0.6,
-            stagger: 0.03,
+            duration: 0.3,
+            stagger: 0.015,
             ease: "power3.out",
-          }, "-=0.8");
+          }, "-=0.4");
         }
       });
 
@@ -860,7 +861,7 @@ function initWorkTimeline() {
     lastProgress = p;
     const speed = Math.abs(delta);
     if (speed > 0.0001) {
-      walkDist += delta * 80;
+      walkDist += delta * 160;
     }
 
     // Position: centered on timeline, scrolled to progress

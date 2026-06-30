@@ -5,6 +5,7 @@
     { "source": "/about", "destination": "/about.html" },
     { "source": "/work", "destination": "/work.html" },
     { "source": "/project", "destination": "/project.html" },
-    { "source": "/contact", "destination": "/contact.html" }
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/dentro-de-las-canchas", "destination": "/dentro-de-las-canchas.html" }
   ]
 }
