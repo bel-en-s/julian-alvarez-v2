@@ -671,6 +671,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (src.includes("Anexo 8")) return;
 
       let amount = amounts[i % amounts.length];
+      if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 8;
+      if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 8;
       // skip parallax for bio/4.webp
       if (src.includes("/bio/4.webp")) return;
       // parallax hacia abajo para bio/3.webp
@@ -752,35 +754,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const headerText = document.querySelector(".btl-header-text");
   if (headerText) {
     gsap.set(headerText, { opacity: 0, y: 30 });
-    ScrollTrigger.create({
-      trigger: headerText,
-      start: "top 85%",
-      once: true,
-      onEnter: () => {
-        gsap.to(headerText, { opacity: 1, y: 0, duration: 1, ease: "power3.out" });
+    gsap.to(headerText, {
+      opacity: 1,
+      y: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: headerText,
+        start: "top 85%",
+        end: "top 30%",
+        scrub: 1,
       },
     });
   }
 
-  const decos = gsap.utils.toArray(".df-deco");
-  decos.forEach((el, i) => {
-    const speeds = [0.25, 0.35, 0.5];
-    const speed = speeds[i % speeds.length];
-    const dir = i % 2 === 0 ? 1 : -1;
-    gsap.to(el, {
-      y: () => dir * 80 + (i * 20),
-      ease: "none",
-      scrollTrigger: {
-        trigger: el.closest("section") || el.parentElement,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: speed,
-      },
-    });
-  });
-
   initWorkTimeline();
-  initBlockReveal();
 });
 
 function initWorkTimeline() {
@@ -789,7 +776,6 @@ function initWorkTimeline() {
   const workSection = document.querySelector(".work-items");
   if (!timeline || !progress || !workSection) return;
 
-  // container for the spider (walks along the timeline)
   const spEl = document.createElement("div");
   spEl.style.position = "absolute";
   spEl.style.left = "50%";
@@ -811,7 +797,6 @@ function initWorkTimeline() {
   svg.style.opacity = "1";
   spEl.appendChild(svg);
 
-  // style defs
   const defs = document.createElementNS(NS, "defs");
   defs.innerHTML =
     `<style>
@@ -820,7 +805,6 @@ function initWorkTimeline() {
     </style>`;
   svg.appendChild(defs);
 
-  // 8 legs
   const legEls = [];
   for (let i = 0; i < 8; i++) {
     const p = document.createElementNS(NS, "path");
@@ -829,7 +813,6 @@ function initWorkTimeline() {
     legEls.push(p);
   }
 
-  // body group (will be transformed each frame)
   const bodyG = document.createElementNS(NS, "g");
   bodyG.innerHTML =
     '<ellipse class="s-body" cx="0" cy="0" rx="3.1" ry="4.2"/>' +
@@ -838,7 +821,6 @@ function initWorkTimeline() {
     '<path class="s-leg" d="M1.1 -6 C2.4 -8 2.6 -9.2 2.2 -10.3"/>';
   svg.appendChild(bodyG);
 
-  // leg layout (matches handoff EXACTLY)
   const LEGS = [
     { side: +1, fore: 5.2, reach: 12, phase: 0.00 },
     { side: +1, fore: 1.4, reach: 14, phase: 0.50 },
@@ -864,30 +846,24 @@ function initWorkTimeline() {
       walkDist += delta * 160;
     }
 
-    // Position: centered on timeline, scrolled to progress
     const yPos = p * 100;
 
-    // Forward = DOWN (positive Y), Normal = RIGHT (positive X)
-    const fx = 0, fy = 1;  // forward direction (along timeline, pointing down)
-    const nx = 1, ny = 0;  // normal direction (perpendicular, right)
+    const fx = 0, fy = 1;
+    const nx = 1, ny = 0;
 
-    // Body bob
     const bob = Math.sin(2 * Math.PI * (walkDist / STEP)) * 0.5;
     const bodyX = nx * (BODYLIFT + bob);
     const bodyY = 0;
 
-    // Heading: facing forward (down)
     const headingDeg = Math.atan2(fy, fx) * 180 / Math.PI;
     bodyG.setAttribute("transform", `translate(${bodyX.toFixed(2)} ${bodyY.toFixed(2)}) rotate(${headingDeg.toFixed(1)})`);
 
     for (let i = 0; i < 8; i++) {
       const lg = LEGS[i];
 
-      // Hip near the body
       const hx = bodyX + fx * lg.fore * 0.45 + nx * lg.side * 1.7;
       const hy = bodyY + fy * lg.fore * 0.45 + ny * lg.side * 1.7;
 
-      // Neutral foot (moves with body)
       const ntx = bodyX + fx * lg.fore + nx * lg.side * lg.reach;
       const nty = bodyY + fy * lg.fore + ny * lg.side * lg.reach;
 
@@ -903,11 +879,9 @@ function initWorkTimeline() {
         liftAmt = Math.sin(w * Math.PI) * LIFT;
       }
 
-      // Foot in world: neutral + along-travel offset − lift toward body (shortens → reads as raised)
       const fxw = ntx + fx * foreOff - (ntx - hx) / lg.reach * liftAmt;
       const fyw = nty + fy * foreOff - (nty - hy) / lg.reach * liftAmt;
 
-      // Two-bone IK
       let dx = fxw - hx, dy = fyw - hy;
       let d = Math.hypot(dx, dy);
       const dmax = FEMUR + TIBIA - 0.2;
@@ -927,14 +901,19 @@ function initWorkTimeline() {
       legEls[i].setAttribute("d", `M${hx.toFixed(1)} ${hy.toFixed(1)} L${kx.toFixed(1)} ${ky.toFixed(1)} L${fxc.toFixed(1)} ${fyc.toFixed(1)}`);
     }
 
-    // Update position
     spEl.style.top = yPos + "%";
   }
 
+  const endEl = workSection.querySelector(".row--2021");
+  const endOffset = endEl ? endEl.offsetTop : workSection.offsetHeight;
+  timeline.style.height = endOffset + "px";
+  timeline.style.bottom = "auto";
+
   ScrollTrigger.create({
     trigger: workSection,
-    start: "top bottom",
-    end: "bottom top",
+    start: "top 85%",
+    endTrigger: ".row--2021",
+    end: "top top",
     scrub: 1,
     onUpdate: (self) => {
       const p = self.progress;

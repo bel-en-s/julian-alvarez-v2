@@ -200,6 +200,42 @@
   z-index: 1;
 }
 
+@media (max-width: 1000px) {
+  .fdc-hero {
+    height: 100dvh;
+  }
+
+  .fdc-hero-inner {
+    padding: 100px var(--page-pad) 40px;
+  }
+
+  .fdc-hero-inner h1 {
+    font-size: clamp(44px, 10vw, 64px);
+    line-height: .9;
+  }
+
+  .fdc-hero-inner h1 em {
+    -webkit-text-stroke: 1px rgba(244, 244, 244, .55);
+  }
+
+  .fdc-herald {
+    font-size: clamp(120px, 30vw, 200px);
+    right: 4%;
+    top: 30%;
+    opacity: 0.12;
+  }
+
+  .fdc-lede {
+    font-size: 15px;
+    margin-top: 16px;
+  }
+
+  .fdc-eyebrow {
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 640px) {
   .fdc-grid-mixed {
     grid-template-columns: 1fr;

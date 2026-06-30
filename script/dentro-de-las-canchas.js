@@ -20,6 +20,8 @@ if (window.innerWidth >= 1000) {
     if (src.includes("Anexo 8")) return
 
     let amount = amounts[i % amounts.length]
+    if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 8
+    if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 8
     if (src.includes("/bio/4.webp")) return
     if (src.includes("/bio/3.webp")) amount = Math.abs(amount) * 2
     if (src.includes("/bio/2.webp")) amount = Math.abs(amount)
@@ -203,10 +205,16 @@ function initWorkTimeline() {
     spEl.style.top = yPos + "%"
   }
 
+  const endEl = workSection.querySelector(".row--2021")
+  const endOffset = endEl ? endEl.offsetTop : workSection.offsetHeight
+  timeline.style.height = endOffset + "px"
+  timeline.style.bottom = "auto"
+
   ScrollTrigger.create({
     trigger: workSection,
-    start: "top bottom",
-    end: "bottom top",
+    start: "top 85%",
+    endTrigger: ".row--2021",
+    end: "top top",
     scrub: 1,
     onUpdate: (self) => {
       const p = self.progress

@@ -72,7 +72,7 @@
 
 @font-face {
   font-family: "Neue Montreal";
-  src: url("/fonts/neue-montreal/neue-montreal-thin.ttf") format("truetype");
+  src: url("/fonts/neue-montreal/neue-montreal-thin.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -80,7 +80,7 @@
 
 @font-face {
   font-family: "Neue Montreal";
-  src: url("/fonts/neue-montreal/neue-montreal-light.ttf") format("truetype");
+  src: url("/fonts/neue-montreal/neue-montreal-light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -88,7 +88,7 @@
 
 @font-face {
   font-family: "Neue Montreal";
-  src: url("/fonts/neue-montreal/neue-montreal-book.ttf") format("truetype");
+  src: url("/fonts/neue-montreal/neue-montreal-book.woff2") format("woff2");
   font-weight: 350;
   font-style: normal;
   font-display: swap;
@@ -96,7 +96,7 @@
 
 @font-face {
   font-family: "Neue Montreal";
-  src: url("/fonts/neue-montreal/neue-montreal-regular.ttf") format("truetype");
+  src: url("/fonts/neue-montreal/neue-montreal-regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -104,7 +104,7 @@
 
 @font-face {
   font-family: "Neue Montreal";
-  src: url("/fonts/neue-montreal/neue-montreal-medium.ttf") format("truetype");
+  src: url("/fonts/neue-montreal/neue-montreal-medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -112,7 +112,7 @@
 
 @font-face {
   font-family: "Neue Montreal";
-  src: url("/fonts/neue-montreal/neue-montreal-bold.ttf") format("truetype");
+  src: url("/fonts/neue-montreal/neue-montreal-bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;

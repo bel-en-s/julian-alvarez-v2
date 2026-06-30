@@ -200,6 +200,85 @@
   z-index: 1;
 }
 
+@media (max-width: 1000px) {
+  .ddc-hero {
+    height: 100dvh;
+  }
+
+  .ddc-hero-inner {
+    padding: 100px var(--page-pad) 40px;
+  }
+
+  .ddc-hero-inner h1 {
+    font-size: clamp(44px, 10vw, 64px);
+    line-height: .9;
+  }
+
+  .ddc-hero-inner h1 em {
+    -webkit-text-stroke: 1px rgba(244, 244, 244, .55);
+  }
+
+  .ddc-herald {
+    font-size: clamp(120px, 30vw, 200px);
+    right: 4%;
+    top: 30%;
+    opacity: 0.12;
+  }
+
+  .ddc-lede {
+    font-size: 15px;
+    margin-top: 16px;
+  }
+
+  .ddc-eyebrow {
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+
+  .ddc-grid-mixed {
+    grid-template-columns: 1fr;
+  }
+
+  .ddc-grid-item {
+    aspect-ratio: 4 / 3;
+  }
+
+  .behind-the-lock .btl-header {
+    top: 62%;
+    padding: 0 1.25rem;
+  }
+
+  .behind-the-lock .btl-header h2 {
+    font-size: clamp(2.5rem, 14vw, 4rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .behind-the-lock .btl-header-text {
+    font-size: 14px;
+    max-width: 90%;
+  }
+
+  .curtain {
+    height: calc(100dvh - 60px);
+  }
+
+  .curtain-ball {
+    width: 36px;
+    top: 48%;
+    left: 88%;
+  }
+
+  .curtain-img {
+    transform: scale(0.6) rotate(0deg);
+    height: 90vh;
+  }
+
+  .curtain-img img {
+    margin-top: -5vh;
+    object-fit: contain;
+  }
+}
+
 @media (max-width: 640px) {
   .ddc-grid-mixed {
     grid-template-columns: 1fr;
@@ -378,4 +457,14 @@
     radial-gradient(ellipse 55% 60% at 15% 75%, rgba(220,190,255,0.25) 0%, transparent 55%),
     radial-gradient(ellipse 80% 40% at 50% 50%, rgba(200,180,235,0.2) 0%, transparent 50%),
     radial-gradient(ellipse 90% 30% at 50% 3%, rgba(255,255,255,0.15) 0%, transparent 50%);
+}
+
+@media (max-width: 768px) {
+  .work-story {
+    background-image:
+      radial-gradient(ellipse 120% 50% at 50% 10%, rgba(200,170,255,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 50% at 50% 50%, rgba(160,130,220,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse 120% 50% at 50% 90%, rgba(180,150,240,0.35) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 30% at 50% 3%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  }
 }
