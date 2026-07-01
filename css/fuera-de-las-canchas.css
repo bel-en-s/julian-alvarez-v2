@@ -14,9 +14,17 @@
   opacity: 0.3;
 }
 
+html {
+  background: #1E2024 !important;
+}
+
+body {
+  background: #1E2024;
+}
+
 .fdc {
   position: relative;
-  background: #fff;
+  background: #1E2024;
   isolation: isolate;
   overflow: hidden;
 }
@@ -216,12 +224,6 @@
 }
 
 .fdc-gallery-quote blockquote {
-  font-family: var(--font-support);
-  font-weight: 400;
-  font-size: clamp(14px, 1.5vw, 18px);
-  line-height: 1.4;
-  text-transform: none;
-  color: rgba(244, 244, 244, .85);
   position: relative;
   max-width: 32ch;
 }
@@ -316,5 +318,36 @@
 
   .fdc-gallery-quote {
     padding: 12px 0;
+  }
+}
+
+.partido-grid-quote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(138, 117, 184, .08);
+  border-radius: 0;
+  border: 1px solid rgba(138, 117, 184, .15);
+  grid-column: span 2;
+}
+
+.partido-grid-quote blockquote {
+  font-family: var(--f-nm);
+  font-weight: 350;
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.5;
+  color: rgba(216, 200, 245, .85);
+  text-align: center;
+  margin: 0;
+  text-transform: none;
+  font-style: italic;
+  max-width: 32ch;
+}
+
+@media (max-width: 560px) {
+  .partido-grid-quote {
+    grid-column: span 1;
+    padding: 16px;
   }
 }

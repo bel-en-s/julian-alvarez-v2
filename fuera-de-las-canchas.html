@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background: #1E2024;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,10 +11,18 @@
     <link rel="stylesheet" href="/globals.css" />
     <link rel="stylesheet" href="/css/transition.css" />
     <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/work.css" />
+    <link rel="stylesheet" href="/css/dentro-de-las-canchas.css" />
     <link rel="stylesheet" href="/css/fuera-de-las-canchas.css" />
     <link rel="stylesheet" href="/css/contact-form.css" />
+    <style>
+      html { background: #1E2024 !important; }
+      body { background: #1E2024 !important; }
+      .fdc { background: #1E2024 !important; }
+      .partidos { background: #1E2024 !important; }
+    </style>
   </head>
-  <body>
+  <body style="background: #1E2024;">
     <div class="mask-transition"></div>
     <div class="mask-bg-overlay"></div>
     <div class="page-texture"></div>
@@ -95,55 +103,41 @@
               Más allá del estadio, la vida también se juega. Patrocinios, viajes, momentos y gente que construyen el día a día.
             </p>
           </div>
+          <div class="ddc-scroll-hint" aria-hidden="true">
+            <svg class="ddc-scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
         </div>
       </div>
 
-      <div class="fdc-gallery-section">
-        <div class="fdc-gallery-inner">
-        <div class="fdc-head" data-copy-wrapper>
-          <p class="eyebrow">Fuera de las canchas</p>
-          <h2>GALERÍA</h2>
-          <p class="fdc-sub">Instantes que construyen el día a día</p>
+    </section>
+
+    <section class="partidos" id="galeria">
+      <header class="partidos-head">
+        <p class="eyebrow"><span class="hero-gradient-text">01</span> · Galería</p>
+        <h2>Fuera de las canchas</h2>
+        <p class="partidos-sub">Instantes que construyen el día a día fuera de la cancha.</p>
+      </header>
+
+      <div class="partido-grid">
+        <div class="partido-img slot-a" data-parallax="80"><img src="/fuera-de-las-canchas/ADIDAS/597160232_1326487642847729_5803140599754485605_n.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="40"><img src="/fuera-de-las-canchas/ADIDAS/ADIDAS-2.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="50"><img src="/fuera-de-las-canchas/ADIDAS/ADIDAS-3.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="30"><img src="/fuera-de-las-canchas/ADIDAS/ADIDAS-4.webp" alt="" loading="lazy" /></div>
+        <div class="partido-grid-quote">
+          <blockquote>"Cada paso fuera de la cancha también construye una historia."</blockquote>
         </div>
-
-        <div class="fdc-gallery">
-          <div class="fdc-gallery-photo fdc-gallery-photo--tall" data-parallax>
-            <img src="/fuera-de-las-canchas/ADIDAS/597160232_1326487642847729_5803140599754485605_n.webp" alt="ADIDAS" loading="lazy" />
-            <span class="fdc-gallery-label">ADIDAS</span>
-          </div>
-
-          <div class="fdc-gallery-quote" data-copy-wrapper>
-            <blockquote>
-              <span class="fdc-gallery-quote-mark">"</span>
-              Cada paso fuera de la cancha también construye una historia.<span class="fdc-gallery-quote-mark">"</span>
-            </blockquote>
-          </div>
-
-          <div class="fdc-gallery-photo" data-parallax>
-            <img src="/fuera-de-las-canchas/BAYER/BAYER-13.webp" alt="BAYER" loading="lazy" />
-            <span class="fdc-gallery-label">BAYER</span>
-          </div>
-
-          <div class="fdc-gallery-photo" data-parallax>
-            <img src="/fuera-de-las-canchas/XBOTGO/Xbotgo-4.webp" alt="XBOTGO" loading="lazy" />
-            <span class="fdc-gallery-label">XBOTGO</span>
-          </div>
-
-          <div class="fdc-gallery-quote" data-copy-wrapper>
-            <blockquote>
-              <span class="fdc-gallery-quote-mark">"</span>
-              Las marcas que acompañan cada paso del camino.<span class="fdc-gallery-quote-mark">"</span>
-            </blockquote>
-          </div>
-
-          <div class="fdc-gallery-photo fdc-gallery-photo--wide" data-parallax>
-            <img src="/fuera-de-las-canchas/XIAOMI/ANUNCIO/01.webp" alt="XIAOMI" loading="lazy" />
-            <span class="fdc-gallery-label">XIAOMI</span>
-          </div>
+        <div class="partido-img" data-parallax="60"><img src="/fuera-de-las-canchas/BAYER/BAYER-13.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="35"><img src="/fuera-de-las-canchas/BAYER/BAYER-2.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="45"><img src="/fuera-de-las-canchas/BAYER/BAYER-3.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="55"><img src="/fuera-de-las-canchas/BAYER/BAYER-4.webp" alt="" loading="lazy" /></div>
+        <div class="partido-grid-quote">
+          <blockquote>"Las marcas que acompañan cada paso del camino."</blockquote>
         </div>
-        </div>
+        <div class="partido-img" data-parallax="70"><img src="/fuera-de-las-canchas/XBOTGO/Xbotgo-4.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="25"><img src="/fuera-de-las-canchas/XBOTGO/XBOTGO-2.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="65"><img src="/fuera-de-las-canchas/XBOTGO/XBOTGO-3.webp" alt="" loading="lazy" /></div>
+        <div class="partido-img" data-parallax="50"><img src="/fuera-de-las-canchas/XIAOMI/ANUNCIO/01.webp" alt="" loading="lazy" /></div>
       </div>
-
     </section>
 
     <section class="contact-form">

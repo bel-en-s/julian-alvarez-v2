@@ -268,32 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const rows = document.querySelectorAll(".work-items .row");
-  rows.forEach(row => {
-    const texts = gsap.utils.toArray(row.querySelectorAll("h2, h3"))
-      .filter(el => !el.closest(".video-quote"))
-      .filter(el => !el.classList.contains("text-static"));
-    if (texts.length && window.innerWidth >= 1000) {
-      texts.forEach(el => {
-        el.style.setProperty("color", "transparent", "important");
-        el.style.setProperty("-webkit-text-fill-color", "transparent", "important");
-      });
-      gsap.fromTo(texts,
-        { "--highlight-offset": "0%" },
-        {
-          "--highlight-offset": "100%",
-          stagger: 0.3,
-          ease: "none",
-          scrollTrigger: {
-            trigger: row,
-            scrub: 1,
-            start: "top bottom",
-            end: "bottom top",
-          }
-        }
-      );
-    }
-  });
+
 
   const smoothStep = (p) => p * p * (3 - 2 * p);
 
@@ -594,53 +569,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (document.querySelector(".work-items")) {
-    document.querySelectorAll(".work-items .row").forEach((row) => {
-      const workItems = row.querySelectorAll(".work-item");
-      const content = row.querySelector(".row-content");
-
-      const tl = gsap.timeline({ paused: true });
-      if (content) {
-        const split = new SplitText(content, { type: "words", wordsClass: "highlight-word" });
-        tl.to(split.words, {
-          "--highlight-offset": "100%",
-          duration: 0.4,
-          stagger: 0.02,
-          ease: "power3.out",
-        }, "-=0.3");
-      }
-
-      const contentTitle = row.querySelector(".row-content-title");
-      if (contentTitle) {
-        const titleSplit = new SplitText(contentTitle, { type: "words", wordsClass: "highlight-word" });
-        tl.to(titleSplit.words, {
-          "--highlight-offset": "100%",
-          duration: 0.4,
-          stagger: 0.02,
-          ease: "power3.out",
-        }, "-=0.3");
-      }
-
-      workItems.forEach((item) => {
-        const itemContent = item.querySelector(".work-item-content");
-        if (itemContent) {
-          const itemSplit = new SplitText(itemContent, { type: "words", wordsClass: "highlight-word" });
-          tl.to(itemSplit.words, {
-            "--highlight-offset": "100%",
-            duration: 0.3,
-            stagger: 0.015,
-            ease: "power3.out",
-          }, "-=0.4");
-        }
-      });
-
-      ScrollTrigger.create({
-        trigger: row,
-        start: "top 80%",
-        once: true,
-        onEnter: () => tl.play(),
-      });
-    });
-
     ScrollTrigger.refresh();
   }
 

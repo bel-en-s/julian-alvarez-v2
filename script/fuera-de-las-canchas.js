@@ -5,7 +5,7 @@ import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.body.style.backgroundColor = "#fff";
+  document.body.style.backgroundColor = "#1E2024";
 
   const section = document.querySelector(".fdc");
   if (!section) return;
@@ -119,11 +119,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const img = item.querySelector("img");
       if (!img) return;
 
+      const speed = parseFloat(item.dataset.parallax) || 60;
+
       gsap.fromTo(
         img,
-        { y: -60 },
+        { y: -speed },
         {
-          y: 60,
+          y: speed,
           ease: "none",
           scrollTrigger: {
             trigger: item,
