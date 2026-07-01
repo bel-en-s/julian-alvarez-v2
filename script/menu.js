@@ -30,21 +30,21 @@ function initMenu() {
 
     if (open) {
       layer.classList.add("is-open");
-      gsap.to(layer, { opacity: 1, duration: 0.3, ease: "power2.out" });
-      if (scrim) gsap.to(scrim, { opacity: 1, duration: 0.35, ease: "power2.out" });
+      gsap.to(layer, { opacity: 1, duration: 0.2, ease: "power2.out" });
+      if (scrim) gsap.to(scrim, { opacity: 1, duration: 0.25, ease: "power2.out" });
 
       const itemEls = Array.from(frame.querySelectorAll(".ja-menu-arana__item"));
       openTween = gsap.fromTo(itemEls,
         { opacity: 0, scale: 0.6, pointerEvents: "none" },
-        { opacity: 1, scale: 1, pointerEvents: "auto", duration: 0.55, ease: "power3.out", stagger: 0.06 }
+        { opacity: 1, scale: 1, pointerEvents: "auto", duration: 0.4, ease: "power3.out", stagger: 0.04 }
       );
     } else {
-      gsap.to(layer, { opacity: 0, duration: 0.25, ease: "power2.in", onComplete: () => {
+      gsap.to(layer, { opacity: 0, duration: 0.15, ease: "power2.in", onComplete: () => {
         layer.classList.remove("is-open");
         const itemEls = frame.querySelectorAll(".ja-menu-arana__item");
         gsap.set(itemEls, { opacity: 0, scale: 0.6, pointerEvents: "none" });
       }});
-      if (scrim) gsap.to(scrim, { opacity: 0, duration: 0.25, ease: "power2.in" });
+      if (scrim) gsap.to(scrim, { opacity: 0, duration: 0.15, ease: "power2.in" });
     }
   }
 

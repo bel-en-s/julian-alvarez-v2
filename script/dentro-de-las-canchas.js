@@ -4,6 +4,23 @@ import { SplitText } from "gsap/SplitText"
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
+document.addEventListener("DOMContentLoaded", () => {
+  const heroH1 = document.querySelector(".ddc-hero-inner h1")
+  if (heroH1) {
+    const split = new SplitText(heroH1, { type: "chars", charsClass: "hero-char" })
+    gsap.fromTo(split.chars,
+      { y: -400, opacity: 0, visibility: "visible" },
+      { y: 0, opacity: 1, duration: 0.7, stagger: 0.035, ease: "power4.out", delay: 0.3,
+        onComplete: () => gsap.set(split.chars, { clearProps: "transform" })
+      }
+    )
+  }
+  gsap.set(".ddc-hero-inner > [data-copy-wrapper], .ddc-hero-inner > .eyebrow", { y: 40, opacity: 0 })
+  gsap.to(".ddc-hero-inner > [data-copy-wrapper], .ddc-hero-inner > .eyebrow", {
+    y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power4.out", delay: 0.3
+  })
+})
+
 if (window.innerWidth >= 1000) {
   const amounts = [-400, -500, -300, -600, -400, -350, -550, -320, -480, -650].map(a => a * 0.15)
   const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4]
@@ -304,6 +321,41 @@ document.querySelectorAll(".palmares-head h2, .partidos-head h2").forEach((headi
     start: "top 88%",
     once: true,
     onEnter: () => tl.play(),
+  })
+})
+
+// Partido accordion
+document.querySelectorAll(".partido").forEach((partido) => {
+  const grid = partido.querySelector(".partido-grid")
+  const head = partido.querySelector(".partido-head")
+  if (!grid || !head) return
+
+  gsap.set(grid, { height: 0, opacity: 0 })
+
+  head.addEventListener("click", () => {
+    const isOpen = partido.classList.toggle("is-open")
+
+    if (isOpen) {
+      gsap.set(grid, { height: "auto", opacity: 0, visibility: "visible" })
+      const autoHeight = grid.offsetHeight
+      gsap.set(grid, { height: 0, opacity: 0 })
+      gsap.to(grid, {
+        height: autoHeight,
+        opacity: 1,
+        duration: 0.5,
+        ease: "power3.out",
+        onComplete: () => {
+          gsap.set(grid, { height: "auto" })
+        },
+      })
+    } else {
+      gsap.to(grid, {
+        height: 0,
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.inOut",
+      })
+    }
   })
 })
 

@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.set(blocks, { scaleX: 1, transformOrigin: "right" });
   gsap.to(blocks, {
     scaleX: 0,
-    duration: 0.6,
-    delay: 0.6,
+    duration: 0.2,
+    delay: 0.2,
     ease: "power3.out",
-    stagger: { amount: 0.3, from: "start" },
+    stagger: { amount: 0.1, from: "start" },
   });
 
   function closeMenuIfOpen() {

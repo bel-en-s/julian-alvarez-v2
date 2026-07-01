@@ -112,7 +112,7 @@
 }
 
 .hero .hero-header .hero-header-img--enter {
-  animation: hero-img-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: hero-img-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero .hero-header .hero-header-img img {

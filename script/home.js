@@ -75,9 +75,9 @@ function startEntryAnimations(hasDelay = false) {
       });
       gsap.to(heroChars, {
         y: 0,
-        duration: 0.7,
+        duration: 0.8,
         stagger: 0.04,
-        delay: hasDelay ? 1.5 : 0,
+        delay: hasDelay ? 0.5 : 0,
         ease: "power4.out",
         onComplete: () => {
           gsap.set(heroChars, { clearProps: "transform" });
@@ -89,9 +89,9 @@ function startEntryAnimations(hasDelay = false) {
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
+          duration: 0.8,
           stagger: 0.15,
-          delay: hasDelay ? 1.5 : 0,
+          delay: hasDelay ? 0.5 : 0,
           ease: "power3.out",
         }
       );
@@ -100,7 +100,7 @@ function startEntryAnimations(hasDelay = false) {
 
   const heroImgWrapper = document.querySelector(".hero-header-img");
   if (heroImgWrapper && window.innerWidth >= 1000) {
-    if (hasDelay) heroImgWrapper.style.animationDelay = "1.5s";
+    if (hasDelay) heroImgWrapper.style.animationDelay = "0.5s";
     heroImgWrapper.classList.add("hero-header-img--enter");
     heroImgWrapper.addEventListener("animationend", () => {
       heroImgWrapper.classList.remove("hero-header-img--enter");
@@ -113,8 +113,8 @@ function startEntryAnimations(hasDelay = false) {
       {
         y: "0%",
         opacity: 1,
-        duration: 0.6,
-        delay: hasDelay ? 1.8 : 0.3,
+        duration: 0.8,
+        delay: hasDelay ? 0.6 : 0.1,
         ease: "power2.out",
         onComplete: () => {
           heroImgWrapper.style.transform = "translateY(0)";
@@ -127,9 +127,9 @@ function startEntryAnimations(hasDelay = false) {
 
   gsap.to(".hero .hero-cards .card", {
     scale: 1,
-    duration: 0.75,
-    delay: 0.25,
-    stagger: 0.1,
+    duration: 0.8,
+    delay: 0.1,
+    stagger: 0.05,
     ease: "power4.out",
     onComplete: () => {
       gsap.set("#hero-card-1", { transformOrigin: "top right" });
@@ -271,11 +271,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const rows = document.querySelectorAll(".work-items .row");
   rows.forEach(row => {
     const texts = gsap.utils.toArray(row.querySelectorAll("h2, h3"))
-      .filter(el => !el.closest(".video-quote"));
+      .filter(el => !el.closest(".video-quote"))
+      .filter(el => !el.classList.contains("text-static"));
     if (texts.length && window.innerWidth >= 1000) {
       texts.forEach(el => {
-        el.style.removeProperty("color");
-        el.style.removeProperty("-webkit-text-fill-color");
+        el.style.setProperty("color", "transparent", "important");
+        el.style.setProperty("-webkit-text-fill-color", "transparent", "important");
       });
       gsap.fromTo(texts,
         { "--highlight-offset": "0%" },
@@ -735,7 +736,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       const item = wrapper.closest(".work-item");
       const content = item.querySelector(".work-item-content");
-      if (content) {
+      if (content && !content.classList.contains("no-parallax")) {
         gsap.to(content, {
           y: amount * 0.7,
           ease: "none",

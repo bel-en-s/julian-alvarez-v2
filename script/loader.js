@@ -63,7 +63,7 @@ if (sessionStorage.getItem(LOADER_KEY) === "1") {
     tl.add(animateProgress(), "0")
       .to(".preloader-wrapper", {
         y: "-100%",
-        duration: 1.25,
+        duration: 0.4,
         ease: "power4.inOut",
       });
   }

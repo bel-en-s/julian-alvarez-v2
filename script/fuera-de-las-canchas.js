@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroAnimations();
   initMarquees();
   initTextReveals();
+  initGalleryParallax();
 
   function initHeroAnimations() {
     const targets = section.querySelectorAll(
@@ -107,6 +108,31 @@ document.addEventListener("DOMContentLoaded", () => {
           refreshPriority: -1,
         });
       }, container);
+    });
+  }
+
+  function initGalleryParallax() {
+    const items = document.querySelectorAll("[data-parallax]");
+    if (!items.length) return;
+
+    items.forEach((item) => {
+      const img = item.querySelector("img");
+      if (!img) return;
+
+      gsap.fromTo(
+        img,
+        { y: -60 },
+        {
+          y: 60,
+          ease: "none",
+          scrollTrigger: {
+            trigger: item,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        }
+      );
     });
   }
 });
