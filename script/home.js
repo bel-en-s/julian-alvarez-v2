@@ -234,24 +234,65 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const videoQuote = document.querySelector(".row--video-gray .video-quote");
-  if (videoQuote && window.innerWidth >= 1000) {
-    const vqTargets = videoQuote.querySelectorAll("h2, p");
-    gsap.fromTo(vqTargets,
-      { "--highlight-offset": "0%" },
-      {
-        "--highlight-offset": "100%",
-        stagger: 0.3,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".row--video-gray",
-          scrub: 1,
-          start: "top 80%",
-          end: "top 30%",
+  const videoGraySection = document.querySelector(".row--video-gray");
+  if (videoGraySection && window.innerWidth >= 1000) {
+    ScrollTrigger.create({
+      trigger: videoGraySection,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: (self) => {
+        document.documentElement.style.setProperty(
+          "--video-gray-scale",
+          1 + self.progress * 0.2
+        );
+      },
+    });
+
+    const vqTargets = videoGraySection.querySelectorAll(".video-quote h2, .video-quote p");
+    if (vqTargets.length) {
+      gsap.fromTo(vqTargets,
+        { "--highlight-offset": "0%" },
+        {
+          "--highlight-offset": "100%",
+          stagger: 0.3,
+          ease: "none",
+          scrollTrigger: {
+            trigger: videoGraySection,
+            scrub: 1,
+            start: "top bottom",
+            end: "bottom top",
+          }
         }
-      }
-    );
+      );
+    }
   }
+
+  const rows = document.querySelectorAll(".work-items .row");
+  rows.forEach(row => {
+    const texts = gsap.utils.toArray(row.querySelectorAll("h2, h3"))
+      .filter(el => !el.closest(".video-quote"));
+    if (texts.length && window.innerWidth >= 1000) {
+      texts.forEach(el => {
+        el.style.removeProperty("color");
+        el.style.removeProperty("-webkit-text-fill-color");
+      });
+      gsap.fromTo(texts,
+        { "--highlight-offset": "0%" },
+        {
+          "--highlight-offset": "100%",
+          stagger: 0.3,
+          ease: "none",
+          scrollTrigger: {
+            trigger: row,
+            scrub: 1,
+            start: "top bottom",
+            end: "bottom top",
+          }
+        }
+      );
+    }
+  });
 
   const smoothStep = (p) => p * p * (3 - 2 * p);
 

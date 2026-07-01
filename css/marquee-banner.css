@@ -170,6 +170,7 @@
   top: 150px;
   text-align: left;
   z-index: 7;
+  transition: none;
 }
 
 .df-dentro .df-big {
@@ -192,6 +193,15 @@
   top: 430px;
   text-align: right;
   z-index: 4;
+  transition: none;
+}
+
+@media (min-width: 1000px) {
+  .df-dentro .df-small,
+  .df-fuera .df-small {
+    will-change: transform;
+    transform: scale(var(--df-lockup-scale, 1));
+  }
 }
 
 .df-fuera .df-big {

@@ -374,6 +374,23 @@ gsap.registerPlugin(ScrollTrigger);
     },
   });
 
+  /* ---- scroll-scale effect for dento/fuera lockups ---- */
+  if (section && window.innerWidth >= 1000) {
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+      onUpdate: (self) => {
+        document.documentElement.style.setProperty(
+          "--df-lockup-scale",
+          1 + self.progress * 0.15
+        );
+      },
+    });
+
+  }
+
   /* ---- cleanup ---- */
   window.addEventListener("beforeunload", function () {
     banner.removeEventListener("mousemove", handleMove);

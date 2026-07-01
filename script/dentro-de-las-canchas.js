@@ -263,3 +263,59 @@ if (document.querySelector(".work-items")) {
 
   ScrollTrigger.refresh()
 }
+
+// Palmarés section title block reveal
+document.querySelectorAll(".palmares-head h2, .partidos-head h2").forEach((heading) => {
+  const section = heading.closest("section") || heading.parentElement
+  const split = new SplitText(heading, { type: "lines", linesClass: "block-line" })
+
+  split.lines.forEach((line) => {
+    const wrapper = document.createElement("div")
+    wrapper.className = "block-line-wrapper"
+    line.parentNode.insertBefore(wrapper, line)
+    wrapper.appendChild(line)
+
+    const block = document.createElement("div")
+    block.className = "block-revealer"
+    block.style.backgroundColor = "#8A75B8"
+    wrapper.appendChild(block)
+  })
+
+  const lines = heading.querySelectorAll(".block-line")
+  const blocks = heading.querySelectorAll(".block-revealer")
+  if (!lines.length) return
+
+  gsap.set(lines, { opacity: 0 })
+  gsap.set(blocks, { scaleX: 0, transformOrigin: "left center" })
+
+  const tl = gsap.timeline({ paused: true })
+
+  lines.forEach((line, i) => {
+    const block = blocks[i]
+    const pos = i * 0.15
+    tl.to(block, { scaleX: 1, duration: 0.7, ease: "power4.inOut" }, pos)
+    tl.set(line, { opacity: 1 }, pos + 0.7)
+    tl.set(block, { transformOrigin: "right center" }, pos + 0.7)
+    tl.to(block, { scaleX: 0, duration: 0.7, ease: "power4.inOut" }, pos + 0.7)
+  })
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: "top 88%",
+    once: true,
+    onEnter: () => tl.play(),
+  })
+})
+
+// Hover animation for trophy cards
+document.querySelectorAll(".t-card").forEach((card) => {
+  const img = card.querySelector(".t-icon")
+  card.addEventListener("mouseenter", () => {
+    gsap.to(card, { scale: 1.04, y: -8, duration: 0.4, ease: "power2.out" })
+    if (img) gsap.to(img, { scale: 1.15, duration: 0.4, ease: "power2.out" })
+  })
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, { scale: 1, y: 0, duration: 0.4, ease: "power2.out" })
+    if (img) gsap.to(img, { scale: 1, duration: 0.4, ease: "power2.out" })
+  })
+})
