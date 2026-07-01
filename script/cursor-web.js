@@ -8,7 +8,7 @@ Object.assign(canvas.style, {
   width: "100%",
   height: "100%",
   pointerEvents: "none",
-  zIndex: "3",
+  zIndex: "-1",
   display: "block",
 });
 document.body.prepend(canvas);
@@ -72,19 +72,27 @@ const pushLine = (x1, y1, x2, y2, opacity) => {
   if (lines.length > MAX_LINES) lines.splice(0, lines.length - MAX_LINES);
 };
 
-const hero = document.querySelector(".hero");
-if (!hero) { canvas.style.display = "none"; }
+const sections = [".hero", ".dentro-fuera", ".fdc", ".partidos"].map(function (sel) {
+  return document.querySelector(sel);
+}).filter(Boolean);
+
+if (!sections.length) { canvas.style.display = "none"; }
 
 var rafActive = false;
+var visibleSet = new Set();
 function startRAF() { if (!rafActive) { rafActive = true; raf = requestAnimationFrame(render); } }
 function stopRAF() { rafActive = false; if (raf) { cancelAnimationFrame(raf); raf = null; } }
 
-if (hero) {
+if (sections.length) {
   var obs = new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) startRAF();
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) visibleSet.add(entry.target);
+      else visibleSet.delete(entry.target);
+    });
+    if (visibleSet.size > 0) startRAF();
     else stopRAF();
   }, { threshold: 0 });
-  obs.observe(hero);
+  sections.forEach(function (el) { obs.observe(el); });
 } else {
   startRAF();
 }
@@ -102,7 +110,7 @@ const onMove = (e) => {
 
 const onLeave = () => { lastPt = null; lines = []; };
 
-if (hero) {
-  hero.addEventListener("pointermove", onMove);
-  hero.addEventListener("pointerleave", onLeave);
-}
+sections.forEach(function (el) {
+  el.addEventListener("pointermove", onMove);
+  el.addEventListener("pointerleave", onLeave);
+});

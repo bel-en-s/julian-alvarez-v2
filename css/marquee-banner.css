@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   --easing: cubic-bezier(.2, .7, .15, 1);
-  touch-action: manipulation;
+  touch-action: none;
 }
 
 .df-stage {
@@ -108,7 +108,7 @@
 .df-banner-bg {
   position: absolute;
   inset: 0;
-  background-image: url("/marquee-banner/mask-face.webp");
+  background-image: url("/marquee-banner/mask-face.jpg");
   background-size: cover;
   background-position: center 20%;
   background-repeat: no-repeat;
@@ -117,7 +117,7 @@
 .df-banner-reveal {
   position: absolute;
   inset: 0;
-  background-image: url("/marquee-banner/fig-mascara.webp");
+  background-image: url("/marquee-banner/fig-mascara.png");
   background-size: cover;
   background-position: center 20%;
   background-repeat: no-repeat;
@@ -174,7 +174,7 @@
 }
 
 .df-dentro .df-big {
-  background-image: url('/spotlight-images/spotlight-banner.webp');
+  background-image: url('/spotlight-images/spotlight-banner.jpg');
   background-position: center 20%;
   background-size: cover;
   -webkit-background-clip: text;
@@ -342,27 +342,18 @@
 
 @media (max-width: 768px) {
   .dentro-fuera { height: 100svh; }
-  .df-stage {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    transform: none !important;
-  }
-  .df-web, .df-rings, .df-dots { opacity: 0.08; }
-  .df-lockup .df-big { font-size: clamp(72px, 20vw, 110px); }
-  .df-lockup .df-small { font-size: clamp(24px, 6.5vw, 38px); }
-  .df-dentro { left: 6%; top: 8%; }
-  .df-fuera { right: 6%; bottom: 8%; }
+  .df-lockup .df-big { font-size: clamp(48px, 14vw, 80px); }
+  .df-lockup .df-small { font-size: clamp(18px, 5vw, 26px); }
+  .df-dentro { left: 6%; top: 10%; }
+  .df-fuera { right: 6%; bottom: 10%; }
   .df-dentro,
-  .df-fuera { white-space: normal; max-width: 85%; }
+  .df-fuera { white-space: normal; max-width: 90%; }
   .df-hint { display: none; }
-  .df-meta { margin-bottom: 14px; gap: 10px; font-size: 11px; }
+  .df-meta { margin-bottom: 12px; gap: 10px; }
   .df-meta .df-rule { width: 28px; }
-  .df-cta { font-size: 13px; margin-top: 20px; }
+  .df-cta { font-size: 12px; margin-top: 18px; }
   .df-banner {
-    width: min(60vw, 300px);
+    width: min(50vw, 220px);
   }
 }
 
