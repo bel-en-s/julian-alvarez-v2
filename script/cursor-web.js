@@ -83,18 +83,20 @@ var visibleSet = new Set();
 function startRAF() { if (!rafActive) { rafActive = true; raf = requestAnimationFrame(render); } }
 function stopRAF() { rafActive = false; if (raf) { cancelAnimationFrame(raf); raf = null; } }
 
-if (sections.length) {
-  var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) visibleSet.add(entry.target);
-      else visibleSet.delete(entry.target);
-    });
-    if (visibleSet.size > 0) startRAF();
-    else stopRAF();
-  }, { threshold: 0 });
-  sections.forEach(function (el) { obs.observe(el); });
-} else {
-  startRAF();
+if (window.innerWidth >= 640) {
+  if (sections.length) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) visibleSet.add(entry.target);
+        else visibleSet.delete(entry.target);
+      });
+      if (visibleSet.size > 0) startRAF();
+      else stopRAF();
+    }, { threshold: 0 });
+    sections.forEach(function (el) { obs.observe(el); });
+  } else {
+    startRAF();
+  }
 }
 
 const onMove = (e) => {
@@ -110,7 +112,9 @@ const onMove = (e) => {
 
 const onLeave = () => { lastPt = null; lines = []; };
 
-sections.forEach(function (el) {
-  el.addEventListener("pointermove", onMove);
-  el.addEventListener("pointerleave", onLeave);
-});
+if (window.innerWidth >= 640) {
+  sections.forEach(function (el) {
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerleave", onLeave);
+  });
+}

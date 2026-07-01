@@ -330,7 +330,10 @@ body {
   grid-template-columns: repeat(5, 1fr);
   gap: 32px;
   overflow: hidden;
-  padding-bottom: 30vh;
+  padding-bottom :30vh;
+}
+.partido-grid + .partido-grid {
+  margin-top: 40px;
 }
 
 .grid-spacer {
