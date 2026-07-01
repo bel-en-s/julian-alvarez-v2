@@ -330,6 +330,7 @@ body {
   grid-template-columns: repeat(5, 1fr);
   gap: 32px;
   overflow: hidden;
+  padding-bottom: 30vh;
 }
 
 .grid-spacer {
@@ -353,6 +354,15 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .partido-img-inner img {
+    margin-top: -10%;
+    margin-bottom: -10%;
+    max-width: none;
+  }
 }
 
 .partido-img-inner:hover {
@@ -428,6 +438,7 @@ body {
 .partidos {
   position: relative;
   overflow: hidden;
+  
 }
 
 #galeria-atmos {
@@ -555,5 +566,22 @@ body {
   }
   .partido-grid-quote--wide {
     grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .partido-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    row-gap: 180px;
+  }
+  .grid-spacer {
+    display: none;
+  }
+  [data-parallax] {
+    transform: none !important;
+  }
+  .slot-tall {
+    margin-top: 60px;
   }
 }

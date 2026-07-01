@@ -8,8 +8,8 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 document.addEventListener("DOMContentLoaded", () => {
   document.body.style.backgroundColor = "#1E2024";
 
-  initFdcAtmos();
-  initFdcShader();
+  try { initFdcAtmos(); } catch (e) { console.warn('initFdcAtmos error:', e); }
+  try { initFdcShader(); } catch (e) { console.warn('initFdcShader error:', e); }
 
   const section = document.querySelector(".fdc");
   if (!section) return;
@@ -127,11 +127,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!img) return;
 
       gsap.fromTo(
-        img,
-        { y: -speed, scale: 1.3 },
+        item,
+        { y: -speed },
         {
           y: speed,
-          scale: 1.3,
           ease: "none",
           scrollTrigger: {
             trigger: item,
