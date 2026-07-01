@@ -332,7 +332,7 @@
   text-decoration: none;
   width: max-content;
   max-width: min(280px, 70vw);
-  pointer-events: auto;
+  pointer-events: none;
   overflow: hidden;
   isolation: isolate;
   transform: translate(-50%, -50%) scale(.6);

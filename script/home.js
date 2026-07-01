@@ -812,9 +812,9 @@ function initWorkTimeline() {
   function updateSpider(p) {
     const delta = p - lastProgress;
     lastProgress = p;
-    walkDist += delta * 220;
+    walkDist += delta * 280;
 
-    const yPos = p * 100;
+    const yPos = -8 + p * 116;
 
     const fx = 0, fy = 1;
     const nx = 1, ny = 0;

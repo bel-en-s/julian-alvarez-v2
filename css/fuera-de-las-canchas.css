@@ -321,43 +321,204 @@ body {
   }
 }
 
-.partido-grid-quote {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: rgba(138, 117, 184, .08);
+.partido-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+  overflow: hidden;
+}
+
+.grid-spacer {
+  /* intentional empty cell for breathing room */
+}
+
+.partido-img {
+  position: relative;
+  width: 100%;
   border-radius: 0;
-  border: 1px solid rgba(138, 117, 184, .15);
+  overflow: hidden;
+  background: rgba(244, 244, 244, .02);
+  aspect-ratio: 1 / 1;
+}
+
+.img-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.img-landscape {
+  aspect-ratio: 4 / 3;
+}
+
+.img-wide {
+  aspect-ratio: 5 / 3;
+}
+
+.partido-img-inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.partido-img-inner img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.partido-img-inner:hover {
+  cursor: pointer;
+}
+
+.partido-img-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  pointer-events: none;
+  font-family: var(--f-h);
+  font-size: clamp(14px, 1.2vw, 18px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ── Scattered placement (desktop) ────── */
+
+.slot-double {
   grid-column: span 2;
 }
+
+.slot-tall {
+  grid-row: span 2;
+}
+
+.slot-double {
+  grid-column: span 2;
+}
+
+/* ── Quotes ──────────────────────────────── */
 
 .partido-grid-quote {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 20px;
   grid-column: span 2;
 }
 
 .partido-grid-quote blockquote {
-  font-family: var(--font-display);
+  font-family: var(--f-h);
   font-weight: 900;
-  font-size: clamp(28px, 3vw, 48px);
-  line-height: 1.1;
+  font-size: clamp(22px, 2.4vw, 38px);
+  line-height: 1.15;
   color: #fff;
   text-align: center;
   margin: 0;
   text-transform: uppercase;
   font-style: normal;
-  max-width: 20ch;
+  max-width: 24ch;
   letter-spacing: -0.02em;
-  position: relative;
 }
 
-@media (max-width: 560px) {
+.partido-grid-quote--inline {
+  grid-column: 4;
+  padding: 20px 12px;
+}
+
+.partido-grid-quote--inline blockquote {
+  font-size: clamp(16px, 1.6vw, 26px);
+  max-width: 16ch;
+}
+
+.partido-grid-quote--wide {
+  grid-column: 2 / 5;
+  padding: 32px 32px;
+  border-top: 1px solid rgba(244, 244, 244, .08);
+  margin-top: 8px;
+}
+
+.partido-grid-quote--wide blockquote {
+  max-width: 40ch;
+  font-size: clamp(24px, 2.8vw, 44px);
+}
+
+/* ── Tablet ──────────────────────────── */
+
+@media (max-width: 960px) {
+  .partido-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: none;
+  }
+  .slot-double {
+    grid-column: span 2;
+  }
   .partido-grid-quote {
-    grid-column: span 1;
+    grid-column: span 2;
     padding: 16px;
+  }
+  .partido-grid-quote--inline {
+    grid-column: span 2;
+  }
+  .partido-grid-quote--wide {
+    grid-column: 1 / -1;
+  }
+  .partido-img {
+    aspect-ratio: 1 / 1;
+  }
+  .img-portrait,
+  .img-landscape,
+  .img-wide {
+    aspect-ratio: 1 / 1;
+  }
+  .grid-spacer {
+    display: none;
+  }
+}
+
+/* ── Mobile ──────────────────────────── */
+
+@media (max-width: 560px) {
+  .partido-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: none;
+  }
+  .slot-tall {
+    grid-row: auto;
+  }
+  .slot-double {
+    grid-column: auto;
+  }
+  .partido-grid-quote {
+    grid-column: auto;
+    padding: 12px;
+  }
+  .partido-grid-quote--inline {
+    grid-column: auto;
+  }
+  .partido-grid-quote--wide {
+    grid-column: auto;
+    padding: 24px 16px;
+  }
+  .partido-grid-quote blockquote {
+    text-align: center;
+    max-width: none;
+  }
+  .partido-img {
+    aspect-ratio: 1 / 1;
+    max-width: none;
+    justify-self: auto;
+  }
+  .img-portrait,
+  .img-landscape,
+  .img-wide {
+    aspect-ratio: 1 / 1;
+  }
+  .grid-spacer {
+    display: none;
   }
 }

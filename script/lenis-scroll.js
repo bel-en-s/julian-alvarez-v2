@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
   let lenis = new Lenis(scrollSettings);
+  window.lenis = lenis;
 
   lenis.on("scroll", ScrollTrigger.update);
 

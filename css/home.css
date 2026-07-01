@@ -39,6 +39,12 @@
   opacity: 0.3;
 }
 
+@media (max-width: 1000px) {
+  .page-texture {
+    opacity: 0.45;
+  }
+}
+
 .about-bg .about-video-wrapper {
   width: 38%;
   max-width: 900px;
@@ -247,7 +253,7 @@
   }
 
   .slide-title h1 {
-    font-size: clamp(2.5rem, 12vw, 4rem);
+    font-size: clamp(4rem, 12vw, 8rem);
     text-align: center;
   }
 
@@ -267,8 +273,8 @@
   }
 
   .slide-description h1 {
-    font-size: clamp(1rem, 3.5vw, 1.4rem);
-    line-height: 1.3;
+    /* font-size: clamp(0.85rem, 1.8vw, 1.3rem); */
+    line-height: 1.4;
   }
 }
 

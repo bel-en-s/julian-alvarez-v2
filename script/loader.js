@@ -7,6 +7,7 @@ function hideWrapper(wrapper) {
   gsap.set(wrapper, { display: "none" });
   document.body.style.overflow = "";
   document.documentElement.style.overflow = "";
+  if (window.lenis) window.lenis.start();
 }
 
 const wrapper = document.querySelector(".preloader-wrapper");
@@ -29,6 +30,7 @@ if (sessionStorage.getItem(LOADER_KEY) === "1") {
 
   document.body.style.overflow = "hidden";
   document.documentElement.style.overflow = "hidden";
+  if (window.lenis) window.lenis.stop();
 
   function ready() {
     if (finished) return;

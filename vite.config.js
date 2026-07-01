@@ -11,6 +11,7 @@ export default defineConfig({
         project: resolve(__dirname, "project.html"),
         contact: resolve(__dirname, "contact.html"),
         "dentro-de-las-canchas": resolve(__dirname, "dentro-de-las-canchas.html"),
+        "fuera-de-las-canchas": resolve(__dirname, "fuera-de-las-canchas.html"),
       },
     },
     assetsInclude: [

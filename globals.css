@@ -36,7 +36,18 @@
 
 html {
   overflow-x: hidden;
-  background: linear-gradient(to bottom, var(--base-100) 0%, #E8E0F0 15%, #C4B5D6 50%, #9B84B8 100%);
+  background: linear-gradient(to bottom,
+    var(--base-100) 0%,
+    #F5EEEB 4%,
+    #EEE7EE 10%,
+    #E8E0F0 16%,
+    #E0D5EA 25%,
+    #D4C6E2 37%,
+    #C4B5D6 50%,
+    #B6A0CB 65%,
+    #A68EC0 80%,
+    #9B84B8 100%
+  );
 }
 
 body {

@@ -756,7 +756,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  background-image: url('/spotlight-images/spotlight-banner.jpg');
+  background-image: url('/spotlight-images/spotlight-banner.webp');
   background-size: cover;
   background-position: center;
 }
@@ -882,7 +882,8 @@
   }
 
   .work-items .row .work-item .work-item-img {
-    max-width: 100%;
+    max-width: 92%;
+    margin: 0 auto;
   }
 
   .work-items .row .work-item .work-item-img img,
@@ -947,6 +948,38 @@
 
   .work-items > div:nth-of-type(5) {
     margin-bottom: 3em;
+  }
+
+  .work-items .row {
+    margin-top: 0 !important;
+  }
+
+  .work-items .row.row--2022 {
+    margin-top: 0;
+  }
+
+  .work-items .row--first > .work-item--with-title {
+    margin-top: 0 !important;
+  }
+
+  .work-items .row--first > .work-item {
+    margin-top: 0 !important;
+  }
+
+  .work-items .row--first[data-no-animate] > .work-item--with-title {
+    order: -1;
+  }
+
+  .work-items .row .row-content-title {
+    text-align: center !important;
+  }
+
+  .work-items .row .row-content-title .meta-line {
+    justify-content: center !important;
+  }
+
+  .work-items .row--first .work-item--with-title .row-content-title .meta-rule {
+    display: none;
   }
 
   /* .work-items > div.row:nth-of-type(odd) > .work-item:nth-child(1) .work-item-img,

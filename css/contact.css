@@ -167,7 +167,7 @@
   bottom: 16px;
   width: 66px;
   height: 66px;
-  background: url("/global/logo-mark-white.png") center/contain no-repeat;
+  background: url("/global/logo-mark-white.webp") center/contain no-repeat;
   opacity: 0.06;
   pointer-events: none;
 }
