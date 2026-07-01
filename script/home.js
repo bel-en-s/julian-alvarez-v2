@@ -636,11 +636,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // skip video wrappers and specific images
       if (video) return;
       if (src.includes("/bio/1.webp")) return;
-      if (src.includes("Anexo 11")) return;
+      if (src.includes("Anexo 9")) return;
       if (src.includes("Anexo 6")) return;
       if (src.includes("Anexo 8")) return;
 
       let amount = amounts[i % amounts.length];
+      if (src.includes("Anexo 11")) amount = Math.abs(amount) * 2;
       if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12;
       if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12;
       // parallax hacia arriba para bio/4.webp (contraste con bio/3)

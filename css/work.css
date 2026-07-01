@@ -547,13 +547,13 @@
   text-align: left;
 }
 
-.work-items > div.row--first > .work-item:nth-child(2) .row-content h3 {
+/* .work-items > div.row--first > .work-item:nth-child(2) .row-content h3 {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   text-align: left;
   font-family: var(--font-support);
   font-weight: 500;
-}
+} */
 
 /* .work-items > div.row:nth-of-type(odd) > .work-item:nth-child(1) .work-item-img { aspect-ratio: 3/4; } */
 /* .work-items > div.row:nth-of-type(odd) > .work-item:nth-child(2) .work-item-img { aspect-ratio: 1/1; } */

@@ -484,14 +484,12 @@
 .partido-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: clamp(150px, 17vw, 230px);
-  gap: 14px;
+  gap: 32px;
   overflow: hidden;
 }
 
 .partido-img {
   width: 100%;
-  height: 100%;
   border-radius: 0;
   overflow: hidden;
   background: rgba(244, 244, 244, .02);
@@ -499,15 +497,20 @@
 
 .partido-img img {
   width: 100%;
-  height: 130%;
-  object-fit: cover;
-  object-position: center 30%;
+  height: auto;
   display: block;
+  object-fit: contain;
 }
 
 .slot-a {
   grid-column: 1 / 3;
-  grid-row: 1 / 3;
+  grid-row: span 2;
+  align-self: stretch;
+}
+
+.slot-a img {
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 960px) {

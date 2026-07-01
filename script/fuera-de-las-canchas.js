@@ -116,13 +116,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!items.length) return;
 
     items.forEach((item) => {
-      const img = item.querySelector("img");
-      if (!img) return;
-
       const speed = parseFloat(item.dataset.parallax) || 60;
 
       gsap.fromTo(
-        img,
+        item,
         { y: -speed },
         {
           y: speed,
@@ -137,4 +134,24 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
   }
+
+  function initQuoteReveal() {
+    const quotes = document.querySelectorAll(".partido-grid-quote blockquote");
+    if (!quotes.length) return;
+
+    quotes.forEach((quote) => {
+      gsap.to(quote, {
+        "--highlight-offset": "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: quote,
+          scrub: 1,
+          start: "top 85%",
+          end: "bottom 30%",
+        },
+      });
+    });
+  }
+
+  initQuoteReveal();
 });

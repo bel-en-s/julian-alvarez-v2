@@ -332,17 +332,27 @@ body {
   grid-column: span 2;
 }
 
+.partido-grid-quote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  grid-column: span 2;
+}
+
 .partido-grid-quote blockquote {
-  font-family: var(--f-nm);
-  font-weight: 350;
-  font-size: clamp(14px, 1.2vw, 18px);
-  line-height: 1.5;
-  color: rgba(216, 200, 245, .85);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 1.1;
+  color: #fff;
   text-align: center;
   margin: 0;
-  text-transform: none;
-  font-style: italic;
-  max-width: 32ch;
+  text-transform: uppercase;
+  font-style: normal;
+  max-width: 20ch;
+  letter-spacing: -0.02em;
+  position: relative;
 }
 
 @media (max-width: 560px) {
