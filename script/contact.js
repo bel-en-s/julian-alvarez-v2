@@ -1,10 +1,13 @@
 import gsap from "gsap";
 
+const CONTACT_API = "/api/contact.php";
+
 document.addEventListener("DOMContentLoaded", () => {
   const stage = document.getElementById("stage");
   const rig = document.getElementById("rig");
   const form = document.getElementById("form");
   const thanks = document.getElementById("thanks");
+  const submitBtn = document.getElementById("submitBtn");
 
   function dropAway() {
     if (!stage.classList.contains("is-open") || stage.classList.contains("is-closing")) return;
@@ -14,7 +17,33 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => stage.classList.remove("is-open", "is-closing"), 700);
   }
 
-  form.addEventListener("submit", (e) => { e.preventDefault(); dropAway(); });
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const msg = document.getElementById("msg").value.trim();
+    if (!name || !email || !msg) return;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Enviando…";
+    try {
+      const res = await fetch(CONTACT_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message: msg }),
+      });
+      if (res.ok) {
+        dropAway();
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Enviar";
+        alert("Error al enviar. Intentá de nuevo.");
+      }
+    } catch {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Enviar";
+      alert("Error al enviar. Intentá de nuevo.");
+    }
+  });
 
   gsap.from(".contact-eyebrow", {
     opacity: 0,

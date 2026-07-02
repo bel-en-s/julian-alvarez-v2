@@ -161,7 +161,7 @@ function initWorkTimeline() {
     lastProgress = p
     walkDist += delta * 280
 
-    const yPos = -8 + p * 116
+    const yPos = p * 100
 
     const fx = 0, fy = 1
     const nx = 1, ny = 0
@@ -219,13 +219,6 @@ function initWorkTimeline() {
     spEl.style.top = yPos + "%"
   }
 
-  const endOffset = 2809
-  timeline.style.height = endOffset + "px"
-  timeline.style.bottom = "auto"
-
-  const spiderEndEl = workSection.querySelectorAll(".row--first")[1]
-  const spiderEndOffset = spiderEndEl ? spiderEndEl.offsetTop + spiderEndEl.offsetHeight : endOffset
-
   ScrollTrigger.create({
     trigger: workSection,
     start: "top bottom",
@@ -233,10 +226,8 @@ function initWorkTimeline() {
     scrub: 1,
     onUpdate: (self) => {
       const p = self.progress
-      const scrollPos = p * endOffset
-      const spiderP = Math.min(scrollPos / spiderEndOffset, 1)
-      progress.style.height = spiderP * 100 + "%"
-      updateSpider(spiderP)
+      progress.style.height = p * 100 + "%"
+      updateSpider(p)
       spEl.style.display = "block"
     },
   })

@@ -327,11 +327,17 @@
 
 @media (max-width: 760px) {
   .next-match {
-    left: auto;
-    right: 1rem;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
     width: auto;
     bottom: 16px;
     padding: 14px 16px 12px;
+  }
+  .next-match.is-min {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 
   .next-match .countdown .n {
@@ -348,8 +354,6 @@
 
   .next-match.is-min {
     width: 160px;
-    left: auto;
-    right: 1rem;
     padding: 8px 12px 8px 16px;
   }
 

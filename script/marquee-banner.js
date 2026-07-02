@@ -153,9 +153,19 @@ gsap.registerPlugin(ScrollTrigger);
   /* ---- scale stage to fit ---- */
   var resizeTimer = null;
   function fit() {
-    var s = Math.min(innerWidth / 1366, innerHeight / 768);
-    if (!s || !isFinite(s) || s <= 0) return;
-    stage.style.transform = "scale(" + s + ")";
+    if (window.innerWidth < 768) {
+      stage.style.transform = "";
+      stage.style.width = "";
+      stage.style.height = "";
+      stage.style.flex = "";
+    } else {
+      stage.style.width = "1366px";
+      stage.style.height = "768px";
+      stage.style.flex = "0 0 auto";
+      var s = Math.min(innerWidth / 1366, innerHeight / 768);
+      if (!s || !isFinite(s) || s <= 0) return;
+      stage.style.transform = "scale(" + s + ")";
+    }
   }
   window.addEventListener("resize", function () {
     if (resizeTimer) cancelAnimationFrame(resizeTimer);
@@ -269,7 +279,20 @@ gsap.registerPlugin(ScrollTrigger);
   }
 
   banner.addEventListener("touchmove", handleTouch, { passive: true });
-  banner.addEventListener("touchstart", handleTouch, { passive: true });
+
+  /* ---- stop lenis scroll while drawing on mobile ---- */
+  banner.addEventListener("touchstart", function (e) {
+    handleTouch(e);
+    if (window.innerWidth < 768 && window.lenis) {
+      window.lenis.stop();
+    }
+  }, { passive: true });
+
+  banner.addEventListener("touchend", function () {
+    if (window.innerWidth < 768 && window.lenis) {
+      window.lenis.start();
+    }
+  }, { passive: true });
 
   function tickAll(now) {
     if (started) {
