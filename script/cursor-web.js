@@ -110,7 +110,7 @@ const onMove = (e) => {
   lastPt = { x: e.clientX, y: e.clientY };
 };
 
-const onLeave = () => { lastPt = null; lines = []; };
+const onLeave = () => { lastPt = null; };
 
 if (window.innerWidth >= 640) {
   sections.forEach(function (el) {

@@ -330,7 +330,7 @@ body {
   grid-template-columns: repeat(5, 1fr);
   gap: 32px;
   overflow: hidden;
-  padding-bottom :30vh;
+  padding-bottom :10vh;
 }
 .partido-grid + .partido-grid {
   margin-top: 40px;
@@ -375,10 +375,11 @@ body {
 .partido-img-label {
   text-align: center;
   padding: 10px 0 0;
-  font-family: var(--f-h);
-  font-size: clamp(14px, 1.2vw, 18px);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-weight: 350;
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
   color: #fff;
 }
 

@@ -397,7 +397,6 @@
 
 .partidos {
   padding: clamp(96px, 12vh, 160px) var(--page-pad) clamp(96px, 12vh, 140px);
-  max-width: 1600px;
   margin: 0 auto;
 }
 
