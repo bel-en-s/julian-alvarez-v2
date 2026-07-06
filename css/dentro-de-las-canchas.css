@@ -285,8 +285,7 @@
   color: #fff;
 }
 
-.palmares .hero-gradient-text,
-.partidos .hero-gradient-text {
+.palmares .hero-gradient-text {
   display: inline-block;
   background: linear-gradient(to bottom, #FFFFFF, var(--ja-amethyst-300));
   -webkit-background-clip: text;
@@ -434,7 +433,6 @@
   margin-top: 18px;
   font-size: clamp(44px, 5vw, 72px);
   line-height: .96;
-  color: var(--fg-1);
 }
 
 .partidos-sub {
@@ -522,9 +520,9 @@
 
 .partido-img img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .slot-a {

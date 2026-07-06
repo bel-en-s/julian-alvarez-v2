@@ -321,7 +321,11 @@ document.querySelectorAll(".partido").forEach((partido) => {
   const head = partido.querySelector(".partido-head")
   if (!grid || !head) return
 
-  gsap.set(grid, { height: 0, opacity: 0 })
+  if (partido.classList.contains("is-open")) {
+    gsap.set(grid, { height: "auto", opacity: 1, visibility: "visible" })
+  } else {
+    gsap.set(grid, { height: 0, opacity: 0 })
+  }
 
   head.addEventListener("click", () => {
     const isOpen = partido.classList.toggle("is-open")

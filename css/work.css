@@ -293,7 +293,7 @@
   margin-bottom: 0;
 }
 
-.work-items::after {
+/* .work-items::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -304,7 +304,7 @@
   background: linear-gradient(to bottom, #1F1535 0%, #1F1535 5%, #1a122b 23%, transparent 32%);
   pointer-events: none;
   z-index: 0;
-}
+} */
 
 
 

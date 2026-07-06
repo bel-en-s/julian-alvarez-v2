@@ -137,7 +137,7 @@
   z-index: 2;
 }
 
-.hero .hero-gradient {
+/* .hero .hero-gradient {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -146,7 +146,7 @@
   background: linear-gradient(to top, #1E1634, transparent);
   z-index: 4;
   pointer-events: none;
-}
+} */
 
 .dot-matrix-wrapper {
   position: absolute;
