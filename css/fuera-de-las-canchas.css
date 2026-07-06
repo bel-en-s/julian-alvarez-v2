@@ -372,17 +372,6 @@ body {
   cursor: pointer;
 }
 
-.partido-img-label {
-  text-align: center;
-  padding: 10px 0 0;
-  font-weight: 350;
-  font-size: 17px;
-  line-height: 1.5;
-  letter-spacing: 0.01em;
-  text-transform: lowercase;
-  color: #fff;
-}
-
 /* ── Scattered placement (desktop) ────── */
 
 .slot-double {
@@ -587,5 +576,27 @@ body {
   }
   .slot-tall {
     margin-top: 60px;
+  }
+
+  .slot-double:not(.mt-neg) {
+    margin-top: 0 !important;
+  }
+
+  .slot-double.mt-neg {
+    margin-top: 150px !important;
+  }
+
+  .xiaomi-mt {
+    margin-top: 120px !important;
+  }
+
+  .row-mt {
+    margin-top: 200px !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .mt-neg {
+    margin-top: -20vh;
   }
 }
