@@ -747,6 +747,17 @@ function initWorkTimeline() {
   const workSection = document.querySelector(".work-items");
   if (!timeline || !progress || !workSection) return;
 
+  const firstRow = workSection.querySelector(".row--first");
+  const row2021 = workSection.querySelector(".row--2021");
+  if (!firstRow || !row2021) return;
+
+  const tlTop = firstRow.offsetTop;
+  const OFFSET = 80;
+  const tlHeight = row2021.offsetTop - firstRow.offsetTop + OFFSET;
+  timeline.style.top = tlTop + "px";
+  timeline.style.height = tlHeight + "px";
+  timeline.style.bottom = "auto";
+
   const spEl = document.createElement("div");
   spEl.style.position = "absolute";
   spEl.style.left = "50%";
@@ -873,8 +884,9 @@ function initWorkTimeline() {
   }
 
   ScrollTrigger.create({
-    trigger: workSection,
-    start: "top 85%",
+    trigger: firstRow,
+    start: "top 87%",
+    endTrigger: timeline,
     end: "bottom bottom",
     scrub: true,
     onUpdate: (self) => {
