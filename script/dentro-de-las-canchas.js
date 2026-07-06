@@ -350,15 +350,13 @@ document.querySelectorAll(".partido").forEach((partido) => {
   })
 })
 
-// Hover animation for trophy cards
+// Violeta hover — solo fondo, sin escalado
 document.querySelectorAll(".t-card").forEach((card) => {
-  const img = card.querySelector(".t-icon")
+  const img = card.querySelector(".trofeo")
   card.addEventListener("mouseenter", () => {
-    gsap.to(card, { scale: 1.04, y: -8, duration: 0.4, ease: "power2.out" })
-    if (img) gsap.to(img, { scale: 1.15, duration: 0.4, ease: "power2.out" })
+    if (img) gsap.to(img, { scale: 1.08, duration: 0.4, ease: "power2.out" })
   })
   card.addEventListener("mouseleave", () => {
-    gsap.to(card, { scale: 1, y: 0, duration: 0.4, ease: "power2.out" })
     if (img) gsap.to(img, { scale: 1, duration: 0.4, ease: "power2.out" })
   })
 })

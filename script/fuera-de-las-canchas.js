@@ -19,21 +19,25 @@ document.addEventListener("DOMContentLoaded", () => {
   initTextReveals();
   initGalleryParallax();
   function initHeroAnimations() {
+    const heroH1 = document.querySelector(".fdc-hero-inner h1");
+    if (heroH1) {
+      const split = new SplitText(heroH1, { type: "chars", charsClass: "hero-char" });
+      gsap.fromTo(split.chars,
+        { y: -400, opacity: 0, visibility: "visible" },
+        { y: 0, opacity: 1, duration: 0.7, stagger: 0.035, ease: "power4.out", delay: 0.3,
+          onComplete: () => gsap.set(split.chars, { clearProps: "transform" })
+        }
+      );
+    }
+
     const targets = section.querySelectorAll(
       ".fdc-hero-inner > [data-copy-wrapper]"
     );
     if (!targets.length) return;
 
-    gsap.set(targets, { y: 60, opacity: 0 });
-
-    const tl = gsap.timeline({ delay: 0.3 });
-    tl.to(targets, {
-      y: 0,
-      opacity: 1,
-      duration: 1.2,
-      stagger: 0.15,
-      ease: "power4.out",
-      overwrite: "auto",
+    gsap.set(targets, { y: 40, opacity: 0 });
+    gsap.to(targets, {
+      y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power4.out", delay: 0.3,
     });
   }
 

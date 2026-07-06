@@ -339,14 +339,39 @@
   box-shadow: 0 12px 40px rgba(81, 57, 141, .25);
 }
 
-.t-icon {
-  width: min(80px, 50%);
+.trofeo { display: block; overflow: visible; }
+.trofeo .tj-strand {
+  fill: none;
+  stroke: rgba(244, 244, 244, .62);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dashoffset 1.5s cubic-bezier(.2, .7, .15, 1), stroke .4s ease;
+}
+.trofeo .tj-chord {
+  stroke: rgba(138, 117, 184, .26);
+  stroke-width: .55;
+  opacity: 0;
+  transition: opacity .9s ease;
+}
+.trofeo .tj-node {
+  fill: var(--ja-amethyst-300);
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+.trofeo .tj-node--hot { fill: var(--neutral-light); }
+.is-in .tj-strand { stroke-dashoffset: 0 !important; }
+.is-in .tj-chord { opacity: 1; }
+.is-in .tj-node { opacity: .55; }
+.is-in .tj-node--hot { opacity: .95; }
+
+.t-card .trofeo {
+  width: min(140px, 62%);
   height: auto;
   margin: 0 auto 22px;
-  font-size: 3rem;
-  line-height: 1;
   filter: drop-shadow(0 0 12px rgba(81, 57, 141, .4));
 }
+.t-card:hover .tj-strand { stroke: rgba(244, 244, 244, .85); }
 
 .t-name {
   font-family: var(--f-h);
@@ -385,18 +410,19 @@
   right: 16px;
   font-family: var(--f-h);
   font-weight: 600;
-  font-size: 11px;
-  letter-spacing: .1em;
+  font-size: 15px;
+  letter-spacing: .06em;
   color: var(--ja-amethyst-300);
-  border: 1px solid rgba(138, 117, 184, .35);
+  border: 1.5px solid rgba(138, 117, 184, .4);
   border-radius: 999px;
-  padding: 4px 9px;
+  padding: 6px 12px;
 }
 
 /* ── Partido a partido ──────────────────────────────── */
 
 .partidos {
   padding: clamp(96px, 12vh, 160px) var(--page-pad) clamp(96px, 12vh, 140px);
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -524,6 +550,15 @@
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .trofeo .tj-strand {
+    transition: none;
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .trofeo .tj-chord, .trofeo .tj-node { transition: none; }
+  .tj-chord { opacity: 1; }
+  .tj-node { opacity: .55; }
+  .tj-node--hot { opacity: .95; }
 }
 
 .partido-head {
