@@ -255,13 +255,13 @@
   font-size: 0.8rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 767px) {
   .about-sticky-cards .gallery-card {
     width: 75%;
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 767px) {
   .anime-text-container .copy-container h1 {
     width: 90%;
     font-size: 2rem;

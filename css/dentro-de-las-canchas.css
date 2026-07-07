@@ -218,7 +218,7 @@
   z-index: 1;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 767px) {
   .ddc-hero {
     height: 100dvh;
   }

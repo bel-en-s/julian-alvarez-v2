@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const allWrappers = [...wrappers, ...galeriaWrappers];
 
     allWrappers.forEach((container) => {
-      const isMobile = window.innerWidth < 1000;
+      const isMobile = window.innerWidth < 768;
 
       const ctx = gsap.context(() => {
         const elements = Array.from(container.children);
@@ -412,7 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initFdcShader() {
     const galeria = document.querySelector('.partidos');
-    if (!galeria || window.innerWidth < 1000 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!galeria || window.innerWidth < 768 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const wrapper = document.createElement("div");
     wrapper.className = "dot-matrix-wrapper";

@@ -128,7 +128,7 @@ footer a {
   color: var(--base-100);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 767px) {
   footer {
     height: max-content;
     padding-top: 8rem;

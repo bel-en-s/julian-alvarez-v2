@@ -39,8 +39,9 @@ if (video && wrapper) {
   };
 
   const toggleSound = () => {
-    if (video.volume > 0) {
-      activeVolume = video.volume;
+    gsap.killTweensOf(video);
+    if (volState !== "muted") {
+      activeVolume = video.volume || 0;
       gsap.to(video, {
         volume: 0,
         duration: 0.2,
@@ -83,4 +84,46 @@ if (video && wrapper) {
 
   if (playBtn) playBtn.addEventListener("click", (e) => { e.stopPropagation(); togglePlay(); });
   if (soundBtn) soundBtn.addEventListener("click", (e) => { e.stopPropagation(); toggleSound(); });
+
+  let savedVolState = null;
+  let savedActiveVol = 0;
+  const aboutSection = wrapper.closest(".about");
+  if (aboutSection) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          if (volState !== "muted") {
+            savedVolState = volState;
+            savedActiveVol = activeVolume;
+            gsap.killTweensOf(video);
+            gsap.to(video, {
+              volume: 0,
+              duration: 0.15,
+              ease: "power2.out",
+              onComplete: () => {
+                volState = "muted";
+                if (soundBtn) soundBtn.innerHTML = muteSvg;
+              },
+            });
+          }
+        } else if (savedVolState && savedVolState !== "muted") {
+          const restoreVol = savedActiveVol > 0 ? savedActiveVol : LOW_VOL;
+          video.muted = false;
+          activeVolume = restoreVol;
+          volState = savedVolState;
+          gsap.killTweensOf(video);
+          gsap.to(video, {
+            volume: restoreVol,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+          if (soundBtn)
+            soundBtn.innerHTML = savedVolState === "low" ? lowSvg : highSvg;
+          savedVolState = null;
+          savedActiveVol = 0;
+        }
+      });
+    }, { threshold: 0 });
+    obs.observe(aboutSection);
+  }
 }

@@ -166,7 +166,7 @@
   color: var(--base-secondary-dark);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 767px) {
   .menu {
     width: 90%;
     max-width: none;

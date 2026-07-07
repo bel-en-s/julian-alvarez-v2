@@ -159,7 +159,7 @@ function bindWeb(card, cv) {
     }, 30);
   }
 
-  if (window.innerWidth >= 1000) {
+  if (window.innerWidth >= 768) {
     card.addEventListener("pointerenter", onEnter);
     card.addEventListener("pointermove", onMove);
     card.addEventListener("pointerleave", onLeave);
@@ -167,7 +167,7 @@ function bindWeb(card, cv) {
 
   return () => {
     ro.disconnect();
-    if (window.innerWidth >= 1000) {
+    if (window.innerWidth >= 768) {
       card.removeEventListener("pointerenter", onEnter);
       card.removeEventListener("pointermove", onMove);
       card.removeEventListener("pointerleave", onLeave);

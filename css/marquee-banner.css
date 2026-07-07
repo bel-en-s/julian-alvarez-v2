@@ -191,7 +191,7 @@
   transition: none;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 768px) {
   .df-dentro .df-small,
   .df-fuera .df-small {
     will-change: transform;
@@ -323,7 +323,7 @@
 }
 
 /* ---- responsive ---- */
-@media (max-width: 1000px) {
+@media (max-width: 767px) {
   .df-lockup .df-big { font-size: clamp(48px, 10vw, 80px); }
   .df-lockup .df-small { font-size: clamp(16px, 3.5vw, 24px); }
   .df-dentro { left: 5%; top: 15%; }

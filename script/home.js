@@ -63,7 +63,7 @@ function initBlockReveal() {
 function startEntryAnimations(hasDelay = false) {
   const heroNames = document.querySelectorAll(".hero-name");
   if (heroNames.length) {
-    if (window.innerWidth >= 1000) {
+    if (window.innerWidth >= 768) {
       const heroChars = [];
       heroNames.forEach((el) => {
         const split = new SplitText(el, { type: "chars", charsClass: "hero-char" });
@@ -99,7 +99,7 @@ function startEntryAnimations(hasDelay = false) {
   }
 
   const heroImgWrapper = document.querySelector(".hero-header-img");
-  if (heroImgWrapper && window.innerWidth >= 1000) {
+  if (heroImgWrapper && window.innerWidth >= 768) {
     if (hasDelay) heroImgWrapper.style.animationDelay = "0.5s";
     heroImgWrapper.classList.add("hero-header-img--enter");
     heroImgWrapper.addEventListener("animationend", () => {
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const aboutTitle = document.querySelector(".slide-title h1");
 
   if (aboutSection) {
-    if (window.innerWidth >= 1000) {
+    if (window.innerWidth >= 768) {
       ScrollTrigger.create({
         trigger: aboutSection,
         start: "top top",
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (aboutDesc || aboutTitle) {
-      if (window.innerWidth >= 1000) {
+      if (window.innerWidth >= 768) {
         gsap.to(".about-word", {
           "--highlight-offset": "100%",
           stagger: 0.4,
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const videoGraySection = document.querySelector(".row--video-gray");
-  if (videoGraySection && window.innerWidth >= 1000) {
+  if (videoGraySection && window.innerWidth >= 768) {
     ScrollTrigger.create({
       trigger: videoGraySection,
       start: "top bottom",
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const smoothStep = (p) => p * p * (3 - 2 * p);
 
-  if (window.innerWidth > 1000) {
+  if (window.innerWidth > 768) {
     ScrollTrigger.create({
       trigger: ".home-services",
       start: "top top",
@@ -572,7 +572,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ScrollTrigger.refresh();
   }
 
-  if (window.innerWidth >= 1000) {
+  if (window.innerWidth >= 768) {
     if (document.querySelector(".work-header")) {
       gsap.set(".work-header-arrow-icon", { scale: 0 });
 
@@ -625,7 +625,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (window.innerWidth >= 1000) {
+  if (window.innerWidth >= 768) {
     const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350].map(function(a) { return a * 0.15; });
     const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4];
     gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
@@ -695,7 +695,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // MI HISTORIA char-by-char entrance (typewriter)
   const miHistoria = document.getElementById("mi-historia-text");
-  if (miHistoria && window.innerWidth >= 1000) {
+  if (miHistoria && window.innerWidth >= 768) {
     const fullText = miHistoria.textContent;
     miHistoria.textContent = "";
 

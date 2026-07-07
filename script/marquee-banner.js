@@ -155,7 +155,7 @@ gsap.registerPlugin(ScrollTrigger);
   /* ---- blob system (batched RAF) ---- */
   if (!banner || !blobContainer || !smudgeSVG) return;
 
-  var isMobile = window.innerWidth < 1000;
+  var isMobile = window.innerWidth < 768;
   var pointer = { x: 0, y: 0 };
   var smooth = { x: 0, y: 0 };
   var started = false;
@@ -377,7 +377,7 @@ gsap.registerPlugin(ScrollTrigger);
   });
 
   /* ---- scroll-scale effect for dento/fuera lockups ---- */
-  if (section && window.innerWidth >= 1000) {
+  if (section && window.innerWidth >= 768) {
     ScrollTrigger.create({
       trigger: section,
       start: "top bottom",

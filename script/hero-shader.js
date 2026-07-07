@@ -169,7 +169,7 @@ function hexToRgb(hex) {
 }
 
 const hero = document.querySelector(".hero");
-if (hero && window.innerWidth >= 1000 && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+if (hero && window.innerWidth >= 768 && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const wrapper = document.createElement("div");
   wrapper.className = "dot-matrix-wrapper";
   hero.prepend(wrapper);

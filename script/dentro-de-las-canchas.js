@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 })
 
-if (window.innerWidth >= 1000) {
+if (window.innerWidth >= 768) {
   const amounts = [-400, -500, -300, -600, -400, -350, -550, -320, -480, -650].map(a => a * 0.15)
   const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4]
 

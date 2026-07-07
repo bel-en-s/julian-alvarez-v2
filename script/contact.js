@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "power2.out",
   });
 
-  if (window.innerWidth >= 1000 && rig) {
+  if (window.innerWidth >= 768 && rig) {
     rig.addEventListener("animationend", () => {
       gsap.set(rig, { opacity: 1, x: 0, y: 0, rotation: 0 });
       rig.style.animation = "none";

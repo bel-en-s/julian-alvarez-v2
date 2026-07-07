@@ -325,7 +325,7 @@
   #hero-webs .ha-corner.br { transform: scale(-1, -1) !important; }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 767px) {
   .hero .container {
     padding: 0;
   }

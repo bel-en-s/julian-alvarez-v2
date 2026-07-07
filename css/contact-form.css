@@ -196,7 +196,7 @@
   margin: 0;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 767px) {
   .contact-form {
     padding: 4rem 1.5rem 2rem;
     gap: 2rem;
