@@ -327,7 +327,7 @@
 
 @media (max-width: 760px) {
   .next-match {
-    left: 50%;
+    /* left: 50%; */
     right: auto;
     transform: translateX(-50%);
     width: auto;

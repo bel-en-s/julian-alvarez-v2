@@ -280,8 +280,8 @@ body {
   }
 
   .fdc-hero-inner h1 {
-    font-size: clamp(44px, 10vw, 64px);
-    line-height: .9;
+    font-size: clamp(56px, 12vw, 76px);
+    line-height: .88;
   }
 
   .fdc-hero-inner h1 em {
@@ -566,7 +566,6 @@ body {
   .partido-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-    row-gap: 180px;
   }
   .grid-spacer {
     display: none;
