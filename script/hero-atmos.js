@@ -1,3 +1,71 @@
+/* ---- web builders (shared with dentro/fuera) ---- */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    var t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function buildRealWeb(svg, o) {
+  var hx = o.hx, hy = o.hy, sx = o.sx, sy = o.sy, N = o.N, maxR = o.maxR, factor = o.factor, start = o.start;
+  var rnd = mulberry32(o.seed);
+  var jit = function (m) { return (rnd() * 2 - 1) * m; };
+  var angJit = 2.6 + (o.irreg || 0) * 7;
+  var dirs = [], rScale = [];
+  for (var i = 0; i < N; i++) {
+    var even = 4 + (86 - 4) * (i / (N - 1));
+    var a = (even + jit(angJit)) * Math.PI / 180;
+    dirs.push([Math.cos(a), Math.sin(a)]);
+    rScale.push(1 + jit(0.13 * (o.irreg || 0)));
+  }
+  var P = function (i, r) {
+    return [(hx + sx * r * dirs[i][0]).toFixed(1), (hy + sy * r * dirs[i][1]).toFixed(1)];
+  };
+  dirs.forEach(function (d, i) {
+    var r = maxR * rScale[i] * (0.86 + rnd() * 0.2);
+    var l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    l.setAttribute("x1", hx); l.setAttribute("y1", hy);
+    var p = P(i, r);
+    l.setAttribute("x2", p[0]); l.setAttribute("y2", p[1]);
+    l.setAttribute("class", "spoke");
+    l.setAttribute("stroke-width", (0.7 + rnd() * 0.35).toFixed(2));
+    svg.appendChild(l);
+  });
+  var ringR = [];
+  var r = start;
+  while (r < maxR * 0.96) { ringR.push(r); r *= (factor + rnd() * 0.08); }
+  ringR.forEach(function (rr) {
+    for (var i = 0; i < N - 1; i++) {
+      if (rnd() < (0.06 + (o.irreg || 0) * 0.10)) continue;
+      var jr = 0.05 + (o.irreg || 0) * 0.13;
+      var rA = rr * rScale[i] * (1 + jit(jr)), rB = rr * rScale[i + 1] * (1 + jit(jr));
+      var p1 = P(i, rA), p2 = P(i + 1, rB);
+      var mx = (+p1[0] + +p2[0]) / 2, my = (+p1[1] + +p2[1]) / 2;
+      var sag = 0.06 + rnd() * 0.06 + jit(0.06 * (o.irreg || 0));
+      var cx = (mx + (hx - mx) * sag).toFixed(1), cy = (my + (hy - my) * sag).toFixed(1);
+      var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      p.setAttribute("d", "M" + p1[0] + " " + p1[1] + " Q" + cx + " " + cy + " " + p2[0] + " " + p2[1]);
+      p.setAttribute("class", rnd() < 0.10 ? "glint" : "capture");
+      p.setAttribute("stroke-width", (0.55 + rnd() * 0.3).toFixed(2));
+      svg.appendChild(p);
+    }
+  });
+  for (var k = 0; k < 2; k++) {
+    var i0 = 1 + k * 3;
+    var rr2 = maxR * (0.74 + k * 0.12);
+    var p1 = P(i0, rr2), p2 = P(Math.min(i0 + 3, N - 1), rr2 * 1.02);
+    var mx = (+p1[0] + +p2[0]) / 2, my = (+p1[1] + +p2[1]) / 2;
+    var cx = (mx + (hx - mx) * 0.04).toFixed(1), cy = (my + (hy - my) * 0.04).toFixed(1);
+    var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttribute("d", "M" + p1[0] + " " + p1[1] + " Q" + cx + " " + cy + " " + p2[0] + " " + p2[1]);
+    p.setAttribute("class", "frame-thread");
+    p.setAttribute("stroke-width", "0.9");
+    svg.appendChild(p);
+  }
+}
+
 function initHeroAtmos() {
   const hero = document.querySelector('.hero');
   if (!hero) return;
@@ -33,6 +101,11 @@ function initHeroAtmos() {
   });
 
   hero.appendChild(webs);
+
+  var hWebTl = hero.querySelector('.hero-web-tl');
+  var hWebBr = hero.querySelector('.hero-web-br');
+  if (hWebTl) buildRealWeb(hWebTl, { hx: 0, hy: 0, sx: 1, sy: 1, seed: 13, N: 9, maxR: 900, factor: 1.30, start: 52, irreg: 0.22 });
+  if (hWebBr) buildRealWeb(hWebBr, { hx: 1366, hy: 768, sx: -1, sy: -1, seed: 53, N: 12, maxR: 660, factor: 1.24, start: 40, irreg: 0.92 });
 
   const curtain = document.querySelector('.curtain');
   if (curtain && !document.getElementById('curtain-webs')) {

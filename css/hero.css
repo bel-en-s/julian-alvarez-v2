@@ -6,6 +6,21 @@
   background: linear-gradient(to bottom, transparent 10%, #51398D 100%);
 }
 
+.hero-web {
+  position: absolute;
+  inset: 0;
+  z-index: 1001;
+  pointer-events: none;
+  overflow: visible;
+}
+
+
+
+.hero-web .spoke { fill: none; stroke: rgba(255,255,255,.09); }
+.hero-web .capture { fill: none; stroke: rgba(255,255,255,.06); }
+.hero-web .frame-thread { fill: none; stroke: rgba(255,255,255,.12); }
+.hero-web .glint { fill: none; stroke: rgba(231,225,245,.18); }
+
 .hero::after {
   content: '';
   position: absolute;
@@ -158,9 +173,7 @@
   z-index: 0;
 }
 
-.hero {
-  background: linear-gradient(to bottom, transparent 10%, color-mix(in srgb, #51398D 60%, transparent) 100%);
-}
+
 
 .dot-matrix-wrapper canvas {
   width: 100%;

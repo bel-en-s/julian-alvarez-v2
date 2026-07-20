@@ -8,7 +8,7 @@ Object.assign(canvas.style, {
   width: "100%",
   height: "100%",
   pointerEvents: "none",
-  zIndex: "-1",
+  zIndex: "5",
   display: "block",
 });
 document.body.prepend(canvas);
@@ -104,9 +104,9 @@ const onMove = (e) => {
     (a.x - e.clientX) * (a.x - e.clientX) + (a.y - e.clientY) * (a.y - e.clientY)
     - ((b.x - e.clientX) * (b.x - e.clientX) + (b.y - e.clientY) * (b.y - e.clientY))
   );
-  pushLine(sorted[0].x, sorted[0].y, e.clientX, e.clientY, 0.55);
-  pushLine(sorted[1].x, sorted[1].y, e.clientX, e.clientY, 0.32);
-  if (lastPt) pushLine(lastPt.x, lastPt.y, e.clientX, e.clientY, 0.7);
+  pushLine(sorted[0].x, sorted[0].y, e.clientX, e.clientY, 0.25);
+  pushLine(sorted[1].x, sorted[1].y, e.clientX, e.clientY, 0.15);
+  if (lastPt) pushLine(lastPt.x, lastPt.y, e.clientX, e.clientY, 0.35);
   lastPt = { x: e.clientX, y: e.clientY };
 };
 
