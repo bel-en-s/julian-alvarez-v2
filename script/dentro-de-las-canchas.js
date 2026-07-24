@@ -36,6 +36,18 @@ if (window.innerWidth >= 768) {
     if (src.includes("Anexo 6")) return
     if (src.includes("Anexo 8")) return
 
+    // entrance animation
+    if (img) {
+      gsap.fromTo(img,
+        { scale: 1.15, opacity: 0, filter: "blur(6px)" },
+        {
+          scale: 1, opacity: 1, filter: "blur(0px)",
+          duration: 1.4, ease: "power3.out",
+          scrollTrigger: { trigger: wrapper, start: "top 85%", once: true }
+        }
+      )
+    }
+
     let amount = amounts[i % amounts.length]
     if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12
     if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12

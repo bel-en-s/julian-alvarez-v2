@@ -151,7 +151,9 @@
     var hero = document.querySelector('.hero');
     if (!hero) return 0;
     var rect = hero.getBoundingClientRect();
-    return clamp(-rect.top / rect.height, 0, 1);
+    var progress = -rect.top / rect.height;
+    if (window.innerWidth < 768) progress *= 0.6;
+    return clamp(progress, 0, 1);
   }
 
   function loop() {

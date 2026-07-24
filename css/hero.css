@@ -4,7 +4,12 @@
   height: 100svh;
   overflow: hidden;
   background: linear-gradient(to bottom, transparent 10%, #51398D 100%);
+  isolation: isolate;
 }
+
+/* ============================================================
+   Background layers: webs, shader, atmos
+   ============================================================ */
 
 .hero-web {
   position: absolute;
@@ -12,14 +17,13 @@
   z-index: 1001;
   pointer-events: none;
   overflow: visible;
+  opacity: 0.15;
 }
 
-
-
-.hero-web .spoke { fill: none; stroke: rgba(255,255,255,.09); }
-.hero-web .capture { fill: none; stroke: rgba(255,255,255,.06); }
-.hero-web .frame-thread { fill: none; stroke: rgba(255,255,255,.12); }
-.hero-web .glint { fill: none; stroke: rgba(231,225,245,.18); }
+.hero-web .spoke { fill: none; stroke: rgba(255,255,255,.04); }
+.hero-web .capture { fill: none; stroke: rgba(255,255,255,.03); }
+.hero-web .frame-thread { fill: none; stroke: rgba(255,255,255,.06); }
+.hero-web .glint { fill: none; stroke: rgba(231,225,245,.08); }
 
 .hero::after {
   content: '';
@@ -33,136 +37,6 @@
   background: linear-gradient(to top, #1F2125 0%, transparent 100%);
 }
 
-.hero .container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  padding: 2rem;
-  max-width: 2000px;
-  margin: 0 auto;
-}
-
-.hero .hero-header {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 0 clamp(20px, 4vw, 56px);
-  z-index: 10;
-  pointer-events: none;
-  display: grid;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: 1fr 0 1fr;
-}
-
-.hero .hero-header .hero-name {
-  line-height: 1.3;
-  text-transform: uppercase;
-  margin: 0;
-  background: linear-gradient(to bottom, #FFFFFF, var(--ja-amethyst-300));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--ja-amethyst-400);
-  text-stroke: 1px var(--ja-amethyst-400);
-  paint-order: stroke fill;
-  letter-spacing: -.022em;
-  font-family: var(--font-display, "Big Shoulders Display", Impact, sans-serif);
-  font-weight: 800;
-  font-size: clamp(4rem, 16vw, 15rem);
-  margin-bottom: 10svh;
-  white-space: nowrap;
-  transform: translate3d(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 4px), 0);
-  transition: transform 0.15s ease-out;
-  will-change: transform;
-  visibility: hidden;
-}
-
-.hero .hero-header .hero-char {
-  visibility: visible;
-  background: linear-gradient(to bottom, #FFFFFF, var(--ja-amethyst-300));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--ja-amethyst-400);
-  text-stroke: 1px var(--ja-amethyst-400);
-  paint-order: stroke fill;
-}
-
-.hero .hero-header .hero-name--julian {
-  text-align: right;
-  justify-self: end;
-  margin-right: 5vw;
-}
-
-.hero .hero-header .hero-name--alvarez {
-  text-align: left;
-  justify-self: start;
-  margin-left: 5vw;
-}
-
-@keyframes hero-img-rise {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0%);
-  }
-}
-
-.hero .hero-header .hero-header-img {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: 100svh;
-  max-height: 100svh;
-  z-index: 6;
-  position: relative;
-  will-change: transform;
-  transform: translateY(100%);
-}
-
-.hero .hero-header .hero-header-img--enter {
-  animation: hero-img-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.hero .hero-header .hero-header-img img {
-  height: auto;
-  width: auto;
-  object-fit: contain;
-  max-height: 90svh;
-  transform: translate3d(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 8px), 0);
-  transition: transform 0.15s ease-out;
-  will-change: transform;
-}
-
-.hero .hero-header .hero-header-img canvas.hero-dissolve-canvas {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  display: block;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateX(-50%) translate3d(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 8px), 0);
-  will-change: transform;
-  z-index: 2;
-}
-
-/* .hero .hero-gradient {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 40%;
-  background: linear-gradient(to top, #1E1634, transparent);
-  z-index: 4;
-  pointer-events: none;
-} */
-
 .dot-matrix-wrapper {
   position: absolute;
   top: 0;
@@ -172,8 +46,6 @@
   pointer-events: none;
   z-index: 0;
 }
-
-
 
 .dot-matrix-wrapper canvas {
   width: 100%;
@@ -275,6 +147,7 @@
   to   { opacity: 0.85; transform: scale(1.08); }
 }
 
+/* corner webs (hero-atmos.js) */
 #hero-webs {
   position: absolute;
   inset: 0;
@@ -282,7 +155,6 @@
   pointer-events: none;
   overflow: hidden;
   contain: paint layout;
-  display: none;
 }
 
 #hero-webs .ha-corner {
@@ -291,9 +163,9 @@
   height: 45vmin;
   max-width: 700px;
   max-height: 700px;
-  opacity: 1.9;
+  opacity: 0.55;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 0 6px rgba(168, 140, 230, 0.2));
+  filter: drop-shadow(0 0 10px rgba(168, 140, 230, 0.15));
   contain: paint layout;
 }
 
@@ -306,28 +178,343 @@
 
 #hero-webs .ha-corner svg .ray {
   fill: none;
-  stroke: rgba(216, 200, 245, 0.2);
+  stroke: rgba(216, 200, 245, 0.55);
   stroke-width: 0.7;
   stroke-linecap: round;
 }
 
 #hero-webs .ha-corner svg .arc {
   fill: none;
-  stroke: rgba(216, 200, 245, 0.25);
+  stroke: rgba(216, 200, 245, 0.6);
   stroke-width: 0.7;
   stroke-linecap: round;
 }
 
 #hero-webs .ha-corner svg .dew {
-  fill: rgba(244, 244, 244, 0.6);
+  fill: rgba(244, 244, 244, 0.85);
   stroke: none;
-  filter: drop-shadow(0 0 6px rgba(168, 140, 230, 0.6));
+  filter: drop-shadow(0 0 8px rgba(168, 140, 230, 0.8));
 }
 
 #hero-webs .ha-corner.tl { top: 0; left: 0; transform: translate3d(calc(var(--mx, 0) * 4px), calc(var(--my, 0) * 4px), 0); }
 #hero-webs .ha-corner.tr { top: 0; right: 0; transform: translate3d(calc(var(--mx, 0) * -4px), calc(var(--my, 0) * 4px), 0) scaleX(-1); }
 #hero-webs .ha-corner.bl { display: none; }
 #hero-webs .ha-corner.br { display: none; }
+
+/* ============================================================
+   Name — graphic background element behind the player
+   ============================================================ */
+
+.hero-name {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(5rem, 18vw, 22rem);
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hero-name-text {
+  display: block;
+  visibility: visible;
+  transform: scaleY(1.15) scaleX(0.95);
+  background: linear-gradient(to bottom, #FFFFFF, var(--ja-amethyst-300));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #fff;
+  text-stroke: 1.5px #fff;
+  paint-order: stroke fill;
+}
+
+.hero-name--julian {
+  text-align: center;
+  font-size: clamp(2rem, 6vw, 7rem);
+  pointer-events: auto;
+  margin-bottom: -0.15em;
+}
+
+.hero-name--julian .hero-name-text {
+  transform: scaleY(1.15) scaleX(0.82);
+}
+
+.hero-name--alvarez {
+  text-align: center;
+  font-size: clamp(7rem, 21vw, 30rem);
+  pointer-events: auto;
+}
+
+.hero-name--alvarez .hero-name-text {
+  transform: scaleY(1.15) scaleX(0.82);
+}
+
+
+
+.hero-alvarez-group {
+  position: absolute;
+  left: 50%;
+  top: 5vh;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-sub--above {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.55);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 0;
+  font-size: clamp(0.9rem, 1.3vw, 1.2rem);
+}
+
+.hero-name--front {
+  text-align: center;
+}
+
+.hero-name .hero-char {
+  visibility: visible;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #fff;
+  text-stroke: 1.5px #fff;
+  paint-order: stroke fill;
+}
+
+/* ============================================================
+   Player photo — centered, absolute protagonist
+   ============================================================ */
+
+@keyframes hero-img-rise {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0%); }
+}
+
+.hero-header-img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10%;
+  margin: 0 auto;
+  z-index: 5;
+  pointer-events: none;
+  height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+.hero-header-img--enter {
+  animation: hero-img-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-header-img img {
+  height: auto;
+  width: auto;
+  max-height: 80svh;
+  max-width: 42vw;
+  object-fit: contain;
+  transform: translate3d(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 8px), 0);
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.hero-header-img canvas.hero-dissolve-canvas {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%) translate3d(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 8px), 0);
+  will-change: transform;
+  z-index: 2;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  right: 2vw;
+  bottom: 38%;
+  z-index: 200;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: #1a1a2e;
+  animation: hero-scroll-breathe 4s ease-in-out infinite;
+}
+
+.hero-scroll-indicator span {
+  font-family: var(--font-support);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.hero-scroll-indicator__ring {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: hero-scroll-ring-spin 10s linear infinite;
+}
+
+.hero-scroll-indicator__ring i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0.35);
+  transform: rotate(calc(var(--i) * 45deg)) translateY(-57px);
+}
+
+.hero-scroll-indicator__ring i::after {
+  content: '→';
+  display: block;
+}
+
+@keyframes hero-scroll-ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hero-scroll-breathe {
+  0%, 100% { transform: scale(1) translateY(0); }
+  40% { transform: scale(1.04) translateY(-12px); }
+  70% { transform: scale(1.02) translateY(-4px); }
+}
+
+/* ============================================================
+   Subtitles — editorial detail
+   ============================================================ */
+
+.hero-sub {
+  font-family: var(--font-support, "Neue Montreal", sans-serif);
+  font-weight: 400;
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
+  letter-spacing: .04em;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .hero-bg-name {
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 1rem;
+    top: auto;
+    margin-top: 12vh;
+  }
+
+  .hero-name {
+    font-size: clamp(2rem, 14vw, 6rem);
+    line-height: 1;
+    letter-spacing: -.03em;
+  }
+
+  .hero-name-text {
+    transform: scaleY(1.05) scaleX(0.95);
+    -webkit-text-stroke-color: #362f48;
+    text-stroke-color: #362f48;
+    -webkit-text-stroke-width: 0.8px;
+    text-stroke-width: 0.8px;
+  }
+
+  .hero-name .hero-char {
+    -webkit-text-stroke-color: #362f48;
+    text-stroke-color: #362f48;
+    -webkit-text-stroke-width: 0.8px;
+    text-stroke-width: 0.8px;
+  }
+
+  .hero-name--julian {
+    align-self: center;
+    text-align: center;
+    margin-top: 0;
+    margin-left: 0;
+    font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+  }
+
+  .hero-name--alvarez {
+    font-size: clamp(5rem, 16vw, 20rem);
+  }
+
+  .hero-alvarez-group {
+    position: relative;
+    right: auto;
+    top: auto;
+    align-items: center;
+    margin-top: 10vh;
+  }
+
+  .hero-name .hero-char {
+    -webkit-text-stroke-color: #362f48;
+    text-stroke-color: #362f48;
+  }
+
+  .hero-name--front {
+    text-align: center;
+  }
+
+  .hero-sub--above {
+    display: none;
+  }
+
+  .hero-header-img {
+    top: auto;
+    bottom: 0;
+    height: 100svh;
+    width: 100vw;
+    z-index: 7;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transform: translateY(0) !important;
+  }
+
+  .hero-header-img img {
+    max-height: none !important;
+    max-width: none !important;
+    width: auto !important;
+    height: 78svh !important;
+    object-fit: contain !important;
+  }
+
+  .hero-scroll-indicator {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-name {
+    /* font-size: clamp(4rem, 20vw, 12rem); */
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   #hero-atmos .ha-fog,
@@ -336,64 +523,16 @@
   #hero-webs .ha-corner.tr { transform: scaleX(-1) !important; }
   #hero-webs .ha-corner.bl { transform: scaleY(-1) !important; }
   #hero-webs .ha-corner.br { transform: scale(-1, -1) !important; }
+  .hero-scroll-indicator__ring { animation: none !important; }
 }
 
-@media (max-width: 767px) {
-  .hero .container {
-    padding: 0;
+@media (min-width: 768px) {
+  .hero-scroll-indicator {
+    bottom: 12%;
+    width: 70px;
+    height: 70px;
   }
-
-  .hero .hero-header {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 0;
-    text-align: center;
-    padding: 0 1rem;
-  }
-
-  .hero .hero-header .hero-name--julian {
-    text-align: center;
-    justify-self: center;
-    margin: 0;
-    font-size: clamp(3rem, 18vw, 12rem);
-  }
-
-  .hero .hero-header .hero-name--alvarez {
-    text-align: center;
-    justify-self: center;
-    margin: 0;
-    font-size: clamp(4rem, 28vw, 15rem);
-  }
-
-  .hero .hero-header .hero-header-img {
-    grid-row: 3;
-    height: auto;
-    max-height: 50svh;
-  }
-
-  .hero .hero-header .hero-header-img img {
-    max-height: 50svh;
-  }
-
-  .hero .hero-header .hero-header-img canvas.hero-dissolve-canvas {
-    /* Inherit sizing from parent, handled by JS matching img rect */
-  }
-}
-
-@media (max-width: 900px) {
-  .hero .hero-header {
-    padding: 0 0.5rem;
-  }
-
-  .hero .hero-header .hero-name--julian {
-    font-size: clamp(36px, 25vw, 90px);
-    line-height: .84;
-    white-space: normal;
-  }
-
-  .hero .hero-header .hero-name--alvarez {
-    font-size: clamp(56px, 28vw, 120px);
-    line-height: .84;
-    white-space: normal;
+  .hero-scroll-indicator span {
+    font-size: 0.55rem;
   }
 }

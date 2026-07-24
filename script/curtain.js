@@ -65,11 +65,17 @@ if (section && img && ball) {
       const p = self.progress;
       const eased = gsap.parseEase("power3.out")(p);
 
-      if (!isMobile) {
-        gsap.set(img, {
-          rotation: 30 * (1 - eased),
-          scale: 0.75 + 0.25 * eased,
+      gsap.set(img, {
+        rotation: isMobile ? -6 + 12 * eased : 18 * (1 - eased),
+        scale: 0.75 + 0.25 * eased,
+      });
+      if (isMobile) {
+        gsap.set(ball, {
+          x: Math.sin(eased * Math.PI) * -40,
+          y: eased * 140,
+          rotation: eased * -120,
         });
+      } else {
         ballTl.progress(p);
       }
     },

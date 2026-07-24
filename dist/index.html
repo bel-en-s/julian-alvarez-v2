@@ -7,16 +7,16 @@
     <link rel="icon" href="/favicon.png" />
     <link rel="preload" href="/fonts/big-shoulder/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/neue-montreal/neue-montreal-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <script type="module" crossorigin src="/assets/main-h2SBFihX.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/menu-B0BHv3xU.js">
-    <link rel="modulepreload" crossorigin href="/assets/SplitText-Cpc1cBKW.js">
-    <link rel="modulepreload" crossorigin href="/assets/anime-CFrp1sPb.js">
-    <link rel="modulepreload" crossorigin href="/assets/three.module-BcibPuIU.js">
-    <link rel="stylesheet" crossorigin href="/assets/menu-C0OuARLH.css">
-    <link rel="stylesheet" crossorigin href="/assets/main-CdAqLjJ0.css">
-    <link rel="stylesheet" crossorigin href="/assets/home-BKcCk5Df.css">
-    <link rel="stylesheet" crossorigin href="/assets/work-BZsj8fXq.css">
-    <link rel="stylesheet" crossorigin href="/assets/contact-form-Dsipx5wS.css">
+    <script type="module" crossorigin src="/assets/main-B-lsJ_CL.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/menu-DvCSQO2f.js">
+    <link rel="modulepreload" crossorigin href="/assets/SplitText-C-wHGKK9.js">
+    <link rel="modulepreload" crossorigin href="/assets/anime-Bi-eiHPM.js">
+    <link rel="modulepreload" crossorigin href="/assets/three.module-KZwyKn98.js">
+    <link rel="stylesheet" crossorigin href="/assets/menu-Csk5z7ul.css">
+    <link rel="stylesheet" crossorigin href="/assets/SplitText-Dsipx5wS.css">
+    <link rel="stylesheet" crossorigin href="/assets/main-BhQw1xhr.css">
+    <link rel="stylesheet" crossorigin href="/assets/home-BA_Z9npm.css">
+    <link rel="stylesheet" crossorigin href="/assets/work-Qn9KBLSt.css">
   </head>
   <body>
     <div class="preloader-wrapper">
@@ -31,6 +31,7 @@
     <div class="page-texture"></div>
     <div class="transition-grid"></div>
 
+    <div id="nav-gradient"></div>
     <nav class="menu">
       <div class="menu-header">
         <a href="/" style="pointer-events: auto"><img class="menu-logo" src="/global/logo-spider.webp" alt="Julián Alvarez" /></a>
@@ -51,6 +52,16 @@
         <div class="ja-menu-arana__scrim" data-scrim></div>
         <div class="ja-menu-arana__frame" data-frame>
           <svg class="ja-menu-arana__web" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <linearGradient id="web-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1F1535"/>
+                <stop offset="100%" stop-color="#8A75B8"/>
+              </linearGradient>
+              <linearGradient id="web-gradient-soft" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1F1535"/>
+                <stop offset="100%" stop-color="#8A75B8" stop-opacity="0.5"/>
+              </linearGradient>
+            </defs>
             <path class="strand s1" d="M 744 52 Q 685 117 618 166"/>
             <path class="strand s2" d="M 744 52 Q 640 158 528 246"/>
             <path class="strand s3" d="M 744 52 Q 685 215 617 343"/>
@@ -92,15 +103,42 @@
     </div>
 
     <section class="hero">
-      <div class="container">
-        <div class="hero-header">
-          <span class="hero-name hero-name--julian">Julián</span>
-          <span class="hero-header-img">
-            <img src="/hero/hero.webp" alt="Julián Alvarez" />
-          </span>
-          <span class="hero-name hero-name--alvarez">Alvarez</span>
+      <!-- spider web backgrounds (populated by hero-atmos.js) -->
+      <svg class="hero-web hero-web-tl" viewBox="0 0 1366 768"></svg>
+      <svg class="hero-web hero-web-tr" viewBox="0 0 1366 768"></svg>
+      <svg class="hero-web hero-web-bl" viewBox="0 0 1366 768"></svg>
+      <svg class="hero-web hero-web-br" viewBox="0 0 1366 768"></svg>
+
+      <!-- name as graphic element behind the player -->
+      <div class="hero-alvarez-group">
+        <span class="hero-name hero-name--julian">
+          <span class="hero-name-text">JULIÁN</span>
+        </span>
+        <span class="hero-name hero-name--alvarez hero-name--front">
+          <span class="hero-name-text">ALVAREZ</span>
+        </span>
+      </div>
+
+
+
+      <!-- player photo wrapper (dissolve.js targets .hero-header-img) -->
+      <div class="hero-header-img">
+        <img src="/hero/hero.webp" alt="Julián Alvarez" />
+      </div>
+
+
+      <div class="hero-scroll-indicator">
+        <div class="hero-scroll-indicator__ring" aria-hidden="true">
+          <i style="--i:0"></i>
+          <i style="--i:1"></i>
+          <i style="--i:2"></i>
+          <i style="--i:3"></i>
+          <i style="--i:4"></i>
+          <i style="--i:5"></i>
+          <i style="--i:6"></i>
+          <i style="--i:7"></i>
         </div>
-        <div class="hero-gradient"></div>
+        <span>scroll</span>
       </div>
     </section>
 
@@ -293,7 +331,7 @@
         </div>
         <div class="work-item work-item--wide">
           <div class="work-item-img">
-            <img src="/bio/Anexo 6.webp" alt="" style="clip-path: inset(0 10%);" />
+            <img src="/bio/Anexo 6.webp" alt="" style="clip-path: inset(0 10% round 12px);" />
              <div class="row-content">
               <h3 class="text-static" style="margin-top: 3vh; text-align: center !important; margin-left: auto; margin-right: auto;">Mejor Jugador de América.</h3>
             </div>
@@ -481,7 +519,7 @@
    
     <section class="contact-form">
       <div class="cf-decorativa">
-        <img src="/work-items/decorativa.webp" alt="" />
+        <img src="/work-items/decorativa.png" alt="" />
       </div>
       <div class="cf-nav">
         <div class="cf-nav-row">
@@ -510,7 +548,7 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         NextMatch.mount({
-          kickoff: '2026-07-19T21:00:00+02:00',
+          kickoff: '2026-08-30T21:00:00+02:00',
           home: 'Atlético de Madrid',
           away: 'Real Madrid',
           competition: 'LaLiga',

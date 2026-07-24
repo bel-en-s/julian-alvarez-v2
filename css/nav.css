@@ -239,7 +239,7 @@
 .ja-menu-arana__web circle { fill: none; stroke-linecap: round; }
 
 .ja-menu-arana__web .strand {
-  stroke: var(--web-stroke);
+  stroke: url(#web-gradient);
   stroke-width: var(--web-w-thick);
   filter: drop-shadow(0 0 6px var(--web-glow));
   stroke-dasharray: 360;
@@ -247,14 +247,14 @@
 }
 
 .ja-menu-arana__web .auxiliary {
-  stroke: var(--web-stroke-soft);
+  stroke: url(#web-gradient-soft);
   stroke-width: var(--web-w-thin);
   stroke-dasharray: 360;
   stroke-dashoffset: 360;
 }
 
 .ja-menu-arana__web .nine {
-  stroke: var(--web-stroke);
+  stroke: url(#web-gradient);
   stroke-width: 0.95px;
   stroke-dasharray: 900;
   stroke-dashoffset: 900;
@@ -262,14 +262,14 @@
 }
 
 .ja-menu-arana__web .anchor {
-  fill: var(--web-stroke);
+  fill: url(#web-gradient);
   stroke: none;
   opacity: 0;
   filter: drop-shadow(0 0 4px var(--web-glow));
 }
 
 .ja-menu-arana__web .dangle {
-  stroke: var(--web-stroke-soft);
+  stroke: url(#web-gradient-soft);
   stroke-width: 0.55px;
   stroke-dasharray: 80;
   stroke-dashoffset: 80;

@@ -326,6 +326,90 @@ gsap.registerPlugin(ScrollTrigger);
   matchSVG();
   window.addEventListener("resize", matchSVG);
 
+  /* ---- auto-peel for mobile ---- */
+  if (isMobile) {
+    (function () {
+      var rect = banner.getBoundingClientRect();
+      var w = rect.width, h = rect.height;
+      var mode = 0;
+      var step = 0;
+      var maxSteps = 0;
+      var cx = w / 2, cy = h / 2;
+      var spiralDir = 1;
+      var totalModes = 4;
+
+      function nextMode() {
+        mode = (mode + 1) % totalModes;
+        step = 0;
+      }
+
+      function tickSweep() {
+        var x, y, t;
+        switch (mode) {
+          case 0:
+            t = step / 60;
+            x = 10 + t * (w - 20);
+            y = 10 + t * (h - 20);
+            burstAt(x, y);
+            step++;
+            if (step > 60) nextMode();
+            sweepTimer = setTimeout(tickSweep, 55);
+            break;
+          case 1:
+            t = step / 60;
+            x = w - 10 - t * (w - 20);
+            y = 10 + t * (h - 20);
+            burstAt(x, y);
+            step++;
+            if (step > 60) { nextMode(); spiralDir *= -1; }
+            sweepTimer = setTimeout(tickSweep, 55);
+            break;
+          case 2:
+            t = step / 100;
+            var rMin = 10, rMax = Math.min(w, h) * 0.4;
+            var a2 = step * 0.1 * spiralDir;
+            var rad = rMin + (rMax - rMin) * (1 - Math.abs(t * 2 - 1));
+            x = cx + Math.cos(a2) * rad;
+            y = cy + Math.sin(a2) * rad;
+            x = Math.max(5, Math.min(w - 5, x));
+            y = Math.max(5, Math.min(h - 5, y));
+            burstAt(x, y);
+            step++;
+            if (step > 100) nextMode();
+            sweepTimer = setTimeout(tickSweep, 50);
+            break;
+          case 3:
+            t = step / 100;
+            var rMin2 = 10, rMax2 = Math.min(w, h) * 0.4;
+            var a3 = step * 0.1 * -spiralDir;
+            var rad2 = rMin2 + (rMax2 - rMin2) * (1 - Math.abs(t * 2 - 1));
+            x = cx + Math.cos(a3) * rad2;
+            y = cy + Math.sin(a3) * rad2;
+            x = Math.max(5, Math.min(w - 5, x));
+            y = Math.max(5, Math.min(h - 5, y));
+            burstAt(x, y);
+            step++;
+            if (step > 100) nextMode();
+            sweepTimer = setTimeout(tickSweep, 50);
+            break;
+        }
+      }
+
+      var sweepTimer = setTimeout(tickSweep, 300);
+      var obs = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) {
+          clearTimeout(sweepTimer);
+        } else {
+          rect = banner.getBoundingClientRect();
+          w = rect.width; h = rect.height;
+          cx = w / 2; cy = h / 2;
+          sweepTimer = setTimeout(tickSweep, 100);
+        }
+      }, { threshold: 0 });
+      obs.observe(section);
+    })();
+  }
+
   /* ---- face === mask interaction ---- */
   var dentro = document.getElementById("df-dentro");
   var fuera = document.getElementById("df-fuera");

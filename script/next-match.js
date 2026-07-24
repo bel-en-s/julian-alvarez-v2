@@ -3,6 +3,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
+
 function getTimeLeft(kickoff) {
   const diff = new Date(kickoff).getTime() - Date.now();
   if (diff <= 0) return { days: "00", hours: "00", minutes: "00", seconds: "00" };
@@ -195,14 +197,6 @@ function mount(userOpts) {
     card.classList.toggle("is-min", minimized);
     toggle.setAttribute("aria-expanded", minimized ? "false" : "true");
     toggle.setAttribute("aria-label", minimized ? "Ampliar tarjeta" : "Minimizar tarjeta");
-
-    gsap.to(card, {
-      scale: minimized ? 0.92 : 1,
-      transformOrigin: "bottom left",
-      duration: 0.45,
-      ease: "power3.out",
-      overwrite: "auto",
-    });
   });
 
   function tick() {
@@ -226,13 +220,6 @@ function mount(userOpts) {
         card.classList.add("is-min");
         toggle.setAttribute("aria-expanded", "false");
         toggle.setAttribute("aria-label", "Ampliar tarjeta");
-        gsap.to(card, {
-          scale: 0.92,
-          transformOrigin: "bottom left",
-          duration: 0.45,
-          ease: "power3.out",
-          overwrite: "auto",
-        });
       }
     },
     onEnter: () => {
@@ -241,13 +228,6 @@ function mount(userOpts) {
         card.classList.remove("is-min");
         toggle.setAttribute("aria-expanded", "true");
         toggle.setAttribute("aria-label", "Minimizar tarjeta");
-        gsap.to(card, {
-          scale: 1,
-          transformOrigin: "bottom left",
-          duration: 0.45,
-          ease: "power3.out",
-          overwrite: "auto",
-        });
       }
     },
   });

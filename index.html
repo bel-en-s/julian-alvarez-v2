@@ -53,6 +53,16 @@
         <div class="ja-menu-arana__scrim" data-scrim></div>
         <div class="ja-menu-arana__frame" data-frame>
           <svg class="ja-menu-arana__web" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <linearGradient id="web-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1F1535"/>
+                <stop offset="100%" stop-color="#8A75B8"/>
+              </linearGradient>
+              <linearGradient id="web-gradient-soft" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1F1535"/>
+                <stop offset="100%" stop-color="#8A75B8" stop-opacity="0.5"/>
+              </linearGradient>
+            </defs>
             <path class="strand s1" d="M 744 52 Q 685 117 618 166"/>
             <path class="strand s2" d="M 744 52 Q 640 158 528 246"/>
             <path class="strand s3" d="M 744 52 Q 685 215 617 343"/>
@@ -94,17 +104,42 @@
     </div>
 
     <section class="hero">
+      <!-- spider web backgrounds (populated by hero-atmos.js) -->
       <svg class="hero-web hero-web-tl" viewBox="0 0 1366 768"></svg>
+      <svg class="hero-web hero-web-tr" viewBox="0 0 1366 768"></svg>
+      <svg class="hero-web hero-web-bl" viewBox="0 0 1366 768"></svg>
       <svg class="hero-web hero-web-br" viewBox="0 0 1366 768"></svg>
-      <div class="container">
-        <div class="hero-header">
-          <span class="hero-name hero-name--julian">julian</span>
-          <span class="hero-header-img">
-            <img src="/hero/hero.webp" alt="Julián Alvarez" />
-          </span>
-          <span class="hero-name hero-name--alvarez">alvarez</span>
+
+      <!-- name as graphic element behind the player -->
+      <div class="hero-alvarez-group">
+        <span class="hero-name hero-name--julian">
+          <span class="hero-name-text">JULIÁN</span>
+        </span>
+        <span class="hero-name hero-name--alvarez hero-name--front">
+          <span class="hero-name-text">ALVAREZ</span>
+        </span>
+      </div>
+
+
+
+      <!-- player photo wrapper (dissolve.js targets .hero-header-img) -->
+      <div class="hero-header-img">
+        <img src="/hero/hero.webp" alt="Julián Alvarez" />
+      </div>
+
+
+      <div class="hero-scroll-indicator">
+        <div class="hero-scroll-indicator__ring" aria-hidden="true">
+          <i style="--i:0"></i>
+          <i style="--i:1"></i>
+          <i style="--i:2"></i>
+          <i style="--i:3"></i>
+          <i style="--i:4"></i>
+          <i style="--i:5"></i>
+          <i style="--i:6"></i>
+          <i style="--i:7"></i>
         </div>
-        <div class="hero-gradient"></div>
+        <span>scroll</span>
       </div>
     </section>
 
@@ -297,7 +332,7 @@
         </div>
         <div class="work-item work-item--wide">
           <div class="work-item-img">
-            <img src="/bio/Anexo 6.webp" alt="" style="clip-path: inset(0 10%);" />
+            <img src="/bio/Anexo 6.webp" alt="" style="clip-path: inset(0 10% round 12px);" />
              <div class="row-content">
               <h3 class="text-static" style="margin-top: 3vh; text-align: center !important; margin-left: auto; margin-right: auto;">Mejor Jugador de América.</h3>
             </div>
@@ -518,7 +553,7 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         NextMatch.mount({
-          kickoff: '2026-07-19T21:00:00+02:00',
+          kickoff: '2026-08-30T21:00:00+02:00',
           home: 'Atlético de Madrid',
           away: 'Real Madrid',
           competition: 'LaLiga',

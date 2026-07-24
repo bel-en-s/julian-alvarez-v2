@@ -26,6 +26,7 @@
   --ja-amethyst-300: #8A75B8;
   --ja-amethyst-400: #6B549F;
   --ja-amethyst-900: #1F1535;
+  --page-pad: clamp(20px, 4vw, 56px);
 }
 
 * {
@@ -114,13 +115,24 @@ p.mono {
   font-family: var(--f-nm);
   font-weight: 500;
   font-size: 0.85rem;
-  font-weight: 500;
 }
 
 p.mono span,
 a span {
   position: relative;
   top: -0.1rem;
+}
+
+.page-texture {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background-image: url(/Textura.webp);
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: soft-light;
+  opacity: 0.3;
 }
 
 .container {
@@ -164,6 +176,10 @@ a span {
 
   p.lg {
     font-size: 1.25rem;
+  }
+
+  .page-texture {
+    opacity: 0.45;
   }
 
   p.mono {

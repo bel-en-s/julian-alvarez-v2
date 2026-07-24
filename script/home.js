@@ -60,42 +60,124 @@ function initBlockReveal() {
   });
 }
 
-function startEntryAnimations(hasDelay = false) {
-  const heroNames = document.querySelectorAll(".hero-name");
-  if (heroNames.length) {
-    if (window.innerWidth >= 768) {
-      const heroChars = [];
-      heroNames.forEach((el) => {
-        const split = new SplitText(el, { type: "chars", charsClass: "hero-char" });
-        heroChars.push(...split.chars);
-      });
-      gsap.set(heroChars, {
-        y: () => -(window.innerHeight + 200),
-        visibility: "visible",
-      });
-      gsap.to(heroChars, {
-        y: 0,
-        duration: 0.8,
-        stagger: 0.04,
-        delay: hasDelay ? 0.5 : 0,
-        ease: "power4.out",
-        onComplete: () => {
-          gsap.set(heroChars, { clearProps: "transform" });
-        },
-      });
-    } else {
-      gsap.fromTo(heroNames,
-        { opacity: 0, y: 40, visibility: "visible" },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          delay: hasDelay ? 0.5 : 0,
-          ease: "power3.out",
+function scrambleNoSplit(element, delay = 0) {
+  if (!element) return;
+  const originalText = element.textContent;
+  const uniqueChars = [...new Set(originalText.toUpperCase().split(""))].filter(Boolean);
+  const pool = uniqueChars.length > 1 ? uniqueChars : "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const len = originalText.length;
+  const originals = originalText.split("");
+
+  let scrambled = "";
+  for (let i = 0; i < len; i++) {
+    scrambled += pool[Math.floor(Math.random() * pool.length)];
+  }
+  element.textContent = scrambled;
+
+  originals.forEach((origChar, i) => {
+    const maxIter = Math.floor(Math.random() * 5) + 4;
+    let iter = 0;
+    setTimeout(() => {
+      const interval = setInterval(() => {
+        const arr = element.textContent.split("");
+        arr[i] = pool[Math.floor(Math.random() * pool.length)];
+        element.textContent = arr.join("");
+        iter++;
+        if (iter >= maxIter) {
+          clearInterval(interval);
+          const final = element.textContent.split("");
+          final[i] = origChar;
+          element.textContent = final.join("");
         }
-      );
+      }, 50);
+    }, delay * 1000 + i * 40);
+  });
+}
+
+function scrambleHeroText(element, delay = 0) {
+  if (!element) return;
+
+  let chars = [...element.querySelectorAll(":scope > .hero-char")];
+  let isReuse = chars.length > 0;
+  if (!isReuse) {
+    const split = new SplitText(element, { type: "chars", charsClass: "hero-char" });
+    if (!split.chars || !split.chars.length) return;
+    chars = split.chars;
+    element.style.background = "none";
+    element.style.webkitBackgroundClip = "unset";
+    element.style.backgroundClip = "unset";
+    element.style.webkitTextFillColor = "unset";
+    if (element.closest(".hero-name")) {
+      fixHeroGradient(element);
     }
+  }
+
+  const originalText = element.textContent || "";
+  const uniqueChars = [...new Set(originalText.toUpperCase().split(""))].filter(Boolean);
+  const pool = uniqueChars.length > 1 ? uniqueChars : "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const originals = chars.map((c) => c.textContent);
+
+  chars.forEach((c) => {
+    c.textContent = pool[Math.floor(Math.random() * pool.length)];
+  });
+
+  chars.forEach((char, i) => {
+    const maxIter = Math.floor(Math.random() * 5) + 4;
+    let iter = 0;
+    setTimeout(() => {
+      const interval = setInterval(() => {
+        char.textContent = pool[Math.floor(Math.random() * pool.length)];
+        iter++;
+        if (iter >= maxIter) {
+          clearInterval(interval);
+          char.textContent = originals[i];
+        }
+      }, 50);
+    }, delay * 1000 + i * 40);
+  });
+}
+
+function scrambleSimpleText(element, delay = 0) {
+  if (!element) return;
+  const original = element.textContent;
+  const pool = [...new Set(original.toUpperCase().split(""))].filter(Boolean);
+  const finalPool = pool.length > 1 ? pool : "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const len = original.length;
+
+  element.textContent = "";
+  for (let i = 0; i < len; i++) {
+    const span = document.createElement("span");
+    span.textContent = finalPool[Math.floor(Math.random() * finalPool.length)];
+    span.style.display = "inline-block";
+    element.appendChild(span);
+  }
+
+  const spans = [...element.children];
+  const originals = original.split("");
+
+  spans.forEach((span, i) => {
+    const maxIter = Math.floor(Math.random() * 5) + 4;
+    let iter = 0;
+    setTimeout(() => {
+      const interval = setInterval(() => {
+        span.textContent = finalPool[Math.floor(Math.random() * finalPool.length)];
+        iter++;
+        if (iter >= maxIter) {
+          clearInterval(interval);
+          span.textContent = originals[i];
+        }
+      }, 50);
+    }, delay * 1000 + i * 40);
+  });
+}
+
+function startEntryAnimations(hasDelay = false) {
+  const heroNameTexts = document.querySelectorAll(".hero-name-text");
+  if (heroNameTexts.length) {
+    const baseDelay = hasDelay ? 0.4 : 0;
+    heroNameTexts.forEach((el, i) => {
+      scrambleHeroText(el, baseDelay + i * 0.15);
+    });
   }
 
   const heroImgWrapper = document.querySelector(".hero-header-img");
@@ -117,25 +199,104 @@ function startEntryAnimations(hasDelay = false) {
         delay: hasDelay ? 0.6 : 0.1,
         ease: "power2.out",
         onComplete: () => {
-          heroImgWrapper.style.transform = "translateY(0)";
+      heroImgWrapper.style.transform = "translateY(0)";
         },
       }
     );
   }
 
-  gsap.set(".hero .hero-cards .card", { transformOrigin: "center center" });
+  var heroCards = document.querySelectorAll(".hero .hero-cards .card");
+  if (heroCards.length) {
+    gsap.set(heroCards, { transformOrigin: "center center" });
+    gsap.to(heroCards, {
+      scale: 1,
+      duration: 0.8,
+      delay: 0.1,
+      stagger: 0.05,
+      ease: "power4.out",
+      onComplete: () => {
+        var card1 = document.querySelector("#hero-card-1");
+        var card3 = document.querySelector("#hero-card-3");
+        if (card1) gsap.set(card1, { transformOrigin: "top right" });
+        if (card3) gsap.set(card3, { transformOrigin: "top left" });
+      },
+    });
+  }
+}
 
-  gsap.to(".hero .hero-cards .card", {
-    scale: 1,
-    duration: 0.8,
-    delay: 0.1,
-    stagger: 0.05,
-    ease: "power4.out",
-    onComplete: () => {
-      gsap.set("#hero-card-1", { transformOrigin: "top right" });
-      gsap.set("#hero-card-3", { transformOrigin: "top left" });
-    },
+function tiltChar(el, index) {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dir = index % 2 === 0 ? -1 : 1;
+  let wiggle = null;
+
+  gsap.set(el, { rotateZ: 0, scale: 1, willChange: "transform", transformOrigin: "50% 50%" });
+
+  const enter = () => {
+    if (prefersReduced) return;
+    gsap.to(el, {
+      rotateZ: dir * 8,
+      scale: 1.04,
+      y: -1,
+      duration: 0.32,
+      ease: "expo.out",
+      overwrite: "auto",
+    });
+    wiggle?.kill();
+    wiggle = gsap.to(el, {
+      rotateZ: dir * 10,
+      duration: 0.9,
+      ease: "sine.inOut",
+      repeat: -1,
+      yoyo: true,
+      overwrite: "auto",
+    });
+  };
+
+  const leave = () => {
+    if (prefersReduced) return;
+    wiggle?.kill();
+    wiggle = null;
+    gsap.to(el, {
+      rotateZ: 0,
+      scale: 1,
+      y: 0,
+      duration: 0.55,
+      ease: "expo.out",
+      overwrite: "auto",
+    });
+  };
+
+  el.addEventListener("pointerenter", enter);
+  el.addEventListener("pointerleave", leave);
+}
+
+function fixHeroGradient(element) {
+  const chars = element.querySelectorAll(".hero-char");
+  if (!chars.length) return;
+  const h = element.getBoundingClientRect().height;
+  if (!h) return;
+  chars.forEach((span) => {
+    span.style.backgroundImage = "linear-gradient(to bottom, #FFFFFF, var(--ja-amethyst-300))";
+    span.style.backgroundSize = "100% " + h + "px";
+    span.style.backgroundPosition = "0 0";
+    span.style.backgroundClip = "text";
+    span.style.webkitBackgroundClip = "text";
+    span.style.webkitTextFillColor = "transparent";
+    span.style.color = "transparent";
+    span.style.paddingLeft = "0.03em";
+    span.style.paddingRight = "0.03em";
+    span.style.paddingTop = "0.15em";
+    span.style.paddingBottom = "0.05em";
+    span.style.marginLeft = "-0.01em";
+    span.style.marginRight = "-0.01em";
+    span.style.marginTop = "-0.1em";
+    span.style.marginBottom = "-0.03em";
   });
+}
+
+function initHeroTilt() {
+  const letters = document.querySelectorAll(".hero-name .hero-char");
+  letters.forEach((el, i) => tiltChar(el, i));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -143,10 +304,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("preloader:complete", () => {
     startEntryAnimations(false);
+    initHeroTilt();
     ScrollTrigger.refresh();
   }, { once: true });
   if (sessionStorage.getItem("ja_preloader_shown") === "1") {
     startEntryAnimations(true);
+    initHeroTilt();
   }
   initAnimations();
 
@@ -188,49 +351,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (aboutDesc || aboutTitle) {
-      if (window.innerWidth >= 768) {
-        gsap.to(".about-word", {
-          "--highlight-offset": "100%",
-          stagger: 0.4,
-          scrollTrigger: {
-            trigger: ".about",
-            scrub: 1,
-            start: "top top",
-            end: "+=800",
-          }
-        });
-      } else {
-        const aboutVideoWrapper = document.querySelector(".about-video-wrapper");
-        if (aboutVideoWrapper) {
-          gsap.fromTo(aboutVideoWrapper,
-            { scale: 0.8, opacity: 0 },
-            {
-              scale: 1,
-              opacity: 1,
-              duration: 0.8,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: ".about",
-                start: "top 90%",
-                once: true,
-              }
-            }
-          );
-        }
-        gsap.fromTo(".about-word",
-          { "--highlight-offset": "0%" },
+      const aboutVideoWrapper = document.querySelector(".about-video-wrapper");
+      if (aboutVideoWrapper) {
+        gsap.fromTo(aboutVideoWrapper,
+          { scale: 0.8, opacity: 0 },
           {
-            "--highlight-offset": "100%",
-            stagger: 0.15,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: ".about",
-              start: "top 80%",
-              once: true,
-            }
+            scale: 1, opacity: 1,
+            duration: 1.2, ease: "power3.out",
+            scrollTrigger: { trigger: ".about", start: "top 90%", once: true }
           }
         );
       }
+
+      gsap.to(".about-word", {
+        "--highlight-offset": "100%",
+        stagger: 0.4,
+        scrollTrigger: {
+          trigger: ".about",
+          scrub: 1,
+          start: "top top",
+          end: "+=400",
+        }
+      });
     }
   }
 
@@ -511,62 +653,65 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.set(outroSplit.words, { opacity: 0 });
   }
 
-  const outroStrips = document.querySelectorAll(".outro-strip");
-  const stripSpeeds = [0.3, 0.4, 0.25, 0.35, 0.2, 0.25];
+  var outroEl = document.querySelector(".outro");
+  if (outroEl) {
+    const outroStrips = document.querySelectorAll(".outro-strip");
+    const stripSpeeds = [0.3, 0.4, 0.25, 0.35, 0.2, 0.25];
 
-  ScrollTrigger.create({
-    trigger: ".outro",
-    start: "top top",
-    end: `+=${window.innerHeight * 3}px`,
-    pin: true,
-    pinSpacing: true,
-    scrub: 1,
-    onUpdate: (self) => {
-      const progress = self.progress;
+    ScrollTrigger.create({
+      trigger: ".outro",
+      start: "top top",
+      end: `+=${window.innerHeight * 3}px`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
 
-      if (outroSplit && outroSplit.words.length > 0) {
-        if (progress >= 0.25 && progress <= 0.75) {
-          const textProgress = (progress - 0.25) / 0.5;
-          const totalWords = outroSplit.words.length;
+        if (outroSplit && outroSplit.words.length > 0) {
+          if (progress >= 0.25 && progress <= 0.75) {
+            const textProgress = (progress - 0.25) / 0.5;
+            const totalWords = outroSplit.words.length;
 
-          outroSplit.words.forEach((word, index) => {
-            const wordRevealProgress = index / totalWords;
+            outroSplit.words.forEach((word, index) => {
+              const wordRevealProgress = index / totalWords;
 
-            if (textProgress >= wordRevealProgress) {
-              gsap.set(word, { opacity: 1 });
-            } else {
-              gsap.set(word, { opacity: 0 });
-            }
-          });
-        } else if (progress < 0.25) {
-          gsap.set(outroSplit.words, { opacity: 0 });
-        } else if (progress > 0.75) {
-          gsap.set(outroSplit.words, { opacity: 1 });
+              if (textProgress >= wordRevealProgress) {
+                gsap.set(word, { opacity: 1 });
+              } else {
+                gsap.set(word, { opacity: 0 });
+              }
+            });
+          } else if (progress < 0.25) {
+            gsap.set(outroSplit.words, { opacity: 0 });
+          } else if (progress > 0.75) {
+            gsap.set(outroSplit.words, { opacity: 1 });
+          }
         }
-      }
-    },
-  });
+      },
+    });
 
-  ScrollTrigger.create({
-    trigger: ".outro",
-    start: "top bottom",
-    end: `+=${window.innerHeight * 6}px`,
-    scrub: 1,
-    onUpdate: (self) => {
-      const progress = self.progress;
+    ScrollTrigger.create({
+      trigger: ".outro",
+      start: "top bottom",
+      end: `+=${window.innerHeight * 6}px`,
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
 
-      outroStrips.forEach((strip, index) => {
-        if (stripSpeeds[index] !== undefined) {
-          const speed = stripSpeeds[index];
-          const movement = progress * 100 * speed;
+        outroStrips.forEach((strip, index) => {
+          if (stripSpeeds[index] !== undefined) {
+            const speed = stripSpeeds[index];
+            const movement = progress * 100 * speed;
 
-          gsap.set(strip, {
-            x: `${movement}%`,
-          });
-        }
-      });
-    },
-  });
+            gsap.set(strip, {
+              x: `${movement}%`,
+            });
+          }
+        });
+      },
+    });
+  }
 
   if (document.querySelector(".work-items")) {
     ScrollTrigger.refresh();
@@ -625,92 +770,88 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (window.innerWidth >= 768) {
-    const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350].map(function(a) { return a * 0.15; });
-    const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4];
-    gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
-      const img = wrapper.querySelector("img");
-      const video = wrapper.querySelector("video");
-      const src = img?.getAttribute("src") || "";
+  const isMobile = window.innerWidth < 768;
+  const mobileScale = isMobile ? 0.4 : 1;
+  const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350].map(function(a) { return a * 0.15 * mobileScale; });
+  const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4];
+  gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
+    const img = wrapper.querySelector("img");
+    const video = wrapper.querySelector("video");
+    const src = img?.getAttribute("src") || "";
 
-      // skip video wrappers and specific images
-      if (video) return;
-      if (src.includes("/bio/1.webp")) return;
-      if (src.includes("Anexo 9")) return;
-      if (src.includes("Anexo 6")) return;
-      if (src.includes("Anexo 8")) return;
+    // skip video wrappers and specific images
+    if (video) return;
+    if (src.includes("/bio/1.webp")) return;
+    if (src.includes("Anexo 9")) return;
+    if (src.includes("Anexo 6")) return;
+    if (src.includes("Anexo 8")) return;
 
-      let amount = amounts[i % amounts.length];
-      if (src.includes("Anexo 11")) amount = Math.abs(amount) * 2;
-      if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12;
-      if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12;
-      // parallax hacia arriba para bio/4.webp (contraste con bio/3)
-      if (src.includes("/bio/4.webp")) amount = -Math.abs(amount);
-      // parallax hacia abajo para bio/3.webp
-      if (src.includes("/bio/3.webp")) amount = Math.abs(amount) * 1.5;
-      if (src.includes("/bio/2.webp")) amount = Math.abs(amount);
-      if (wrapper.classList.contains("work-item-img--bio3")) amount = Math.abs(amount);
+    let amount = amounts[i % amounts.length];
+    if (src.includes("Anexo 11")) amount = Math.abs(amount) * 2;
+    if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12;
+    if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12;
+    // parallax hacia arriba para bio/4.webp (contraste con bio/3)
+    if (src.includes("/bio/4.webp")) amount = -Math.abs(amount);
+    // parallax hacia abajo para bio/3.webp
+    if (src.includes("/bio/3.webp")) amount = Math.abs(amount) * 1.5;
+    if (src.includes("/bio/2.webp")) amount = Math.abs(amount);
+    if (wrapper.classList.contains("work-item-img--bio3")) amount = Math.abs(amount);
 
-      const scrubVal = scrubs[i % scrubs.length];
+    const scrubVal = scrubs[i % scrubs.length];
 
-      gsap.to(wrapper, {
-        y: amount,
+    gsap.to(wrapper, {
+      y: amount,
+      ease: "none",
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: scrubVal,
+      },
+    });
+    const item = wrapper.closest(".work-item");
+    const content = item.querySelector(".work-item-content");
+    if (content && !content.classList.contains("no-parallax")) {
+      gsap.to(content, {
+        y: amount * 0.7,
         ease: "none",
         scrollTrigger: {
           trigger: wrapper,
-          start: "top bottom",
+          start: "top 85%",
           end: "bottom top",
-          scrub: scrubVal,
+          scrub: Math.min(scrubVal * 2, 1.5),
         },
       });
-      const item = wrapper.closest(".work-item");
-      const content = item.querySelector(".work-item-content");
-      if (content && !content.classList.contains("no-parallax")) {
-        gsap.to(content, {
-          y: amount * 0.7,
-          ease: "none",
-          scrollTrigger: {
-            trigger: wrapper,
-    start: "top 85%",
-            end: "bottom top",
-            scrub: Math.min(scrubVal * 2, 1.5),
-          },
-        });
-      }
+    }
+  });
+  gsap.utils.toArray(".work-items .row-content, .work-items .row-content-title").forEach((el) => {
+    if (el.classList.contains("no-parallax")) return;
+    gsap.to(el, {
+      y: isMobile ? -15 : -30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: el.closest(".row"),
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
     });
-    gsap.utils.toArray(".work-items .row-content, .work-items .row-content-title").forEach((el) => {
-      if (el.classList.contains("no-parallax")) return;
-      gsap.to(el, {
-        y: -30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: el.closest(".row"),
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-    });
-  }
+  });
 
-  // MI HISTORIA char-by-char entrance (typewriter)
+  // MI HISTORIA scramble entrance
   const miHistoria = document.getElementById("mi-historia-text");
   if (miHistoria && window.innerWidth >= 768) {
-    const fullText = miHistoria.textContent;
-    miHistoria.textContent = "";
-
     const section = miHistoria.closest(".behind-the-lock");
     if (section) {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-              const tl = gsap.timeline();
-              fullText.split("").forEach((char, i) => {
-                tl.call(() => {
-                  miHistoria.textContent += char;
-                }, [], i * 0.05);
-              });
+              scrambleHeroText(miHistoria, 0);
+              setTimeout(() => {
+                const miChars = miHistoria.querySelectorAll(".hero-char");
+                miChars.forEach((el, i) => tiltChar(el, i));
+              }, 600);
               observer.unobserve(entry.target);
             }
           });
@@ -736,6 +877,48 @@ document.addEventListener("DOMContentLoaded", () => {
         scrub: 1,
       },
     });
+  }
+
+  // años highlight entrance
+  document.querySelectorAll(".hero-gradient-text").forEach((el) => {
+    if (!/^\d{4}$/.test(el.textContent.trim())) return;
+
+    el.classList.add("highlight-word");
+
+    gsap.set(el, { "--highlight-offset": "0%" });
+
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.to(el, {
+          "--highlight-offset": "100%",
+          duration: 1.2,
+          ease: "power3.out",
+          overwrite: "auto",
+        });
+      },
+    });
+  });
+
+  if (window.innerWidth < 768) {
+    const videoRow = document.querySelector('.row--video-gray');
+    const workStory = document.querySelector('.work-story');
+    if (videoRow && workStory) {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: videoRow,
+          start: 'bottom top',
+          end: 'bottom top+=3000',
+          scrub: 1.5,
+        }
+      })
+      .to(workStory, { backgroundColor: '#2a2a2a', duration: 0.3, ease: 'none' })
+      .to(workStory, { backgroundColor: '#555555', duration: 0.3, ease: 'none' })
+      .to(workStory, { backgroundColor: '#999999', duration: 0.2, ease: 'none' })
+      .to(workStory, { backgroundColor: '#d4d4d4', duration: 0.2, ease: 'none' });
+    }
   }
 
   initWorkTimeline();

@@ -8,7 +8,7 @@ Object.assign(canvas.style, {
   width: "100%",
   height: "100%",
   pointerEvents: "none",
-  zIndex: "5",
+  zIndex: "3",
   display: "block",
 });
 document.body.prepend(canvas);

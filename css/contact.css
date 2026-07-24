@@ -1,15 +1,3 @@
-.page-texture {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  background-image: url(/Textura.webp);
-  background-size: cover;
-  background-position: center;
-  mix-blend-mode: soft-light;
-  opacity: 0.3;
-}
-
 .contact-page {
   position: fixed;
   inset: 0;

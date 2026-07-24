@@ -93,4 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("resize", handleResize);
+
+  const logo = document.querySelector(".menu-logo");
+  if (logo) {
+    logo.closest("a")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.lenis?.scrollTo(0, { duration: 1.5 });
+    });
+  }
 });

@@ -6,7 +6,6 @@
   overflow: hidden;
   background: #1E2024;
   --easing: cubic-bezier(.2, .7, .15, 1);
-  touch-action: none;
 }
 
 .df-stage {
@@ -346,6 +345,9 @@
 }
 
 @media (max-width: 768px) {
+  .df-stage {
+    margin: 0 3vh;
+  }
   .df-lockup .df-big { font-size: clamp(48px, 14vw, 80px); }
   .df-lockup .df-small { font-size: clamp(18px, 5vw, 26px); }
   .df-dentro { left: 2%; top: 10%; }
