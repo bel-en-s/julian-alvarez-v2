@@ -1,13 +1,25 @@
 import gsap from "gsap";
 
 const LOADER_KEY = "ja_preloader_shown";
-const MAX_LOADER_DURATION = 4000;
+const isMobile = window.innerWidth < 768;
+const MAX_WAIT = isMobile ? 6000 : 4000;
+const MIN_DISPLAY = 1800;
+const PROGRESS_DURATION = 2;
+const SLIDE_DURATION = 0.4;
 
 function hideWrapper(wrapper) {
   gsap.set(wrapper, { display: "none" });
+  wrapper.style.pointerEvents = "none";
+  wrapper.style.touchAction = "";
   document.body.style.overflow = "";
   document.documentElement.style.overflow = "";
-  if (window.lenis) window.lenis.start();
+  document.body.style.position = "";
+}
+
+function startLenis() {
+  if (window.lenis) {
+    window.lenis.start();
+  }
 }
 
 const wrapper = document.querySelector(".preloader-wrapper");
@@ -17,6 +29,7 @@ if (sessionStorage.getItem(LOADER_KEY) === "1") {
   hideWrapper(wrapper);
 } else {
   let finished = false;
+  const appStart = performance.now();
 
   const finish = () => {
     if (finished) return;
@@ -24,55 +37,60 @@ if (sessionStorage.getItem(LOADER_KEY) === "1") {
     sessionStorage.setItem(LOADER_KEY, "1");
     hideWrapper(wrapper);
     document.dispatchEvent(new CustomEvent("preloader:complete"));
+    requestAnimationFrame(() => {
+      requestAnimationFrame(startLenis);
+    });
   };
-
-  setTimeout(finish, MAX_LOADER_DURATION);
 
   document.body.style.overflow = "hidden";
   document.documentElement.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  wrapper.style.pointerEvents = "auto";
+  wrapper.style.touchAction = "none";
   if (window.lenis) window.lenis.stop();
 
-  function ready() {
-    if (finished) return;
+  let loadReady = false;
+  let timeoutFired = false;
 
-    function animateProgress(duration = 2) {
-      const tl = gsap.timeline();
-      const counterSteps = 5;
-      let currentProgress = 0;
+  function tryStart() {
+    if (loadReady || timeoutFired) return;
+    const elapsed = performance.now() - appStart;
+    if (elapsed < MIN_DISPLAY) {
+      setTimeout(tryStart, MIN_DISPLAY - elapsed + 100);
+      return;
+    }
+    loadReady = true;
 
-      for (let i = 0; i < counterSteps; i++) {
-        const finalStep = i === counterSteps - 1;
-        const targetProgress = finalStep
-          ? 1
-          : Math.min(currentProgress + Math.random() * 0.3 + 0.1, 0.9);
-        currentProgress = targetProgress;
+    const tl = gsap.timeline({ delay: 0.1, onComplete: finish });
 
-        tl.to(".preloader-progress-bar", {
-          scaleX: targetProgress,
-          duration: duration / counterSteps,
-          ease: "power2.out",
-        });
-      }
-
-      return tl;
+    const steps = 5;
+    let current = 0;
+    for (let i = 0; i < steps; i++) {
+      const isLast = i === steps - 1;
+      const target = isLast ? 1 : Math.min(current + Math.random() * 0.3 + 0.1, 0.9);
+      current = target;
+      tl.to(".preloader-progress-bar", {
+        scaleX: target,
+        duration: PROGRESS_DURATION / steps,
+        ease: "power2.out",
+      });
     }
 
-    const tl = gsap.timeline({
-      delay: 0.2,
-      onComplete: finish,
+    tl.to(".preloader-wrapper", {
+      y: "-100%",
+      duration: SLIDE_DURATION,
+      ease: "power4.inOut",
     });
-
-    tl.add(animateProgress(), "0")
-      .to(".preloader-wrapper", {
-        y: "-100%",
-        duration: 0.4,
-        ease: "power4.inOut",
-      });
   }
 
+  setTimeout(() => {
+    timeoutFired = true;
+    tryStart();
+  }, MAX_WAIT);
+
   if (document.readyState === "complete") {
-    ready();
+    tryStart();
   } else {
-    window.addEventListener("load", ready);
+    window.addEventListener("load", tryStart);
   }
 }

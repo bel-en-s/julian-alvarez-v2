@@ -2,24 +2,23 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-document.addEventListener("DOMContentLoaded", () => {
-  let isMobile = window.innerWidth <= 900;
+let isMobile = window.innerWidth <= 900;
 
   const scrollSettings = isMobile
     ? {
-        duration: 0.8,
+        duration: 0.6,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: "vertical",
         gestureDirection: "vertical",
         smooth: true,
         smoothTouch: true,
-        touchMultiplier: 1.5,
+        touchMultiplier: 1,
         infinite: false,
-        lerp: 0.09,
-        wheelMultiplier: 1,
+        lerp: 0.06,
+        wheelMultiplier: 0.8,
         orientation: "vertical",
         smoothWheel: true,
-        syncTouch: true,
+        syncTouch: false,
       }
     : {
         duration: 1.2,
@@ -57,19 +56,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const newScrollSettings = isMobile
         ? {
-            duration: 1,
+            duration: 0.6,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: "vertical",
             gestureDirection: "vertical",
             smooth: true,
             smoothTouch: true,
-            touchMultiplier: 1.5,
+            touchMultiplier: 1,
             infinite: false,
-            lerp: 0.05,
-            wheelMultiplier: 1,
+            lerp: 0.06,
+            wheelMultiplier: 0.8,
             orientation: "vertical",
             smoothWheel: true,
-            syncTouch: true,
+            syncTouch: false,
           }
         : {
             duration: 1.2,
@@ -101,4 +100,3 @@ document.addEventListener("DOMContentLoaded", () => {
       window.lenis?.scrollTo(0, { duration: 1.5 });
     });
   }
-});

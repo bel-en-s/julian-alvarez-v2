@@ -192,12 +192,115 @@ function mount(userOpts) {
   const nM = card.querySelector(".n-m");
   const nS = card.querySelector(".n-s");
 
-  toggle.addEventListener("click", () => {
-    minimized = !minimized;
-    card.classList.toggle("is-min", minimized);
-    toggle.setAttribute("aria-expanded", minimized ? "false" : "true");
-    toggle.setAttribute("aria-label", minimized ? "Ampliar tarjeta" : "Minimizar tarjeta");
-  });
+  const isMobile = window.innerWidth < 760;
+
+  let nmOverlay = null;
+  let nmPopup = null;
+  let nmCloseBtn = null;
+  let nmBackdrop = null;
+
+  if (isMobile) {
+    nmOverlay = document.createElement("div");
+    nmOverlay.className = "nm-overlay";
+    nmOverlay.innerHTML = `
+      <div class="nm-backdrop"></div>
+      <div class="nm-popup next-match">
+        <div class="watermark" aria-hidden="true"></div>
+        <header class="head">
+          <div class="eyebrow">Pr\u00f3ximo partido</div>
+          <button type="button" class="nm-close" aria-label="Cerrar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </header>
+        <div class="countdown" aria-live="polite">
+          <div class="unit"><span class="n n-d">00</span><span class="u">D\u00edas</span></div>
+          <span class="sep">:</span>
+          <div class="unit"><span class="n n-h">00</span><span class="u">Horas</span></div>
+          <span class="sep">:</span>
+          <div class="unit"><span class="n n-m">00</span><span class="u">Min</span></div>
+          <span class="sep">:</span>
+          <div class="unit"><span class="n n-s">00</span><span class="u">Seg</span></div>
+        </div>
+        <div class="nm-extra">
+          <div class="teams">
+            <span class="t home">${opts.home}</span>
+            <span class="vs">vs</span>
+            <span class="t away">${opts.away}</span>
+          </div>
+          <div class="meta">
+            <span class="comp">${opts.competition}</span>
+            <span class="dot">\u00b7</span>
+            <span class="extra">${opts.extra}</span>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(nmOverlay);
+    nmPopup = nmOverlay.querySelector(".nm-popup");
+    nmCloseBtn = nmOverlay.querySelector(".nm-close");
+    nmBackdrop = nmOverlay.querySelector(".nm-backdrop");
+
+    const nmD = nmPopup.querySelector(".n-d");
+    const nmH = nmPopup.querySelector(".n-h");
+    const nmM = nmPopup.querySelector(".n-m");
+    const nmS = nmPopup.querySelector(".n-s");
+
+    function openPopup() {
+      const t = getTimeLeft(kickoff);
+      nmD.textContent = t.days;
+      nmH.textContent = t.hours;
+      nmM.textContent = t.minutes;
+      nmS.textContent = t.seconds;
+      nmOverlay.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closePopup() {
+      nmOverlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+
+    nmCloseBtn.addEventListener("click", () => {
+      minimized = true;
+      card.classList.add("is-min");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Ampliar tarjeta");
+      closePopup();
+    });
+
+    nmBackdrop.addEventListener("click", () => {
+      minimized = true;
+      card.classList.add("is-min");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Ampliar tarjeta");
+      closePopup();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && nmOverlay.classList.contains("is-open")) {
+        minimized = true;
+        card.classList.add("is-min");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Ampliar tarjeta");
+        closePopup();
+      }
+    });
+
+    toggle.addEventListener("click", () => {
+      if (minimized) {
+        openPopup();
+      }
+    });
+  }
+
+  if (!isMobile) {
+    toggle.addEventListener("click", () => {
+      minimized = !minimized;
+      card.classList.toggle("is-min", minimized);
+      toggle.setAttribute("aria-expanded", minimized ? "false" : "true");
+      toggle.setAttribute("aria-label", minimized ? "Ampliar tarjeta" : "Minimizar tarjeta");
+    });
+  }
 
   function tick() {
     const t = getTimeLeft(kickoff);
@@ -205,6 +308,16 @@ function mount(userOpts) {
     nH.textContent = t.hours;
     nM.textContent = t.minutes;
     nS.textContent = t.seconds;
+    if (isMobile && nmPopup) {
+      const nmD = nmPopup.querySelector(".n-d");
+      const nmH = nmPopup.querySelector(".n-h");
+      const nmM = nmPopup.querySelector(".n-m");
+      const nmS = nmPopup.querySelector(".n-s");
+      nmD.textContent = t.days;
+      nmH.textContent = t.hours;
+      nmM.textContent = t.minutes;
+      nmS.textContent = t.seconds;
+    }
   }
   tick();
   const interval = setInterval(tick, 1000);
@@ -215,7 +328,14 @@ function mount(userOpts) {
     trigger: ".hero",
     start: "bottom top",
     onLeave: () => {
-      if (!minimized) {
+      if (isMobile) {
+        minimized = true;
+        card.classList.add("is-min");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Ampliar tarjeta");
+        if (nmOverlay) nmOverlay.classList.remove("is-open");
+        if (document.body.style.overflow === "hidden") document.body.style.overflow = "";
+      } else if (!minimized) {
         minimized = true;
         card.classList.add("is-min");
         toggle.setAttribute("aria-expanded", "false");
@@ -223,6 +343,7 @@ function mount(userOpts) {
       }
     },
     onEnter: () => {
+      if (isMobile) return;
       if (minimized) {
         minimized = false;
         card.classList.remove("is-min");
@@ -240,6 +361,7 @@ function mount(userOpts) {
       clearInterval(interval);
       destroyWeb();
       card.remove();
+      if (nmOverlay) nmOverlay.remove();
     },
   };
 }

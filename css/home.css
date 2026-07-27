@@ -46,6 +46,12 @@
   will-change: transform;
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .about-bg .about-video-wrapper {
+    width: 60%;
+  }
+}
+
 @media (min-width: 768px) {
   .about-bg .about-video-wrapper {
     transform: scale(calc(var(--video-scale, 0.88) * var(--pin-scale, 1)));
@@ -853,7 +859,7 @@
   .behind-the-lock .btl-header .btl-header-text {
     text-align: justify;
     width: 90%;
-    /* text-align-last: center; */
+    text-align-last: center;
   }
 }
 
@@ -1008,15 +1014,11 @@
 
 .behind-the-lock .btl-header-text {
   font-size: clamp(0.85rem, 1.8vw, 1.3rem);
-  line-height: 1.4;
+  line-height: 1.5;
   color: #fff;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  font-family: var(--font-display);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .curtain {
@@ -1103,7 +1105,7 @@
 
   .curtain-ball {
     width: 45px;
-    top: 50%;
+    top: 32%;
     left: 89%;
     translate: -50% -50%;
   }
@@ -1113,14 +1115,14 @@
   }
 
   .curtain-img img {
-    margin-top: -10svh;
+    margin-top: -25svh;
   }
 
   .behind-the-lock .btl-header {
     top: auto;
     bottom: 0;
     transform: translate(-50%, 0);
-    padding: 0 2rem 2rem;
+    padding: 0 2rem 1rem;
     text-align: center;
   }
 
@@ -1129,13 +1131,12 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12px;
   }
 
   .work-items > div:nth-child(2) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 5vh;
   }
   .work-items > div:nth-child(2) > .work-item {
     display: contents;
@@ -1153,8 +1154,18 @@
     grid-row: 2;
   }
   .work-items > div:nth-child(2) > .work-item:first-child .work-item-img img {
-    width: 100%;
+    width: 85%;
     height: auto;
+  }
+  .work-items > div:nth-child(2) > .work-item:last-child .work-item-img img {
+    grid-column: 2;
+    grid-row: 2;
+    width: 85%;
+    height: auto;
+  }
+
+  .bio-1-img {
+    margin-top: 15vh;
   }
   .work-items > div:nth-child(2) > .work-item:last-child .work-item-img img {
     grid-column: 2;
@@ -1169,7 +1180,8 @@
   }
   .work-items > div:nth-child(2) .row-content--quote h3 {
     display: block !important;
-    text-align: center !important;
-    font-size: 8px;
+    /* text-align: right !important; */
+    /* font-size: 11px; */
+    margin-top: 5vh;
   }
 }

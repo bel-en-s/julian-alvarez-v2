@@ -7,16 +7,16 @@
     <link rel="icon" href="/favicon.png" />
     <link rel="preload" href="/fonts/big-shoulder/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/neue-montreal/neue-montreal-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <script type="module" crossorigin src="/assets/main-B-lsJ_CL.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/menu-DvCSQO2f.js">
+    <script type="module" crossorigin src="/assets/main-C5hq4xTY.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/menu-DSwbCVS3.js">
     <link rel="modulepreload" crossorigin href="/assets/SplitText-C-wHGKK9.js">
-    <link rel="modulepreload" crossorigin href="/assets/anime-Bi-eiHPM.js">
+    <link rel="modulepreload" crossorigin href="/assets/anime-CFCcRIrr.js">
     <link rel="modulepreload" crossorigin href="/assets/three.module-KZwyKn98.js">
-    <link rel="stylesheet" crossorigin href="/assets/menu-Csk5z7ul.css">
+    <link rel="stylesheet" crossorigin href="/assets/menu-CF6ya-qf.css">
     <link rel="stylesheet" crossorigin href="/assets/SplitText-Dsipx5wS.css">
-    <link rel="stylesheet" crossorigin href="/assets/main-BhQw1xhr.css">
-    <link rel="stylesheet" crossorigin href="/assets/home-BA_Z9npm.css">
-    <link rel="stylesheet" crossorigin href="/assets/work-Qn9KBLSt.css">
+    <link rel="stylesheet" crossorigin href="/assets/main-BQspn---.css">
+    <link rel="stylesheet" crossorigin href="/assets/home-CMWuYsnC.css">
+    <link rel="stylesheet" crossorigin href="/assets/work-Cww5FtJb.css">
   </head>
   <body>
     <div class="preloader-wrapper">
@@ -127,18 +127,20 @@
       </div>
 
 
-      <div class="hero-scroll-indicator">
-        <div class="hero-scroll-indicator__ring" aria-hidden="true">
-          <i style="--i:0"></i>
-          <i style="--i:1"></i>
-          <i style="--i:2"></i>
-          <i style="--i:3"></i>
-          <i style="--i:4"></i>
-          <i style="--i:5"></i>
-          <i style="--i:6"></i>
-          <i style="--i:7"></i>
+      <div class="hero-scroll-wrapper">
+        <div class="hero-scroll-indicator">
+          <div class="hero-scroll-indicator__ring" aria-hidden="true">
+            <i style="--i:0"></i>
+            <i style="--i:1"></i>
+            <i style="--i:2"></i>
+            <i style="--i:3"></i>
+            <i style="--i:4"></i>
+            <i style="--i:5"></i>
+            <i style="--i:6"></i>
+            <i style="--i:7"></i>
+          </div>
+          <span>scroll</span>
         </div>
-        <span>scroll</span>
       </div>
     </section>
 
@@ -194,7 +196,11 @@
       </div>
     </section>
 
-    <!-- work - work items -->
+    <!-- ============================================================
+    TIMELINE / WORK ITEMS
+    Desktop: línea vertical central + progreso
+    Mobile:  línea oculta, se muestra indicador puntual (vía CSS)
+    ============================================================ -->
     <section class="work-items">
       <div class="work-timeline" aria-hidden="true">
         <div class="work-timeline-track"></div>
@@ -211,28 +217,32 @@
                 <h2 class="meta-text">Club Atlético Calchín</h2>
                 <span class="meta-rule"></span>
               </div>
+            
             </div>
           </div>
           <div class="work-item-img">
-            <img src="/bio/1.webp" alt="" />
+            <img src="/bio/1.webp" alt="" class="bio-1-img" />
+             <div class="row-content no-parallax row-content--quote">
+              <h3 class="text-quote" style="margin-left: 10px;">"Mi pueblo, mis amigos, el potrero. Acá nació todo: la pasión por el fútbol y las ganas de ir siempre un paso más allá. Acá aprendí a soñar en grande."</h3>
+            </div>
           </div>
+          
         </div>
         <div class="work-item">
+           
           <div class="work-item-img">
             <img src="/bio/2.webp" alt="" />
-            <div class="row-content no-parallax row-content--quote">
-              <h3 class="text-quote" style="max-width: 30ch;">"Mi pueblo, mis amigos, el potrero. Acá nació todo: la pasión por el fútbol y las ganas de ir siempre un paso más allá. Acá aprendí a soñar en grande."</h3>
-            </div>
+            
           </div>
+         
         </div>
+         
       </div>
 
       <!-- ROW: 2018 / El Doble Salto -->
       <div class="row row--first" data-no-animate>
         <div class="work-item">
-          <div class="row-content no-parallax" style="margin-top: 6em;">
-            <h3 class="text-quote" style="text-align: right; max-width: 30ch; margin-left: auto;">“Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid”</h3>
-          </div>
+         
           <div class="work-item-img">
             <img src="/bio/3.webp" alt="" />
           </div>
@@ -255,6 +265,8 @@
           </div>
           <div class="work-item-img">
             <img src="/bio/4.webp" alt="" />
+          </div> <div class="row-content no-parallax" style="margin-top: 6em;">
+            <h3 class="text-quote" style="margin-left: 10px;">“Llegar a River fue cumplir el sueño que tenía desde chico… y viví noches que quedan para siempre, como aquella final histórica en Madrid”</h3>
           </div>
         </div>
       </div>
@@ -325,12 +337,12 @@
           <div class="work-item-img">
             <img src="/bio/Anexo 5.webp" alt="" />
              <div class="row-content">
-              <h3 style="margin-top: 3vh; text-align: center !important; margin-left: auto; margin-right: auto;">Máximo goleador de la Primera División. </h3>
+               <h3 id="frase-goleador" style="margin-top: 3vh; text-align: center !important; margin-left: auto; margin-right: auto;">Máximo goleador de la Primera División. </h3>
             </div>
           </div>
         </div>
         <div class="work-item work-item--wide">
-          <div class="work-item-img">
+          <div class="work-item-img" id="trigger-bg-2021">
             <img src="/bio/Anexo 6.webp" alt="" style="clip-path: inset(0 10% round 12px);" />
              <div class="row-content">
               <h3 class="text-static" style="margin-top: 3vh; text-align: center !important; margin-left: auto; margin-right: auto;">Mejor Jugador de América.</h3>
@@ -341,38 +353,35 @@
           <div class="work-item-img">
             <img src="/bio/Anexo 7.webp" alt="" />
             <div class="row-content">
-              <h3 class="text-static" style="margin-top: 3vh; text-align: center !important; margin-left: auto; margin-right: auto;"> La noche de los seis goles.</h3>
+              <h3 id="frase-seisgoles" style="margin-top: 3vh; text-align: center !important; margin-left: auto; margin-right: auto;"> La noche de los seis goles.</h3>
             </div>
           </div>
         </div>
       </div>
       <!-- ROW: 2022 / Europa y el Mundo -->
-      <div class="row row--first">
-        <div class="work-item work-item--with-title">
-          <div class="row-content-title" style="text-align: right;">
-            <div class="work-header-title">
-              <h2 class="hero-gradient-text">2022</h2>
-              <div class="meta-line">
-                <h2 class="meta-text">Europa y el Mundo</h2>
-                <span class="meta-rule"></span>
-              </div>
+      <div class="row row--first row--2022">
+        <div class="row-content-title" style="text-align: center;">
+          <div class="work-header-title">
+            <h2 class="hero-gradient-text">2022</h2>
+            <div class="meta-line" style="justify-content: center;">
+              <h2 class="meta-text">Europa y el Mundo</h2>
             </div>
           </div>
-         
+        </div>
+        <div class="work-item work-item--with-title">
+          <div class="row-content" style="margin-top: 1.5em; text-align: right; flex: none;">
+            <h3 class="text-quote" style="text-align: right; max-width: 30ch; margin-top: 20px; margin-left: auto;">“Crecer al lado de los mejores del mundo fue un privilegio. Cada entrenamiento y cada partido fueron una enseñanza para mejorar, adaptarme y entender el fútbol de otra manera.”</h3>
+          </div>
           <div class="work-item-img">
             <img src="/bio/Anexo 9.webp" alt="" />
           </div>
-          <div class="row-content" style="margin-top: 1.5em; text-align: right; flex: none;">
-            <h3 class="text-quote" style="text-align: right; max-width: 30ch; margin-left: auto;">“Crecer al lado de los mejores del mundo fue un privilegio. Cada entrenamiento y cada partido fueron una enseñanza para mejorar, adaptarme y entender el fútbol de otra manera.”</h3>
-          </div>
-        
         </div>
         <div class="work-item" style="border-left: 2px solid #b1a8c4; padding-left: 1em;">
-          <div class="row-content" style="margin-bottom: 3em; text-align: left;">
-            <h3 class="text-quote" style="text-align: left;">“Desde las juveniles hasta levantar la Copa del Mundo… Es dejarlo todo por una camiseta que representa a millones.”</h3>
-          </div>
           <div class="work-item-img">
             <img src="/bio/Anexo 8.webp" alt="" />
+          </div>
+          <div class="row-content" style="margin-bottom: 3em; text-align: left;">
+            <h3 class="text-quote" style="text-align: left;">“Desde las juveniles hasta levantar la Copa del Mundo… Es dejarlo todo por una camiseta que representa a millones.”</h3>
           </div>
         </div>
       </div>
@@ -394,11 +403,12 @@
               </div>
             </div>
           </div>
-          <div class="row-content" style="margin-bottom: 3em; text-align: left;">
-            <h3 class="text-quote" style="max-width: 30ch;">“Llegar al Atlético fue aceptar un desafío. Se juega con carácter, compromiso y corazón.”</h3>
-          </div>
+       
           <div class="work-item-img">
             <img src="/bio/Anexo 11.webp" alt="" style="object-fit: contain; margin-top: -20em;" />
+          </div>
+             <div class="row-content" style="margin-bottom: 3em; text-align: left;">
+            <h3 class="text-quote" style="max-width: 30ch;">“Llegar al Atlético fue aceptar un desafío. Se juega con carácter, compromiso y corazón.”</h3>
           </div>
         </div>
       </div>
@@ -419,18 +429,19 @@
             <img src="/bio/Anexo 12.webp" alt="" style="margin-top: 0;" />
           </div>
         </div>
-        <div class="work-item">
-          <div class="row-content" style="margin-bottom: 0; text-align: center;">
-            <h3 class="text-quote" style="max-width: 30ch; text-align: center;">“Llegar al Atlético fue aceptar un desafío. Se juega con carácter, compromiso y corazón.”</h3>
-          </div>
-        </div>
+      
         <div class="work-item">
           <div class="work-item-img">
             <img src="/bio/Anexo 11.webp" alt="" style="object-fit: cover; margin-top: 0;" />
           </div>
         </div>
+          <div class="work-item">
+          <div class="row-content" style="margin-bottom: 0; text-align: center;">
+            <h3 class="text-quote" style="max-width: 30ch; text-align: center; padding-top: 13em;">“Llegar al Atlético fue aceptar un desafío. Se juega con carácter, compromiso y corazón.”</h3>
+          </div>
+        </div>
       </div>
-          <div class="row row--first" style="margin-top: -12em;">
+          <div class="row row--first row--2026" style="margin-top: -12em;">
         <div class="work-item work-item--with-title">
           <div class="row-content-title" style="text-align: right;">
             <div class="work-header-title">
@@ -443,13 +454,13 @@
             </div>
           </div>
           <div class="work-item-img">
-               <img src="/bio/Anexo 9.webp" alt="" />
+               <img src="/bio/elementor-placeholder-image.png" alt="" />
           </div>
         </div>
         <div class="work-item" style="border-left: 2px solid #b1a8c4; padding-left: 1em;">
           <div class="work-item-img">
       
-            <img src="/bio/Anexo 8.webp" alt="" />
+            <img src="/bio/elementor-placeholder-image.png" alt="" />
               <!-- <div class="row-content no-parallax" style="margin-top: 0.5em;">
               <h3>"Crecer al lado de los mejores del mundo fue un privilegio. Cada entrenamiento y cada partido fueron una enseñanza para mejorar, adaptarme y entender el fútbol de otra manera."</h3>
             </div> -->
@@ -591,5 +602,21 @@
         <video src="/bio/primer-gol-2018.mp4" playsinline loop></video>
       </div>
     </div>
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+
+      (function() {
+        var ring = document.querySelector('.hero-scroll-indicator__ring');
+        if (!ring) return;
+        var start = performance.now();
+        (function spin() {
+          ring.style.transform = 'rotate(' + ((performance.now() - start) / 1000 % 10) * 36 + 'deg)';
+          requestAnimationFrame(spin);
+        })();
+      })();
+    </script>
   </body>
 </html>

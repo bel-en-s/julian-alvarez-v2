@@ -2,9 +2,8 @@ import gsap from "gsap";
 
 const BLOCK_COUNT = 10;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.querySelector(".transition-grid");
-  if (!grid) return;
+const grid = document.querySelector(".transition-grid");
+if (grid) {
 
   const blocks = [];
   const blockWidth = Math.ceil(window.innerWidth / BLOCK_COUNT) + 5;
@@ -87,4 +86,4 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = href;
     });
   });
-});
+}

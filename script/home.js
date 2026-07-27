@@ -299,19 +299,35 @@ function initHeroTilt() {
   letters.forEach((el, i) => tiltChar(el, i));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
-  document.addEventListener("preloader:complete", () => {
-    startEntryAnimations(false);
-    initHeroTilt();
-    ScrollTrigger.refresh();
-  }, { once: true });
-  if (sessionStorage.getItem("ja_preloader_shown") === "1") {
-    startEntryAnimations(true);
-    initHeroTilt();
+document.addEventListener("preloader:complete", () => {
+  startEntryAnimations(false);
+  initHeroTilt();
+  ScrollTrigger.refresh();
+}, { once: true });
+if (sessionStorage.getItem("ja_preloader_shown") === "1") {
+  startEntryAnimations(true);
+  initHeroTilt();
+}
+initAnimations();
+
+  const scrollIndicator = document.querySelector(".hero-scroll-wrapper");
+  if (scrollIndicator) {
+    if (window.innerWidth >= 768) {
+      let mouseX = 0, mouseY = 0;
+      let currentX = 0, currentY = 0;
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX + 140;
+        mouseY = e.clientY + 140;
+      });
+      gsap.ticker.add(() => {
+        currentX += (mouseX - currentX) * 0.04;
+        currentY += (mouseY - currentY) * 0.04;
+        gsap.set(scrollIndicator, { x: currentX, y: currentY });
+      });
+    }
   }
-  initAnimations();
 
   const aboutSection = document.querySelector(".about");
   const aboutDesc = document.querySelector(".slide-description h1");
@@ -540,7 +556,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const spotlightImages = document.querySelector(".home-spotlight-images");
-  if (spotlightImages) {
+  if (spotlightImages && window.innerWidth >= 768) {
     const containerHeight = spotlightImages.offsetHeight;
     const viewportHeight = window.innerHeight;
 
@@ -641,20 +657,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   }
 
-  const outroHeader = document.querySelector(".outro h3");
-  let outroSplit = null;
-
-  if (outroHeader) {
-    outroSplit = SplitText.create(outroHeader, {
-      type: "words",
-      wordsClass: "outro-word",
-    });
-
-    gsap.set(outroSplit.words, { opacity: 0 });
-  }
-
   var outroEl = document.querySelector(".outro");
-  if (outroEl) {
+  if (outroEl && window.innerWidth >= 768) {
+    const outroHeader = document.querySelector(".outro h3");
+    let outroSplit = null;
+
+    if (outroHeader) {
+      outroSplit = SplitText.create(outroHeader, {
+        type: "words",
+        wordsClass: "outro-word",
+      });
+
+      gsap.set(outroSplit.words, { opacity: 0 });
+    }
+
     const outroStrips = document.querySelectorAll(".outro-strip");
     const stripSpeeds = [0.3, 0.4, 0.25, 0.35, 0.2, 0.25];
 
@@ -770,70 +786,67 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const isMobile = window.innerWidth < 768;
-  const mobileScale = isMobile ? 0.4 : 1;
-  const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350].map(function(a) { return a * 0.15 * mobileScale; });
-  const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4];
-  gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
-    const img = wrapper.querySelector("img");
-    const video = wrapper.querySelector("video");
-    const src = img?.getAttribute("src") || "";
+  if (window.innerWidth >= 768) {
+    const amounts = [-200, -280, -150, -320, -220, -180, -300, -160, -260, -350].map(function(a) { return a * 0.15; });
+    const scrubs = [0.2, 0.5, 0.8, 0.35, 0.65, 0.95, 0.3, 0.55, 0.85, 0.4];
+    gsap.utils.toArray(".work-items .work-item-img").forEach((wrapper, i) => {
+      const img = wrapper.querySelector("img");
+      const video = wrapper.querySelector("video");
+      const src = img?.getAttribute("src") || "";
 
-    // skip video wrappers and specific images
-    if (video) return;
-    if (src.includes("/bio/1.webp")) return;
-    if (src.includes("Anexo 9")) return;
-    if (src.includes("Anexo 6")) return;
-    if (src.includes("Anexo 8")) return;
+      if (video) return;
+      if (src.includes("/bio/1.webp")) return;
+      if (src.includes("Anexo 9")) return;
+      if (src.includes("Anexo 6")) return;
+      if (src.includes("Anexo 8")) return;
 
-    let amount = amounts[i % amounts.length];
-    if (src.includes("Anexo 11")) amount = Math.abs(amount) * 2;
-    if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12;
-    if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12;
-    // parallax hacia arriba para bio/4.webp (contraste con bio/3)
-    if (src.includes("/bio/4.webp")) amount = -Math.abs(amount);
-    // parallax hacia abajo para bio/3.webp
-    if (src.includes("/bio/3.webp")) amount = Math.abs(amount) * 1.5;
-    if (src.includes("/bio/2.webp")) amount = Math.abs(amount);
-    if (wrapper.classList.contains("work-item-img--bio3")) amount = Math.abs(amount);
+      let amount = amounts[i % amounts.length];
+      if (src.includes("Anexo 11")) amount = Math.abs(amount) * 2;
+      if (src.includes("Anexo 5")) amount = -Math.abs(amount) * 12;
+      if (src.includes("Anexo 7")) amount = -Math.abs(amount) * 12;
+      if (src.includes("/bio/4.webp")) amount = -Math.abs(amount);
+      if (src.includes("/bio/3.webp")) amount = Math.abs(amount) * 1.5;
+      if (src.includes("/bio/2.webp")) amount = -Math.abs(amount);
+      if (wrapper.classList.contains("work-item-img--bio3")) amount = Math.abs(amount);
 
-    const scrubVal = scrubs[i % scrubs.length];
+      const scrubVal = scrubs[i % scrubs.length];
 
-    gsap.to(wrapper, {
-      y: amount,
-      ease: "none",
-      scrollTrigger: {
-        trigger: wrapper,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: scrubVal,
-      },
-    });
-    const item = wrapper.closest(".work-item");
-    const content = item.querySelector(".work-item-content");
-    if (content && !content.classList.contains("no-parallax")) {
-      gsap.to(content, {
-        y: amount * 0.7,
+      gsap.to(wrapper, {
+        y: amount,
         ease: "none",
         scrollTrigger: {
           trigger: wrapper,
-          start: "top 85%",
+          start: "top bottom",
           end: "bottom top",
-          scrub: Math.min(scrubVal * 2, 1.5),
+          scrub: scrubVal,
         },
       });
-    }
-  });
+      const item = wrapper.closest(".work-item");
+      const content = item.querySelector(".work-item-content");
+      if (content && !content.classList.contains("no-parallax")) {
+        gsap.to(content, {
+          y: amount * 0.7,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top 85%",
+            end: "bottom top",
+            scrub: Math.min(scrubVal * 2, 1.5),
+          },
+        });
+      }
+    });
+  }
   gsap.utils.toArray(".work-items .row-content, .work-items .row-content-title").forEach((el) => {
     if (el.classList.contains("no-parallax")) return;
     gsap.to(el, {
-      y: isMobile ? -15 : -30,
+      y: window.innerWidth < 768 ? -10 : -30,
       ease: "none",
       scrollTrigger: {
         trigger: el.closest(".row"),
         start: "top bottom",
         end: "bottom top",
-        scrub: 1,
+        scrub: window.innerWidth < 768 ? 0.5 : 1,
       },
     });
   });
@@ -902,27 +915,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  document.querySelectorAll(".row--2026 .meta-text").forEach((el) => {
+    gsap.set(el, { opacity: 0, y: 20 });
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out" });
+      },
+    });
+  });
+
   if (window.innerWidth < 768) {
-    const videoRow = document.querySelector('.row--video-gray');
+    const triggerBg = document.querySelector('#trigger-bg-2021');
     const workStory = document.querySelector('.work-story');
-    if (videoRow && workStory) {
-      gsap.timeline({
+    const fraseGoleador = document.querySelector('#frase-goleador');
+    const fraseSeisGoles = document.querySelector('#frase-seisgoles');
+    if (triggerBg && workStory) {
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: videoRow,
-          start: 'bottom top',
-          end: 'bottom top+=3000',
+          trigger: triggerBg,
+          start: 'bottom top+=50',
+          end: 'bottom top+=40000',
           scrub: 1.5,
         }
       })
-      .to(workStory, { backgroundColor: '#2a2a2a', duration: 0.3, ease: 'none' })
-      .to(workStory, { backgroundColor: '#555555', duration: 0.3, ease: 'none' })
-      .to(workStory, { backgroundColor: '#999999', duration: 0.2, ease: 'none' })
-      .to(workStory, { backgroundColor: '#d4d4d4', duration: 0.2, ease: 'none' });
+      .to(workStory, { backgroundColor: '#2a2a2a', duration: 1, ease: 'none' }, 0)
+      .to(workStory, { backgroundColor: '#444444', duration: 1, ease: 'none' }, 1)
+      .to(workStory, { backgroundColor: '#555555', duration: 1, ease: 'none' }, 2)
+      .to(workStory, { backgroundColor: '#777777', duration: 0.5, ease: 'none' }, 3)
+      .to(workStory, { backgroundColor: '#999999', duration: 0.3, ease: 'none' }, 3.5)
+      .to(workStory, { backgroundColor: '#d4d4d4', duration: 0.2, ease: 'none' }, 3.8);
+
+      if (fraseGoleador) {
+        tl.to(fraseGoleador, { color: '#000', '-webkit-text-fill-color': '#000', duration: 0.3, ease: 'none' }, 2.8);
+      }
+      if (fraseSeisGoles) {
+        tl.to(fraseSeisGoles, { color: '#000', '-webkit-text-fill-color': '#000', duration: 0.3, ease: 'none' }, 2.8);
+      }
     }
   }
 
-  initWorkTimeline();
-});
+  if (window.innerWidth >= 768) {
+    initWorkTimeline();
+  }
 
 function initWorkTimeline() {
   const timeline = document.querySelector(".work-timeline");

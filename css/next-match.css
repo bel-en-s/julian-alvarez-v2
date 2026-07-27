@@ -412,6 +412,85 @@
   }
 }
 
+/* ============================================================
+   MOBILE MODAL OVERLAY
+   ============================================================ */
+
+.nm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nm-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nm-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.nm-popup {
+  position: relative;
+  z-index: 1;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: 0 1.5rem;
+  width: 100%;
+  max-width: 380px;
+  animation: none !important;
+  opacity: 1 !important;
+  padding: 24px 28px 20px !important;
+}
+
+.nm-popup .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nm-close {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(30, 20, 51, 0.85);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: transform 0.15s;
+  padding: 0;
+}
+
+.nm-close:hover {
+  transform: scale(1.08);
+}
+
+.nm-close:active {
+  transform: scale(0.92);
+}
+
+@media (min-width: 761px) {
+  .nm-overlay {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .next-match {
     animation: none;

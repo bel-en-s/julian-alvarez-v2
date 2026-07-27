@@ -39,28 +39,15 @@ if (video && wrapper) {
   };
 
   const toggleSound = () => {
-    gsap.killTweensOf(video);
     if (volState !== "muted") {
-      activeVolume = video.volume || 0;
-      gsap.to(video, {
-        volume: 0,
-        duration: 0.2,
-        ease: "power2.out",
-        onComplete: () => {
-          volState = "muted";
-          if (soundBtn) soundBtn.innerHTML = muteSvg;
-        },
-      });
+      video.muted = true;
+      volState = "muted";
+      if (soundBtn) soundBtn.innerHTML = muteSvg;
     } else {
-      const newVol = activeVolume > 0 ? activeVolume : LOW_VOL;
       video.muted = false;
-      activeVolume = newVol;
-      gsap.to(video, {
-        volume: newVol,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-      volState = newVol === LOW_VOL ? "low" : "high";
+      video.volume = activeVolume > 0 ? activeVolume : LOW_VOL;
+      activeVolume = video.volume;
+      volState = activeVolume === LOW_VOL ? "low" : "high";
       if (soundBtn)
         soundBtn.innerHTML = volState === "low" ? lowSvg : highSvg;
     }
@@ -95,28 +82,16 @@ if (video && wrapper) {
           if (volState !== "muted") {
             savedVolState = volState;
             savedActiveVol = activeVolume;
-            gsap.killTweensOf(video);
-            gsap.to(video, {
-              volume: 0,
-              duration: 0.15,
-              ease: "power2.out",
-              onComplete: () => {
-                volState = "muted";
-                if (soundBtn) soundBtn.innerHTML = muteSvg;
-              },
-            });
+            video.muted = true;
+            volState = "muted";
+            if (soundBtn) soundBtn.innerHTML = muteSvg;
           }
         } else if (savedVolState && savedVolState !== "muted") {
           const restoreVol = savedActiveVol > 0 ? savedActiveVol : LOW_VOL;
           video.muted = false;
+          video.volume = restoreVol;
           activeVolume = restoreVol;
           volState = savedVolState;
-          gsap.killTweensOf(video);
-          gsap.to(video, {
-            volume: restoreVol,
-            duration: 0.3,
-            ease: "power2.out",
-          });
           if (soundBtn)
             soundBtn.innerHTML = savedVolState === "low" ? lowSvg : highSvg;
           savedVolState = null;

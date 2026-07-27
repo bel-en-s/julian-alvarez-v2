@@ -56,7 +56,7 @@ if (section && img && ball) {
 
   ScrollTrigger.create({
     trigger: section,
-    start: "top top",
+    start: isMobile ? "top 75%" : "top top",
     end: `+=${isMobile ? window.innerHeight * 5 : window.innerHeight * 3}`,
     scrub: true,
     invalidateOnRefresh: true,
@@ -68,6 +68,7 @@ if (section && img && ball) {
       gsap.set(img, {
         rotation: isMobile ? -6 + 12 * eased : 18 * (1 - eased),
         scale: 0.75 + 0.25 * eased,
+        y: isMobile ? 20 * eased : 0,
       });
       if (isMobile) {
         gsap.set(ball, {
