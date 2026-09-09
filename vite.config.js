@@ -12,6 +12,7 @@ export default defineConfig({
         contact: resolve(__dirname, "contact.html"),
         "dentro-de-las-canchas": resolve(__dirname, "dentro-de-las-canchas.html"),
         "fuera-de-las-canchas": resolve(__dirname, "fuera-de-las-canchas.html"),
+        shader: resolve(__dirname, "shader.html"),
       },
     },
     assetsInclude: [

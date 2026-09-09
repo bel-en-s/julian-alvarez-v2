@@ -1,0 +1,52 @@
+# ============================================================
+# Julián Alvarez — Configuración Hostinger (Apache / LiteSpeed)
+# ============================================================
+
+# ---------- Compresión ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml font/woff2
+</IfModule>
+
+# ---------- Caché del navegador ----------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# ---------- Tipos MIME ----------
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+  AddType video/mp4 .mp4
+</IfModule>
+
+# ---------- Redirección a HTTPS ----------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # URLs limpias (sin .html)
+  RewriteRule ^about/?$                about.html                 [L]
+  RewriteRule ^work/?$                 work.html                  [L]
+  RewriteRule ^project/?$              project.html               [L]
+  RewriteRule ^contact/?$              contact.html               [L]
+  RewriteRule ^dentro-de-las-canchas/?$  dentro-de-las-canchas.html [L]
+  RewriteRule ^fuera-de-las-canchas/?$   fuera-de-las-canchas.html  [L]
+  RewriteRule ^shader/?$               shader.html                [L]
+</IfModule>
+
+# ---------- Seguridad básica ----------
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
